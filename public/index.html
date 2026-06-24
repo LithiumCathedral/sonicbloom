@@ -112,7 +112,7 @@
 
     .visual-canvas {
       width: 100%;
-      height: 180px;
+      height: 160px;
       border: 1px dashed var(--border-color);
       border-radius: 8px;
       display: flex;
@@ -274,7 +274,7 @@
     .quiz-options {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       margin-top: auto;
     }
 
@@ -282,7 +282,7 @@
       background: rgba(255, 255, 255, 0.01);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 14px;
+      padding: 12px 14px;
       text-align: left;
       cursor: pointer;
       display: flex;
@@ -297,8 +297,8 @@
     }
 
     .option-texture {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 6px;
       border: 1px solid var(--border-color);
       flex-shrink: 0;
@@ -362,28 +362,6 @@
       opacity: 0.9;
     }
 
-    .linkedin-btn {
-      background-color: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 16px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      text-decoration: none;
-      transition: background-color 0.2s;
-    }
-
-    .linkedin-btn:hover {
-      background-color: #005987;
-    }
-
     .results-box {
       background: var(--accent-orange-glow);
       border: 1px solid rgba(255, 87, 34, 0.15);
@@ -392,51 +370,81 @@
       margin-bottom: 12px;
     }
 
-    .split-action-matrix {
+    /* Production Triple Action Matrix Core Layout (Slide 10) */
+    .triple-action-matrix {
       display: flex;
+      flex-direction: column;
       gap: 10px;
       margin-top: auto;
       position: relative;
-      z-index: 5;
+      z-index: 10;
     }
 
-    .job-link {
-      flex: 1.8;
-      text-align: center;
-      background-color: var(--accent-orange);
-      color: white;
-      padding: 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.95rem;
-      box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4);
-      transition: all 0.2s;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .action-row-split {
+      display: flex;
+      gap: 10px;
     }
 
-    .job-link:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
-    }
-
-    .restart-btn {
+    .action-row-split .restart-btn {
       flex: 1;
       background-color: transparent;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
-      padding: 16px;
+      padding: 14px;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .restart-btn:hover {
+    .action-row-split .restart-btn:hover {
       border-color: var(--text-muted);
       color: var(--text-main);
+    }
+
+    .action-row-split .linkedin-broadcast-btn {
+      flex: 1.5;
+      background-color: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .action-row-split .linkedin-broadcast-btn:hover {
+      background-color: #005987;
+    }
+
+    .primary-job-cta {
+      width: 100%;
+      text-align: center;
+      background-color: var(--accent-orange);
+      color: white;
+      padding: 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4);
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+    }
+
+    .primary-job-cta:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
     }
   </style>
 </head>
@@ -452,7 +460,7 @@
           Frontier neural networks are scaling rapidly, but they lack your specific industry judgment. 
         </p>
         <p style="margin-top: 12px; font-size: 0.95rem;">
-          A massive hiring wave is pairing <strong style="color: var(--accent-orange);">subject matter experts</strong> directly with advanced alignment pipelines. Take the alignment check to claim your vector assignment.
+          A massive hiring wave is pairing subject matter experts directly with advanced alignment pipelines. Take the validation track check to extract your vector profile.
         </p>
       </div>
       <div class="visual-canvas">
@@ -465,19 +473,19 @@
       <div>
         <span class="category-tag">Strategic Value</span>
         <div class="question-text">Why Validate Your Domain Profile?</div>
-        <p>Frontier AI labs are not just looking for engineers—they are aggressively recruiting real-world experts to serve as specialized benchmarkers.</p>
+        <p>Frontier AI labs are aggressively recruiting real-world specialists to train reasoning benchmarks rather than standard developers.</p>
         <div class="benefit-list">
           <div class="benefit-item">
             <span class="benefit-icon">//</span>
-            <p><strong>Targeted Placement:</strong> Skip the general queue and match directly into a micro-specialty that respects your industry tenure.</p>
+            <p><strong>Targeted Placement:</strong> Bypass generalized backlogs to match micro-specialties respecting your years of career focus.</p>
           </div>
           <div class="benefit-item">
             <span class="benefit-icon">//</span>
-            <p><strong>Workplace Evolution:</strong> Learn the diagnostic prompting and validation methods that safeguard your domain against disruption.</p>
+            <p><strong>Workplace Evolution:</strong> Harness diagnostic oversight loops that solidify your expertise against technical displacement.</p>
           </div>
           <div class="benefit-item">
             <span class="benefit-icon">//</span>
-            <p><strong>Optimized Pipelines:</strong> Find the ideal dynamic workflow model configured precisely to your natural cognitive style.</p>
+            <p><strong>Optimized Pipelines:</strong> Locate high-yield production spaces tailored specifically to your natural problem-solving mechanics.</p>
           </div>
         </div>
       </div>
@@ -487,29 +495,29 @@
     <section class="webstory-slide" id="slide-3" style="display: none;">
       <div>
         <h2>01: Domain Matrix</h2>
-        <div class="question-text">Which baseline framework defines your professional world?</div>
-        <p>Pick the track that matches your hard-won real-world industry background.</p>
+        <div class="question-text">Which structural ecosystem encapsulates your background?</div>
+        <p>Isolate your foundational field of professional tenure.</p>
       </div>
       <div class="quiz-options">
         <div class="option-card" onclick="selectTrack('logic')">
           <div class="option-texture tex-logic"></div>
           <div class="option-text-container">
-            <strong>Logic, Math, & Systems</strong>
-            <span>Software, complex data pools, engineering, or financial systems.</span>
+            <strong>Quantitative Systems & Tech</strong>
+            <span>Software engineering, complex algorithmic architecture, or commercial market data pools.</span>
           </div>
         </div>
         <div class="option-card" onclick="selectTrack('human')">
           <div class="option-texture tex-human"></div>
           <div class="option-text-container">
-            <strong>Culture, Arts, & Translation</strong>
-            <span>Creative arts, language structures, audio patterns, or humanities.</span>
+            <strong>Creative Expression & Text Blocks</strong>
+            <span>Language, content strategy, audio nuances, fine arts, or historical records.</span>
           </div>
         </div>
         <div class="option-card" onclick="selectTrack('sys')">
           <div class="option-texture tex-sys"></div>
           <div class="option-text-container">
-            <strong>Operations, Rules, & Logic</strong>
-            <span>Medicine, life sciences, business ops, or legal frameworks.</span>
+            <strong>Compliance, Operations & Protocols</strong>
+            <span>Clinical healthcare, legal frameworks, business administration, or corporate governance.</span>
           </div>
         </div>
       </div>
@@ -519,7 +527,7 @@
       <div>
         <h2>02: Target Expertise</h2>
         <div class="question-text">Select your exact specialty ecosystem:</div>
-        <p>We use this to pinpoint your placement directly with the correct review pipeline.</p>
+        <p>This isolates the review pipeline that natively matches your working focus.</p>
       </div>
       <div class="quiz-options" id="specific-options-container"></div>
     </section>
@@ -527,22 +535,29 @@
     <section class="webstory-slide" id="slide-5" style="display: none;">
       <div>
         <h2>03: Cognitive Processing</h2>
-        <div class="question-text">How do you naturally dismantle an ambiguous problem?</div>
-        <p>This guides how our pipelines route edge-case exceptions to your workstation.</p>
+        <div class="question-text">How do you break down ambiguous edge cases?</div>
+        <p>Determines how optimization pipelines route complex tasks to your terminal.</p>
       </div>
       <div class="quiz-options">
         <div class="option-card" onclick="showSlide(6)">
           <div class="option-texture tex-intuitive"></div>
           <div class="option-text-container">
-            <strong>Contextual & Iterative</strong>
-            <span>You cross-reference historical patterns, relying on intuitive pattern matching.</span>
+            <strong>Contextual, Variable & Iterative</strong>
+            <span>Cross-referencing historical precedents, macro trends, and deep situational intuition.</span>
           </div>
         </div>
         <div class="option-card" onclick="showSlide(6)">
           <div class="option-texture tex-algorithmic"></div>
           <div class="option-text-container">
-            <strong>First-Principles & Structural</strong>
-            <span>You break systems down into isolated base variables and absolute logical truths.</span>
+            <strong>First-Principles, Math-Driven & Absolute</strong>
+            <span>Dismantling problems into clear isolated strings, logical branches, and cold data truths.</span>
+          </div>
+        </div>
+        <div class="option-card" onclick="showSlide(6)">
+          <div class="option-texture tex-logic" style="background: radial-gradient(circle, #3a221d 1px, transparent 5px);"></div>
+          <div class="option-text-container">
+            <strong>Combined / Cross-Functional Matrix</strong>
+            <span>Blending intuitive creative contexts directly with rigid functional rules to reconcile systemic anomalies.</span>
           </div>
         </div>
       </div>
@@ -551,22 +566,29 @@
     <section class="webstory-slide" id="slide-6" style="display: none;">
       <div>
         <h2>04: Output Calibration</h2>
-        <div class="question-text">Where do you provide your absolute highest value?</div>
-        <p>Select the pacing model that aligns with your peak mental durability.</p>
+        <div class="question-text">Where do you deliver your absolute peak value?</div>
+        <p>Select the execution pacing model matching your cognitive stamina limits.</p>
       </div>
       <div class="quiz-options">
         <div class="option-card" onclick="showSlide(7)">
           <div class="option-texture tex-rapid"></div>
           <div class="option-text-container">
-            <strong>Rapid Adaptation & Iteration</strong>
-            <span>Generating high volumes of diverse viewpoints quickly across shifting contexts.</span>
+            <strong>Rapid Execution & Shifting Adaptability</strong>
+            <span>Drafting high volumes of diverse viewpoints cleanly across rapid timelines.</span>
           </div>
         </div>
         <div class="option-card" onclick="showSlide(7)">
           <div class="option-texture tex-rigor"></div>
           <div class="option-text-container">
-            <strong>Exhaustive Rigor & Deep Auditing</strong>
-            <span>Tracing tiny, hyper-complex logic trails until absolute validation is met.</span>
+            <strong>Deep Audit & Total Analytical Rigor</strong>
+            <span>Tracing micro-level tracking details until complex outputs are verified flawless.</span>
+          </div>
+        </div>
+        <div class="option-card" onclick="showSlide(7)">
+          <div class="option-texture tex-sys" style="background: linear-gradient(to right, #2d3345, #14161f);"></div>
+          <div class="option-text-container">
+            <strong>Combined Continuous Oversight</strong>
+            <span>Balancing quick contextual sorting cycles with sustained technical deep dives as required.</span>
           </div>
         </div>
       </div>
@@ -574,23 +596,30 @@
 
     <section class="webstory-slide" id="slide-7" style="display: none;">
       <div>
-        <h2>05: Mindset Check</h2>
-        <div class="question-text">How do you prefer to apply your knowledge?</div>
-        <p>This tells our systems how to shape your ideal training and project delivery schedule.</p>
+        <h2>05: Mindset Configuration</h2>
+        <div class="question-text">How do you prefer to apply your expertise?</div>
+        <p>Informs your deployment layout configuration preferences.</p>
       </div>
       <div class="quiz-options">
         <div class="option-card" onclick="selectPreference('freelance')">
           <div class="option-texture tex-freelance"></div>
           <div class="option-text-container">
-            <strong>Fluid & Autonomously</strong>
-            <span>You value complete flexibility, working task-by-task entirely on your own terms.</span>
+            <strong>Fluid, Task-Based & Autonomous</strong>
+            <span>Trading formal oversight for supreme versatility, selecting discrete evaluation batches.</span>
           </div>
         </div>
         <div class="option-card" onclick="selectPreference('structured')">
           <div class="option-texture tex-corporate"></div>
           <div class="option-text-container">
-            <strong>Deeply Focused & Linear</strong>
-            <span>You appreciate meticulous guidelines, systemic checklists, and robust milestones.</span>
+            <strong>Systematic, Metric-Driven & Linear</strong>
+            <span>Operating inside robust benchmark milestones, documented guidelines, and technical rubrics.</span>
+          </div>
+        </div>
+        <div class="option-card" onclick="selectPreference('freelance')">
+          <div class="option-texture tex-logic" style="background: repeating-linear-gradient(90deg, #ff5722 0px, transparent 10px);"></div>
+          <div class="option-text-container">
+            <strong>Combined Flexible Delivery</strong>
+            <span>Securing structured task tracks while maintaining total independent scheduling leverage.</span>
           </div>
         </div>
       </div>
@@ -600,30 +629,24 @@
       <div>
         <h2>06: Secure Your Results</h2>
         <div class="question-text">Where should we deploy your custom roadmap?</div>
-        <p>Enter your main contact email below to log your validation results and reveal your targeted portal gateway.</p>
+        <p>Enter your professional email below to index your evaluation scores and generate your dedicated allocation portal layout.</p>
         <input type="email" id="user-email" placeholder="name@domain.com" class="input-field" required>
       </div>
-      <button class="nav-btn" onclick="submitEmail()">Proceed to Verification Gateway</button>
+      <button class="nav-btn" onclick="submitEmail()">Proceed to Profile Summary</button>
     </section>
 
     <section class="webstory-slide" id="slide-9" style="display: none;">
       <div>
-        <h2>07: Amplify Your Edge</h2>
-        <div class="question-text">Signal the Shift to Your Network</div>
-        <p>Your background matches critical parameters needed by model evaluation groups. Here are your high-value target tracks:</p>
+        <h2>07: Skill Matching Matrix</h2>
+        <div class="question-text">Your Validated Model Target Paths</div>
+        <p>Your real-world metrics align with high-value operational roles inside active verification networks:</p>
         <div class="role-matrix-box">
-          <div class="role-matrix-title">Matched Model Tracks</div>
+          <div class="role-matrix-title">Matched Industry Tracks</div>
           <div class="role-tag-list" id="target-roles-container"></div>
         </div>
-        <p style="margin-bottom: 15px;">Lock in your custom roadmap configuration parameters and broadcast your profile validation loop directly to your network on LinkedIn.</p>
+        <p style="margin-bottom: 15px;">Your parameters match active recruitment pools. Proceed forward to reveal market placement and launch deployment pathways.</p>
       </div>
-      <div>
-        <a href="#" id="linkedin-share-anchor" target="_blank" class="linkedin-btn">
-          <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-          Broadcast Profile to LinkedIn
-        </a>
-        <button class="nav-btn" id="slide9-next-btn" onclick="finalUnlock()" style="margin-top: 10px;">Access Final Allocation Gateway</button>
-      </div>
+      <button class="nav-btn" onclick="finalUnlock()">Scan AI Opportunities</button>
     </section>
 
     <section class="webstory-slide" id="slide-10" style="display: none;">
@@ -648,9 +671,16 @@
           <tbody id="compensation-table-rows"></tbody>
         </table>
       </div>
-      <div class="split-action-matrix">
-        <button class="restart-btn" onclick="resetQuiz()">Retake</button>
-        <a href="#" id="final-job-link" target="_blank" class="job-link">Join AI Lab Pool</a>
+      
+      <div class="triple-action-matrix">
+        <div class="action-row-split">
+          <button class="restart-btn" onclick="resetQuiz()">Retake</button>
+          <a href="#" id="linkedin-share-anchor" target="_blank" class="linkedin-broadcast-btn">
+            <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            Broadcast
+          </a>
+        </div>
+        <a href="#" id="final-job-link" target="_blank" class="primary-job-cta">Join AI Lab Pool</a>
       </div>
     </section>
 
@@ -804,8 +834,8 @@
           <div class="option-card" onclick="finalizeDomain('${domain}')">
             <div class="option-texture tex-${trackType}"></div>
             <div class="option-text-container">
-              <strong>${domain} Segment</strong>
-              <span>Click to bridge your background into this targeted internal review pipeline.</span>
+              <strong>${domain} Track</strong>
+              <span>Bridge your structural tenure directly into this internal review vector.</span>
             </div>
           </div>`;
       });
@@ -833,7 +863,6 @@
       const activeDomain = finalTargetDomain || "Humanities";
       const chosenData = domainDatabase[activeDomain];
 
-      // ⚡ REVISED: Active async pipeline capture payload to Vercel Endpoint
       try {
         await fetch('/api/capture', {
           method: 'POST',
