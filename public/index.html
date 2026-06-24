@@ -59,7 +59,6 @@
       z-index: 2;
     }
 
-    /* Dynamic Tessellating Background Layer for Final Slide */
     .tessellation-overlay {
       position: absolute;
       top: 0;
@@ -111,7 +110,6 @@
       color: var(--text-muted);
     }
 
-    /* Cover Visual Canvas */
     .visual-canvas {
       width: 100%;
       height: 180px;
@@ -144,7 +142,6 @@
       font-weight: 600;
     }
 
-    /* Target Roles Display Box */
     .role-matrix-box {
       background: rgba(0, 0, 0, 0.2);
       border: 1px solid var(--border-color);
@@ -187,7 +184,6 @@
       font-size: 0.8rem;
     }
 
-    /* Identity Pride Badges */
     .identity-graphic-wrapper {
       width: 100%;
       padding: 16px;
@@ -220,7 +216,6 @@
       text-transform: uppercase;
     }
 
-    /* Compensation Matrix Table Styling */
     .comp-table {
       width: 100%;
       border-collapse: collapse;
@@ -255,7 +250,6 @@
       font-weight: 700;
     }
 
-    /* Benefit List */
     .benefit-list {
       display: flex;
       flex-direction: column;
@@ -277,7 +271,6 @@
       line-height: 1;
     }
 
-    /* Interactive Quiz Options */
     .quiz-options {
       display: flex;
       flex-direction: column;
@@ -311,7 +304,6 @@
       flex-shrink: 0;
     }
 
-    /* Textures */
     .tex-logic { background: linear-gradient(90deg, #3a221d 2px, transparent 2px) 0 0 / 8px 8px, #14161f; }
     .tex-human { background: radial-gradient(circle, var(--accent-orange) 1px, transparent 1px) 0 0 / 8px 8px, #14161f; }
     .tex-sys { background: repeating-linear-gradient(45deg, transparent, transparent 4px, #3a221d 4px, #3a221d 8px), #14161f; }
@@ -352,7 +344,6 @@
       border-color: var(--accent-orange);
     }
 
-    /* Buttons */
     .nav-btn {
       background-color: var(--accent-orange);
       color: #fff;
@@ -401,7 +392,6 @@
       margin-bottom: 12px;
     }
 
-    /* Split Button Matrix layout */
     .split-action-matrix {
       display: flex;
       gap: 10px;
@@ -465,11 +455,9 @@
           A massive hiring wave is pairing <strong style="color: var(--accent-orange);">subject matter experts</strong> directly with advanced alignment pipelines. Take the alignment check to claim your vector assignment.
         </p>
       </div>
-      
       <div class="visual-canvas">
         <div class="canvas-text">[ Dynamic Core Matrix ]</div>
       </div>
-      
       <button class="nav-btn" onclick="showSlide(2)">Analyze My Skill Match</button>
     </section>
 
@@ -478,7 +466,6 @@
         <span class="category-tag">Strategic Value</span>
         <div class="question-text">Why Validate Your Domain Profile?</div>
         <p>Frontier AI labs are not just looking for engineers—they are aggressively recruiting real-world experts to serve as specialized benchmarkers.</p>
-        
         <div class="benefit-list">
           <div class="benefit-item">
             <span class="benefit-icon">//</span>
@@ -494,7 +481,6 @@
           </div>
         </div>
       </div>
-      
       <button class="nav-btn" onclick="showSlide(3)">Begin Allocation Assessment</button>
     </section>
 
@@ -504,7 +490,6 @@
         <div class="question-text">Which baseline framework defines your professional world?</div>
         <p>Pick the track that matches your hard-won real-world industry background.</p>
       </div>
-
       <div class="quiz-options">
         <div class="option-card" onclick="selectTrack('logic')">
           <div class="option-texture tex-logic"></div>
@@ -513,7 +498,6 @@
             <span>Software, complex data pools, engineering, or financial systems.</span>
           </div>
         </div>
-        
         <div class="option-card" onclick="selectTrack('human')">
           <div class="option-texture tex-human"></div>
           <div class="option-text-container">
@@ -521,7 +505,6 @@
             <span>Creative arts, language structures, audio patterns, or humanities.</span>
           </div>
         </div>
-        
         <div class="option-card" onclick="selectTrack('sys')">
           <div class="option-texture tex-sys"></div>
           <div class="option-text-container">
@@ -538,9 +521,7 @@
         <div class="question-text">Select your exact specialty ecosystem:</div>
         <p>We use this to pinpoint your placement directly with the correct review pipeline.</p>
       </div>
-
-      <div class="quiz-options" id="specific-options-container">
-      </div>
+      <div class="quiz-options" id="specific-options-container"></div>
     </section>
 
     <section class="webstory-slide" id="slide-5" style="display: none;">
@@ -549,7 +530,6 @@
         <div class="question-text">How do you naturally dismantle an ambiguous problem?</div>
         <p>This guides how our pipelines route edge-case exceptions to your workstation.</p>
       </div>
-
       <div class="quiz-options">
         <div class="option-card" onclick="showSlide(6)">
           <div class="option-texture tex-intuitive"></div>
@@ -558,7 +538,6 @@
             <span>You cross-reference historical patterns, relying on intuitive pattern matching.</span>
           </div>
         </div>
-        
         <div class="option-card" onclick="showSlide(6)">
           <div class="option-texture tex-algorithmic"></div>
           <div class="option-text-container">
@@ -575,7 +554,6 @@
         <div class="question-text">Where do you provide your absolute highest value?</div>
         <p>Select the pacing model that aligns with your peak mental durability.</p>
       </div>
-
       <div class="quiz-options">
         <div class="option-card" onclick="showSlide(7)">
           <div class="option-texture tex-rapid"></div>
@@ -584,7 +562,6 @@
             <span>Generating high volumes of diverse viewpoints quickly across shifting contexts.</span>
           </div>
         </div>
-        
         <div class="option-card" onclick="showSlide(7)">
           <div class="option-texture tex-rigor"></div>
           <div class="option-text-container">
@@ -601,7 +578,6 @@
         <div class="question-text">How do you prefer to apply your knowledge?</div>
         <p>This tells our systems how to shape your ideal training and project delivery schedule.</p>
       </div>
-
       <div class="quiz-options">
         <div class="option-card" onclick="selectPreference('freelance')">
           <div class="option-texture tex-freelance"></div>
@@ -610,7 +586,6 @@
             <span>You value complete flexibility, working task-by-task entirely on your own terms.</span>
           </div>
         </div>
-        
         <div class="option-card" onclick="selectPreference('structured')">
           <div class="option-texture tex-corporate"></div>
           <div class="option-text-container">
@@ -626,10 +601,8 @@
         <h2>06: Secure Your Results</h2>
         <div class="question-text">Where should we deploy your custom roadmap?</div>
         <p>Enter your main contact email below to log your validation results and reveal your targeted portal gateway.</p>
-        
         <input type="email" id="user-email" placeholder="name@domain.com" class="input-field" required>
       </div>
-
       <button class="nav-btn" onclick="submitEmail()">Proceed to Verification Gateway</button>
     </section>
 
@@ -638,16 +611,12 @@
         <h2>07: Amplify Your Edge</h2>
         <div class="question-text">Signal the Shift to Your Network</div>
         <p>Your background matches critical parameters needed by model evaluation groups. Here are your high-value target tracks:</p>
-        
         <div class="role-matrix-box">
           <div class="role-matrix-title">Matched Model Tracks</div>
-          <div class="role-tag-list" id="target-roles-container">
-            </div>
+          <div class="role-tag-list" id="target-roles-container"></div>
         </div>
-
         <p style="margin-bottom: 15px;">Lock in your custom roadmap configuration parameters and broadcast your profile validation loop directly to your network on LinkedIn.</p>
       </div>
-
       <div>
         <a href="#" id="linkedin-share-anchor" target="_blank" class="linkedin-btn">
           <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
@@ -659,21 +628,16 @@
 
     <section class="webstory-slide" id="slide-10" style="display: none;">
       <div class="tessellation-overlay" id="dynamic-tessellation-layer"></div>
-
       <div>
         <span class="category-tag" id="matched-tag">Allocation Verified</span>
-        
         <div class="identity-graphic-wrapper">
           <div class="identity-badge-title" id="identity-main-badge-txt">DECENTRALIZED AUTONOMY</div>
           <div class="identity-badge-subtitle" id="identity-sub-badge-txt">WORK ROUTE VERIFIED</div>
         </div>
-
         <div id="identitarian-graphic-frame" style="margin-bottom: 12px;"></div>
-
         <div class="results-box">
           <p id="result-text" style="color: var(--text-main); font-weight: 500; font-size: 0.95rem; line-height: 1.4;"></p>
         </div>
-        
         <table class="comp-table">
           <thead>
             <tr>
@@ -681,11 +645,9 @@
               <th style="text-align: right;">Market Rate</th>
             </tr>
           </thead>
-          <tbody id="compensation-table-rows">
-            </tbody>
+          <tbody id="compensation-table-rows"></tbody>
         </table>
       </div>
-
       <div class="split-action-matrix">
         <button class="restart-btn" onclick="resetQuiz()">Retake</button>
         <a href="#" id="final-job-link" target="_blank" class="job-link">Join AI Lab Pool</a>
@@ -699,7 +661,6 @@
     let finalTargetDomain = "";
     let userPreference = "";
 
-    // Realistic, simplified terms with specific matched tracking rates and CSS tessellation architectures
     const domainDatabase = {
       "Software Engineering": { 
         title: "Code Evaluator",
@@ -862,7 +823,7 @@
       showSlide(8);
     }
 
-    function submitEmail() {
+    async function submitEmail() {
       const emailVal = document.getElementById('user-email').value;
       if (!emailVal || !emailVal.includes('@')) {
         alert('Please enter a valid email address to protect your custom dashboard pathway.');
@@ -871,8 +832,22 @@
 
       const activeDomain = finalTargetDomain || "Humanities";
       const chosenData = domainDatabase[activeDomain];
+
+      // ⚡ REVISED: Active async pipeline capture payload to Vercel Endpoint
+      try {
+        await fetch('/api/capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: emailVal,
+            track: activeDomain,
+            workMode: userPreference === 'structured' ? "SYSTEMATIC RIGOR" : "DECENTRALIZED AUTONOMY"
+          })
+        });
+      } catch (err) {
+        console.warn('Network layer capture fallback engaged.');
+      }
       
-      // Render Roles with explicit hourly estimate caps onto Slide 9
       const roleContainer = document.getElementById('target-roles-container');
       roleContainer.innerHTML = "";
       chosenData.roles.forEach(role => {
@@ -883,7 +858,6 @@
           </span>`;
       });
 
-      // Assemble pre-written template text optimized for LinkedIn share deployment
       const currentUrl = window.location.origin + window.location.pathname;
       const shareUrl = encodeURIComponent(currentUrl);
       
@@ -905,12 +879,10 @@
       document.getElementById('matched-tag').innerText = "ALLOCATION CONFIGURATION VERIFIED";
       document.getElementById('result-text').innerText = chosenData.text;
       
-      // Dynamic Tessellation Pattern Background Engine
       const tessellationOverlay = document.getElementById('dynamic-tessellation-layer');
       tessellationOverlay.style.backgroundImage = chosenData.tessellation;
       tessellationOverlay.style.backgroundSize = chosenData.tessellationSize;
       
-      // Populate Compensation Matrix on Slide 10
       const tableBody = document.getElementById('compensation-table-rows');
       tableBody.innerHTML = "";
       chosenData.roles.forEach(role => {
@@ -921,7 +893,6 @@
           </tr>`;
       });
       
-      // Dynamic SVG Graphic Framework Engine (Sharp lines, conceptual imagery, contrast pops)
       const graphicContainer = document.getElementById('identitarian-graphic-frame');
       const accentColor = userPreference === 'structured' ? "#0077b5" : "#ff5722";
       
@@ -959,7 +930,6 @@
         </svg>
       `;
 
-      // Update structural title headers
       const mainBadgeText = document.getElementById('identity-main-badge-txt');
       const subBadgeText = document.getElementById('identity-sub-badge-txt');
       
@@ -973,7 +943,6 @@
         mainBadgeText.style.color = "var(--accent-orange)";
       }
 
-      // Final CTA Button Explicit Offer Overhaul
       const linkButton = document.getElementById('final-job-link');
       linkButton.href = chosenData.link;
       linkButton.innerText = `Join ${activeDomain} AI Lab`;
