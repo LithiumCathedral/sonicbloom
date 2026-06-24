@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hidden AI Labor Boom Quiz</title>
+  <style>
+    /* High-Contrast Minimalist Theme with Electric Orange Accents */
+    :root {
+      --bg-color: #0b0c10;
+      --panel-bg: #14161f;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-orange: #ff5722;
+      --accent-orange-glow: rgba(255, 87, 34, 0.15);
+      --accent-blue: #0077b5;
+      --border-color: #242936;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .webstory-container {
+      width: 100%;
+      max-width: 480px;
+      height: 740px;
+      background-color: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    .webstory-slide {
+      padding: 35px 25px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Dynamic Tessellating Background Layer for Final Slide */
+    .tessellation-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.07;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .category-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-orange);
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+
+    h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    /* Cover Visual Canvas */
+    .visual-canvas {
+      width: 100%;
+      height: 180px;
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, #2a1b18 0%, #14161f 100%),
+                  repeating-linear-gradient(45deg, rgba(255,87,34,0.02) 0px, rgba(255,87,34,0.02) 2px, transparent 2px, transparent 10px);
+      overflow: hidden;
+    }
+
+    .visual-canvas::before {
+      content: '';
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border: 2px solid rgba(255, 87, 34, 0.2);
+      transform: rotate(45deg);
+    }
+
+    .canvas-text {
+      font-size: 0.75rem;
+      color: var(--accent-orange);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      z-index: 1;
+      font-weight: 600;
+    }
+
+    /* Target Roles Display Box */
+    .role-matrix-box {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 12px 0;
+    }
+
+    .role-matrix-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-orange);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .role-tag-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .role-badge {
+      font-size: 0.85rem;
+      background: #1c1e27;
+      border: 1px solid #2d3345;
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .role-rate-tag {
+      color: var(--accent-orange);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* Identity Pride Badges */
+    .identity-graphic-wrapper {
+      width: 100%;
+      padding: 16px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-left: 4px solid var(--accent-orange);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .identity-badge-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .identity-badge-subtitle {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-orange);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Compensation Matrix Table Styling */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .comp-table th {
+      text-align: left;
+      padding: 8px 12px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .comp-table td {
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(36, 41, 54, 0.5);
+    }
+
+    .comp-table td strong {
+      color: var(--text-main);
+    }
+
+    .rate-column {
+      text-align: right;
+      color: var(--accent-orange);
+      font-weight: 700;
+    }
+
+    /* Benefit List */
+    .benefit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .benefit-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .benefit-icon {
+      color: var(--accent-orange);
+      font-weight: bold;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    /* Interactive Quiz Options */
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .option-card {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.2s ease;
+    }
+
+    .option-card:hover {
+      border-color: var(--accent-orange);
+      background: var(--accent-orange-glow);
+    }
+
+    .option-texture {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    /* Textures */
+    .tex-logic { background: linear-gradient(90deg, #3a221d 2px, transparent 2px) 0 0 / 8px 8px, #14161f; }
+    .tex-human { background: radial-gradient(circle, var(--accent-orange) 1px, transparent 1px) 0 0 / 8px 8px, #14161f; }
+    .tex-sys { background: repeating-linear-gradient(45deg, transparent, transparent 4px, #3a221d 4px, #3a221d 8px), #14161f; }
+    .tex-freelance { background: linear-gradient(to bottom, transparent 50%, rgba(255,87,34,0.2) 50%), #14161f; }
+    .tex-corporate { background: border-box #242936; }
+    .tex-intuitive { background-image: radial-gradient(circle at 100% 100%, transparent 7px, #3a221d 7px); background-color: #14161f; }
+    .tex-algorithmic { background: repeating-linear-gradient(0deg, #3a221d, #3a221d 2px, transparent 2px, transparent 6px); }
+    .tex-rapid { background: linear-gradient(135deg, rgba(255,87,34,0.2) 25%, transparent 25%, transparent 50%, rgba(255,87,34,0.2) 50%, rgba(255,87,34,0.2) 75%, transparent 75%, transparent); background-size: 8px 8px; }
+    .tex-rigor { background: radial-gradient(ellipse at center, #3a221d 0%, #14161f 100%); }
+
+    .option-text-container strong {
+      display: block;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+
+    .option-text-container span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 16px;
+      background-color: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 1rem;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border-color: var(--accent-orange);
+    }
+
+    /* Buttons */
+    .nav-btn {
+      background-color: var(--accent-orange);
+      color: #fff;
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .nav-btn:hover {
+      opacity: 0.9;
+    }
+
+    .linkedin-btn {
+      background-color: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .linkedin-btn:hover {
+      background-color: #005987;
+    }
+
+    .results-box {
+      background: var(--accent-orange-glow);
+      border: 1px solid rgba(255, 87, 34, 0.15);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    /* Split Button Matrix layout */
+    .split-action-matrix {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+      position: relative;
+      z-index: 5;
+    }
+
+    .job-link {
+      flex: 1.8;
+      text-align: center;
+      background-color: var(--accent-orange);
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4);
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .job-link:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .restart-btn {
+      flex: 1;
+      background-color: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .restart-btn:hover {
+      border-color: var(--text-muted);
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="webstory-container">
+    
+    <section class="webstory-slide" id="slide-1">
+      <div>
+        <span class="category-tag">The Hidden Labor Boom</span>
+        <h1>Your Field is the Next <span style="color: var(--accent-orange);">AI Frontier</span></h1>
+        <p style="margin-top: 10px; font-size: 1rem; color: var(--text-main); font-weight: 500;">
+          Frontier neural networks are scaling rapidly, but they lack your specific industry judgment. 
+        </p>
+        <p style="margin-top: 12px; font-size: 0.95rem;">
+          A massive hiring wave is pairing <strong style="color: var(--accent-orange);">subject matter experts</strong> directly with advanced alignment pipelines. Take the alignment check to claim your vector assignment.
+        </p>
+      </div>
+      
+      <div class="visual-canvas">
+        <div class="canvas-text">[ Dynamic Core Matrix ]</div>
+      </div>
+      
+      <button class="nav-btn" onclick="showSlide(2)">Analyze My Skill Match</button>
+    </section>
+
+    <section class="webstory-slide" id="slide-2" style="display: none;">
+      <div>
+        <span class="category-tag">Strategic Value</span>
+        <div class="question-text">Why Validate Your Domain Profile?</div>
+        <p>Frontier AI labs are not just looking for engineers—they are aggressively recruiting real-world experts to serve as specialized benchmarkers.</p>
+        
+        <div class="benefit-list">
+          <div class="benefit-item">
+            <span class="benefit-icon">//</span>
+            <p><strong>Targeted Placement:</strong> Skip the general queue and match directly into a micro-specialty that respects your industry tenure.</p>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">//</span>
+            <p><strong>Workplace Evolution:</strong> Learn the diagnostic prompting and validation methods that safeguard your domain against disruption.</p>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">//</span>
+            <p><strong>Optimized Pipelines:</strong> Find the ideal dynamic workflow model configured precisely to your natural cognitive style.</p>
+          </div>
+        </div>
+      </div>
+      
+      <button class="nav-btn" onclick="showSlide(3)">Begin Allocation Assessment</button>
+    </section>
+
+    <section class="webstory-slide" id="slide-3" style="display: none;">
+      <div>
+        <h2>01: Domain Matrix</h2>
+        <div class="question-text">Which baseline framework defines your professional world?</div>
+        <p>Pick the track that matches your hard-won real-world industry background.</p>
+      </div>
+
+      <div class="quiz-options">
+        <div class="option-card" onclick="selectTrack('logic')">
+          <div class="option-texture tex-logic"></div>
+          <div class="option-text-container">
+            <strong>Logic, Math, & Systems</strong>
+            <span>Software, complex data pools, engineering, or financial systems.</span>
+          </div>
+        </div>
+        
+        <div class="option-card" onclick="selectTrack('human')">
+          <div class="option-texture tex-human"></div>
+          <div class="option-text-container">
+            <strong>Culture, Arts, & Translation</strong>
+            <span>Creative arts, language structures, audio patterns, or humanities.</span>
+          </div>
+        </div>
+        
+        <div class="option-card" onclick="selectTrack('sys')">
+          <div class="option-texture tex-sys"></div>
+          <div class="option-text-container">
+            <strong>Operations, Rules, & Logic</strong>
+            <span>Medicine, life sciences, business ops, or legal frameworks.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="webstory-slide" id="slide-4" style="display: none;">
+      <div>
+        <h2>02: Target Expertise</h2>
+        <div class="question-text">Select your exact specialty ecosystem:</div>
+        <p>We use this to pinpoint your placement directly with the correct review pipeline.</p>
+      </div>
+
+      <div class="quiz-options" id="specific-options-container">
+      </div>
+    </section>
+
+    <section class="webstory-slide" id="slide-5" style="display: none;">
+      <div>
+        <h2>03: Cognitive Processing</h2>
+        <div class="question-text">How do you naturally dismantle an ambiguous problem?</div>
+        <p>This guides how our pipelines route edge-case exceptions to your workstation.</p>
+      </div>
+
+      <div class="quiz-options">
+        <div class="option-card" onclick="showSlide(6)">
+          <div class="option-texture tex-intuitive"></div>
+          <div class="option-text-container">
+            <strong>Contextual & Iterative</strong>
+            <span>You cross-reference historical patterns, relying on intuitive pattern matching.</span>
+          </div>
+        </div>
+        
+        <div class="option-card" onclick="showSlide(6)">
+          <div class="option-texture tex-algorithmic"></div>
+          <div class="option-text-container">
+            <strong>First-Principles & Structural</strong>
+            <span>You break systems down into isolated base variables and absolute logical truths.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="webstory-slide" id="slide-6" style="display: none;">
+      <div>
+        <h2>04: Output Calibration</h2>
+        <div class="question-text">Where do you provide your absolute highest value?</div>
+        <p>Select the pacing model that aligns with your peak mental durability.</p>
+      </div>
+
+      <div class="quiz-options">
+        <div class="option-card" onclick="showSlide(7)">
+          <div class="option-texture tex-rapid"></div>
+          <div class="option-text-container">
+            <strong>Rapid Adaptation & Iteration</strong>
+            <span>Generating high volumes of diverse viewpoints quickly across shifting contexts.</span>
+          </div>
+        </div>
+        
+        <div class="option-card" onclick="showSlide(7)">
+          <div class="option-texture tex-rigor"></div>
+          <div class="option-text-container">
+            <strong>Exhaustive Rigor & Deep Auditing</strong>
+            <span>Tracing tiny, hyper-complex logic trails until absolute validation is met.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="webstory-slide" id="slide-7" style="display: none;">
+      <div>
+        <h2>05: Mindset Check</h2>
+        <div class="question-text">How do you prefer to apply your knowledge?</div>
+        <p>This tells our systems how to shape your ideal training and project delivery schedule.</p>
+      </div>
+
+      <div class="quiz-options">
+        <div class="option-card" onclick="selectPreference('freelance')">
+          <div class="option-texture tex-freelance"></div>
+          <div class="option-text-container">
+            <strong>Fluid & Autonomously</strong>
+            <span>You value complete flexibility, working task-by-task entirely on your own terms.</span>
+          </div>
+        </div>
+        
+        <div class="option-card" onclick="selectPreference('structured')">
+          <div class="option-texture tex-corporate"></div>
+          <div class="option-text-container">
+            <strong>Deeply Focused & Linear</strong>
+            <span>You appreciate meticulous guidelines, systemic checklists, and robust milestones.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="webstory-slide" id="slide-8" style="display: none;">
+      <div>
+        <h2>06: Secure Your Results</h2>
+        <div class="question-text">Where should we deploy your custom roadmap?</div>
+        <p>Enter your main contact email below to log your validation results and reveal your targeted portal gateway.</p>
+        
+        <input type="email" id="user-email" placeholder="name@domain.com" class="input-field" required>
+      </div>
+
+      <button class="nav-btn" onclick="submitEmail()">Proceed to Verification Gateway</button>
+    </section>
+
+    <section class="webstory-slide" id="slide-9" style="display: none;">
+      <div>
+        <h2>07: Amplify Your Edge</h2>
+        <div class="question-text">Signal the Shift to Your Network</div>
+        <p>Your background matches critical parameters needed by model evaluation groups. Here are your high-value target tracks:</p>
+        
+        <div class="role-matrix-box">
+          <div class="role-matrix-title">Matched Model Tracks</div>
+          <div class="role-tag-list" id="target-roles-container">
+            </div>
+        </div>
+
+        <p style="margin-bottom: 15px;">Lock in your custom roadmap configuration parameters and broadcast your profile validation loop directly to your network on LinkedIn.</p>
+      </div>
+
+      <div>
+        <a href="#" id="linkedin-share-anchor" target="_blank" class="linkedin-btn">
+          <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          Broadcast Profile to LinkedIn
+        </a>
+        <button class="nav-btn" id="slide9-next-btn" onclick="finalUnlock()" style="margin-top: 10px;">Access Final Allocation Gateway</button>
+      </div>
+    </section>
+
+    <section class="webstory-slide" id="slide-10" style="display: none;">
+      <div class="tessellation-overlay" id="dynamic-tessellation-layer"></div>
+
+      <div>
+        <span class="category-tag" id="matched-tag">Allocation Verified</span>
+        
+        <div class="identity-graphic-wrapper">
+          <div class="identity-badge-title" id="identity-main-badge-txt">DECENTRALIZED AUTONOMY</div>
+          <div class="identity-badge-subtitle" id="identity-sub-badge-txt">WORK ROUTE VERIFIED</div>
+        </div>
+
+        <div id="identitarian-graphic-frame" style="margin-bottom: 12px;"></div>
+
+        <div class="results-box">
+          <p id="result-text" style="color: var(--text-main); font-weight: 500; font-size: 0.95rem; line-height: 1.4;"></p>
+        </div>
+        
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Target Track Assignment</th>
+              <th style="text-align: right;">Market Rate</th>
+            </tr>
+          </thead>
+          <tbody id="compensation-table-rows">
+            </tbody>
+        </table>
+      </div>
+
+      <div class="split-action-matrix">
+        <button class="restart-btn" onclick="resetQuiz()">Retake</button>
+        <a href="#" id="final-job-link" target="_blank" class="job-link">Join AI Lab Pool</a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    let selectedTrackCategory = "";
+    let finalTargetDomain = "";
+    let userPreference = "";
+
+    // Realistic, simplified terms with specific matched tracking rates and CSS tessellation architectures
+    const domainDatabase = {
+      "Software Engineering": { 
+        title: "Code Evaluator",
+        text: "Your understanding of systems, logic loops, and deployment source mechanics maps directly to high-stakes algorithmic reasoning verification pipelines.", 
+        link: "https://t.mercor.com/rrVyb",
+        tessellation: "linear-gradient(rgba(255,87,34,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,87,34,0.15) 1px, transparent 1px)",
+        tessellationSize: "20px 20px",
+        roles: [
+          { name: "Technical Lead Evaluator", rate: "$180 - $250/hr" },
+          { name: "Logic Systems Auditor", rate: "$120 - $160/hr" },
+          { name: "Benchmarking Specialist", rate: "$95 - $140/hr" }
+        ]
+      },
+      "Data Analysis": { 
+        title: "Data Optimization Critic",
+        text: "Your skills isolating clear operational trends from chaotic multidimensional records routes you cleanly to computational evaluation frameworks.", 
+        link: "https://t.mercor.com/K13Z9",
+        tessellation: "radial-gradient(rgba(255,87,34,0.2) 2px, transparent 2px)",
+        tessellationSize: "14px 14px",
+        roles: [
+          { name: "Data Optimization Architect", rate: "$110 - $155/hr" },
+          { name: "Model Matrix Benchmarker", rate: "$85 - $120/hr" },
+          { name: "Pattern Drift Specialist", rate: "$70 - $95/hr" }
+        ]
+      },
+      "Finance": { 
+        title: "Quantitative Reviewer",
+        text: "Your background parsing capital markets, risk metrics, and fiscal operational infrastructure links directly to model valuation tracks.", 
+        link: "https://t.mercor.com/po98d",
+        tessellation: "linear-gradient(45deg, rgba(255,87,34,0.1) 25%, transparent 25%, transparent 75%, rgba(255,87,34,0.1) 75%)",
+        tessellationSize: "30px 30px",
+        roles: [
+          { name: "Quantitative Risk Auditor", rate: "$140 - $190/hr" },
+          { name: "Market Simulation Reviewer", rate: "$90 - $135/hr" },
+          { name: "Fiscal Parameter Guard", rate: "$75 - $110/hr" }
+        ]
+      },
+      "Arts": { 
+        title: "Generative Designer",
+        text: "Your technical mastery over visual framing, design systems, and aesthetic mechanics aligns seamlessly with creative reinforcement workflows.", 
+        link: "https://t.mercor.com/P5jqE",
+        tessellation: "radial-gradient(circle, transparent 20%, #14161f 20%, #14161f 80%, transparent 80%)",
+        tessellationSize: "20px 20px",
+        roles: [
+          { name: "Prompt Architecture Critic", rate: "$95 - $130/hr" },
+          { name: "UI Intuition Evaluator", rate: "$70 - $105/hr" },
+          { name: "Spatial Dynamics Auditor", rate: "$65 - $85/hr" }
+        ]
+      },
+      "Language/Audio": { 
+        title: "Linguistics Expert",
+        text: "Your precision evaluating phonetic variation, syntactic semantics, or audio patterns slots you right into advanced voice modeling pipelines.", 
+        link: "https://t.mercor.com/dWbN8",
+        tessellation: "linear-gradient(0deg, rgba(255,87,34,0.15) 50%, transparent 50%)",
+        tessellationSize: "10px 10px",
+        roles: [
+          { name: "Acoustic System Verifier", rate: "$85 - $120/hr" },
+          { name: "Semantic Accent Evaluator", rate: "$65 - $95/hr" },
+          { name: "Phonetic Quality Lead", rate: "$60 - $80/hr" }
+        ]
+      },
+      "Humanities": { 
+        title: "Reasoning Specialist",
+        text: "Your academic experience interpreting text blocks and cultural concepts targets high-level ethical logic alignment environments.", 
+        link: "https://t.mercor.com/uP10o",
+        tessellation: "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,87,34,0.1) 10px, rgba(255,87,34,0.1) 12px)",
+        tessellationSize: "auto",
+        roles: [
+          { name: "Contextual Bias Auditor", rate: "$90 - $125/hr" },
+          { name: "Ontology Alignment Critic", rate: "$75 - $110/hr" },
+          { name: "Logic Train Evaluator", rate: "$65 - $90/hr" }
+        ]
+      },
+      "Medicine": { 
+        title: "Clinical Validator",
+        text: "Your industry insight parsing patient charts and diagnostics sets you up perfectly to secure advanced biological system logic frameworks.", 
+        link: "https://t.mercor.com/1Sxsx",
+        tessellation: "linear-gradient(45deg, rgba(255,87,34,0.15) 25%, transparent 25%), linear-gradient(-45deg, rgba(255,87,34,0.15) 25%, transparent 25%)",
+        tessellationSize: "16px 16px",
+        roles: [
+          { name: "Diagnostic Workflow Auditor", rate: "$160 - $220/hr" },
+          { name: "Biolayer Logic Reviewer", rate: "$115 - $150/hr" },
+          { name: "Medical Protocol Benchmarker", rate: "$90 - $130/hr" }
+        ]
+      },
+      "Law": { 
+        title: "Compliance Commander",
+        text: "Your legal background checking operational policies and statutory details unlocks direct deployment into strategic model compliance pipelines.", 
+        link: "https://t.mercor.com/j41qe",
+        tessellation: "linear-gradient(90deg, rgba(255,87,34,0.1) 2px, transparent 2px)",
+        tessellationSize: "25px 100%",
+        roles: [
+          { name: "Statutory Rule Evaluator", rate: "$150 - $210/hr" },
+          { name: "Governance Policy Auditor", rate: "$110 - $145/hr" },
+          { name: "Regulatory Tracking Critic", rate: "$85 - $120/hr" }
+        ]
+      },
+      "Life Sciences": { 
+        title: "Research Accelerator",
+        text: "Your empirical approach running research validation loops matches cleanly with clinical automation modeling pipelines.", 
+        link: "https://t.mercor.com/PEfVh",
+        tessellation: "radial-gradient(rgba(255,87,34,0.15) 1px, transparent 1px)",
+        tessellationSize: "8px 8px",
+        roles: [
+          { name: "Biochemical Logic Evaluator", rate: "$120 - $165/hr" },
+          { name: "Empirical Model Benchmarker", rate: "$95 - $130/hr" },
+          { name: "Laboratory Framework Critic", rate: "$70 - $100/hr" }
+        ]
+      },
+      "Business Ops": { 
+        title: "Operations Specialist",
+        text: "Your skills handling platform scaling and deployment logistics position you to construct next-gen corporate model architectures.", 
+        link: "https://t.mercor.com/YCgs8",
+        tessellation: "linear-gradient(to right, rgba(255,87,34,0.12) 1px, transparent 1px)",
+        tessellationSize: "12px 100%",
+        roles: [
+          { name: "Workflow Automation Lead", rate: "$105 - $145/hr" },
+          { name: "Logistics Optimization Critic", rate: "$80 - $115/hr" },
+          { name: "Enterprise Scale Auditor", rate: "$70 - $95/hr" }
+        ]
+      }
+    };
+
+    function showSlide(slideNum) {
+      document.querySelectorAll('.webstory-slide').forEach(slide => slide.style.display = 'none');
+      document.getElementById('slide-' + slideNum).style.display = 'flex';
+    }
+
+    function selectTrack(trackType) {
+      selectedTrackCategory = trackType;
+      const optionsContainer = document.getElementById('specific-options-container');
+      optionsContainer.innerHTML = ""; 
+
+      let relevantDomains = [];
+      if (trackType === 'logic') relevantDomains = ["Software Engineering", "Data Analysis", "Finance"];
+      if (trackType === 'human') relevantDomains = ["Arts", "Language/Audio", "Humanities"];
+      if (trackType === 'sys')   relevantDomains = ["Medicine", "Law", "Life Sciences", "Business Ops"];
+
+      relevantDomains.forEach(domain => {
+        optionsContainer.innerHTML += `
+          <div class="option-card" onclick="finalizeDomain('${domain}')">
+            <div class="option-texture tex-${trackType}"></div>
+            <div class="option-text-container">
+              <strong>${domain} Segment</strong>
+              <span>Click to bridge your background into this targeted internal review pipeline.</span>
+            </div>
+          </div>`;
+      });
+
+      showSlide(4);
+    }
+
+    function finalizeDomain(domainName) {
+      finalTargetDomain = domainName;
+      showSlide(5);
+    }
+
+    function selectPreference(preferenceType) {
+      userPreference = preferenceType;
+      showSlide(8);
+    }
+
+    function submitEmail() {
+      const emailVal = document.getElementById('user-email').value;
+      if (!emailVal || !emailVal.includes('@')) {
+        alert('Please enter a valid email address to protect your custom dashboard pathway.');
+        return;
+      }
+
+      const activeDomain = finalTargetDomain || "Humanities";
+      const chosenData = domainDatabase[activeDomain];
+      
+      // Render Roles with explicit hourly estimate caps onto Slide 9
+      const roleContainer = document.getElementById('target-roles-container');
+      roleContainer.innerHTML = "";
+      chosenData.roles.forEach(role => {
+        roleContainer.innerHTML += `
+          <span class="role-badge">
+            <span>${role.name}</span>
+            <span class="role-rate-tag">${role.rate}</span>
+          </span>`;
+      });
+
+      // Assemble pre-written template text optimized for LinkedIn share deployment
+      const currentUrl = window.location.origin + window.location.pathname;
+      const shareUrl = encodeURIComponent(currentUrl);
+      
+      const profileTitle = chosenData.title;
+      const primaryTargetRole = chosenData.roles[0].name;
+      
+      const rawPostCopy = `I just ran my background and got it mapped into the current AI frontier. As an ${profileTitle}, my micro-specialty labor boom is shifting the architecture of career evolution, heading toward ${primaryTargetRole}. Get your personal profile and guide here: labor-boom.vercel.app`;
+      
+      const textLine = encodeURIComponent(rawPostCopy);
+      document.getElementById('linkedin-share-anchor').href = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}&text=${textLine}`;
+      
+      showSlide(9);
+    }
+
+    function finalUnlock() {
+      const activeDomain = finalTargetDomain || "Humanities";
+      const chosenData = domainDatabase[activeDomain];
+      
+      document.getElementById('matched-tag').innerText = "ALLOCATION CONFIGURATION VERIFIED";
+      document.getElementById('result-text').innerText = chosenData.text;
+      
+      // Dynamic Tessellation Pattern Background Engine
+      const tessellationOverlay = document.getElementById('dynamic-tessellation-layer');
+      tessellationOverlay.style.backgroundImage = chosenData.tessellation;
+      tessellationOverlay.style.backgroundSize = chosenData.tessellationSize;
+      
+      // Populate Compensation Matrix on Slide 10
+      const tableBody = document.getElementById('compensation-table-rows');
+      tableBody.innerHTML = "";
+      chosenData.roles.forEach(role => {
+        tableBody.innerHTML += `
+          <tr>
+            <td><strong>${role.name}</strong></td>
+            <td class="rate-column">${role.rate}</td>
+          </tr>`;
+      });
+      
+      // Dynamic SVG Graphic Framework Engine (Sharp lines, conceptual imagery, contrast pops)
+      const graphicContainer = document.getElementById('identitarian-graphic-frame');
+      const accentColor = userPreference === 'structured' ? "#0077b5" : "#ff5722";
+      
+      let geometricElements = "";
+      if (selectedTrackCategory === 'logic') {
+        geometricElements = `
+          <g stroke="${accentColor}" stroke-width="1.5" fill="none" opacity="0.8">
+            <path d="M10 20 L440 20 M10 60 L440 60 M10 100 L440 100" stroke-dasharray="5,5"/>
+            <path d="M40 10 L40 110 M120 10 L120 110 M200 10 L200 110 M360 10 L360 110"/>
+            <rect x="230" y="30" width="80" height="50" fill="rgba(255,87,34,0.1)" stroke="${accentColor}" stroke-width="2"/>
+            <circle cx="270" cy="55" r="4" fill="#ffffff"/>
+          </g>`;
+      } else if (selectedTrackCategory === 'human') {
+        geometricElements = `
+          <g stroke="${accentColor}" stroke-width="2" fill="none">
+            <path d="M20 90 Q 110 10, 200 90 T 380 90" opacity="0.4"/>
+            <path d="M20 40 Q 150 120, 260 30 T 420 70"/>
+            <line x1="145" y1="15" x2="145" y2="105" stroke="#ffffff" stroke-width="1" stroke-dasharray="2,2"/>
+            <circle cx="145" cy="52" r="6" fill="${accentColor}"/>
+          </g>`;
+      } else {
+        geometricElements = `
+          <g stroke="${accentColor}" stroke-width="1.5" fill="none">
+            <polygon points="220,15 320,95 120,95" opacity="0.3"/>
+            <polygon points="220,30 290,90 150,90"/>
+            <line x1="220" y1="15" x2="220" y2="95" stroke="#ffffff"/>
+            <circle cx="220" cy="60" r="18" stroke="#ffffff" stroke-width="1"/>
+          </g>`;
+      }
+
+      graphicContainer.innerHTML = `
+        <svg width="100%" height="110" style="background: rgba(0,0,0,0.4); border-radius: 6px; border: 1px solid var(--border-color);">
+          ${geometricElements}
+          <text x="25" y="35" fill="#ffffff" font-family="monospace" font-size="11" font-weight="700" letter-spacing="1">[ SYSTEM_TRACK // ${activeDomain.toUpperCase()} ]</text>
+        </svg>
+      `;
+
+      // Update structural title headers
+      const mainBadgeText = document.getElementById('identity-main-badge-txt');
+      const subBadgeText = document.getElementById('identity-sub-badge-txt');
+      
+      if (userPreference === 'structured') {
+        mainBadgeText.innerText = "SYSTEMATIC RIGOR";
+        subBadgeText.innerText = `CONFIRMED: ${chosenData.title.toUpperCase()}`;
+        mainBadgeText.style.color = "var(--accent-blue)";
+      } else {
+        mainBadgeText.innerText = "DECENTRALIZED AUTONOMY";
+        subBadgeText.innerText = `CONFIRMED: ${chosenData.title.toUpperCase()}`;
+        mainBadgeText.style.color = "var(--accent-orange)";
+      }
+
+      // Final CTA Button Explicit Offer Overhaul
+      const linkButton = document.getElementById('final-job-link');
+      linkButton.href = chosenData.link;
+      linkButton.innerText = `Join ${activeDomain} AI Lab`;
+
+      showSlide(10);
+    }
+
+    function resetQuiz() {
+      selectedTrackCategory = "";
+      finalTargetDomain = "";
+      userPreference = "";
+      document.getElementById('user-email').value = "";
+      showSlide(1);
+    }
+  </script>
+</body>
+</html>
