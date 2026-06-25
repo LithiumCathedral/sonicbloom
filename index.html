@@ -3,435 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabMatch | Discover Your AI Alignment Role</title>
+    <title>LabMatch | Specialized AI Alignment Search</title>
     <style>
         :root {
-            --bg-light: #fafafa;
+            --bg-canvas: #fafafa;
             --panel-white: #ffffff;
-            --border-clean: #e5e7eb;
-            --brand-orange: #ff6a00;
-            --brand-orange-light: #fff0e6;
-            --text-main: #1f2937;
-            --text-muted: #4b5563;
-            --matrix-green: #10b981;
+            --sonic-orange: #ff6a00;
+            --sonic-orange-light: #fff0e6;
+            --text-ink: #1f2937;
+            --text-slate: #4b5563;
+            --border-gray: #e5e7eb;
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-canvas);
+            color: var(--text-ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
-            padding: 0;
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 100vh;
         }
 
         .story-container {
             width: 100%;
-            max-width: 1100px;
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            box-sizing: border-box;
+            max-width: 680px;
+            padding: 40px 24px;
         }
 
-        .story-slide {
+        .slide {
             display: none;
-            width: 100%;
             opacity: 0;
-            transition: opacity 0.4s ease-in-out;
+            transition: opacity 0.4s ease;
+            background: var(--panel-white);
+            border: 1px solid var(--border-gray);
+            border-radius: 20px;
+            padding: 48px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
         }
 
-        .story-slide.active {
-            display: flex;
-            opacity: 1;
-        }
+        .slide.active { display: block; opacity: 1; }
 
-        /* ==========================================================================
-           SLIDE 1: REFINED ACCESSIBLE INTRO
-           ========================================================================== */
-        .intro-layout {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            justify-content: space-between;
-            gap: 60px;
-        }
-
-        .intro-text-panel {
-            flex: 1.2;
-            max-width: 550px;
-        }
-
-        .brand-badge {
+        /* Typography */
+        .badge {
             display: inline-block;
-            background-color: var(--brand-orange-light);
-            color: var(--brand-orange);
+            background: var(--sonic-orange-light);
+            color: var(--sonic-orange);
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            padding: 6px 16px;
+            padding: 6px 14px;
             border-radius: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
-        .main-title {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-            color: var(--text-main);
-            margin: 0 0 1.5rem 0;
+        h1, h2 { 
+            margin: 0 0 16px 0; 
+            letter-spacing: -1px; 
+            line-height: 1.1;
         }
 
-        .main-title .highlight {
-            color: var(--brand-orange);
-        }
-
-        .intro-desc {
-            font-size: 1.15rem;
-            line-height: 1.6;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-        }
-
-        .next-btn {
-            background: var(--brand-orange);
-            border: none;
-            color: #ffffff;
-            padding: 1rem 3rem;
+        .desc { 
+            color: var(--text-slate); 
+            line-height: 1.6; 
+            margin-bottom: 32px; 
             font-size: 1.05rem;
-            font-weight: 600;
+        }
+
+        /* Form & Input Styling */
+        .input-group { margin-bottom: 24px; }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="email"]:focus { border-color: var(--sonic-orange); }
+
+        .btn {
+            background: var(--sonic-orange);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 4px 12px rgba(255, 106, 0, 0.2);
-        }
-
-        .next-btn:hover {
-            background: #e05d00;
-            transform: translateY(-1px);
-        }
-
-        .intro-vector-panel {
-            flex: 0.8;
-            position: relative;
-            height: 400px;
-            max-width: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Minimal, friendly abstract geometric graphic engine using standard CSS elements */
-        .conceptual-shapes {
-            position: relative;
-            width: 280px;
-            height: 280px;
-        }
-
-        .shape-circle {
-            position: absolute;
-            border-radius: 50%;
-            border: 2px dashed rgba(255, 106, 0, 0.2);
             width: 100%;
-            height: 100%;
-            animation: rotate 20s linear infinite;
+            font-size: 1rem;
+            transition: background 0.2s;
         }
 
-        .shape-node {
-            position: absolute;
-            background: var(--brand-orange);
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            top: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+        .btn:hover { background: #e05d00; }
 
-        .shape-center {
-            position: absolute;
-            top: 25%;
-            left: 25%;
-            width: 50%;
-            height: 50%;
-            background: var(--brand-orange-light);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--brand-orange);
-            font-size: 1.25rem;
-            box-shadow: 0 10px 25px rgba(255, 106, 0, 0.08);
-        }
-
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-
-        /* ==========================================================================
-           SLIDE 2: THE SIMPLIFIED LABMATCH QUIZ
-           ========================================================================== */
-        .quiz-panel {
-            background-color: var(--panel-white);
-            border: 1px solid var(--border-clean);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 640px;
-            margin: 0 auto;
-            padding: 48px;
-            box-sizing: border-box;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-        }
-
-        .quiz-title {
-            font-size: 1.85rem;
-            font-weight: 700;
-            line-height: 1.3;
-            margin: 0 0 12px 0;
-            color: var(--text-main);
-        }
-
-        .quiz-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 36px;
-        }
-
-        .track-options {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .track-card {
-            background-color: #ffffff;
-            border: 1.5px solid var(--border-clean);
+        /* Quiz Options */
+        .option {
+            border: 1.5px solid var(--border-gray);
             border-radius: 12px;
             padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            margin-bottom: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
 
-        .track-card:hover {
-            border-color: var(--brand-orange);
-            background-color: var(--brand-orange-light);
-        }
+        .option:hover { border-color: var(--sonic-orange); background: var(--sonic-orange-light); }
+        .option-name { font-weight: 700; display: block; margin-bottom: 4px; }
+        .option-desc { font-size: 0.9rem; color: var(--text-slate); }
 
-        .track-info-block {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            max-width: 85%;
-        }
-
-        .track-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .track-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        .arrow-indicator {
-            color: var(--text-muted);
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: transform 0.2s;
-        }
-
-        .track-card:hover .arrow-indicator {
-            color: var(--brand-orange);
-            transform: translateX(4px);
-        }
-
-        /* ==========================================================================
-           SLIDE 3: SIMPLE HELPFUL RESULT
-           ========================================================================== */
-        .result-panel {
-            background-color: var(--panel-white);
-            border: 1px solid var(--border-clean);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 48px;
-            box-sizing: border-box;
+        /* Results Display */
+        .result-role {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--sonic-orange);
+            background: var(--sonic-orange-light);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 24px 0;
             text-align: center;
         }
 
-        .assigned-role {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--brand-orange);
-            margin: 20px 0;
-            background: var(--brand-orange-light);
-            padding: 16px;
-            border-radius: 12px;
-            display: inline-block;
-            letter-spacing: -0.5px;
-        }
-
-        .share-btn {
-            background: #0077b5;
-            border: none;
-            color: white;
-            padding: 14px 36px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 16px;
-        }
-
-        .share-btn:hover { background: #005a8a; }
-
-        @media (max-width: 900px) {
-            .intro-layout {
-                flex-direction: column;
-                text-align: center;
-                gap: 40px;
-            }
-            .main-title { font-size: 3rem; }
-            .intro-vector-panel { display: none; }
-            .quiz-panel, .result-panel { padding: 32px; }
+        .share-link {
+            display: block;
+            text-align: center;
+            color: #0077b5;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 24px;
         }
     </style>
 </head>
 <body>
 
-    <div class="story-container">
-
-        <div id="slide-intro" class="story-slide active">
-            <div class="intro-layout">
-                <div class="intro-text-panel">
-                    <span class="brand-badge">Introducing LabMatch</span>
-                    <h1 class="main-title">Reveal Your <span class="highlight">Role</span></h1>
-                    <p class="intro-desc">AI models are evolving quickly, creating a high demand for specialized knowledge. Take a few simple steps to find out where your professional experience fits into this new frontier.</p>
-                    <button class="next-btn" onclick="goToTargetExpertise()">Start LabMatch</button>
-                </div>
-
-                <div class="intro-vector-panel">
-                    <div class="conceptual-shapes">
-                        <div class="shape-circle"><div class="shape-node"></div></div>
-                        <div class="shape-center">LabMatch</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="slide-expertise" class="story-slide">
-            <div class="quiz-panel">
-                <h2 class="quiz-title">What is your primary area of domain expertise?</h2>
-                <p class="quiz-subtitle">Select the option that best matches your professional background or training.</p>
-
-                <div class="track-options">
-                    <div class="track-card" onclick="selectTrack('Medicine', 'Clinical Reasoning Evaluator')">
-                        <div class="track-info-block">
-                            <span class="track-name">Medicine & Healthcare</span>
-                            <span class="track-desc">Review complex clinical decisions, evaluate diagnostic reasoning, or interpret medical data.</span>
-                        </div>
-                        <span class="arrow-indicator">→</span>
-                    </div>
-
-                    <div class="track-card" onclick="selectTrack('Law', 'Regulatory Compliance Architect')">
-                        <div class="track-info-block">
-                            <span class="track-name">Law & Policy</span>
-                            <span class="track-desc">Govern high-stakes legal logic, guide contract evaluations, or map compliance pipelines.</span>
-                        </div>
-                        <span class="arrow-indicator">→</span>
-                    </div>
-
-                    <div class="track-card" onclick="selectTrack('Life Sciences', 'Data Optimization Architect')">
-                        <div class="track-info-block">
-                            <span class="track-name">Life Sciences & Research</span>
-                            <span class="track-desc">Contribute to scientific discoveries, evaluate complex biological structures, or review research methodologies.</span>
-                        </div>
-                        <span class="arrow-indicator">→</span>
-                    </div>
-
-                    <div class="track-card" onclick="selectTrack('Business Ops', 'Operational Scale Strategist')">
-                        <div class="track-info-block">
-                            <span class="track-name">Business Operations</span>
-                            <span class="track-desc">Optimize organizational supply chains, direct logical scaling, or analyze operational workflows.</span>
-                        </div>
-                        <span class="arrow-indicator">→</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="slide-result" class="story-slide">
-            <div class="result-panel">
-                <h2 class="quiz-title" style="margin-bottom: 8px;">Your Match is Ready</h2>
-                <p class="quiz-subtitle" style="margin-bottom: 0;">Based on your background, your optimal match within cutting-edge AI development models is:</p>
-                
-                <div id="display-role" class="assigned-role">Data Optimization Architect</div>
-                
-                <p class="quiz-subtitle" style="margin-top: 0; margin-bottom: 32px;">Major research labs look for this precise blend of experience to evaluate structural alignment systems safely.</p>
-                
-                <button class="share-btn" onclick="shareToLinkedIn()">
-                    Share Match on LinkedIn
-                </button>
-            </div>
-        </div>
-
+<div class="story-container">
+    <div id="slide-1" class="slide active">
+        <span class="badge">SonicBloom Presenta</span>
+        <h1>Reveal Your<br>AI Role</h1>
+        <p class="desc">A precision diagnostic tool to map your specialized industry experience into the emerging AI alignment labor market.</p>
+        <button class="btn" onclick="next(2)">Begin LabMatch</button>
     </div>
 
-    <script>
-        let selectedSpecialty = "";
-        let assignedRole = "";
+    <div id="slide-2" class="slide">
+        <h2>Target Expertise</h2>
+        <p class="desc">Which specialized ecosystem defines your professional background?</p>
+        <div id="quiz-options"></div>
+    </div>
 
-        function goToTargetExpertise() {
-            const introSlide = document.getElementById('slide-intro');
-            const expertiseSlide = document.getElementById('slide-expertise');
+    <div id="slide-3" class="slide">
+        <span class="badge">Identity Verification</span>
+        <h2>Secure Your Result</h2>
+        <p class="desc">We are mapping your profile to a specific AI review vector. Enter your professional email to finalize the architectural match.</p>
+        <div class="input-group">
+            <input type="email" id="user-email" placeholder="name@company.com" required>
+        </div>
+        <button class="btn" id="email-btn" onclick="submitEmail()">Finalize Mapping</button>
+    </div>
 
-            introSlide.style.opacity = '0';
-            setTimeout(() => {
-                introSlide.classList.remove('active');
-                expertiseSlide.classList.add('active');
-                setTimeout(() => { expertiseSlide.style.opacity = '1'; }, 50);
-            }, 400);
+    <div id="slide-4" class="slide">
+        <span class="badge">System Match Generated</span>
+        <h2 id="result-header">Expertise Confirmed</h2>
+        <div id="result-role" class="result-role">---</div>
+        <p id="result-desc" class="desc">Your review track has been isolated.</p>
+        <button class="btn" onclick="shareResult()">Share to LinkedIn</button>
+        <a href="/" class="share-link">Return to SonicBloom Home</a>
+    </div>
+</div>
+
+<script>
+    let state = { specialty: '', role: '', desc: '', email: '' };
+
+    // Triple-Action Data Structure
+    const quizData = [
+        { 
+            name: "Medicine & Healthcare", 
+            role: "Clinical Reasoning Evaluator", 
+            desc: "You will validate high-stakes diagnostic reasoning and biomedical data interpretation for medical-frontier models." 
+        },
+        { 
+            name: "Law & Policy", 
+            role: "Regulatory Compliance Architect", 
+            desc: "You will govern policy-critical contract logic and regulatory compliance mapping within legal-native LLMs." 
+        },
+        { 
+            name: "Life Sciences", 
+            role: "Data Optimization Architect", 
+            desc: "You will shape sequence analysis and deep scientific methodology for proprietary research alignment pipelines." 
+        },
+        { 
+            name: "Business Ops", 
+            role: "Operational Scale Strategist", 
+            desc: "You will guide complex operational scaling models and intuitive logical supply-chain alignment for enterprise systems." 
         }
+    ];
 
-        function selectTrack(specialtyName, frameworkRole) {
-            selectedSpecialty = specialtyName;
-            assignedRole = frameworkRole;
+    function next(id) {
+        document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+        document.getElementById(`slide-${id}`).classList.add('active');
+    }
 
-            document.getElementById('display-role').innerText = assignedRole;
+    // Populate Quiz
+    const quizContainer = document.getElementById('quiz-options');
+    quizData.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.innerHTML = `<span class="option-name">${item.name}</span><span class="option-desc">${item.role} pathway</span>`;
+        div.onclick = () => {
+            state.specialty = item.name;
+            state.role = item.role;
+            state.desc = item.desc;
+            next(3);
+        };
+        quizContainer.appendChild(div);
+    });
 
-            const expertiseSlide = document.getElementById('slide-expertise');
-            const resultSlide = document.getElementById('slide-result');
+    async function submitEmail() {
+        const email = document.getElementById('user-email').value;
+        const btn = document.getElementById('email-btn');
+        if(!email.includes('@')) return alert("Valid professional email required.");
+        
+        btn.innerText = "Connecting to Gateway...";
+        state.email = email;
 
-            expertiseSlide.style.opacity = '0';
-            setTimeout(() => {
-                expertiseSlide.classList.remove('active');
-                resultSlide.classList.add('active');
-                setTimeout(() => { resultSlide.style.opacity = '1'; }, 50);
-            }, 400);
-        }
+        // Vercel / Google Sheets API Integration Point
+        try {
+            await fetch('/api/capture', {
+                method: 'POST',
+                body: JSON.stringify(state)
+            });
+        } catch(e) { console.log("Local mode: Skipping API write"); }
 
-        function shareToLinkedIn() {
-            const shareText = `My micro-specialty is shifting the architecture of AI; experts like me are heading toward "${assignedRole}" roles at major labs.\n\nInsight is everything: labor-boom.vercel.app`;
-            const targetUrl = 'https://labor-boom.vercel.app';
-            const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(targetUrl)}&text=${encodeURIComponent(shareText)}`;
-            
-            window.open(linkedinShareUrl, '_blank', 'width=600,height=600');
-        }
-    </script>
+        // Trigger Triple-Action Reveal
+        document.getElementById('result-role').innerText = state.role;
+        document.getElementById('result-desc').innerText = state.desc;
+        next(4);
+    }
+
+    function shareResult() {
+        const text = `My micro-specialty is shifting the architecture of AI; experts like me are heading toward "${state.role}" roles at major labs.\n\nInsight via SonicBloom: labor-boom.vercel.app`;
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://labor-boom.vercel.app&text=${encodeURIComponent(text)}`, '_blank');
+    }
+</script>
+
 </body>
 </html>

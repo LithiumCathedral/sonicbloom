@@ -1,71 +1,51 @@
 {
-  "appConfig": {
-    "quizName": "LabMatch",
-    "version": "2.0.0",
-    "ethos": "informed, accessible, simple, helpful",
-    "theme": {
-      "mode": "light",
-      "primaryColor": "#ff6a00",
-      "secondaryColor": "#fafafa",
-      "textColor": "#1f2937",
-      "accentColor": "#10b981"
-    },
-    "meta": {
-      "baseUrl": "https://labor-boom.vercel.app",
-      "defaultShareTitle": "LabMatch | Discover Your AI Alignment Role"
-    }
+  "branding": {
+    "studio": "SonicBloom",
+    "product": "LabMatch",
+    "domain": "sonicbloom.dev"
   },
-  "slides": {
-    "intro": {
-      "id": "slide-intro",
-      "badge": "Introducing LabMatch",
-      "title": "Reveal Your Role",
-      "highlightWord": "Role",
-      "description": "AI models are evolving quickly, creating a high demand for specialized knowledge. Take a few simple steps to find out where your professional experience fits into this new frontier.",
-      "ctaText": "Start LabMatch"
+  "flow": [
+    {
+      "step": 1,
+      "type": "intro",
+      "headline": "Reveal Your Role",
+      "copy": "Map your professional experience into high-paid AI alignment vectors."
     },
-    "expertiseQuiz": {
-      "id": "slide-expertise",
-      "stepNumber": "02",
-      "question": "What is your primary area of domain expertise?",
-      "subtitle": "Select the option that best matches your professional background or training.",
-      "tracks": [
+    {
+      "step": 2,
+      "type": "expertise_matrix",
+      "options": [
         {
-          "id": "medicine",
-          "category": "Medicine & Healthcare",
-          "description": "Review complex clinical decisions, evaluate diagnostic reasoning, or interpret medical data.",
-          "assignedRole": "Clinical Reasoning Evaluator"
+          "id": "med",
+          "label": "Medicine",
+          "role": "Clinical Reasoning Evaluator",
+          "summary": "Validation of high-stakes diagnostic datasets."
         },
         {
           "id": "law",
-          "category": "Law & Policy",
-          "description": "Govern high-stakes legal logic, guide contract evaluations, or map compliance pipelines.",
-          "assignedRole": "Regulatory Compliance Architect"
+          "label": "Law",
+          "role": "Regulatory Compliance Architect",
+          "summary": "Governing policy-critical contract logic."
         },
         {
-          "id": "lifesci",
-          "category": "Life Sciences & Research",
-          "description": "Contribute to scientific discoveries, evaluate complex biological structures, or review research methodologies.",
-          "assignedRole": "Data Optimization Architect"
+          "id": "sci",
+          "label": "Life Sciences",
+          "role": "Data Optimization Architect",
+          "summary": "Refining sequence analysis and research methodology."
         },
         {
-          "id": "bizops",
-          "category": "Business Operations",
-          "description": "Optimize organizational supply chains, direct logical scaling, or analyze operational workflows.",
-          "assignedRole": "Operational Scale Strategist"
+          "id": "biz",
+          "label": "Business Ops",
+          "role": "Operational Scale Strategist",
+          "summary": "Guiding intuitive supply-chain alignment."
         }
       ]
     },
-    "results": {
-      "id": "slide-result",
-      "title": "Your Match is Ready",
-      "preHeader": "Based on your background, your optimal match within cutting-edge AI development models is:",
-      "postHeader": "Major research labs look for this precise blend of experience to evaluate structural alignment systems safely.",
-      "ctaText": "Share Match on LinkedIn"
+    {
+      "step": 3,
+      "type": "gateway",
+      "title": "Finalize Mapping",
+      "fields": ["email"]
     }
-  },
-  "sharingEngine": {
-    "platform": "LinkedIn",
-    "copyTemplate": "My micro-specialty is shifting the architecture of AI; experts like me are heading toward \"{{assignedRole}}\" roles at major labs.\n\nInsight is everything: labor-boom.vercel.app"
-  }
+  ]
 }
