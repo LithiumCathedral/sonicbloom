@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabMatch | SonicBloom Multi-Stage Alignment Engine</title>
+    <title>LabMatch | Find Your AI Role</title>
     <style>
         :root {
             --bg-canvas: #fafafa;
@@ -47,7 +47,6 @@
 
         .slide.active { display: block; opacity: 1; }
 
-        /* Component Framework */
         .badge {
             display: inline-block;
             background: var(--sonic-orange-light);
@@ -80,7 +79,6 @@
         h1, h2, h3 { margin: 0 0 16px 0; letter-spacing: -1px; line-height: 1.15; }
         .desc { color: var(--text-slate); line-height: 1.6; margin-bottom: 32px; font-size: 1.05rem; }
 
-        /* Interactive Card Triggers */
         .option {
             border: 1.5px solid var(--border-clean);
             border-radius: 12px;
@@ -91,11 +89,9 @@
             background: var(--panel-white);
         }
         .option:hover { border-color: var(--sonic-orange); background: var(--sonic-orange-light); }
-        .option.selected { border-color: var(--sonic-orange); background: var(--sonic-orange-light); }
         .option-title { font-weight: 700; display: block; margin-bottom: 4px; }
         .option-subtitle { font-size: 0.9rem; color: var(--text-slate); }
 
-        /* Input Forms */
         input[type="email"] {
             width: 100%;
             padding: 16px;
@@ -108,7 +104,6 @@
         }
         input[type="email"]:focus { border-color: var(--sonic-orange); }
 
-        /* Buttons & Actions Layout */
         .btn {
             background: var(--sonic-orange);
             color: white;
@@ -137,7 +132,6 @@
         .btn-join { background: var(--success-green); color: white; text-decoration: none; display: block; text-align: center; box-sizing: border-box; }
         .btn-join:hover { background: #059669; }
 
-        /* Market Index Table View */
         .market-metrics {
             margin: 24px 0;
             border: 1px solid var(--border-clean);
@@ -166,105 +160,104 @@
     </div>
 
     <div id="slide-1" class="slide active">
-        <span class="badge">LabMatch V2.1</span>
+        <span class="badge">LabMatch Quiz</span>
         <h1>Reveal Your Role</h1>
-        <p class="desc">A specialized, multi-stage optimization diagnostic matching expert human cognitive domains to high-fidelity AI model instruction pipelines.</p>
-        <button class="btn" onclick="goToSlide(2)">Initiate Optimization Engine</button>
+        <p class="desc">Smart AI models are growing fast. Take this quick quiz to see how your everyday work skills can help build the future of AI technology.</p>
+        <button class="btn" onclick="goToSlide(2)">Start the Quiz</button>
     </div>
 
     <div id="slide-2" class="slide">
-        <h2>01 / Primary Domain Focus</h2>
-        <p class="desc">Isolate your structural industry segment to target matching verification vectors.</p>
+        <h2>01 / Your Main Field</h2>
+        <p class="desc">What kind of work or subject do you know best?</p>
         <div id="domain-options"></div>
     </div>
 
     <div id="slide-3" class="slide">
-        <h2>02 / Psychometric Attribute</h2>
-        <p class="desc">Identify your core internal style when dissecting anomalous outputs or system edge-cases.</p>
+        <h2>02 / Your Problem-Solving Style</h2>
+        <p class="desc">How do you usually handle tricky questions or look for mistakes?</p>
         <div class="option" onclick="selectPsychometric('Granular Adversarial')">
-            <span class="option-title">Granular & Adversarial</span>
-            <span class="option-subtitle">Systematically stress-testing rule definitions to catch edge vulnerabilities.</span>
+            <span class="option-title">Testing Limits</span>
+            <span class="option-subtitle">I like to test rules to find hidden mistakes and weak spots.</span>
         </div>
         <div class="option" onclick="selectPsychometric('Synthetic Structural')">
-            <span class="option-title">Synthetic & Structural</span>
-            <span class="option-subtitle">Synthesizing macro concepts cleanly into clear, logical reference schemas.</span>
+            <span class="option-title">Building Blueprints</span>
+            <span class="option-subtitle">I like to turn big, messy ideas into clear, simple guides.</span>
         </div>
         <div class="option" onclick="selectPsychometric('Heuristic Creative')">
-            <span class="option-title">Heuristic & Creative</span>
-            <span class="option-subtitle">Navigating ambiguous boundaries fluidly via interpretive lateral comparison.</span>
+            <span class="option-title">Thinking Outside the Box</span>
+            <span class="option-subtitle">I like using imagination to solve unusual problems that do not have clear rules.</span>
         </div>
     </div>
 
     <div id="slide-4" class="slide">
-        <h2>03 / Work Style Vector</h2>
-        <p class="desc">Define the framework paradigm that maximizes your computational annotation efficacy.</p>
+        <h2>03 / Your Work Habits</h2>
+        <p class="desc">What kind of work setup helps you focus the best?</p>
         <div class="option" onclick="selectWorkStyle('Asynchronous Autonomous')">
-            <span class="option-title">Asynchronous Autonomous</span>
-            <span class="option-subtitle">Deep concentration, solo deep dives, and highly analytical independent review cycles.</span>
+            <span class="option-title">Independent Focus</span>
+            <span class="option-subtitle">I work best alone, taking my time to deeply study a single problem.</span>
         </div>
         <div class="option" onclick="selectWorkStyle('Iterative Rapid-Fire')">
-            <span class="option-title">Iterative Rapid-Fire</span>
-            <span class="option-subtitle">High cadence, immediate adaptive context shifts, and responsive diagnostic loops.</span>
+            <span class="option-title">Fast-Paced Loops</span>
+            <span class="option-subtitle">I work best moving quickly between tasks and fixing problems on the go.</span>
         </div>
     </div>
 
     <div id="slide-5" class="slide">
-        <h2>04 / Core Skill Specification</h2>
-        <p class="desc">What represents your supreme analytical utility when evaluating model outputs?</p>
+        <h2>04 / Your Strongest Skill</h2>
+        <p class="desc">Which of these tasks feels easiest to you?</p>
         <div class="option" onclick="selectSkill('Logical Fallacy Separation')">
-            <span class="option-title">Logical Fallacy Separation</span>
-            <span class="option-subtitle">Isolating hallucinated assertions and structural validity flaws directly.</span>
+            <span class="option-title">Spotting Bad Logic</span>
+            <span class="option-subtitle">Finding made-up facts and pointing out arguments that do not make sense.</span>
         </div>
         <div class="option" onclick="selectSkill('Nuanced Semantic Pruning')">
-            <span class="option-title">Nuanced Semantic Pruning</span>
-            <span class="option-subtitle">Refining tone parameters, idiom logic, and contextual clarity accuracy.</span>
+            <span class="option-title">Smoothing Out Text</span>
+            <span class="option-subtitle">Fixing the tone, slang, and clarity of a piece of writing so it sounds natural.</span>
         </div>
         <div class="option" onclick="selectSkill('Structural Edge Case Mapping')">
-            <span class="option-title">Structural Edge Case Mapping</span>
-            <span class="option-subtitle">Discovering complex hidden limits where standard guidelines conflict.</span>
+            <span class="option-title">Handling Weird Situations</span>
+            <span class="option-subtitle">Figuring out what to do when rules crash or confuse each other.</span>
         </div>
     </div>
 
     <div id="slide-6" class="slide">
-        <span class="badge">Identity Validation</span>
-        <h2>Secure Custom Profile</h2>
-        <p class="desc">Your profile metrics have been localized. Authenticate using your professional email to sync results with the AI Lab onboarding vectors.</p>
+        <span class="badge">Save Your Progress</span>
+        <h2>Secure Your Profile</h2>
+        <p class="desc">Your choices are saved! Enter your work email below to unlock your results and see active tech lab jobs.</p>
         <input type="email" id="user-email" placeholder="name@domain.com" required>
-        <button class="btn" id="email-submit-btn" onclick="submitSecureEmail()">Secure Optimization Vector</button>
+        <button class="btn" id="email-submit-btn" onclick="submitSecureEmail()">See My Match</button>
     </div>
 
     <div id="slide-7" class="slide">
-        <span class="badge">Optimization Architecture Resolved</span>
-        <h2>Alignment Vector Target</h2>
+        <span class="badge">Your Match Is Ready</span>
+        <h2>Your AI Career Fit</h2>
         
         <div class="market-metrics">
             <div class="metric-row">
-                <span class="metric-label">Assigned Model Track:</span>
-                <span id="display-role" class="metric-value">Evaluating...</span>
+                <span class="metric-label">Your AI Job Title:</span>
+                <span id="display-role" class="metric-value">Loading...</span>
             </div>
             <div class="metric-row">
-                <span class="metric-label">Estimated Market Rate Index:</span>
+                <span class="metric-label">Estimated Hourly Pay:</span>
                 <span id="display-rate" class="metric-value highlighted-rate">$00.00 / hr</span>
             </div>
             <div class="metric-row">
-                <span class="metric-label">Domain Core Focus:</span>
-                <span id="display-specialty" class="metric-value">Evaluating...</span>
+                <span class="metric-label">Your Field Focus:</span>
+                <span id="display-specialty" class="metric-value">Loading...</span>
             </div>
         </div>
 
-        <p class="desc">This custom profile aligns precisely with active recruitment requests at premier Frontier Model Alignment Labs.</p>
+        <p class="desc">Great news! Your background is a perfect fit for real job openings at major AI research labs looking for smart helpers.</p>
 
         <div class="matrix-grid">
-            <a href="#" id="display-referral-link" target="_blank" class="btn btn-join">Join Frontier Alignment Lab Now</a>
-            <button class="btn btn-share" onclick="shareToLinkedIn()">Share Profile to LinkedIn</button>
-            <button class="btn btn-secondary" onclick="resetEngine()">Retake Optimization Diagnostic</button>
+            <a href="#" id="display-referral-link" target="_blank" class="btn btn-join">Apply to an AI Lab Now</a>
+            <button class="btn btn-share" onclick="shareToLinkedIn()">Share My Results on LinkedIn</button>
+            <button class="btn btn-secondary" onclick="resetEngine()">Take Quiz Again</button>
         </div>
     </div>
 
 </div>
 
 <script>
-    // State Tracking Engine
     let state = {
         specialty: '',
         role: '',
@@ -276,7 +269,7 @@
         email: ''
     };
 
-    // Complete Global Model Segment Data Mapping Array
+    // Kept exactly intact to preserve the referral logic
     const pipelineData = [
         { segment: "Software Engineering", role: "Code Evaluator", rate: "$45 - $65", link: "https://t.mercor.com/rrVyb" },
         { segment: "Data Analysis", role: "Data Critic", rate: "$40 - $55", link: "https://t.mercor.com/K13Z9" },
@@ -295,18 +288,15 @@
     function goToSlide(id) {
         document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
         document.getElementById(`slide-${id}`).classList.add('active');
-        
-        // Progress Fill calculation logic
         const percent = ((id - 1) / (totalSlides - 1)) * 100;
         document.getElementById('progress-fill').style.width = `${percent}%`;
     }
 
-    // Dynamic Option Builder for Slide 2
     const optionsContainer = document.getElementById('domain-options');
     pipelineData.forEach(item => {
         const div = document.createElement('div');
         div.className = 'option';
-        div.innerHTML = `<span class="option-title">${item.segment}</span><span class="option-subtitle">Target Profile: ${item.role}</span>`;
+        div.innerHTML = `<span class="option-title">${item.segment}</span><span class="option-subtitle">Match Pathway: ${item.role}</span>`;
         div.onclick = () => {
             state.specialty = item.segment;
             state.role = item.role;
@@ -326,22 +316,20 @@
         const btn = document.getElementById('email-submit-btn');
         
         if (!emailInput.includes('@') || emailInput.length < 5) {
-            return alert("A valid professional ecosystem email domain is required.");
+            return alert("Please enter a valid work email address.");
         }
 
         state.email = emailInput;
-        btn.innerText = "Synchronizing Diagnostic State Data...";
+        btn.innerText = "Loading your results...";
 
-        // Automated execution hook logging payload into Vercel Sheets Gateway Integration
         try {
             await fetch('/api/capture', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(state)
             });
-        } catch (e) { console.log("Dev Execution Pipeline Mode: Data Captured Locally."); }
+        } catch (e) { console.log("Data captured locally."); }
 
-        // Bind data fields into result matrix panel
         document.getElementById('display-role').innerText = state.role;
         document.getElementById('display-rate').innerText = `${state.rate} / hr`;
         document.getElementById('display-specialty').innerText = state.specialty;
@@ -359,7 +347,7 @@
     function resetEngine() {
         state = { specialty: '', role: '', rate: '', referral: '', psychometric: '', workStyle: '', skill: '', email: '' };
         document.getElementById('user-email').value = '';
-        document.getElementById('email-submit-btn').innerText = "Secure Optimization Vector";
+        document.getElementById('email-submit-btn').innerText = "See My Match";
         goToSlide(1);
     }
 </script>
