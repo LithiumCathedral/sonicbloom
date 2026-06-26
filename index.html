@@ -13,6 +13,7 @@
             --sonic-orange: #ff6a00;
             --sonic-orange-light: #fff0e6;
             --border-clean: #e5e7eb;
+            --terminal-green: #10b981;
         }
 
         body {
@@ -140,6 +141,7 @@
         }
 
         .status.live { background: var(--sonic-orange-light); color: var(--sonic-orange); }
+        .status.active-dev { background: #e6f4ea; color: var(--terminal-green); border: 1px solid rgba(16, 185, 129, 0.2); }
         .status.upcoming { background: var(--bg-canvas); color: var(--text-muted); border: 1px dashed var(--border-clean); }
 
         .card-title { font-size: 1.75rem; font-weight: 700; margin: 0 0 10px 0; letter-spacing: -0.5px; }
@@ -175,37 +177,37 @@
     </header>
 
     <section class="hero">
-        <h1 class="hero-title">We build simple tools and <em>digital tools</em> that work.</h1>
-        <p class="hero-subtitle">SonicBloom is a creative playground where we build clean web apps, helpful content engines, and interactive digital projects.</p>
+        <h1 class="hero-title"><em>Simple tools</em> have the best effect.</h1>
+        <p class="hero-subtitle">SonicBloom is a creative playground where we build clean web apps, helpful content engines, and structured data-driven pipelines.</p>
     </section>
 
     <main class="grid-section">
-        <span class="section-label">Our Projects</span>
+        <span class="section-label">Active Deployments</span>
         <div class="grid">
             
             <div class="card featured">
                 <div>
-                    <div class="status live">Live Now</div>
+                    <div class="status live">Connected Engine</div>
                     <h2 class="card-title">LabMatch</h2>
-                    <p class="card-desc">A fast, simple diagnostic quiz that matches your career skills with direct paid job openings at top AI labs.</p>
+                    <p class="card-desc">A diagnostic application parsing structured user tracks and matching operational credentials directly with technical AI data labs.</p>
                 </div>
-                <a href="/labmatch" class="card-link">Take the Quiz <span>→</span></a>
+                <a href="/labmatch" class="card-link">Take Diagnostic<span>→</span></a>
             </div>
 
             <div class="card">
                 <div>
-                    <div class="status upcoming">In Development</div>
+                    <div class="status active-dev">In Development</div>
                     <h2 class="card-title">Plath</h2>
-                    <p class="card-desc">A clean, experimental platform for neat text formatting and writing layouts.</p>
+                    <p class="card-desc">A specialized framework structuring calculations for personal forecasts and predictive analysis.</p>
                 </div>
-                <span class="card-link" style="color: var(--text-muted);">Coming Soon</span>
+                <span class="card-link" style="color: var(--terminal-green);">Building</span>
             </div>
 
             <div class="card">
                 <div>
-                    <div class="status upcoming">Planned</div>
+                    <div class="status upcoming">Paused</div>
                     <h2 class="card-title">Go Engine</h2>
-                    <p class="card-desc">A simple digital engine focusing on game logic and strategy grids.</p>
+                    <p class="card-desc">An architectural framework focused on the spatial logic and strategic insights of traditional grid-based play.</p>
                 </div>
                 <span class="card-link" style="color: var(--text-muted);">Awaiting Build</span>
             </div>
