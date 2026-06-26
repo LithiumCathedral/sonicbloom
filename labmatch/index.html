@@ -336,12 +336,22 @@
         };
 
         try {
-            await fetch('/api/capture', {
+            const response = await fetch('/api/capture', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(backendPayload)
             });
-        } catch (e) { console.log("Network operation logging fallback executed."); }
+            
+            const resultData = await response.json();
+            
+            if (!response.ok) {
+                alert(`Server Error (${response.status}): ${resultData.error || 'Submission rejected by Vercel api endpoint.'}`);
+            } else {
+                console.log("Data successfully written to Supabase instance.");
+            }
+        } catch (e) { 
+            alert(`Network Connection Error: Fail to contact server backend. ${e.message}`); 
+        }
 
         document.getElementById('display-role').innerText = internalState.role;
         document.getElementById('display-rate').innerText = `${internalState.rate} / hr`;
