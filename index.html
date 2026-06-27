@@ -359,6 +359,84 @@
         </main>
 
     </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Explicit Architecture Grid Registry (Matches your live sitemap.xml)
+    const siteArchitecture = [
+        { path: "/", title: "⊙ Core Workspace Dashboard", type: "root", priority: 1.0 },
+        { path: "/labmatch", title: "⚙ LabMatch Engine Portal", type: "application", priority: 0.9 },
+        { path: "/blog/the-algorithmic-shift.html", title: "⊙ Algorithmic Shift Authority Hub", type: "hub", priority: 0.85 },
+        { path: "/blog/parsing-logic.html", title: "├── 01 / Parsing Logic Engine", type: "spoke", parent: "/blog/the-algorithmic-shift.html" },
+        { path: "/blog/rate-architecture.html", title: "├── 02 / Rate Value Matrix", type: "spoke", parent: "/blog/the-algorithmic-shift.html" },
+        { path: "/blog/adversarial-mitigation.html", title: "└── 03 / Adversarial Loop Mitigation", type: "spoke", parent: "/blog/the-algorithmic-shift.html" }
+    ];
 
+    // 2. Select your existing desktop workspace sidebar layout container
+    const sidebarContainer = document.querySelector(".sidebar-nav");
+    
+    if (sidebarContainer) {
+        // Clear old hardcoded items while keeping the heading component intact
+        sidebarContainer.innerHTML = '<span class="tree-title">Dynamic Knowledge Graph Scope</span>';
+        
+        const treeRoot = document.createElement("ul");
+        treeRoot.className = "tree-root";
+        treeRoot.style.padding = "0";
+        treeRoot.style.margin = "0";
+        treeRoot.style.listStyle = "none";
+
+        // 3. Build hierarchical semantic node fragments
+        siteArchitecture.forEach(node => {
+            if (!node.parent) {
+                const li = document.createElement("li");
+                li.style.marginBottom = "12px";
+                
+                const a = document.createElement("a");
+                a.href = node.path;
+                a.textContent = node.title;
+                a.className = node.type === "hub" || node.type === "root" ? "tree-node-parent" : "";
+                a.style.textDecoration = "none";
+                a.style.display = "block";
+                
+                // Track active state highlights
+                if (window.location.pathname === node.path) {
+                    a.style.color = "var(--sonic-orange)";
+                    a.style.fontWeight = "700";
+                }
+
+                li.appendChild(a);
+
+                // Find and systematically nest corresponding child structural nodes
+                const children = siteArchitecture.filter(child => child.parent === node.path);
+                if (children.length > 0) {
+                    const branchUl = document.createElement("ul");
+                    branchUl.className = "tree-branch";
+                    
+                    children.forEach(child => {
+                        const childLi = document.createElement("li");
+                        childLi.className = "tree-item";
+                        
+                        const childA = document.createElement("a");
+                        childA.href = child.path;
+                        childA.textContent = child.title;
+                        
+                        if (window.location.pathname === child.path) {
+                            childA.style.color = "var(--sonic-orange)";
+                            childA.style.fontWeight = "700";
+                        }
+                        
+                        childLi.appendChild(childA);
+                        branchUl.appendChild(childLi);
+                    });
+                    li.appendChild(branchUl);
+                }
+                
+                treeRoot.appendChild(li);
+            }
+        });
+        
+        sidebarContainer.appendChild(treeRoot);
+    }
+});
+</script>
 </body>
 </html>
