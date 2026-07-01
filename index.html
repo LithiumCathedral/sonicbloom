@@ -326,16 +326,85 @@
     <script>
         // DATA MATRIX ARCHITECTURE
         // Appending a new dictionary row here automatically calculates folder quantities, links, and builds UI pathways.
-        const structuralSitemap = [
-            { id: "n1", category: "nodes", file: "parsing_logic.md", title: "Parsing Logic", summary: "How engineering platforms programmatically break down unstructured resume data strings into structured operational tokens." },
-            { id: "n2", category: "nodes", file: "rate_architecture.md", title: "Rate Architecture", summary: "Tracking hourly project scaling configurations across highly technical, domain-dense data validation segments." },
-            { id: "n3", category: "nodes", file: "adversarial_mitigation.md", title: "Adversarial Mitigation", summary: "An inspection of the human feedback loop structures required to stress-test logical variations and block hallucination states." },
-            { id: "n4", category: "nodes", file: "validator_onboarding.md", title: "Validator Onboarding", summary: "The step-by-step protocol sequence for independent validators syncing with model calibration pipelines to establish human-in-the-loop synchronization parameters." },
-            { id: "n5", category: "nodes", file: "injection_mapping.md", title: "Node-to-Edge Profiling", summary: "Details the algorithmic pipeline utilized by LabMatch to transform messy, non-linear structural backgrounds into clean database system variables without human recruitment intervention." },
-            { id: "e1", category: "essays", file: "algorithmic_shift.txt", title: "The Algorithmic Shift", summary: "An analysis tracking deep infrastructure adaptations within specialized modern expert talent matching networks." },
-            { id: "e2", category: "essays", file: "logic_density_matrix.txt", title: "Calibrating Compensation Against Domain Depth", summary: "An analysis of the fixed-tier mathematical grid correlating domain logic depth to live hourly compensation metrics, mapping out rates for Compliance Engineers ($40-$55/hr), Code Evaluators ($55-$70/hr), and Data Critics ($70-$85+/hr)." },
-            { id: "f1", category: "faq", file: "global_faq_v1.cfg", title: "Global Core FAQ Engine", isFaq: true }
-        ];
+const structuralSitemap = [
+    { 
+        id: "n1", 
+        category: "nodes", 
+        file: "parsing_logic.md", 
+        title: "Parsing Logic", 
+        seoTitle: "01 / Parsing Logic: Semantic Domain Expertise Evaluation",
+        summary: "How AI platforms programmatically evaluate semantic domain expertise from unstructured text parameters.", 
+        url: "/blog/parsing-logic.html",
+        keywords: "semantic parsing, data tokenization, ingestion pipelines, AI labs"
+    },
+    { 
+        id: "n2", 
+        category: "nodes", 
+        file: "rate_architecture.md", 
+        title: "Rate Architecture", 
+        seoTitle: "02 / Rate Architecture: Contract Technical Validation Economics",
+        summary: "Tracking hourly project scaling configurations across highly technical, domain-dense data validation segments.", 
+        url: "/blog/rate-architecture.html",
+        keywords: "rate value matrix, logic density scaling, tech compensation metrics"
+    },
+    { 
+        id: "n3", 
+        category: "nodes", 
+        file: "adversarial_mitigation.md", 
+        title: "Adversarial Mitigation", 
+        seoTitle: "03 / Adversarial Mitigation: Stabilizing Foundational Models via Human Oversight Loops",
+        summary: "An inspection of the human feedback loop structures required to stress-test logical variations and block model hallucination states.", 
+        url: "/blog/adversarial-mitigation.html",
+        keywords: "adversarial loop mitigation, model hallucination filter, human-in-the-loop safety"
+    },
+    { 
+        id: "n4", 
+        category: "nodes", 
+        file: "validator_onboarding.md", 
+        title: "Validator Onboarding", 
+        seoTitle: "Direct Validator Onboarding to Model Calibration Pipelines",
+        summary: "The step-by-step human-in-the-loop synchronization parameters and protocol sequence for independent validators joining active training arrays.", 
+        url: "/blog/validator-onboarding.html",
+        keywords: "validator registration, calibration verification, pipeline injection"
+    },
+    { 
+        id: "n5", 
+        category: "nodes", 
+        file: "injection_mapping.md", 
+        title: "Node-to-Edge Profiling", 
+        seoTitle: "Node-to-Edge Profiling Infrastructure and Tokenization Pipelines",
+        summary: "Details the algorithmic pipeline utilized by LabMatch to transform messy, non-linear structural backgrounds into clean database system variables.", 
+        url: "/blog/injection-mapping.html",
+        keywords: "token parser, structural mapping, credential tracking matrix"
+    },
+    { 
+        id: "e1", 
+        category: "essays", 
+        file: "algorithmic_shift.txt", 
+        title: "The Algorithmic Shift", 
+        seoTitle: "The Algorithmic Shift: Navigating Modern AI Research Lab Infrastructures",
+        summary: "An analysis tracking deep infrastructure adaptations and automated onboarding frameworks within specialized modern expert talent matching networks.", 
+        url: "/blog/the-algorithmic-shift.html",
+        keywords: "talent matching networks, automated intake, algorithmic shift hub"
+    },
+    { 
+        id: "e2", 
+        category: "essays", 
+        file: "logic_density_matrix.txt", 
+        title: "Calibrating Compensation Against Domain Depth", 
+        seoTitle: "Calibrating Compensation Against Domain Depth Matrix",
+        summary: "An analysis of the fixed-tier mathematical grid correlating domain logic depth to live hourly compensation metrics across compliance engineers, code evaluators, and data critics.", 
+        url: "/blog/logic-density-matrix.html",
+        keywords: "compliance engineers, code evaluators, data critics, logic density exponential scale"
+    },
+    { 
+        id: "f1", 
+        category: "faq", 
+        file: "global_faq_v1.cfg", 
+        title: "Global Core FAQ Engine", 
+        isFaq: true 
+    }
+];
 
         // Renders Core Platform Frame Layout
         function loadDashboard() {
@@ -404,27 +473,96 @@
         }
 
         // Intelligent Page Routing Router Content Handler
-        function routeSystemPage(id) {
-            const asset = structuralSitemap.find(x => x.id === id);
-            if (!asset) return;
+async function routeSystemPage(id) {
+    const asset = structuralSitemap.find(x => x.id === id);
+    if (!asset) return;
 
-            document.getElementById('console-stream').innerText = `STDOUT: Print sequence executing for node asset [${asset.file}]`;
+    // 1. DYNAMIC SYSTEM SEO MARKUP HOOKS
+    document.title = `${asset.seoTitle || asset.title} | SonicBloom Infrastructure`;
+    
+    // Dynamically insert or update the SEO meta description tag
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.name = "description";
+        document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = asset.summary;
 
-            if (asset.isFaq) {
-                renderFaqPage(asset);
-                return;
+    // Inject Runtime JSON-LD Structured Data for Technical Search Crawlers
+    let schemaScript = document.getElementById('dynamic-jsonld');
+    if (!schemaScript) {
+        schemaScript = document.createElement('script');
+        schemaScript.id = 'dynamic-jsonld';
+        schemaScript.type = 'application/ld+json';
+        document.head.appendChild(schemaScript);
+    }
+    schemaScript.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": asset.seoTitle || asset.title,
+        "description": asset.summary,
+        "keywords": asset.keywords || "ai infrastructure, data tracking",
+        "identifier": asset.id,
+        "filePath": `system/${asset.category}/${asset.file}`
+    });
+
+    // 2. INITIALIZE WORKSPACE VIEW WITH LOADING ANIMATION LOOP
+    document.getElementById('console-stream').innerText = `STDOUT: Querying server stream for remote asset location: ${asset.url}`;
+    document.getElementById('stage').innerHTML = `
+        <div class="stage-card">
+            <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">📄 SYSTEM_PATH // ${asset.category}/${asset.file}</span>
+            <h1 style="margin-top:10px;">${asset.title}</h1>
+            <p style="font-size:1.1rem; color: var(--text-main); margin-bottom:25px; font-style: italic;">${asset.summary}</p>
+            <hr style="border:0; border-top:1px dashed var(--border-clean); margin-bottom:30px;">
+            <div id="async-node-content" style="font-family:inherit; color:var(--text-muted);">
+                <span style="font-family:monospace; color:var(--sonic-orange);">[CONNECTING TO TERMINAL ENDPOINT STREAM...]</span>
+            </div>
+        </div>
+    `;
+
+    if (asset.isFaq) {
+        renderFaqPage(asset);
+        return;
+    }
+
+    // 3. EXECUTE THE HYBRID FETCH LOGIC FROM THE /BLOG/ DIRECTORY
+    if (asset.url) {
+        try {
+            const response = await fetch(asset.url);
+            if (!response.ok) throw new Error(`HTTP Endpoint Error Status: ${response.status}`);
+            const rawContent = await response.text();
+            
+            // Extract content cleanly out of full HTML wrappers if pulling raw pages
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(rawContent, 'text/html');
+            
+            // Clean extraction prioritization layer:
+            // Tries to grab .wrapper first (essays), then .container (nodes), then fallback to body or raw text
+            let filteredContent = "";
+            if (doc.querySelector('.wrapper')) {
+                filteredContent = doc.querySelector('.wrapper').innerHTML;
+            } else if (doc.querySelector('.container')) {
+                filteredContent = doc.querySelector('.container').innerHTML;
+            } else if (doc.querySelector('body')) {
+                filteredContent = doc.querySelector('body').innerHTML;
+            } else {
+                filteredContent = rawContent;
             }
 
-            document.getElementById('stage').innerHTML = `
-                <div class="stage-card">
-                    <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">📄 SYSTEM_PATH // ${asset.category}/${asset.file}</span>
-                    <h1 style="margin-top:10px;">${asset.title}</h1>
-                    <p style="font-size:1.1rem; color: var(--text-main); margin-bottom:30px;">${asset.summary}</p>
-                    <hr style="border:0; border-top:1px dashed var(--border-clean); margin-bottom:30px;">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Core operational pipeline parameters populate seamlessly from verified database schemas inside active container frameworks.</p>
-                </div>
+            document.getElementById('async-node-content').innerHTML = filteredContent;
+            document.getElementById('console-stream').innerText = `STDOUT: Successfully rendered [${asset.file}] tracking asset framework cleanly into the viewport container.`;
+        } catch (error) {
+            document.getElementById('async-node-content').innerHTML = `
+                <p style="color:red; font-family:monospace;">[ERRLOG: DIRECTORY ROUTING RESOLUTION FAULT]</p>
+                <p style="font-size:0.9rem; margin-top:10px;">Verify that the source content file exists exactly at path: <code>${asset.url}</code></p>
             `;
+            document.getElementById('console-stream').innerText = `ERRLOG: Failed to load target path source asset stream for filename [${asset.file}].`;
         }
+    } else {
+        document.getElementById('async-node-content').innerHTML = `<p><em>No remote deployment mapping assigned to this system parameter item.</em></p>`;
+    }
+}
 
         // Render Global Interactive FAQ Template Engine Block
         function renderFaqPage(asset) {
