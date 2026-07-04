@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SonicBloom // LabMatch Assessment</title>
+    <title>SonicBloom // LabMatch</title>
     <style>
         :root {
             --bg-canvas: #090d16;
@@ -89,45 +89,61 @@
         }
         .nav-icon-btn:hover { border-color: var(--sonic-orange); color: var(--text-main); }
 
-        h2 { font-size: 1.3rem; font-weight: 600; margin: 0 0 12px 0; color: var(--text-main); line-height: 1.4; letter-spacing: -0.5px; }
-        .desc { color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; font-size: 0.9rem; }
+        h2 { font-size: 1.4rem; font-weight: 600; margin: 0 0 8px 0; color: var(--text-main); line-height: 1.3; letter-spacing: -0.5px; }
+        .desc { color: var(--text-muted); line-height: 1.5; margin-bottom: 24px; font-size: 0.9rem; }
 
+        /* Immersive Selection Grid */
         .option {
+            display: flex;
+            align-items: center;
             border: 1px solid var(--border-clean);
             background: #0d131f;
-            padding: 16px 20px;
-            margin-bottom: 10px;
+            padding: 18px 20px;
+            margin-bottom: 12px;
             cursor: pointer;
             border-radius: 4px;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .option:hover { border-color: var(--sonic-orange); background: var(--sonic-orange-dim); }
+        .option:hover { border-color: var(--sonic-orange); background: var(--sonic-orange-dim); transform: translateX(2px); }
         .option.selected { border-color: var(--sonic-orange); background: var(--sonic-orange-dim); }
         
+        /* Visual Glyph Representation Mappings */
+        .visual-badge {
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--sonic-orange);
+            margin-right: 18px;
+            width: 24px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
         .checkbox-indicator {
             display: inline-block;
             width: 14px;
             height: 14px;
             border: 1px solid var(--text-muted);
             border-radius: 2px;
-            margin-right: 12px;
-            vertical-align: middle;
+            margin-right: 18px;
+            flex-shrink: 0;
         }
         .option.selected .checkbox-indicator { background: var(--sonic-orange); border-color: var(--sonic-orange); }
 
-        .option-title { font-weight: bold; display: block; margin-bottom: 4px; color: var(--text-main); font-size: 0.92rem;}
-        .option-subtitle { font-size: 0.8rem; color: var(--text-muted); }
+        .text-block { flex-grow: 1; }
+        .option-title { font-weight: bold; display: block; margin-bottom: 4px; color: var(--text-main); font-size: 0.95rem; }
+        .option-subtitle { font-size: 0.82rem; color: var(--text-muted); line-height: 1.3; }
 
         input[type="email"] {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: #0d131f;
             border: 1px solid var(--border-clean);
             color: var(--text-main);
-            font-size: 0.95rem;
+            font-size: 1rem;
             box-sizing: border-box;
             margin-bottom: 20px;
             border-radius: 4px;
+            text-align: center;
         }
         input[type="email"]:focus { border-color: var(--sonic-orange); outline: none; }
 
@@ -135,30 +151,31 @@
             background: var(--sonic-orange);
             color: #ffffff;
             border: none;
-            padding: 14px 28px;
-            font-size: 0.9rem;
+            padding: 16px 32px;
+            font-size: 0.95rem;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
             border-radius: 4px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            transition: background 0.2s;
         }
         .btn:hover { background: #e05d00; }
         .btn:disabled { background: var(--border-clean); color: var(--text-muted); cursor: not-allowed; }
 
         .matrix-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 24px; }
-        .btn-secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border-clean); text-align: center; text-decoration: none; padding: 14px 0; border-radius: 4px; font-weight: bold; font-size: 0.9rem; cursor: pointer; }
+        .btn-secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border-clean); text-align: center; text-decoration: none; padding: 14px 0; border-radius: 4px; font-weight: bold; font-size: 0.9rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
         .btn-secondary:hover { background: #0d131f; color: var(--text-main); }
-        .btn-join { background: var(--success-green); color: white; text-decoration: none; display: block; text-align: center; box-sizing: border-box; }
+        .btn-join { background: var(--success-green); color: white; text-decoration: none; display: block; text-align: center; box-sizing: border-box; text-transform: uppercase; padding: 16px 0; font-weight: bold; letter-spacing: 1px; }
         .btn-join:hover { background: #059669; }
 
         .market-metrics { margin: 20px 0; border: 1px solid var(--border-clean); background: #0d131f; border-radius: 4px; }
-        .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-bottom: 1px solid var(--border-clean); }
+        .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--border-clean); }
         .metric-row:last-child { border-bottom: none; }
         .metric-label { color: var(--text-muted); font-size: 0.85rem; font-family: monospace; }
         .metric-value { color: var(--text-main); font-size: 0.9rem; font-weight: bold; }
-        .metric-value.highlighted-rate { color: var(--sonic-orange); font-size: 1.1rem; font-family: monospace; }
+        .metric-value.highlighted-rate { color: var(--sonic-orange); font-size: 1.15rem; font-family: monospace; }
 
         .vector-graphic-box { margin: 24px 0; border: 1px solid var(--border-clean); padding: 4px; background: #070a12; border-radius: 4px; }
     </style>
@@ -168,7 +185,7 @@
 <div class="story-container">
     
     <div class="nav-progress-grid">
-        <button class="nav-icon-btn" onclick="prevSlide()">&larr; BACK</button>
+        <button class="nav-icon-btn" onclick="prevSlide()">&larr;</button>
         <div>
             <div class="progress-bar-container">
                 <div id="progress-fill" class="progress-fill"></div>
@@ -179,139 +196,204 @@
     </div>
 
     <div id="slide-1" class="slide active">
-        <h2>Verify Identity Pipeline Vector</h2>
-        <p class="desc">Welcome to LabMatch by SonicBloom. Regular industry specialists use this framework to index domain credentials for placement in major validation labs. Provide an operational email address to initialize your workspace footprint.</p>
+        <h2>Unlock Your Match</h2>
+        <p class="desc">Top AI research labs hire specialists to evaluate, fix, and fine-tune model output streams. Drop your work email below to initiate identity initialization.</p>
         <input type="email" id="user-email" placeholder="name@domain.com" required>
-        <button class="btn" onclick="submitEmailGateway()">Initialize Profile Calibration</button>
+        <button class="btn" onclick="submitEmailGateway()">START</button>
     </div>
 
     <div id="slide-2" class="slide">
-        <h2>01 // How do you naturally process problem evaluation maps?</h2>
-        <p class="desc">Select the track component that corresponds closest with your cognitive problem-solving reflex.</p>
+        <h2>01 // Problem Solving</h2>
+        <p class="desc">What is your natural instinct when checking someone else's work for mistakes?</p>
         <div class="option" onclick="selectSingle('cognitiveStyle', 'Adversarial', 3)">
-            <span class="option-title">The Boundary Tester (Adversarial)</span>
-            <span class="option-subtitle">I identify hidden rule exceptions, corner cases, and logical anomalies instantly.</span>
+            <div class="visual-badge">&xml;</div>
+            <div class="text-block">
+                <span class="option-title">Break the boundaries</span>
+                <span class="option-subtitle">I lock directly onto rule violations, edge cases, and contradictions.</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('cognitiveStyle', 'Structural', 3)">
-            <span class="option-title">The Blueprint Builder (Structural)</span>
-            <span class="option-subtitle">I focus on cleaning syntax architectures, organizing files, and mapping blueprints.</span>
+            <div class="visual-badge">&#10144;</div>
+            <div class="text-block">
+                <span class="option-title">Build the blueprints</span>
+                <span class="option-subtitle">I excel at cataloging files, organizing logic steps, and sorting data sets.</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('cognitiveStyle', 'Creative', 3)">
-            <span class="option-title">The Context Explorer (Creative)</span>
-            <span class="option-subtitle">I apply deep real-world logic patterns to balance nuanced, descriptive semantic branches.</span>
+            <div class="visual-badge">&#10043;</div>
+            <div class="text-block">
+                <span class="option-title">Explore the context</span>
+                <span class="option-subtitle">I look for human-sounding nuance, natural expression, and flow errors.</span>
+            </div>
         </div>
     </div>
 
     <div id="slide-3" class="slide">
-        <h2>02 // Which strategic perspective best governs your analytical training workflow?</h2>
-        <p class="desc">This psychological variable identifies how you evaluate validation pipelines to maximize alignment clarity.</p>
+        <h2>02 // Evaluation Lens</h2>
+        <p class="desc">Which core trait best defines your focus during a training process?</p>
         <div class="option" onclick="selectSingle('psychometricProfile', 'Granular Adversarial', 4)">
-            <span class="option-title">Stress-Testing Boundaries (Granular Adversarial)</span>
-            <span class="option-subtitle">I approach code tracks looking to break baseline assumptions and stress-test core system logic rules.</span>
+            <div class="visual-badge">&#9762;</div>
+            <div class="text-block">
+                <span class="option-title">Stress-Testing Boundaries</span>
+                <span class="option-subtitle">Isolating vulnerabilities, hacking logic errors, and exposing flaws.</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('psychometricProfile', 'Synthetic Structural', 4)">
-            <span class="option-title">Systemization & Framing (Synthetic Structural)</span>
-            <span class="option-subtitle">I build precise semantic patterns to frame macro concepts and structural information layout boundaries cleanly.</span>
+            <div class="visual-badge">&#9643;</div>
+            <div class="text-block">
+                <span class="option-title">Clean Systemization</span>
+                <span class="option-subtitle">Formulating precise definitions, clean schemas, and crisp layouts.</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('psychometricProfile', 'Heuristic Creative', 4)">
-            <span class="option-title">Fluid Interpretation (Heuristic Creative)</span>
-            <span class="option-subtitle">I prioritize multi-context exploration using fluid situational reasoning to guide qualitative text arrays.</span>
+            <div class="visual-badge">&#10022;</div>
+            <div class="text-block">
+                <span class="option-title">Fluid Interpretation</span>
+                <span class="option-subtitle">Navigating subjective tones, stylistic distribution, and depth.</span>
+            </div>
         </div>
     </div>
 
     <div id="slide-4" class="slide">
-        <h2>03 // Which speed setting matches your productivity threshold?</h2>
-        <p class="desc">Rhythm values ensure your profile connects with properly indexed execution loads.</p>
+        <h2>03 // Operating Speed</h2>
+        <p class="desc">What kind of pace keeps your focus locked the longest?</p>
         <div class="option" onclick="selectSingle('workRhythm', 'Deep-Dive', 5)">
-            <span class="option-title">The Independent Deep-Dive</span>
-            <span class="option-subtitle">I isolate complicated challenges down over sustained blocks to ensure absolute precision.</span>
+            <div class="visual-badge">&#9201;</div>
+            <div class="text-block">
+                <span class="option-title">Independent Deep-Dive</span>
+                <span class="option-subtitle">Sustained, hyper-detailed concentration on complex issues.</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('workRhythm', 'Rapid-Fire', 5)">
-            <span class="option-title">The Rapid-Fire Router</span>
-            <span class="option-subtitle">I move through incoming tasks with velocity, optimizing outputs on the fly.</span>
+            <div class="visual-badge">&#9055;</div>
+            <div class="text-block">
+                <span class="option-title">Rapid-Fire Router</span>
+                <span class="option-subtitle">High-velocity processing, updating, and shipping on the go.</span>
+            </div>
         </div>
     </div>
 
     <div id="slide-5" class="slide">
-        <h2>04 // Select your domains of authority</h2>
-        <p class="desc">Choose up to 3 domain spaces to direct your logic calibration weights cleanly (Minimum 1 required).</p>
+        <h2>04 // Target Domains</h2>
+        <p class="desc">Pick up to 3 fields you understand best. (Minimum 1 required).</p>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Software')">
-            <span class="checkbox-indicator"></span><span class="option-title" style="display:inline-block; margin:0;">Software Engineering & Syntax Evaluation</span>
+            <span class="checkbox-indicator"></span>
+            <div class="text-block">
+                <span class="option-title">Software Engineering</span>
+                <span class="option-subtitle">Coding languages, architecture analysis, and script optimization.</span>
+            </div>
         </div>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Data')">
-            <span class="checkbox-indicator"></span><span class="option-title" style="display:inline-block; margin:0;">Data Analysis, Log Optimization & RLHF</span>
+            <span class="checkbox-indicator"></span>
+            <div class="text-block">
+                <span class="option-title">Data Logs & Analysis</span>
+                <span class="option-subtitle">Database outputs, math schemas, and model RLHF training queues.</span>
+            </div>
         </div>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Linguistics')">
-            <span class="checkbox-indicator"></span><span class="option-title" style="display:inline-block; margin:0;">Linguistics, Creative Prose & Essays</span>
+            <span class="checkbox-indicator"></span>
+            <div class="text-block">
+                <span class="option-title">Linguistics & Prose</span>
+                <span class="option-subtitle">Creative essays, syntax parsing trees, grammar, and translation.</span>
+            </div>
         </div>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Medicine')">
-            <span class="checkbox-indicator"></span><span class="option-title" style="display:inline-block; margin:0;">Clinical Validation & Healthcare Life Sciences</span>
+            <span class="checkbox-indicator"></span>
+            <div class="text-block">
+                <span class="option-title">Medical Life Sciences</span>
+                <span class="option-subtitle">Healthcare summaries, clinical logs, and scientific research.</span>
+            </div>
         </div>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Law')">
-            <span class="checkbox-indicator"></span><span class="option-title" style="display:inline-block; margin:0;">Legal Architecture & Policy Frameworks</span>
+            <span class="checkbox-indicator"></span>
+            <div class="text-block">
+                <span class="option-title">Legal Frameworks</span>
+                <span class="option-subtitle">Policy rules, complex contracts, compliance, and case briefs.</span>
+            </div>
         </div>
-        <button class="btn" id="next-q3-btn" disabled onclick="submitDomains()" style="margin-top:16px;">Confirm Selections</button>
+        <button class="btn" id="next-q3-btn" disabled onclick="submitDomains()" style="margin-top:16px;">CONTINUE</button>
     </div>
 
     <div id="slide-6" class="slide">
-        <h2>05 // Quantify your industry tenure credentials</h2>
-        <p class="desc">Select your experience background tier to calibrate entry base rate calculations.</p>
+        <h2>05 // Domain Mileage</h2>
+        <p class="desc">How far along are you in your career track or primary topic?</p>
         <div class="option" onclick="selectSingle('experienceLayer', 'Entry', 7)">
-            <span class="option-title">Foundational Tier (Entry / Transitioning)</span>
-            <span class="option-subtitle">I am looking to establish pipeline skills and gain my first project allocations.</span>
+            <div class="visual-badge">&#9634;</div>
+            <div class="text-block">
+                <span class="option-title">Foundational Tier</span>
+                <span class="option-subtitle">Student, early explorer, or actively pivoting into a new field.</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('experienceLayer', 'Mid-Career', 7)">
-            <span class="option-title">Established Tier (Mid-Career 2-5 Years)</span>
-            <span class="option-subtitle">I consistently execute standalone problem analysis and handle project assignments.</span>
+            <div class="visual-badge">&#9639;</div>
+            <div class="text-block">
+                <span class="option-title">Established Tier</span>
+                <span class="option-subtitle">2-5 years of independent, professional field execution.</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('experienceLayer', 'Expert', 7)">
-            <span class="option-title">Advanced Tier (Senior Expert / Lead 5+ Years)</span>
-            <span class="option-subtitle">I run systemic schema auditing infrastructure, advanced code reviews, or hold master degrees.</span>
+            <div class="visual-badge">&#9638;</div>
+            <div class="text-block">
+                <span class="option-title">Advanced Tier</span>
+                <span class="option-subtitle">5+ years running deep audits, team systems, or holding specialty degrees.</span>
+            </div>
         </div>
     </div>
 
     <div id="slide-7" class="slide">
-        <h2>06 // [Optional] How do you plan to leverage LabMatch?</h2>
-        <p class="desc">Specify your target focus configuration to customize your network delivery vectors.</p>
+        <h2>06 // Pipeline Goals</h2>
+        <p class="desc">[Optional] Tell us exactly how you want the network to work for you.</p>
         <div class="option" onclick="selectSingle('primaryGoal', 'Join AI Labs', 'finalize')">
-            <span class="option-title">Join AI Labs</span>
-            <span class="option-subtitle">Onboard directly into high-paying, remote research task vectors ($40-$85+/hr).</span>
+            <div class="visual-badge">&#10140;</div>
+            <div class="text-block">
+                <span class="option-title">Join AI Labs</span>
+                <span class="option-subtitle">Get direct alignment roles at premium paying labs ($40-$85+/hr).</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('primaryGoal', 'Share Skills', 'finalize')">
-            <span class="option-title">Share Your Skills</span>
-            <span class="option-subtitle">Build a verified identity link to exhibit logic metrics across external platforms.</span>
+            <div class="visual-badge">&#8633;</div>
+            <div class="text-block">
+                <span class="option-title">Share Your Skills</span>
+                <span class="option-subtitle">Generate a custom metrics link to display on LinkedIn or portfolios.</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('primaryGoal', 'Help a Friend', 'finalize')">
-            <span class="option-title">Help a Friend</span>
-            <span class="option-subtitle">Analyze framework operations to refer team members or sync specialized associates.</span>
+            <div class="visual-badge">&#128101;</div>
+            <div class="text-block">
+                <span class="option-title">Help a Friend</span>
+                <span class="option-subtitle">Learn the framework to refer team members or sync skilled peers.</span>
+            </div>
         </div>
         <div class="option" onclick="selectSingle('primaryGoal', 'Get Industry Updates', 'finalize')">
-            <span class="option-title">Get Industry Updates</span>
-            <span class="option-subtitle">Subscribe to premium tracking briefs detailing architectural shifts in machine learning labor.</span>
+            <div class="visual-badge">&#128225;</div>
+            <div class="text-block">
+                <span class="option-title">Get Industry Updates</span>
+                <span class="option-subtitle">Subscribe to long-form strategy essays tracking the tech labor wave.</span>
+            </div>
         </div>
-        <button class="btn btn-secondary" onclick="selectSingle('primaryGoal', 'Not Specified', 'finalize')">Bypass Optional Parameter &rarr;</button>
+        <button class="btn btn-secondary" onclick="selectSingle('primaryGoal', 'Not Specified', 'finalize')">SKIP</button>
     </div>
 
     <div id="slide-8" class="slide">
-        <h2>Calibration Profile Ready</h2>
+        <h2>Calibration Complete</h2>
         
         <div class="vector-graphic-box" id="vector-print-viewport"></div>
 
         <div class="market-metrics">
-            <div class="metric-row"><span class="metric-label">Target Trajectory Placement:</span><span id="display-role-title" class="metric-value">Loading...</span></div>
-            <div class="metric-row"><span class="metric-label">Calibrated Compensation Value:</span><span id="display-rate-index" class="metric-value highlighted-rate">$00.00 / hr</span></div>
-            <div class="metric-row"><span class="metric-label">Cognitive Style Vector:</span><span id="res-cognitive" class="metric-value">Creative</span></div>
-            <div class="metric-row"><span class="metric-label">Rhythm Parameter Strategy:</span><span id="res-rhythm" class="metric-value">Rapid-Fire</span></div>
-            <div class="metric-row"><span class="metric-label">Strategic Trademark:</span><span id="res-psychometric" class="metric-value">Heuristic Creative</span></div>
-            <div class="metric-row"><span class="metric-label">Registered Authority Tracks:</span><span id="res-domains" class="metric-value">Medicine</span></div>
-            <div class="metric-row"><span class="metric-label">Credential Maturity Score:</span><span id="res-experience" class="metric-value">Mid-Career</span></div>
-            <div class="metric-row"><span class="metric-label">Pipeline Output Intent:</span><span id="res-goal" class="metric-value">Help a Friend</span></div>
+            <div class="metric-row"><span class="metric-label">Target Role Match:</span><span id="display-role-title" class="metric-value">Loading...</span></div>
+            <div class="metric-row"><span class="metric-label">Indexed Hourly Rate:</span><span id="display-rate-index" class="metric-value highlighted-rate">$00.00 / hr</span></div>
+            <div class="metric-row"><span class="metric-label">Problem Instinct:</span><span id="res-cognitive" class="metric-value">-</span></div>
+            <div class="metric-row"><span class="metric-label">Operating Rhythm:</span><span id="res-rhythm" class="metric-value">-</span></div>
+            <div class="metric-row"><span class="metric-label">Strategic Trademark:</span><span id="res-psychometric" class="metric-value">-</span></div>
+            <div class="metric-row"><span class="metric-label">Domains Tracked:</span><span id="res-domains" class="metric-value">-</span></div>
+            <div class="metric-row"><span class="metric-label">Experience Tier:</span><span id="res-experience" class="metric-value">-</span></div>
+            <div class="metric-row"><span class="metric-label">Workspace Intent:</span><span id="res-goal" class="metric-value">-</span></div>
         </div>
 
         <div class="matrix-grid">
-            <a href="#" id="display-action-cta" target="_blank" class="btn btn-join">Initiate Active Pipeline Placement</a>
-            <button class="btn" style="background:#0077b5;" onclick="window.labmatchRouter.triggerLinkedInWindow()">Distribute Results Matrix via LinkedIn</button>
-            <a href="/" class="btn-secondary">Return to Core Network Workspace</a>
+            <a href="#" id="display-action-cta" target="_blank" class="btn btn-join">APPLY</a>
+            <button class="btn" style="background:#0077b5;" onclick="window.labmatchRouter.triggerLinkedInWindow()">SHARE</button>
+            <a href="/" class="btn-secondary">EXIT</a>
         </div>
     </div>
 </div>
