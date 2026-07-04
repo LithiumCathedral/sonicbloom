@@ -1,0 +1,31 @@
+{
+  "system_routes": {
+    "nodes": {
+      "adversarial-mitigation": { "path": "nodes/adversarial-mitigation.html", "status": "active" },
+      "calculating-logic-density": { "path": "nodes/calculating-logic-density.html", "status": "active" },
+      "injection-mapping": { "path": "nodes/injection-mapping.html", "status": "active" },
+      "node-ast-compilation": { "path": "nodes/node-ast-compilation.html", "status": "active" },
+      "node-consensus-weighting": { "path": "nodes/node-consensus-weighting.html", "status": "active" },
+      "node-rlhf-bias": { "path": "nodes/node-rlhf-bias.html", "status": "active" },
+      "node-schema-conformance": { "path": "nodes/node-schema-conformance.html", "status": "active" },
+      "node-token-isolation": { "path": "nodes/node-token-isolation.html", "status": "active" },
+      "parsing-logic": { "path": "nodes/parsing-logic.html", "status": "active" },
+      "rate-architecture": { "path": "nodes/rate-architecture.html", "status": "active" },
+      "semantic-pruning-evaluation": { "path": "nodes/semantic-pruning-evaluation.html", "status": "active" },
+      "validator-onboarding": { "path": "nodes/validator-onboarding.html", "status": "active" }
+    },
+    "faq": {
+      "master-cluster": { "path": "faq/master-faq-cluster.html", "status": "active" }
+    },
+    "knowledge": {
+      "distributed-validation": { "path": "knowledge/distributed-validation.html", "status": "active" },
+      "logic-density-matrix": { "path": "knowledge/logic-density-matrix.html", "status": "active" },
+      "the-algorithmic-shift": { "path": "knowledge/the-algorithmic-shift.html", "status": "active" }
+    }
+  },
+  "capture_endpoints": {
+    "linguistics_track": "https://t.mercor.com/dWbN8",
+    "software_eval_track": "https://t.mercor.com/rrVyb",
+    "labmatch_diagnostic": "/labmatch/index.html"
+  }
+}
