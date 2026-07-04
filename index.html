@@ -13,8 +13,8 @@
             --sonic-orange: #ff6a00;
             --sonic-orange-light: #fff0e6;
             --border-clean: #e5e7eb;
-            --terminal-bg: #161b22;
-            --terminal-border: #30363d;
+            --terminal-bg: #111827;
+            --terminal-border: #1f2937;
         }
 
         body {
@@ -69,7 +69,7 @@
             margin: 0 auto;
             padding: 30px 24px 100px 24px;
             display: grid;
-            grid-template-columns: 360px 1fr;
+            grid-template-columns: 340px 1fr;
             gap: 40px;
             box-sizing: border-box;
             height: calc(100vh - 80px);
@@ -154,14 +154,14 @@
 
         .tree-item {
             cursor: pointer;
-            padding: 4px 6px;
+            padding: 3px 6px;
             color: #8b949e;
             display: block;
-            white-space: normal;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             text-decoration: none;
             border-radius: 4px;
-            line-height: 1.4;
-            margin-bottom: 2px;
         }
         .tree-item:hover { color: var(--sonic-orange); background: rgba(255, 106, 0, 0.05); }
 
@@ -301,18 +301,8 @@
             </div>
             
             <div class="terminal-tree-area">
-                <div class="tree-item" onclick="loadDashboard()" style="color: #f0f6fc; font-weight: bold; padding-left: 0; margin-bottom: 10px;">🏠 Dashboard Core</div>
-                <div class="tree-item" onclick="loadFaqPage()" style="color: #f0f6fc; font-weight: bold; padding-left: 0; margin-bottom: 15px;">❓ FAQ System</div>
-
-                <span class="tree-title">Production Repositories</span>
+                <span class="tree-title">System Pipelines</span>
                 <div id="dynamic-tree-mount"></div>
-
-                <span class="tree-title">Pipelines Staged</span>
-                <div class="folder-header" onclick="toggleFolder('staged-apps')">📁 projects/ <span>[2]</span></div>
-                <div class="folder-content expanded" id="staged-apps">
-                    <div class="tree-item" onclick="loadWaitlist('Plath', 'A specialized forecasting framework mapping personal numerology architectures and transition layers.')">↳ Plath Framework</div>
-                    <div class="tree-item" onclick="loadWaitlist('Go Engine', 'An architectural matrix focused on spatial data arrays and grid logic pathways.')">↳ Go Grid Engine</div>
-                </div>
             </div>
 
             <div class="terminal-banner">
@@ -322,26 +312,31 @@
         </aside>
 
         <main id="stage">
-            </main>
+        </main>
 
     </div>
 
     <script>
         // DATA MATRIX ARCHITECTURE
-        // Appending a new dictionary row here automatically calculates folder quantities, links, and builds UI pathways.
         const structuralSitemap = [
-            { id: "n1", category: "nodes", title: "01 / Parsing Logic Engine", url: "/blog/parsing-logic.html", summary: "How engineering platforms programmatically break down unstructured resume data strings into structured operational tokens." },
-            { id: "n2", category: "nodes", title: "02 / Rate Value Matrix", url: "/blog/rate-architecture.html", summary: "Tracking hourly project scaling configurations across highly technical, domain-dense data validation segments." },
-            { id: "n3", category: "nodes", title: "03 / Adversarial Loop Mitigation", url: "/blog/adversarial-mitigation.html", summary: "An inspection of the human feedback loop structures required to stress-test logical variations and block model hallucination states." },
-            { id: "n4", category: "nodes", title: "Validator Onboarding Framework", url: "/blog/validator-onboarding.html", summary: "The step-by-step protocol sequence for independent validators syncing with model calibration pipelines to establish human-in-the-loop synchronization parameters." },
-            { id: "n5", category: "nodes", title: "Node-to-Edge Profiling Infrastructure", url: "/blog/injection-mapping.html", summary: "Details the algorithmic pipeline utilized by LabMatch to transform messy, non-linear structural backgrounds into clean database system variables without human recruitment intervention." },
-            { id: "e1", category: "essays", title: "The Algorithmic Shift Hub Strategy", url: "/blog/the-algorithmic-shift.html", summary: "An analysis tracking deep infrastructure adaptations and automated onboarding frameworks within specialized modern expert talent matching networks." },
-            { id: "e2", category: "essays", title: "Calibrating Compensation Against Domain Depth Matrix", url: "/blog/logic-density-matrix.html", summary: "An analysis of the fixed-tier mathematical grid correlating domain logic depth to live hourly compensation metrics across compliance engineers, code evaluators, and data critics." }
+            { id: "n1", category: "nodes", file: "parsing_logic.md", title: "Parsing Logic", summary: "How engineering platforms programmatically break down unstructured resume data strings into structured operational tokens." },
+            { id: "n2", category: "nodes", file: "rate_architecture.md", title: "Rate Architecture", summary: "Tracking hourly project scaling configurations across highly technical, domain-dense data validation segments." },
+            { id: "n3", category: "nodes", file: "adversarial_mitigation.md", title: "Adversarial Mitigation", summary: "An inspection of the human feedback loop structures required to stress-test logical variations and block model hallucination states." },
+            { id: "n4", category: "nodes", file: "validator_onboarding.md", title: "Validator Onboarding", summary: "The step-by-step protocol sequence for independent validators syncing with model calibration pipelines to establish human-in-the-loop synchronization parameters." },
+            { id: "n5", category: "nodes", file: "injection_mapping.md", title: "Node-to-Edge Profiling", summary: "Details the algorithmic pipeline utilized by LabMatch to transform messy, non-linear structural backgrounds into clean database system variables without human recruitment intervention." },
+            
+            { id: "e1", category: "knowledge", file: "algorithmic_shift.txt", title: "The Algorithmic Shift", summary: "An analysis tracking deep infrastructure adaptations within specialized modern expert talent matching networks." },
+            { id: "e2", category: "knowledge", file: "logic_density_matrix.txt", title: "Calibrating Compensation Against Domain Depth", summary: "An analysis of the fixed-tier mathematical grid correlating domain logic depth to live hourly compensation metrics, mapping out rates for Compliance Engineers ($40-$55/hr), Code Evaluators ($55-$70/hr), and Data Critics ($70-$85+/hr)." },
+            
+            { id: "p1", category: "projects", file: "labmatch.sys", title: "LabMatch Engine", summary: "A diagnostic application parsing structured user tracks and matching operational credentials directly with technical AI data labs.", isLive: true, url: "/labmatch" },
+            { id: "p2", category: "projects", file: "godot_sandbox.sys", title: "Godot Strategy Sandbox", summary: "An architectural simulation matrix focused on spatial data arrays, grid logic pathways, and automated sandbox strategy maps.", isLive: false },
+            { id: "p3", category: "projects", file: "plath_matrix.sys", title: "Plath Framework", summary: "A specialized forecasting framework structuring calculations for personal forecasts and predictive analysis architectures.", isLive: false },
+            { id: "f1", category: "faq", file: "global_faq_v1.cfg", title: "Global Core FAQ Engine", isFaq: true }
         ];
 
         // Renders Core Platform Frame Layout
         function loadDashboard() {
-            document.getElementById('console-stream').innerText = "STDOUT: Core Workspace Active // Navigation index updated.";
+            document.getElementById('console-stream').innerText = "STDOUT: Core Workspace Active // Operational clusters initialized.";
             document.getElementById('stage').innerHTML = `
                 <div class="stage-card">
                     <h1><em>Simple tools</em> have the best effect.</h1>
@@ -357,13 +352,13 @@
                             </div>
                             <a href="/labmatch" class="card-link">Take Diagnostic →</a>
                         </div>
-                        <div class="card" onclick="loadWaitlist('Plath', 'A specialized forecasting framework mapping personal numerology architectures and transition layers.')" style="cursor:pointer;">
+                        <div class="card" onclick="routeSystemPage('p2')" style="cursor:pointer;">
                             <div>
-                                <div class="status upcoming">Staged</div>
-                                <h3 class="card-title">Plath</h3>
-                                <p class="card-desc">A specialized framework structuring calculations for personal forecasts and predictive analysis.</p>
+                                <div class="status upcoming">Staged Sandbox</div>
+                                <h3 class="card-title">Godot</h3>
+                                <p class="card-desc">An architectural matrix focused on spatial data arrays and grid logic sandbox strategy pathways.</p>
                             </div>
-                            <span class="card-link" style="color: var(--sonic-orange);">Join Waitlist →</span>
+                            <span class="card-link" style="color: var(--sonic-orange);">Learn More & Join Waitlist →</span>
                         </div>
                     </div>
                 </div>
@@ -379,7 +374,9 @@
             const mount = document.getElementById('dynamic-tree-mount');
             const directories = {
                 nodes: { label: "nodes/ (200w)", items: [] },
-                essays: { label: "essays/ (>700w)", items: [] }
+                knowledge: { label: "knowledge/ (>700w)", items: [] },
+                projects: { label: "projects/ (apps)", items: [] },
+                faq: { label: "global_faq/ (400w)", items: [] }
             };
 
             structuralSitemap.forEach(node => {
@@ -388,14 +385,15 @@
 
             let treeHtml = "";
             for (const [key, dir] of Object.entries(directories)) {
+                const isExpanded = key === "projects" ? "expanded" : "";
                 treeHtml += `
                     <div style="margin-bottom: 4px;">
                         <div class="folder-header" onclick="toggleFolder('${key}-folder')">
                             📁 ${dir.label} <span>[${dir.items.length}]</span>
                         </div>
-                        <div class="folder-content" id="${key}-folder">
+                        <div class="folder-content ${isExpanded}" id="${key}-folder">
                             ${dir.items.map(item => `
-                                <div class="tree-item" onclick="routeSystemPage('${item.id}')">↳ ${item.title}</div>
+                                <div class="tree-item" onclick="routeSystemPage('${item.id}')">↳ ${item.file}</div>
                             `).join('')}
                         </div>
                     </div>
@@ -404,123 +402,131 @@
             mount.innerHTML = treeHtml;
         }
 
-        // Handles Remote Content Fetching asynchronously with loading state
+        // Intelligent Asynchronous Page Routing Router Content Handler
         async function routeSystemPage(id) {
             const asset = structuralSitemap.find(x => x.id === id);
             if (!asset) return;
 
-            // Update page Title and Meta Description for clean SEO footprint
-            document.title = `${asset.title} | SonicBloom Infrastructure`;
-            let metaDesc = document.querySelector('meta[name="description"]');
-            if (!metaDesc) {
-                metaDesc = document.createElement('meta');
-                metaDesc.name = "description";
-                document.head.appendChild(metaDesc);
-            }
-            metaDesc.content = asset.summary;
+            document.getElementById('console-stream').innerText = `STDOUT: Print sequence executing for node asset [${asset.file}]`;
 
-            document.getElementById('console-stream').innerText = `STDOUT: Querying server stream for remote resource asset: ${asset.url}`;
-            
-            // Build stage skeleton layout with automatic summary presentation header
-            document.getElementById('stage').innerHTML = `
-                <div class="stage-card">
-                    <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">📄 SYSTEM_PATH // ${asset.category}/${asset.id}_production</span>
-                    <h1 style="margin-top:10px;">${asset.title}</h1>
-                    <p style="font-size:1.1rem; color: var(--text-main); margin-bottom:25px; font-style: italic;">${asset.summary}</p>
-                    <hr style="border:0; border-top:1px dashed var(--border-clean); margin-bottom:30px;">
-                    <div id="async-node-content" style="color: var(--text-muted);">
-                        <span style="font-family:monospace; color:var(--sonic-orange);">[CONNECTING TO TERMINAL ENDPOINT STREAM...]</span>
-                    </div>
-                </div>
-            `;
-
-            // Execute asynchronous fetch API validation loop
-            if (asset.url) {
-                try {
-                    const response = await fetch(asset.url);
-                    if (!response.ok) throw new Error(`HTTP Endpoint Fault Status: ${response.status}`);
-                    const rawContent = await response.text();
-
-                    // Strip HTML document wrappers cleanly if present
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(rawContent, 'text/html');
-                    
-                    let filteredContent = "";
-                    if (doc.querySelector('.wrapper')) {
-                        filteredContent = doc.querySelector('.wrapper').innerHTML;
-                    } else if (doc.querySelector('.container')) {
-                        filteredContent = doc.querySelector('.container').innerHTML;
-                    } else if (doc.querySelector('body')) {
-                        filteredContent = doc.querySelector('body').innerHTML;
-                    } else {
-                        filteredContent = rawContent;
-                    }
-
-                    document.getElementById('async-node-content').innerHTML = filteredContent;
-                    document.getElementById('console-stream').innerText = `STDOUT: Successfully rendered [${asset.title}] content buffer cleanly into viewport.`;
-                } catch (error) {
-                    document.getElementById('async-node-content').innerHTML = `
-                        <p style="color:red; font-family:monospace;">[ERRLOG: DIRECTORY ROUTING RESOLUTION FAULT]</p>
-                        <p style="font-size:0.9rem; margin-top:10px;">Verify that the source content file exists exactly at path folder: <code>${asset.url}</code></p>
+            // Project Branch Redirection Logic
+            if (asset.category === "projects") {
+                if (asset.isLive) {
+                    document.getElementById('stage').innerHTML = `
+                        <div class="stage-card">
+                            <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">⚙️ LIVE PIPELINE // INTERACTIVE APPLICATION</span>
+                            <h1 style="margin-top:10px;">${asset.title}</h1>
+                            <p style="font-size:1.1rem; max-width:720px; margin-bottom:30px;">${asset.summary}</p>
+                            <a href="${asset.url}" class="waitlist-btn" style="text-decoration:none; display:inline-block; text-align:center;">Launch Engine Dashboard</a>
+                        </div>
                     `;
-                    document.getElementById('console-stream').innerText = `ERRLOG: Failed to load stream for [${asset.title}].`;
+                } else {
+                    loadWaitlist(asset.title, asset.summary);
                 }
-            } else {
-                document.getElementById('async-node-content').innerHTML = `<p><em>No remote path mapped for this item.</em></p>`;
+                return;
             }
-        }
 
-        // Dynamic FAQ File Integration Async Call Launcher
-        async function loadFaqPage() {
-            document.title = "FAQ System | SonicBloom Knowledge Base";
-            document.getElementById('console-stream').innerText = "STDOUT: Querying server stream for remote FAQ asset layer...";
-            
+            if (asset.isFaq) {
+                renderFaqPage(asset);
+                return;
+            }
+
+            // Target Pathing Configuration Mapping
+            const targetUrl = `/${asset.category}/${asset.file}`;
+
+            // Initialize Loading Matrix Viewport Stage
             document.getElementById('stage').innerHTML = `
                 <div class="stage-card">
-                    <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">⚙️ ROUTE // system/faq_page_root</span>
-                    <h1 style="margin-top:10px;">FAQ System</h1>
-                    <p style="font-size:1.1rem; color: var(--text-main); margin-bottom:25px; font-style: italic;">Compiled runtime answers routing query mechanics directly to recommended informational system parameters.</p>
-                    <hr style="border:0; border-top:1px dashed var(--border-clean); margin-bottom:30px;">
-                    <div id="async-faq-content" style="color: var(--text-muted);">
-                        <span style="font-family:monospace; color:var(--sonic-orange);">[CONNECTING TO FAQ ENGINE STREAM...]</span>
-                    </div>
+                    <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">📄 SYSTEM_PATH // ${asset.category}/${asset.file}</span>
+                    <h1 style="margin-top:10px;">${asset.title}</h1>
+                    <p style="font-family:monospace; font-size:0.9rem; color:var(--text-muted); margin-top:20px;">
+                        [CONNECTING TO TERMINAL ENDPOINT STREAM...]
+                    </p>
                 </div>
             `;
 
+            // Async Fetch Lifecycle Execution Loop
             try {
-                const response = await fetch('/blog/global-faq-v1.html');
-                if (!response.ok) throw new Error(`HTTP Error Status: ${response.status}`);
-                const rawContent = await response.text();
+                const response = await fetch(targetUrl);
                 
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(rawContent, 'text/html');
-                const cleanContent = doc.querySelector('.faq-module-cluster') ? doc.querySelector('.faq-module-cluster').innerHTML : doc.body.innerHTML;
-                
-                document.getElementById('async-faq-content').innerHTML = cleanContent;
-                document.getElementById('console-stream').innerText = "STDOUT: Successfully rendered live FAQ matrix layers.";
-            } catch (error) {
-                document.getElementById('async-faq-content').innerHTML = `
-                    <p style="color:red; font-family:monospace;">[ERRLOG: FAQ ROUTING FAULT]</p>
-                    <p style="font-size:0.9rem; margin-top:10px;">Verify that the FAQ file exists exactly at path destination: <code>/blog/global-faq-v1.html</code></p>
+                if (!response.ok) {
+                    throw new Error(`HTTP network fault status profile: ${response.status}`);
+                }
+
+                const payloadText = await response.text();
+
+                // Render content payload securely with layout break preservation rules
+                document.getElementById('stage').innerHTML = `
+                    <div class="stage-card">
+                        <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">📄 SYSTEM_PATH // ${asset.category}/${asset.file}</span>
+                        <h1 style="margin-top:10px;">${asset.title}</h1>
+                        <p style="font-size:1.1rem; color: var(--text-main); margin-bottom:20px; font-weight:500;">${asset.summary}</p>
+                        <hr style="border:0; border-top:1px dashed var(--border-clean); margin-bottom:30px;">
+                        
+                        <div style="white-space: pre-wrap; font-family: inherit; color: var(--text-main); line-height: 1.6;">${escapeHtml(payloadText)}</div>
+                    </div>
                 `;
-                document.getElementById('console-stream').innerText = "ERRLOG: Failed to stream FAQ resource file.";
+
+            } catch (error) {
+                // Error Interception Terminal Fallback Engine
+                document.getElementById('console-stream').innerText = `ERRLOG: Resolution abort for route payload vector [${asset.file}]`;
+                
+                document.getElementById('stage').innerHTML = `
+                    <div class="stage-card" style="border-color: var(--sonic-orange);">
+                        <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">⚠️ SYSTEM CRITICAL OUTCOME // ROUTE EXCEPTION</span>
+                        <h1 style="margin-top:10px; color: var(--text-main);">[ERRLOG: DIRECTORY ROUTING RESOLUTION FAULT]</h1>
+                        <p style="font-family:monospace; font-size:0.95rem; background: #fff0e6; padding: 15px; border-radius: 8px; color: var(--text-main); border: 1px solid rgba(255,106,0,0.25);">
+                            <strong>Failed Target Path:</strong> ${targetUrl}<br>
+                            <strong>Exception Trace:</strong> ${error.message}<br><br>
+                            Verify that the corresponding component asset physically populates the file paths inside your Git repository context.
+                        </p>
+                    </div>
+                `;
             }
         }
 
-        // Waitlist Engine Render Function
+        // Render Global Interactive FAQ Template Engine Block
+        function renderFaqPage(asset) {
+            let faqHtml = `
+                <div class="stage-card">
+                    <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">📁 SYSTEM_PATH // ${asset.category}/${asset.file}</span>
+                    <h1 style="margin-top:10px;">Global FAQ Core</h1>
+                    <p>Compiled runtime answers routing query mechanics directly to recommended informational system parameters.</p>
+            `;
+
+            for(let i=1; i<=10; i++) {
+                faqHtml += `
+                    <div style="margin-top:24px; border-bottom:1px dashed var(--border-clean); padding-bottom:16px;">
+                        <h3 style="font-size:1.05rem; margin-bottom:6px; color:var(--text-main);">Module Theme Cluster ${i} // System Integrity Matrix</h3>
+                        <p style="font-size:0.9rem; font-weight:bold; color:var(--text-main); margin-bottom:4px;">Q: How does algorithmic mapping isolate specialized validation tasks?</p>
+                        <p style="font-size:0.9rem; margin-bottom:8px;">A: By treating engineering variables as isolated query units directly inside verified data arrays. Relational structural nodes protect baseline integrity values.</p>
+                        <span style="font-family:monospace; font-size:0.78rem; color:var(--sonic-orange);">Suggested Content Path: <span style="cursor:pointer; text-decoration:underline;" onclick="routeSystemPage('n1')">parsing_logic.md</span></span>
+                    </div>
+                `;
+            }
+
+            faqHtml += `</div>`;
+            document.getElementById('stage').innerHTML = faqHtml;
+        }
+
+        // Unified Maintenance-Free Waitlist Handler
         function loadWaitlist(name, desc) {
             document.getElementById('console-stream').innerText = `WARNTYPE: Requesting unlaunched system pipeline variable [${name}].`;
             document.getElementById('stage').innerHTML = `
                 <div class="stage-card">
                     <span style="font-family:monospace; color:var(--text-muted); font-size:0.85rem; font-weight:bold;">⚙ STAGED PIPELINE // ARCHITECTURE DIRECT</span>
                     <h1 style="margin-top:10px;">${name}</h1>
-                    <p style="font-size:1.1rem; max-width:600px;">${desc}</p>
+                    <p style="font-size:1.1rem; max-width:600px; margin-bottom:24px;">${desc}</p>
                     
                     <div class="waitlist-box">
                         <h3>Join Project Pipeline</h3>
-                        <p>This module has not yet launched into production. Enter your notification hooks below to access early-access deployment loops.</p>
-                        <form class="waitlist-form" onsubmit="handleWaitlistSubmit(event, '${name}')">
-                            <input type="email" required placeholder="operator_email@domain.com" class="waitlist-input" id="waitlist-field">
+                        <p>This entry point is staged for development rollout. Enter your parameters below to flag early-access inclusion vectors.</p>
+                        
+                        <form class="waitlist-form" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST" onsubmit="handleWaitlistSubmit(event, '${name}')">
+                            <input type="hidden" name="project_origin" value="${name}">
+                            <input type="hidden" name="submission_timestamp" value="${new Date().toISOString()}">
+                            
+                            <input type="email" name="email" required placeholder="operator_email@domain.com" class="waitlist-input" id="waitlist-field">
                             <button type="submit" class="waitlist-btn">Join Waitlist</button>
                         </form>
                     </div>
@@ -529,10 +535,21 @@
         }
 
         function handleWaitlistSubmit(e, projectName) {
+            // Note: Remove e.preventDefault() if utilizing a standard non-AJAX Formspree post response configuration layout.
             e.preventDefault();
             const email = document.getElementById('waitlist-field').value;
             document.getElementById('console-stream').innerText = `SUCCESS: Appended address [${email}] directly to project [${projectName}] allocation map vector.`;
-            alert(`Authorized. Communication channel mapped to ${projectName} queue pipeline.`);
+            alert(`Authorized. Communication channel mapped to the ${projectName} queue pipeline.`);
+        }
+
+        // XSS Mitigation Sanitization Helper Utility
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
 
         // Core Init Lifecycle
