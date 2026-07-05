@@ -70,24 +70,49 @@ class LabMatchRouter {
 
   goToSlide(id) {
     if (id < 1 || id > this.totalSlides) return;
+    
+    // Cleanly strip active class from all slides
     document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    
+    // Safely target the numerical slide ID element
     const target = document.getElementById(`slide-${id}`);
-    if (target) target.classList.add('active');
+    if (target) {
+      target.classList.add('active');
+    } else {
+      console.warn(`[LABMATCH] Target slide missing in DOM: #slide-${id}`);
+    }
+    
     this.currentSlide = id;
     this.updateProgressBar();
   }
 
   updateProgressBar() {
-    const percent = ((this.currentSlide - 1) / (this.totalSlides - 1)) * 100;
+    // Hide progress bar elements completely on the final results page (Slide 7)
+    const navGrid = document.querySelector('.nav-progress-grid');
+    if (this.currentSlide === 7) {
+      if (navGrid) navGrid.style.display = 'none';
+      return;
+    } else {
+      if (navGrid) navGrid.style.display = 'grid';
+    }
+
+    // Progress bar reflects stages 1 through 5
+    const percent = ((this.currentSlide - 1) / 5) * 100;
     const fill = document.getElementById('progress-fill');
     const display = document.getElementById('progress-text');
-    if (fill) fill.style.width = `${percent}%`;
-    if (display) display.innerText = `STAGE 0${this.currentSlide - 1 || 1} // 0${this.totalSlides - 1}`;
+    
+    if (fill) fill.style.width = `${Math.min(percent, 100)}%`;
+    if (display) display.innerText = `STAGE 0${Math.max(1, this.currentSlide - 1)} // 05`;
   }
 
   finalizeAssessment() {
+    // 1. Map choices to the 3-column emoji layout grid
     this.renderDigitalPrintLayout();
+    
+    // 2. Route directly to slide 7 (the profile viewport)
     this.goToSlide(7);
+    
+    // 3. Fire telemetry logging safely backgrounded
     this.dispatchTelemetryLog();
   }
 
