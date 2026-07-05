@@ -92,7 +92,6 @@
         h2 { font-size: 1.4rem; font-weight: 600; margin: 0 0 8px 0; color: var(--text-main); line-height: 1.3; letter-spacing: -0.5px; }
         .desc { color: var(--text-muted); line-height: 1.5; margin-bottom: 24px; font-size: 0.9rem; }
 
-        /* Immersive Selection Grid */
         .option {
             display: flex;
             align-items: center;
@@ -106,17 +105,6 @@
         }
         .option:hover { border-color: var(--sonic-orange); background: var(--sonic-orange-dim); transform: translateX(2px); }
         .option.selected { border-color: var(--sonic-orange); background: var(--sonic-orange-dim); }
-        
-        /* Visual Glyph Representation Mappings */
-        .visual-badge {
-            font-family: monospace;
-            font-size: 1.1rem;
-            color: var(--sonic-orange);
-            margin-right: 18px;
-            width: 24px;
-            text-align: center;
-            flex-shrink: 0;
-        }
 
         .checkbox-indicator {
             display: inline-block;
@@ -164,20 +152,49 @@
         .btn:hover { background: #e05d00; }
         .btn:disabled { background: var(--border-clean); color: var(--text-muted); cursor: not-allowed; }
 
-        .matrix-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 24px; }
-        .btn-secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border-clean); text-align: center; text-decoration: none; padding: 14px 0; border-radius: 4px; font-weight: bold; font-size: 0.9rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
-        .btn-secondary:hover { background: #0d131f; color: var(--text-main); }
-        .btn-join { background: var(--success-green); color: white; text-decoration: none; display: block; text-align: center; box-sizing: border-box; text-transform: uppercase; padding: 16px 0; font-weight: bold; letter-spacing: 1px; }
-        .btn-join:hover { background: #059669; }
+        /* Digital Print Grid Rules */
+        .digital-print-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .print-column {
+            background: #0d131f;
+            border: 1px solid var(--border-clean);
+            border-radius: 4px;
+            padding: 20px 12px;
+            text-align: center;
+        }
+        .print-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .print-title {
+            font-weight: bold;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .print-desc {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            line-height: 1.4;
+        }
 
         .market-metrics { margin: 20px 0; border: 1px solid var(--border-clean); background: #0d131f; border-radius: 4px; }
-        .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--border-clean); }
-        .metric-row:last-child { border-bottom: none; }
+        .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; }
         .metric-label { color: var(--text-muted); font-size: 0.85rem; font-family: monospace; }
         .metric-value { color: var(--text-main); font-size: 0.9rem; font-weight: bold; }
         .metric-value.highlighted-rate { color: var(--sonic-orange); font-size: 1.15rem; font-family: monospace; }
 
-        .vector-graphic-box { margin: 24px 0; border: 1px solid var(--border-clean); padding: 4px; background: #070a12; border-radius: 4px; }
+        .matrix-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 24px; }
+        .btn-secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border-clean); text-align: center; text-decoration: none; padding: 14px 0; border-radius: 4px; font-weight: bold; font-size: 0.9rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-secondary:hover { background: #0d131f; color: var(--text-main); }
+        .btn-join { background: var(--success-green); color: white; text-decoration: none; display: block; text-align: center; box-sizing: border-box; text-transform: uppercase; padding: 16px 0; font-weight: bold; letter-spacing: 1px; border-radius: 4px; }
+        .btn-join:hover { background: #059669; }
     </style>
 </head>
 <body>
@@ -190,210 +207,182 @@
             <div class="progress-bar-container">
                 <div id="progress-fill" class="progress-fill"></div>
             </div>
-            <span class="progress-tracker-text" id="progress-text">STAGE 01 // 08</span>
+            <span class="progress-tracker-text" id="progress-text">STAGE 01 // 06</span>
         </div>
         <button class="nav-icon-btn" style="opacity:0; cursor:default;" disabled>&rarr;</button>
     </div>
 
     <div id="slide-1" class="slide active">
         <h2>Unlock Your Match</h2>
-        <p class="desc">Top AI research labs hire specialists to evaluate, fix, and fine-tune model output streams. Drop your work email below to initiate identity initialization.</p>
+        <p class="desc">Top AI research labs hire specialists to tune model output streams.</p>
         <input type="email" id="user-email" placeholder="name@domain.com" required>
         <button class="btn" onclick="submitEmailGateway()">START</button>
     </div>
 
     <div id="slide-2" class="slide">
-        <h2>01 // Problem Solving</h2>
-        <p class="desc">What is your natural instinct when checking someone else's work for mistakes?</p>
-        <div class="option" onclick="selectSingle('cognitiveStyle', 'Adversarial', 3)">
-            <div class="visual-badge">&xml;</div>
-            <div class="text-block">
-                <span class="option-title">Break the boundaries</span>
-                <span class="option-subtitle">I lock directly onto rule violations, edge cases, and contradictions.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('cognitiveStyle', 'Structural', 3)">
-            <div class="visual-badge">&#10144;</div>
-            <div class="text-block">
-                <span class="option-title">Build the blueprints</span>
-                <span class="option-subtitle">I excel at cataloging files, organizing logic steps, and sorting data sets.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('cognitiveStyle', 'Creative', 3)">
-            <div class="visual-badge">&#10043;</div>
-            <div class="text-block">
-                <span class="option-title">Explore the context</span>
-                <span class="option-subtitle">I look for human-sounding nuance, natural expression, and flow errors.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="slide-3" class="slide">
-        <h2>02 // Evaluation Lens</h2>
-        <p class="desc">Which core trait best defines your focus during a training process?</p>
-        <div class="option" onclick="selectSingle('psychometricProfile', 'Granular Adversarial', 4)">
-            <div class="visual-badge">&#9762;</div>
-            <div class="text-block">
-                <span class="option-title">Stress-Testing Boundaries</span>
-                <span class="option-subtitle">Isolating vulnerabilities, hacking logic errors, and exposing flaws.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('psychometricProfile', 'Synthetic Structural', 4)">
-            <div class="visual-badge">&#9643;</div>
-            <div class="text-block">
-                <span class="option-title">Clean Systemization</span>
-                <span class="option-subtitle">Formulating precise definitions, clean schemas, and crisp layouts.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('psychometricProfile', 'Heuristic Creative', 4)">
-            <div class="visual-badge">&#10022;</div>
-            <div class="text-block">
-                <span class="option-title">Fluid Interpretation</span>
-                <span class="option-subtitle">Navigating subjective tones, stylistic distribution, and depth.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="slide-4" class="slide">
-        <h2>03 // Operating Speed</h2>
-        <p class="desc">What kind of pace keeps your focus locked the longest?</p>
-        <div class="option" onclick="selectSingle('workRhythm', 'Deep-Dive', 5)">
-            <div class="visual-badge">&#9201;</div>
-            <div class="text-block">
-                <span class="option-title">Independent Deep-Dive</span>
-                <span class="option-subtitle">Sustained, hyper-detailed concentration on complex issues.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('workRhythm', 'Rapid-Fire', 5)">
-            <div class="visual-badge">&#9055;</div>
-            <div class="text-block">
-                <span class="option-title">Rapid-Fire Router</span>
-                <span class="option-subtitle">High-velocity processing, updating, and shipping on the go.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="slide-5" class="slide">
-        <h2>04 // Target Domains</h2>
-        <p class="desc">Pick up to 3 fields you understand best. (Minimum 1 required).</p>
+        <h2>01 // Target Domains</h2>
+        <p class="desc">Select up to 3 fields you understand best.</p>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Software')">
             <span class="checkbox-indicator"></span>
             <div class="text-block">
                 <span class="option-title">Software Engineering</span>
-                <span class="option-subtitle">Coding languages, architecture analysis, and script optimization.</span>
+                <span class="option-subtitle">Code design, syntax parsing, script optimization.</span>
             </div>
         </div>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Data')">
             <span class="checkbox-indicator"></span>
             <div class="text-block">
-                <span class="option-title">Data Logs & Analysis</span>
-                <span class="option-subtitle">Database outputs, math schemas, and model RLHF training queues.</span>
+                <span class="option-title">Data Analysis</span>
+                <span class="option-subtitle">Database logs, math schemas, training queues.</span>
             </div>
         </div>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Linguistics')">
             <span class="checkbox-indicator"></span>
             <div class="text-block">
                 <span class="option-title">Linguistics & Prose</span>
-                <span class="option-subtitle">Creative essays, syntax parsing trees, grammar, and translation.</span>
+                <span class="option-subtitle">Creative syntax, grammar trees, human translation.</span>
             </div>
         </div>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Medicine')">
             <span class="checkbox-indicator"></span>
             <div class="text-block">
-                <span class="option-title">Medical Life Sciences</span>
-                <span class="option-subtitle">Healthcare summaries, clinical logs, and scientific research.</span>
+                <span class="option-title">Medical Sciences</span>
+                <span class="option-subtitle">Clinical summaries, health logs, scientific research.</span>
             </div>
         </div>
         <div class="option" onclick="toggleDomainCheckbox(this, 'Law')">
             <span class="checkbox-indicator"></span>
             <div class="text-block">
                 <span class="option-title">Legal Frameworks</span>
-                <span class="option-subtitle">Policy rules, complex contracts, compliance, and case briefs.</span>
+                <span class="option-subtitle">Compliance rules, contracts, policy case briefs.</span>
             </div>
         </div>
-        <button class="btn" id="next-q3-btn" disabled onclick="submitDomains()" style="margin-top:16px;">CONTINUE</button>
+        <button class="btn" id="next-domains-btn" disabled onclick="submitDomains()" style="margin-top:16px;">CONTINUE</button>
+    </div>
+
+    <div id="slide-3" class="slide">
+        <h2>02 // Domain Mileage</h2>
+        <p class="desc">How far along are you in your career track?</p>
+        <div class="option" onclick="selectSingle('experienceLayer', 'Expert', 4)">
+            <div class="text-block">
+                <span class="option-title">Advanced Tier</span>
+                <span class="option-subtitle">5+ years running deep, complex audits.</span>
+            </div>
+        </div>
+        <div class="option" onclick="selectSingle('experienceLayer', 'Mid-Career', 4)">
+            <div class="text-block">
+                <span class="option-title">Established Tier</span>
+                <span class="option-subtitle">2-5 years of professional execution.</span>
+            </div>
+        </div>
+        <div class="option" onclick="selectSingle('experienceLayer', 'Entry', 4)">
+            <div class="text-block">
+                <span class="option-title">Foundational Tier</span>
+                <span class="option-subtitle">Student, explorer, or pivoting fields.</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide-4" class="slide">
+        <h2>03 // Operating Speed</h2>
+        <p class="desc">What processing pace keeps your focus locked the longest?</p>
+        <div class="option" onclick="selectSingle('workRhythm', 'Deep-Dive', 5)">
+            <div class="text-block">
+                <span class="option-title">Independent Deep-Dive</span>
+                <span class="option-subtitle">Sustained, hyper-detailed concentration.</span>
+            </div>
+        </div>
+        <div class="option" onclick="selectSingle('workRhythm', 'Rapid-Fire', 5)">
+            <div class="text-block">
+                <span class="option-title">Rapid-Fire Router</span>
+                <span class="option-subtitle">High-velocity execution and fast shipping.</span>
+            </div>
+        </div>
+        <div class="option" onclick="selectSingle('workRhythm', 'Hybrid', 5)">
+            <div class="text-block">
+                <span class="option-title">Hybrid Synchronizer</span>
+                <span class="option-subtitle">Balanced rhythm blending deep study with fluid pivots.</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide-5" class="slide">
+        <h2>04 // Problem Solving</h2>
+        <p class="desc">What is your natural instinct when checking work for mistakes?</p>
+        <div class="option" onclick="selectSingle('cognitiveStyle', 'Adversarial', 6)">
+            <div class="text-block">
+                <span class="option-title">Break boundaries</span>
+                <span class="option-subtitle">Lock onto rule violations and edge cases.</span>
+            </div>
+        </div>
+        <div class="option" onclick="selectSingle('cognitiveStyle', 'Structural', 6)">
+            <div class="text-block">
+                <span class="option-title">Build blueprints</span>
+                <span class="option-subtitle">Excel at organizing logic steps and datasets.</span>
+            </div>
+        </div>
+        <div class="option" onclick="selectSingle('cognitiveStyle', 'Creative', 6)">
+            <div class="text-block">
+                <span class="option-title">Explore context</span>
+                <span class="option-subtitle">Look for semantic nuance and natural flow.</span>
+            </div>
+        </div>
     </div>
 
     <div id="slide-6" class="slide">
-        <h2>05 // Domain Mileage</h2>
-        <p class="desc">How far along are you in your career track or primary topic?</p>
-        <div class="option" onclick="selectSingle('experienceLayer', 'Entry', 7)">
-            <div class="visual-badge">&#9634;</div>
+        <h2>05 // Evaluation Lens</h2>
+        <p class="desc">Which trait best defines your focus during model training?</p>
+        <div class="option" onclick="selectSingle('psychometricProfile', 'Granular Adversarial', 'finalize')">
             <div class="text-block">
-                <span class="option-title">Foundational Tier</span>
-                <span class="option-subtitle">Student, early explorer, or actively pivoting into a new field.</span>
+                <span class="option-title">Stress-Testing</span>
+                <span class="option-subtitle">Isolating vulnerabilities and logic flaws.</span>
             </div>
         </div>
-        <div class="option" onclick="selectSingle('experienceLayer', 'Mid-Career', 7)">
-            <div class="visual-badge">&#9639;</div>
+        <div class="option" onclick="selectSingle('psychometricProfile', 'Synthetic Structural', 'finalize')">
             <div class="text-block">
-                <span class="option-title">Established Tier</span>
-                <span class="option-subtitle">2-5 years of independent, professional field execution.</span>
+                <span class="option-title">Systemization</span>
+                <span class="option-subtitle">Formulating precise definitions and crisp layouts.</span>
             </div>
         </div>
-        <div class="option" onclick="selectSingle('experienceLayer', 'Expert', 7)">
-            <div class="visual-badge">&#9638;</div>
+        <div class="option" onclick="selectSingle('psychometricProfile', 'Heuristic Creative', 'finalize')">
             <div class="text-block">
-                <span class="option-title">Advanced Tier</span>
-                <span class="option-subtitle">5+ years running deep audits, team systems, or holding specialty degrees.</span>
+                <span class="option-title">Fluid Interpretation</span>
+                <span class="option-subtitle">Navigating subjective depth and semantic tone.</span>
             </div>
         </div>
     </div>
 
     <div id="slide-7" class="slide">
-        <h2>06 // Pipeline Goals</h2>
-        <p class="desc">[Optional] Tell us exactly how you want the network to work for you.</p>
-        <div class="option" onclick="selectSingle('primaryGoal', 'Join AI Labs', 'finalize')">
-            <div class="visual-badge">&#10140;</div>
-            <div class="text-block">
-                <span class="option-title">Join AI Labs</span>
-                <span class="option-subtitle">Get direct alignment roles at premium paying labs ($40-$85+/hr).</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('primaryGoal', 'Share Skills', 'finalize')">
-            <div class="visual-badge">&#8633;</div>
-            <div class="text-block">
-                <span class="option-title">Share Your Skills</span>
-                <span class="option-subtitle">Generate a custom metrics link to display on LinkedIn or portfolios.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('primaryGoal', 'Help a Friend', 'finalize')">
-            <div class="visual-badge">&#128101;</div>
-            <div class="text-block">
-                <span class="option-title">Help a Friend</span>
-                <span class="option-subtitle">Learn the framework to refer team members or sync skilled peers.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('primaryGoal', 'Get Industry Updates', 'finalize')">
-            <div class="visual-badge">&#128225;</div>
-            <div class="text-block">
-                <span class="option-title">Get Industry Updates</span>
-                <span class="option-subtitle">Subscribe to long-form strategy essays tracking the tech labor wave.</span>
-            </div>
-        </div>
-        <button class="btn btn-secondary" onclick="selectSingle('primaryGoal', 'Not Specified', 'finalize')">SKIP</button>
-    </div>
-
-    <div id="slide-8" class="slide">
         <h2>Calibration Complete</h2>
+        <p class="desc">Your cognitive architecture is fully indexed. Review your digital print below to reveal premium laboratory tracks and dispatch your credentials.</p>
         
-        <div class="vector-graphic-box" id="vector-print-viewport"></div>
+        <div class="digital-print-grid">
+            <div class="print-column">
+                <span class="print-emoji" id="print-emoji-thinking">🧠</span>
+                <span class="print-title" id="print-title-thinking">Thinking</span>
+                <p class="print-desc" id="print-desc-thinking">Loading index parameter alignment...</p>
+            </div>
+            <div class="print-column">
+                <span class="print-emoji" id="print-emoji-skillset">💎</span>
+                <span class="print-title" id="print-title-skillset">Skillset</span>
+                <p class="print-desc" id="print-desc-skillset">Loading index parameter alignment...</p>
+            </div>
+            <div class="print-column">
+                <span class="print-emoji" id="print-emoji-domain">💻</span>
+                <span class="print-title" id="print-title-domain">Domain</span>
+                <p class="print-desc" id="print-desc-domain">Loading index parameter alignment...</p>
+            </div>
+        </div>
 
         <div class="market-metrics">
-            <div class="metric-row"><span class="metric-label">Target Role Match:</span><span id="display-role-title" class="metric-value">Loading...</span></div>
+            <div class="metric-row" style="border-bottom: 1px solid var(--border-clean);"><span class="metric-label">Target Role Match:</span><span id="display-role-title" class="metric-value">Loading...</span></div>
             <div class="metric-row"><span class="metric-label">Indexed Hourly Rate:</span><span id="display-rate-index" class="metric-value highlighted-rate">$00.00 / hr</span></div>
-            <div class="metric-row"><span class="metric-label">Problem Instinct:</span><span id="res-cognitive" class="metric-value">-</span></div>
-            <div class="metric-row"><span class="metric-label">Operating Rhythm:</span><span id="res-rhythm" class="metric-value">-</span></div>
-            <div class="metric-row"><span class="metric-label">Strategic Trademark:</span><span id="res-psychometric" class="metric-value">-</span></div>
-            <div class="metric-row"><span class="metric-label">Domains Tracked:</span><span id="res-domains" class="metric-value">-</span></div>
-            <div class="metric-row"><span class="metric-label">Experience Tier:</span><span id="res-experience" class="metric-value">-</span></div>
-            <div class="metric-row"><span class="metric-label">Workspace Intent:</span><span id="res-goal" class="metric-value">-</span></div>
         </div>
 
         <div class="matrix-grid">
-            <a href="#" id="display-action-cta" target="_blank" class="btn btn-join">APPLY</a>
-            <button class="btn" style="background:#0077b5;" onclick="window.labmatchRouter.triggerLinkedInWindow()">SHARE</button>
-            <a href="/" class="btn-secondary">EXIT</a>
+            <a href="#" id="display-action-cta" target="_blank" class="btn btn-join">Access Premium Lab Links</a>
+            <button class="btn" style="background:#0077b5;" onclick="window.labmatchRouter.triggerLinkedInWindow()">Share Digital Print</button>
+            <a href="/" class="btn-secondary">Exit Runway</a>
         </div>
     </div>
 </div>
