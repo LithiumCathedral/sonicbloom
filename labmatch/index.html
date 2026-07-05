@@ -152,7 +152,6 @@
         .btn:hover { background: #e05d00; }
         .btn:disabled { background: var(--border-clean); color: var(--text-muted); cursor: not-allowed; }
 
-        /* Digital Print Grid Rules */
         .digital-print-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -207,7 +206,7 @@
             <div class="progress-bar-container">
                 <div id="progress-fill" class="progress-fill"></div>
             </div>
-            <span class="progress-tracker-text" id="progress-text">STAGE 01 // 06</span>
+            <span class="progress-tracker-text" id="progress-text">STAGE 01 // 05</span>
         </div>
         <button class="nav-icon-btn" style="opacity:0; cursor:default;" disabled>&rarr;</button>
     </div>
@@ -373,6 +372,18 @@
                 <p class="print-desc" id="print-desc-domain">Loading index parameter alignment...</p>
             </div>
         </div>
+
+        <div class="market-metrics">
+            <div class="metric-row" style="border-bottom: 1px solid var(--border-clean);"><span class="metric-label">Target Role Match:</span><span id="display-role-title" class="metric-value">Loading...</span></div>
+            <div class="metric-row"><span class="metric-label">Indexed Hourly Rate:</span><span id="display-rate-index" class="metric-value highlighted-rate">$00.00 / hr</span></div>
+        </div>
+
+        <div class="matrix-grid">
+            <a href="#" id="display-action-cta" target="_blank" class="btn btn-join">Access Premium Lab Links</a>
+            <button class="btn" style="background:#0077b5;" onclick="window.labmatchRouter.triggerLinkedInWindow()">Share Digital Print</button>
+            <a href="/" class="btn-secondary">Exit Runway</a>
+        </div>
+    </div>
 
         <div class="market-metrics">
             <div class="metric-row" style="border-bottom: 1px solid var(--border-clean);"><span class="metric-label">Target Role Match:</span><span id="display-role-title" class="metric-value">Loading...</span></div>

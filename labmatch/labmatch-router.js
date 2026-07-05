@@ -67,19 +67,18 @@ class LabMatchRouter {
       this.goToSlide(2);
     };
   }
-
-  goToSlide(id) {
+goToSlide(id) {
     if (id < 1 || id > this.totalSlides) return;
     
-    // Cleanly strip active class from all slides
+    // Unmount active flag from all slider views
     document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
     
-    // Safely target the numerical slide ID element
+    // Inject active visibility flag onto the designated slide target
     const target = document.getElementById(`slide-${id}`);
     if (target) {
       target.classList.add('active');
     } else {
-      console.warn(`[LABMATCH] Target slide missing in DOM: #slide-${id}`);
+      console.warn(`[LABMATCH] Target slide missing in DOM pipeline: #slide-${id}`);
     }
     
     this.currentSlide = id;
@@ -88,6 +87,8 @@ class LabMatchRouter {
 
   updateProgressBar() {
     const navGrid = document.querySelector('.nav-progress-grid');
+    
+    // Hard break if loading the profile dashboard view (Slide 7)
     if (this.currentSlide === 7) {
       if (navGrid) navGrid.style.display = 'none';
       return;
@@ -95,8 +96,8 @@ class LabMatchRouter {
       if (navGrid) navGrid.style.display = 'grid';
     }
 
-    // Slide 1 is Stage 0, Slide 2 is Stage 1, up to Slide 6 (Stage 5)
-    const currentStage = this.currentSlide - 1;
+    // Explicitly clamp calculations between question slides (Slide 2 to Slide 6)
+    const currentStage = this.currentSlide - 1; 
     const percent = (currentStage / 5) * 100;
     
     const fill = document.getElementById('progress-fill');
@@ -107,26 +108,26 @@ class LabMatchRouter {
   }
 
   finalizeAssessment() {
-    // 1. Map choices to the 3-column emoji layout grid
+    // 1. Compile state profiles and output matching emojis to the dashboard columns
     this.renderDigitalPrintLayout();
     
-    // 2. Route directly to slide 7 (the profile viewport)
+    // 2. Direct system jump to show the profile dashboard view
     this.goToSlide(7);
     
-    // 3. Fire telemetry logging safely backgrounded
+    // 3. Log user metrics cleanly backgrounded
     this.dispatchTelemetryLog();
   }
 
   renderDigitalPrintLayout() {
     const maps = this.quizData.matrices.emojis;
 
-    // 1. Core Column Assignments (Thinking Matrix)
+    // 1. Target Column One: Thinking Match Allocation
     const thinkingObj = maps.thinking[this.state.cognitiveStyle] || maps.thinking["Structural"];
     document.getElementById('print-emoji-thinking').innerText = thinkingObj.char;
     document.getElementById('print-title-thinking').innerText = thinkingObj.title;
     document.getElementById('print-desc-thinking').innerText = thinkingObj.desc;
 
-    // 2. Skillset Priority Allocation (Experience Preferred, Speed Fallback)
+    // 2. Target Column Two: Skillset Priority Match Allocation
     let skillsetKey = this.state.experienceLayer;
     if (!maps.skillset[skillsetKey]) skillsetKey = this.state.workRhythm;
     const skillObj = maps.skillset[skillsetKey] || maps.skillset["Hybrid"];
@@ -134,20 +135,20 @@ class LabMatchRouter {
     document.getElementById('print-title-skillset').innerText = skillObj.title;
     document.getElementById('print-desc-skillset').innerText = skillObj.desc;
 
-    // 3. Domain Multi-Column Assignment Mapping
+    // 3. Target Column Three: Primary Field Domain Match Allocation
     const primaryDomain = this.state.selectedDomains[0] || 'Linguistics';
     const domainObj = maps.domain[primaryDomain] || maps.domain["Linguistics"];
     document.getElementById('print-emoji-domain').innerText = domainObj.char;
     document.getElementById('print-title-domain').innerText = domainObj.title;
     document.getElementById('print-desc-domain').innerText = domainObj.desc;
 
-    // 4. Global Ingestion Track Assignments
+    // 4. Set Action Matrix and Lab Links Data Mappings
     const targetTrack = this.quizData.matrices.tracks.find(t => t.segment === primaryDomain) || this.quizData.matrices.tracks[2];
     document.getElementById('display-role-title').innerText = targetTrack.role;
     document.getElementById('display-rate-index').innerText = `${targetTrack.rateIndex} / hr`;
     document.getElementById('display-action-cta').href = targetTrack.referralUrl;
 
-    // String builder execution mapping
+    // Build template text mapping logic
     this.generatedShareString = this.quizData.sharing.templateText
       .replace('VAR_SEGMENT', targetTrack.segment)
       .replace('VAR_WORK_STYLE', thinkingObj.title)
@@ -176,7 +177,7 @@ class LabMatchRouter {
         body: JSON.stringify(payload)
       });
     } catch (e) {
-      // Graceful fallback bypass
+      // Background logging bypass
     }
   }
 }
