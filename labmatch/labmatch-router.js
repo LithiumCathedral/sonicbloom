@@ -96,7 +96,7 @@ class LabMatchRouter {
       if (navGrid) navGrid.style.display = 'grid';
     }
 
-    // Progress bar reflects stages 1 through 5
+    // Progress bar reflects intermediate calculation checkpoints across the 5 stages
     const percent = ((this.currentSlide - 1) / 5) * 100;
     const fill = document.getElementById('progress-fill');
     const display = document.getElementById('progress-text');
