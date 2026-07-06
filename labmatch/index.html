@@ -3,401 +3,637 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SonicBloom // LabMatch</title>
+    <title>SonicBloom // LabMatch Diagnostic Webstory</title>
+    <!-- Dark-mode terminal typography and modern font setups -->
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-canvas: #090d16;
-            --panel-dark: #111827;
-            --sonic-orange: #ff6a00;
-            --sonic-orange-dim: rgba(255, 106, 0, 0.1);
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-clean: #1f2937;
-            --success-green: #10b981;
+            --bg-color: #050505;
+            --surface-color: #0c0c0d;
+            --surface-card: #121214;
+            --text-color: #eaeaea;
+            --text-secondary: #8c8c94;
+            --brand-color: #ff6a00; /* Minimalist bright orange brand accent */
+            --brand-glow: rgba(255, 106, 0, 0.15);
+            --border-color: #222226;
+            --success-color: #10b981;
+            --font-terminal: "Share Tech Mono", "Courier New", monospace;
+            --font-body: "Courier Prime", monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            background-color: var(--bg-canvas);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
             min-height: 100vh;
-        }
-
-        .story-container {
-            width: 100%;
-            max-width: 680px;
-            padding: 24px;
-            box-sizing: border-box;
-        }
-
-        .slide {
-            display: none;
-            background: var(--panel-dark);
-            border: 1px solid var(--border-clean);
-            border-radius: 6px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        .slide.active { display: block; }
-
-        .nav-progress-grid {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .progress-bar-container {
-            height: 4px;
-            background: var(--border-clean);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: var(--sonic-orange);
-            transition: width 0.3s ease;
-        }
-
-        .progress-tracker-text {
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 4px;
-            display: block;
-        }
-
-        .nav-icon-btn {
-            background: transparent;
-            border: 1px solid var(--border-clean);
-            color: var(--text-muted);
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-        }
-        .nav-icon-btn:hover { border-color: var(--sonic-orange); color: var(--text-main); }
-
-        h2 { font-size: 1.4rem; font-weight: 600; margin: 0 0 8px 0; color: var(--text-main); line-height: 1.3; letter-spacing: -0.5px; }
-        .desc { color: var(--text-muted); line-height: 1.5; margin-bottom: 24px; font-size: 0.9rem; }
-
-        .option {
             display: flex;
+            justify-content: center;
             align-items: center;
-            border: 1px solid var(--border-clean);
-            background: #0d131f;
-            padding: 18px 20px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+            overflow-x: hidden;
         }
-        .option:hover { border-color: var(--sonic-orange); background: var(--sonic-orange-dim); transform: translateX(2px); }
-        .option.selected { border-color: var(--sonic-orange); background: var(--sonic-orange-dim); }
 
-        .checkbox-indicator {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            border: 1px solid var(--text-muted);
-            border-radius: 2px;
-            margin-right: 18px;
-            flex-shrink: 0;
-        }
-        .option.selected .checkbox-indicator { background: var(--sonic-orange); border-color: var(--sonic-orange); }
-
-        .text-block { flex-grow: 1; }
-        .option-title { font-weight: bold; display: block; margin-bottom: 4px; color: var(--text-main); font-size: 0.95rem; }
-        .option-subtitle { font-size: 0.82rem; color: var(--text-muted); line-height: 1.3; }
-
-        input[type="email"] {
+        /* Root terminal wrapper */
+        .terminal-container {
+            max-width: 680px;
             width: 100%;
-            padding: 16px;
-            background: #0d131f;
-            border: 1px solid var(--border-clean);
-            color: var(--text-main);
-            font-size: 1rem;
-            box-sizing: border-box;
-            margin-bottom: 20px;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
             border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 1px var(--brand-color);
+        }
+
+        /* Status Chrome */
+        .terminal-header {
+            background-color: #121214;
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-terminal);
+            font-size: 11px;
+            color: var(--brand-color);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #222;
+        }
+
+        .dot.active-glow {
+            background-color: var(--brand-color);
+            box-shadow: 0 0 4px var(--brand-color);
+        }
+
+        /* Scannable Progress Grid */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            border-bottom: 1px solid var(--border-color);
+            background-color: #08080a;
+        }
+
+        .progress-step {
+            padding: 10px 6px;
             text-align: center;
+            font-family: var(--font-terminal);
+            font-size: 10px;
+            color: var(--text-secondary);
+            border-right: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
         }
-        input[type="email"]:focus { border-color: var(--sonic-orange); outline: none; }
 
-        .btn {
-            background: var(--sonic-orange);
-            color: #ffffff;
-            border: none;
-            padding: 16px 32px;
-            font-size: 0.95rem;
+        .progress-step:last-child {
+            border-right: none;
+        }
+
+        .progress-step.active {
+            color: var(--brand-color);
+            background-color: rgba(255, 106, 0, 0.05);
             font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 4px;
+        }
+
+        .progress-step.completed {
+            color: var(--success-color);
+            background-color: rgba(16, 185, 129, 0.02);
+        }
+
+        /* Main Story Slides Stack */
+        .webstory-content {
+            padding: 30px 40px;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .webstory-slide {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .webstory-slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography & Form Elements */
+        h2 {
+            font-family: var(--font-terminal);
+            font-size: 1.5rem;
+            color: var(--brand-color);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        p.slide-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label.input-label {
+            font-family: var(--font-terminal);
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        input[type="email"], select {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 12px 16px;
+            font-family: var(--font-body);
+            color: var(--text-color);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="email"]:focus, select:focus {
+            border-color: var(--brand-color);
+            box-shadow: 0 0 8px var(--brand-glow);
+        }
+
+        /* Competency Checkboxes Wrapper */
+        .checkbox-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 4px;
+            cursor: pointer;
             transition: background 0.2s;
         }
-        .btn:hover { background: #e05d00; }
-        .btn:disabled { background: var(--border-clean); color: var(--text-muted); cursor: not-allowed; }
 
-        .digital-print-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin: 24px 0;
+        .checkbox-wrapper:hover {
+            background-color: rgba(255, 106, 0, 0.02);
+            border-color: #333;
         }
-        .print-column {
-            background: #0d131f;
-            border: 1px solid var(--border-clean);
-            border-radius: 4px;
-            padding: 20px 12px;
-            text-align: center;
+
+        .checkbox-wrapper input[type="checkbox"] {
+            margin-top: 3px;
+            accent-color: var(--brand-color);
         }
-        .print-emoji {
-            font-size: 2.8rem;
-            margin-bottom: 12px;
-            display: block;
-        }
-        .print-title {
-            font-weight: bold;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            margin-bottom: 6px;
-            display: block;
-        }
-        .print-desc {
-            color: var(--text-muted);
-            font-size: 0.78rem;
+
+        .checkbox-wrapper label {
+            font-size: 13px;
+            color: #d1d1d1;
+            cursor: pointer;
             line-height: 1.4;
         }
 
-        .market-metrics { margin: 20px 0; border: 1px solid var(--border-clean); background: #0d131f; border-radius: 4px; }
-        .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; }
-        .metric-label { color: var(--text-muted); font-size: 0.85rem; font-family: monospace; }
-        .metric-value { color: var(--text-main); font-size: 0.9rem; font-weight: bold; }
-        .metric-value.highlighted-rate { color: var(--sonic-orange); font-size: 1.15rem; font-family: monospace; }
+        /* Slider Styles */
+        .slider-container {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-        .matrix-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 24px; }
-        .btn-secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border-clean); text-align: center; text-decoration: none; padding: 14px 0; border-radius: 4px; font-weight: bold; font-size: 0.9rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
-        .btn-secondary:hover { background: #0d131f; color: var(--text-main); }
-        .btn-join { background: var(--success-green); color: white; text-decoration: none; display: block; text-align: center; box-sizing: border-box; text-transform: uppercase; padding: 16px 0; font-weight: bold; letter-spacing: 1px; border-radius: 4px; }
-        .btn-join:hover { background: #059669; }
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-terminal);
+            font-size: 12px;
+            color: var(--text-color);
+        }
+
+        .slider-header span strong {
+            color: var(--brand-color);
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #1a1a1f;
+            outline: none;
+            border-radius: 3px;
+            accent-color: var(--brand-color);
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--brand-color);
+            cursor: pointer;
+            box-shadow: 0 0 6px var(--brand-color);
+        }
+
+        /* Gamified Owiwi-style Grid */
+        .sjt-scenario-card {
+            background-color: #0b0b0d;
+            border-left: 2px solid var(--brand-color);
+            padding: 16px 20px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #d1d1d1;
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 15px;
+        }
+
+        .sjt-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .sjt-table th {
+            font-family: var(--font-terminal);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: normal;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sjt-table th.sjt-col-text {
+            text-align: left;
+            width: 70%;
+        }
+
+        .sjt-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .sjt-table td.col-radio {
+            text-align: center;
+        }
+
+        .sjt-table input[type="radio"] {
+            cursor: pointer;
+            accent-color: var(--brand-orange);
+            transform: scale(1.1);
+        }
+
+        .sjt-table p {
+            line-height: 1.4;
+            color: #eaeaea;
+        }
+
+        /* Results Terminal Grid (Dashboard View) */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .result-block {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .result-block.full-row {
+            grid-column: span 2;
+        }
+
+        .result-label {
+            font-family: var(--font-terminal);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        .result-val {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--brand-color);
+        }
+
+        .result-val.highlight {
+            color: var(--success-color);
+        }
+
+        .result-desc {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Navigation Buttons */
+        .button-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            font-family: var(--font-terminal);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            border-color: #444;
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .btn.btn-primary {
+            background-color: var(--brand-color);
+            border-color: var(--brand-color);
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--brand-glow);
+        }
+
+        .btn.btn-primary:hover {
+            background-color: #e05e00;
+            border-color: #e05e00;
+            box-shadow: 0 0 15px rgba(255, 106, 0, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: var(--border-color) !important;
+            background: transparent !important;
+        }
+
+        /* Emoji Character Container */
+        .emoji-fingerprint-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(255,106,0,0.06) 0%, rgba(0,0,0,0) 70%);
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
+            padding: 20px;
+            font-size: 2.2rem;
+            letter-spacing: 12px;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
 
-<div class="story-container">
-    
-    <div class="nav-progress-grid">
-        <button class="nav-icon-btn" onclick="prevSlide()">&larr;</button>
-        <div>
-            <div class="progress-bar-container">
-                <div id="progress-fill" class="progress-fill"></div>
-            </div>
-            <span class="progress-tracker-text" id="progress-text">STAGE 01 // 05</span>
+<div class="terminal-container">
+    <!-- Top System Chrome -->
+    <header class="terminal-header">
+        <div class="terminal-dots">
+            <span class="dot active-glow"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
         </div>
-        <button class="nav-icon-btn" style="opacity:0; cursor:default;" disabled>&rarr;</button>
-    </div>
+        <div>labmatch_onboarding_terminal.exe // supabase_ok</div>
+    </header>
 
-    <div id="slide-1" class="slide active">
-        <h2>Unlock Your Match</h2>
-        <p class="desc">Top AI research labs hire specialists to tune model output streams.</p>
-        <input type="email" id="user-email" placeholder="name@domain.com" required>
-        <button class="btn" onclick="submitEmailGateway()">START</button>
-    </div>
+    <!-- Top Progress Indicator Grid -->
+    <nav class="progress-grid">
+        <div class="progress-step active" id="prog-1">01 / ID</div>
+        <div class="progress-step" id="prog-2">02 / LOGIC</div>
+        <div class="progress-step" id="prog-3">03 / CAP</div>
+        <div class="progress-step" id="prog-4">04 / SJT</div>
+        <div class="progress-step" id="prog-5">05 / RESULT</div>
+    </nav>
 
-    <div id="slide-2" class="slide">
-        <h2>01 // Target Domains</h2>
-        <p class="desc">Select up to 3 fields you understand best.</p>
-        <div class="option" onclick="toggleDomainCheckbox(this, 'Software')">
-            <span class="checkbox-indicator"></span>
-            <div class="text-block">
-                <span class="option-title">Software Engineering</span>
-                <span class="option-subtitle">Code design, syntax parsing, script optimization.</span>
-            </div>
-        </div>
-        <div class="option" onclick="toggleDomainCheckbox(this, 'Data')">
-            <span class="checkbox-indicator"></span>
-            <div class="text-block">
-                <span class="option-title">Data Analysis</span>
-                <span class="option-subtitle">Database logs, math schemas, training queues.</span>
-            </div>
-        </div>
-        <div class="option" onclick="toggleDomainCheckbox(this, 'Linguistics')">
-            <span class="checkbox-indicator"></span>
-            <div class="text-block">
-                <span class="option-title">Linguistics & Prose</span>
-                <span class="option-subtitle">Creative syntax, grammar trees, human translation.</span>
-            </div>
-        </div>
-        <div class="option" onclick="toggleDomainCheckbox(this, 'Medicine')">
-            <span class="checkbox-indicator"></span>
-            <div class="text-block">
-                <span class="option-title">Medical Sciences</span>
-                <span class="option-subtitle">Clinical summaries, health logs, scientific research.</span>
-            </div>
-        </div>
-        <div class="option" onclick="toggleDomainCheckbox(this, 'Law')">
-            <span class="checkbox-indicator"></span>
-            <div class="text-block">
-                <span class="option-title">Legal Frameworks</span>
-                <span class="option-subtitle">Compliance rules, contracts, policy case briefs.</span>
-            </div>
-        </div>
-        <button class="btn" id="next-domains-btn" disabled onclick="submitDomains()" style="margin-top:16px;">CONTINUE</button>
-    </div>
-
-    <div id="slide-3" class="slide">
-        <h2>02 // Domain Mileage</h2>
-        <p class="desc">How far along are you in your career track?</p>
-        <div class="option" onclick="selectSingle('experienceLayer', 'Expert', 4)">
-            <div class="text-block">
-                <span class="option-title">Advanced Tier</span>
-                <span class="option-subtitle">5+ years running deep, complex audits.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('experienceLayer', 'Mid-Career', 4)">
-            <div class="text-block">
-                <span class="option-title">Established Tier</span>
-                <span class="option-subtitle">2-5 years of professional execution.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('experienceLayer', 'Entry', 4)">
-            <div class="text-block">
-                <span class="option-title">Foundational Tier</span>
-                <span class="option-subtitle">Student, explorer, or pivoting fields.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="slide-4" class="slide">
-        <h2>03 // Operating Speed</h2>
-        <p class="desc">What processing pace keeps your focus locked the longest?</p>
-        <div class="option" onclick="selectSingle('workRhythm', 'Deep-Dive', 5)">
-            <div class="text-block">
-                <span class="option-title">Independent Deep-Dive</span>
-                <span class="option-subtitle">Sustained, hyper-detailed concentration.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('workRhythm', 'Rapid-Fire', 5)">
-            <div class="text-block">
-                <span class="option-title">Rapid-Fire Router</span>
-                <span class="option-subtitle">High-velocity execution and fast shipping.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('workRhythm', 'Hybrid', 5)">
-            <div class="text-block">
-                <span class="option-title">Hybrid Synchronizer</span>
-                <span class="option-subtitle">Balanced rhythm blending deep study with fluid pivots.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="slide-5" class="slide">
-        <h2>04 // Problem Solving</h2>
-        <p class="desc">What is your natural instinct when checking work for mistakes?</p>
-        <div class="option" onclick="selectSingle('cognitiveStyle', 'Adversarial', 6)">
-            <div class="text-block">
-                <span class="option-title">Break boundaries</span>
-                <span class="option-subtitle">Lock onto rule violations and edge cases.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('cognitiveStyle', 'Structural', 6)">
-            <div class="text-block">
-                <span class="option-title">Build blueprints</span>
-                <span class="option-subtitle">Excel at organizing logic steps and datasets.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('cognitiveStyle', 'Creative', 6)">
-            <div class="text-block">
-                <span class="option-title">Explore context</span>
-                <span class="option-subtitle">Look for semantic nuance and natural flow.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="slide-6" class="slide">
-        <h2>05 // Evaluation Lens</h2>
-        <p class="desc">Which trait best defines your focus during model training?</p>
-        <div class="option" onclick="selectSingle('psychometricProfile', 'Granular Adversarial', 'finalize')">
-            <div class="text-block">
-                <span class="option-title">Stress-Testing</span>
-                <span class="option-subtitle">Isolating vulnerabilities and logic flaws.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('psychometricProfile', 'Synthetic Structural', 'finalize')">
-            <div class="text-block">
-                <span class="option-title">Systemization</span>
-                <span class="option-subtitle">Formulating precise definitions and crisp layouts.</span>
-            </div>
-        </div>
-        <div class="option" onclick="selectSingle('psychometricProfile', 'Heuristic Creative', 'finalize')">
-            <div class="text-block">
-                <span class="option-title">Fluid Interpretation</span>
-                <span class="option-subtitle">Navigating subjective depth and semantic tone.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="slide-7" class="slide">
-        <h2>Calibration Complete</h2>
-        <p class="desc">Your cognitive architecture is fully indexed. Review your digital print below to reveal premium laboratory tracks and dispatch your credentials.</p>
+    <!-- Form Ingestion Content Area -->
+    <main class="webstory-content">
         
-        <div class="digital-print-grid">
-            <div class="print-column">
-                <span class="print-emoji" id="print-emoji-thinking">🧠</span>
-                <span class="print-title" id="print-title-thinking">Thinking</span>
-                <p class="print-desc" id="print-desc-thinking">Loading index parameter alignment...</p>
+        <!-- SLIDE 1: Identifiers & Domain Selection -->
+        <section class="webstory-slide active" id="slide-1">
+            <div>
+                <h2>01 / Operator Identification</h2>
+                <p class="slide-description">Onboarding into the active calibration queues requires absolute validation. Please specify your communication parameters and primary engineering domain.</p>
             </div>
-            <div class="print-column">
-                <span class="print-emoji" id="print-emoji-skillset">💎</span>
-                <span class="print-title" id="print-title-skillset">Skillset</span>
-                <p class="print-desc" id="print-desc-skillset">Loading index parameter alignment...</p>
+            
+            <div class="input-group">
+                <label class="input-label" for="email-input">Email Credential</label>
+                <input type="email" id="email-input" placeholder="e.g. engineer@sonicbloom.dev" required>
             </div>
-            <div class="print-column">
-                <span class="print-emoji" id="print-emoji-domain">💻</span>
-                <span class="print-title" id="print-title-domain">Domain</span>
-                <p class="print-desc" id="print-desc-domain">Loading index parameter alignment...</p>
+
+            <div class="input-group">
+                <label class="input-label" for="domain-select">Active Operational Track</label>
+                <select id="domain-select">
+                    <option value="" disabled selected>-- Select Domain Track --</option>
+                    <option value="Software Engineering">Software Engineering Track</option>
+                    <option value="Compliance Architecture">Compliance Architecture Track</option>
+                    <option value="Linguistics">Linguistics Track</option>
+                </select>
             </div>
-        </div>
+        </section>
 
-        <div class="market-metrics">
-            <div class="metric-row" style="border-bottom: 1px solid var(--border-clean);"><span class="metric-label">Target Role Match:</span><span id="display-role-title" class="metric-value">Loading...</span></div>
-            <div class="metric-row"><span class="metric-label">Indexed Hourly Rate:</span><span id="display-rate-index" class="metric-value highlighted-rate">$00.00 / hr</span></div>
-        </div>
+        <!-- SLIDE 2: Core Competencies (Populated dynamically via JS) -->
+        <section class="webstory-slide" id="slide-2">
+            <div>
+                <h2>02 / Logical Depth Assessment</h2>
+                <p class="slide-description">The database indexes matching pipelines using specific competence tags. Select all sub-domains where you have actively deployed production code.</p>
+            </div>
 
-        <div class="matrix-grid">
-            <a href="#" id="display-action-cta" target="_blank" class="btn btn-join">Access Premium Lab Links</a>
-            <button class="btn" style="background:#0077b5;" onclick="window.labmatchRouter.triggerLinkedInWindow()">Share Digital Print</button>
-            <a href="/" class="btn-secondary">Exit Runway</a>
-        </div>
-    </div>
+            <div class="checkbox-grid" id="competency-checkbox-container">
+                <!-- Checkboxes injected dynamically by routing script -->
+            </div>
+        </section>
 
-        <div class="market-metrics">
-            <div class="metric-row" style="border-bottom: 1px solid var(--border-clean);"><span class="metric-label">Target Role Match:</span><span id="display-role-title" class="metric-value">Loading...</span></div>
-            <div class="metric-row"><span class="metric-label">Indexed Hourly Rate:</span><span id="display-rate-index" class="metric-value highlighted-rate">$00.00 / hr</span></div>
-        </div>
+        <!-- SLIDE 3: Constraints & Throughput Sliders -->
+        <section class="webstory-slide" id="slide-3">
+            <div>
+                <h2>03 / Production Constraints</h2>
+                <p class="slide-description">Define your weekly throughput limitations and active queue availability parameters. Rates map directly to commitment density values.</p>
+            </div>
 
-        <div class="matrix-grid">
-            <a href="#" id="display-action-cta" target="_blank" class="btn btn-join">Access Premium Lab Links</a>
-            <button class="btn" style="background:#0077b5;" onclick="window.labmatchRouter.triggerLinkedInWindow()">Share Digital Print</button>
-            <a href="/" class="btn-secondary">Exit Runway</a>
-        </div>
-    </div>
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span>Weekly Availability Range</span>
+                    <span><strong id="hours-val">20</strong> hrs/week</span>
+                </div>
+                <input type="range" id="hours-slider" min="5" max="80" value="20" oninput="document.getElementById('hours-val').innerText = this.value">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" for="throughput-select">Expected Throughput Capacity</label>
+                <select id="throughput-select">
+                    <option value="Standard">Standard Execution (Passive pacing)</option>
+                    <option value="Optimized" selected>Optimized Pipeline Synchronization</option>
+                    <option value="High Velocity">High Velocity / Intensive Stress-testing</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: Gamified SJT (Owiwi Framework) -->
+        <section class="webstory-slide" id="slide-4">
+            <div>
+                <h2>04 / Situational Validation</h2>
+                <p class="slide-description">Assess the following real-world scenario. To validate decision resilience, designate exactly ONE action as Most Likely (ML) and ONE action as Least Likely (LL).</p>
+            </div>
+
+            <div class="sjt-scenario-card">
+                "A critical validation logic drift occurs in your parsing pipeline, causing 15% of downstream evaluation tokens to fail validation constraints during peak execution hours. What is your action?"
+            </div>
+
+            <table class="sjt-table">
+                <thead>
+                    <tr>
+                        <th class="sjt-col-text">Action Response Option</th>
+                        <th>ML</th>
+                        <th>LL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><p><strong>Option A:</strong> Halt the entire ingestion queue immediately to conduct a comprehensive database isolation audit, preserving absolute data integrity while tolerating routing latency.</p></td>
+                        <td class="col-radio"><input type="radio" name="sjt-ml" value="A"></td>
+                        <td class="col-radio"><input type="radio" name="sjt-ll" value="A"></td>
+                    </tr>
+                    <tr>
+                        <td><p><strong>Option B:</strong> Deploy a quick client-side bypass script to route failed tokens to a staging waitlist and allow processing to continue, planning to patch the validation parser during off-peak hours.</p></td>
+                        <td class="col-radio"><input type="radio" name="sjt-ml" value="B"></td>
+                        <td class="col-radio"><input type="radio" name="sjt-ll" value="B"></td>
+                    </tr>
+                    <tr>
+                        <td><p><strong>Option C:</strong> Escalate the schema issue immediately to lead systems architects while continuing to log the erroneous token streams in background analytics.</p></td>
+                        <td class="col-radio"><input type="radio" name="sjt-ml" value="C"></td>
+                        <td class="col-radio"><input type="radio" name="sjt-ll" value="C"></td>
+                    </tr>
+                    <tr>
+                        <td><p><strong>Option D:</strong> Execute a semantic pruning routine, automatically isolating the anomalous syntactic pathways and dynamically adjusting downstream model calibration values.</p></td>
+                        <td class="col-radio"><input type="radio" name="sjt-ml" value="D"></td>
+                        <td class="col-radio"><input type="radio" name="sjt-ll" value="D"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SLIDE 5: Diagnostic Profile Results Dashboard -->
+        <section class="webstory-slide" id="slide-5">
+            <div>
+                <h2>05 / Diagnostic Character Profile</h2>
+                <p class="slide-description">Onboarding compilation complete. Your operational characteristics, calculated hourly rate indexing, and behavioral styles are matched below.</p>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-block">
+                    <span class="result-label">Assigned Labor Tier</span>
+                    <span class="result-val" id="display-tier">...</span>
+                </div>
+                <div class="result-block">
+                    <span class="result-label">Hourly Compensation Index</span>
+                    <span class="result-val highlight" id="display-rate">...</span>
+                </div>
+                <div class="result-block">
+                    <span class="result-label">Cognitive Style</span>
+                    <span class="result-val" id="display-style">...</span>
+                </div>
+                <div class="result-block">
+                    <span class="result-label">Cognitive Precision</span>
+                    <span class="result-val" id="display-precision">...</span>
+                </div>
+                <div class="result-block full-row">
+                    <span class="result-label">Psychometric Character Focus</span>
+                    <p class="result-desc" id="display-focus">...</p>
+                </div>
+            </div>
+
+            <div class="result-label" style="text-align: center; margin-top: 10px;">Calculated Token Fingerprint</div>
+            <div class="emoji-fingerprint-box" id="display-emoji-mark">
+                🛡️ 💻 🧠
+            </div>
+        </section>
+
+        <!-- Dynamic Control Bar -->
+        <footer class="button-bar">
+            <button class="btn" id="prev-btn" onclick="labmatchRouter.goToSlide(labmatchRouter.currentSlide - 1)">Back</button>
+            <button class="btn btn-primary" id="next-btn" onclick="if(labmatchRouter.currentSlide === 5) { labmatchRouter.triggerLinkedInWindow() } else { labmatchRouter.goToSlide(labmatchRouter.currentSlide + 1) }">Next</button>
+        </footer>
+    </main>
 </div>
 
-<script src="/labmatch/labmatch-router.js"></script>
+<!-- Onboarding routing engine code dependency -->
+<script src="./labmatch-routing.js"></script>
+<script>
+    // Live reactive adjustments on control bar states
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkButtons = () => {
+            const current = labmatchRouter.currentSlide;
+            document.getElementById('prev-btn').disabled = (current === 1);
+            
+            const nextBtn = document.getElementById('next-btn');
+            if (current === 5) {
+                nextBtn.innerText = "Share Profile to LinkedIn";
+            } else {
+                nextBtn.innerText = "Next >>";
+            }
+        };
+
+        // Override original slide transition slightly to bind reactive control button triggers
+        const originGoToSlide = labmatchRouter.goToSlide;
+        labmatchRouter.goToSlide = function(id) {
+            originGoToSlide.call(this, id);
+            checkButtons();
+        };
+
+        checkButtons();
+    });
+</script>
 </body>
 </html>

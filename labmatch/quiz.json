@@ -7,24 +7,106 @@
   },
   "matrices": {
     "tracks": [
-      { "segment": "Software Engineering", "role": "Code Evaluator", "rateIndex": "$45 - $65", "referralUrl": "https://t.mercor.com/rrVyb" },
-      { "segment": "Data Analysis", "role": "Data Critic", "rateIndex": "$40 - $55", "referralUrl": "https://t.mercor.com/K13Z9" },
-      { "segment": "Finance", "role": "Quantitative Reviewer", "rateIndex": "$45 - $60", "referralUrl": "https://t.mercor.com/po98d" },
-      { "segment": "Arts", "role": "Generative Designer", "rateIndex": "$35 - $50", "referralUrl": "https://t.mercor.com/P5jqE" },
-      { "segment": "Language/Audio", "role": "Linguistics Expert", "rateIndex": "$35 - $50", "referralUrl": "https://t.mercor.com/dWbN8" },
-      { "segment": "Humanities", "role": "Reasoning Specialist", "rateIndex": "$35 - $50", "referralUrl": "https://t.mercor.com/uP10o" },
-      { "segment": "Medicine", "role": "Clinical Validator", "rateIndex": "$60 - $85", "referralUrl": "https://t.mercor.com/1Sxsx" },
-      { "segment": "Law", "role": "Compliance Commander", "rateIndex": "$50 - $75", "referralUrl": "https://t.mercor.com/j41qe" },
-      { "segment": "Life Sciences", "role": "Research Accelerator", "rateIndex": "$45 - $65", "referralUrl": "https://t.mercor.com/PEfVh" },
-      { "segment": "Business Operations", "role": "Operations Specialist", "rateIndex": "$35 - $50", "referralUrl": "https://t.mercor.com/YCgs8" }
+      {
+        "segment": "Software Engineering",
+        "role": "Code Evaluator",
+        "rateIndex": "$55 - $70",
+        "referralUrl": "https://t.mercor.com/rrVyb"
+      },
+      {
+        "segment": "Data Analysis",
+        "role": "Data Critic",
+        "rateIndex": "$70 - $85+",
+        "referralUrl": "https://t.mercor.com/K13Z9"
+      },
+      {
+        "segment": "Compliance Architecture",
+        "role": "Compliance Engineer",
+        "rateIndex": "$40 - $55",
+        "referralUrl": "https://t.mercor.com/j41qe"
+      },
+      {
+        "segment": "Linguistics",
+        "role": "Linguistics Expert",
+        "rateIndex": "$35 - $50",
+        "referralUrl": "https://t.mercor.com/dWbN8"
+      }
     ],
     "psychometrics": [
-      { "type": "Granular Adversarial", "focus": "Edge vulnerability identification via systematic analytical stress-testing" },
-      { "type": "Synthetic Structural", "focus": "Clean logical schema construction for macro concept definitions" },
-      { "type": "Heuristic Creative", "focus": "Interpretive lateral boundary traversal through fluid semantic logic" }
-    ]
+      {
+        "type": "Granular Adversarial",
+        "focus": "Edge vulnerability identification via systematic analytical stress-testing"
+      },
+      {
+        "type": "Synthetic Structural",
+        "focus": "Clean logical schema construction for macro concept definitions"
+      },
+      {
+        "type": "Heuristic Creative",
+        "focus": "Interpretive lateral boundary traversal through fluid semantic logic"
+      }
+    ],
+    "emojis": {
+      "Compliance Engineer": "\ud83d\udee1\ufe0f",
+      "Code Evaluator": "\ud83d\udcbb",
+      "Data Critic": "\ud83e\udde0",
+      "Linguistics Expert": "\ud83d\udde3\ufe0f"
+    }
   },
+  "sjt_scenarios": [
+    {
+      "id": "sjt1",
+      "competency": "Decision-Making",
+      "scenario": "A sudden validation logic drift occurs in your parsing pipeline, causing 15% of downstream evaluation tokens to fail validation constraints during peak execution hours. What is your immediate course of action?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Halt the entire ingestion queue immediately to conduct a comprehensive database isolation audit, preserving absolute data integrity while tolerating routing latency.",
+          "score": 1,
+          "traits": {
+            "resilience": 1,
+            "adaptability": 0,
+            "flexibility": 0,
+            "decisionMaking": 1
+          }
+        },
+        {
+          "key": "B",
+          "text": "Deploy a quick client-side bypass script to route failed tokens to a staging waitlist and allow processing to continue, planning to patch the validation parser during off-peak hours.",
+          "score": -1,
+          "traits": {
+            "resilience": -1,
+            "adaptability": 1,
+            "flexibility": 1,
+            "decisionMaking": -1
+          }
+        },
+        {
+          "key": "C",
+          "text": "Escalate the schema issue immediately to lead systems architects while continuing to log the erroneous token streams in background analytics.",
+          "score": 0,
+          "traits": {
+            "resilience": 0,
+            "adaptability": 0,
+            "flexibility": 0,
+            "decisionMaking": 0
+          }
+        },
+        {
+          "key": "D",
+          "text": "Execute a semantic pruning routine, automatically isolating the anomalous syntactic pathways and dynamically adjusting downstream model calibration values.",
+          "score": 1,
+          "traits": {
+            "resilience": 1,
+            "adaptability": 1,
+            "flexibility": 1,
+            "decisionMaking": 1
+          }
+        }
+      ]
+    }
+  ],
   "sharing": {
-    "templateText": "My VAR_SEGMENT trademark is VAR_WORK_STYLE, mapping perfectly to VAR_ROLE1 and VAR_ROLE2 at VAR_LOWEST_HOURLY to VAR_HIGHEST_HOURLY through LabMatch.\n\nReveal your AI-work profile and connect to labs: https://sonicbloom.dev/labmatch"
+    "templateText": "My VAR_SEGMENT profile is VAR_WORK_STYLE, indexing at VAR_ROLE with a rate range of VAR_LOWEST_HOURLY to VAR_HIGHEST_HOURLY per hour. Verify your logic index on LabMatch:\n\nhttps://sonicbloom.dev/labmatch"
   }
 }
