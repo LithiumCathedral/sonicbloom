@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SonicBloom // LabMatch Diagnostic Webstory</title>
-    <!-- Dark-mode terminal typography and modern font setups -->
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,7 +12,7 @@
             --surface-card: #121214;
             --text-color: #eaeaea;
             --text-secondary: #8c8c94;
-            --brand-color: #ff6a00; /* Minimalist bright orange brand accent */
+            --brand-color: #ff6a00;
             --brand-glow: rgba(255, 106, 0, 0.15);
             --border-color: #222226;
             --success-color: #10b981;
@@ -39,7 +38,6 @@
             overflow-x: hidden;
         }
 
-        /* Root terminal wrapper */
         .terminal-container {
             max-width: 680px;
             width: 100%;
@@ -50,7 +48,6 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 1px var(--brand-color);
         }
 
-        /* Status Chrome */
         .terminal-header {
             background-color: #121214;
             border-bottom: 1px solid var(--border-color);
@@ -82,7 +79,6 @@
             box-shadow: 0 0 4px var(--brand-color);
         }
 
-        /* Scannable Progress Grid */
         .progress-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -116,7 +112,6 @@
             background-color: rgba(16, 185, 129, 0.02);
         }
 
-        /* Main Story Slides Stack */
         .webstory-content {
             padding: 30px 40px;
             min-height: 420px;
@@ -141,7 +136,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Typography & Form Elements */
         h2 {
             font-family: var(--font-terminal);
             font-size: 1.5rem;
@@ -190,7 +184,79 @@
             box-shadow: 0 0 8px var(--brand-glow);
         }
 
-        /* Competency Checkboxes Wrapper */
+        /* Interactive Track Cards Layout */
+        .track-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .track-card {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .track-card:hover {
+            border-color: #444;
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .track-card.selected {
+            border-color: var(--brand-color);
+            background-color: rgba(255, 106, 0, 0.04);
+            box-shadow: 0 0 8px var(--brand-glow);
+        }
+
+        .track-graphic {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            background-color: #08080a;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .track-card.selected .track-graphic {
+            border-color: var(--brand-color);
+            color: #fff;
+        }
+
+        .track-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .track-title {
+            font-family: var(--font-terminal);
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .track-card.selected .track-title {
+            color: var(--brand-color);
+        }
+
+        .track-desc {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
         .checkbox-grid {
             display: flex;
             flex-direction: column;
@@ -227,7 +293,6 @@
             line-height: 1.4;
         }
 
-        /* Slider Styles */
         .slider-container {
             background-color: var(--surface-card);
             border: 1px solid var(--border-color);
@@ -270,7 +335,6 @@
             box-shadow: 0 0 6px var(--brand-color);
         }
 
-        /* Gamified Owiwi-style Grid */
         .sjt-scenario-card {
             background-color: #0b0b0d;
             border-left: 2px solid var(--brand-color);
@@ -316,7 +380,7 @@
 
         .sjt-table input[type="radio"] {
             cursor: pointer;
-            accent-color: var(--brand-orange);
+            accent-color: var(--brand-color);
             transform: scale(1.1);
         }
 
@@ -325,7 +389,6 @@
             color: #eaeaea;
         }
 
-        /* Results Terminal Grid (Dashboard View) */
         .results-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -371,7 +434,6 @@
             line-height: 1.4;
         }
 
-        /* Navigation Buttons */
         .button-bar {
             display: flex;
             justify-content: space-between;
@@ -420,7 +482,6 @@
             background: transparent !important;
         }
 
-        /* Emoji Character Container */
         .emoji-fingerprint-box {
             display: flex;
             align-items: center;
@@ -438,7 +499,6 @@
 <body>
 
 <div class="terminal-container">
-    <!-- Top System Chrome -->
     <header class="terminal-header">
         <div class="terminal-dots">
             <span class="dot active-glow"></span>
@@ -448,7 +508,6 @@
         <div>labmatch_onboarding_terminal.exe // supabase_ok</div>
     </header>
 
-    <!-- Top Progress Indicator Grid -->
     <nav class="progress-grid">
         <div class="progress-step active" id="prog-1">01 / ID</div>
         <div class="progress-step" id="prog-2">02 / LOGIC</div>
@@ -457,45 +516,59 @@
         <div class="progress-step" id="prog-5">05 / RESULT</div>
     </nav>
 
-    <!-- Form Ingestion Content Area -->
     <main class="webstory-content">
         
-        <!-- SLIDE 1: Identifiers & Domain Selection -->
         <section class="webstory-slide active" id="slide-1">
             <div>
                 <h2>01 / Operator Identification</h2>
-                <p class="slide-description">Onboarding into the active calibration queues requires absolute validation. Please specify your communication parameters and primary engineering domain.</p>
+                <p class="slide-description">Onboarding into the active calibration queues requires validation. Specify your communication parameter and select an active engineering domain track.</p>
             </div>
             
-            <div class="input-group">
+            <div class="input-group" style="margin-bottom: 10px;">
                 <label class="input-label" for="email-input">Email Credential</label>
                 <input type="email" id="email-input" placeholder="e.g. engineer@sonicbloom.dev" required>
             </div>
 
             <div class="input-group">
-                <label class="input-label" for="domain-select">Active Operational Track</label>
-                <select id="domain-select">
-                    <option value="" disabled selected>-- Select Domain Track --</option>
-                    <option value="Software Engineering">Software Engineering Track</option>
-                    <option value="Compliance Architecture">Compliance Architecture Track</option>
-                    <option value="Linguistics">Linguistics Track</option>
-                </select>
+                <label class="input-label">Active Operational Track</label>
+                
+                <input type="hidden" id="domain-select" value="">
+
+                <div class="track-cards-grid">
+                    <div class="track-card" data-value="Software Engineering" onclick="selectTrackCard(this)">
+                        <div class="track-graphic">💻</div>
+                        <div class="track-info">
+                            <span class="track-title">Software Engineering Track</span>
+                            <span class="track-desc">AST frameworks, algorithmic scaling, code constraints evaluation, and logical routing optimization models.</span>
+                        </div>
+                    </div>
+                    <div class="track-card" data-value="Compliance Architecture" onclick="selectTrackCard(this)">
+                        <div class="track-graphic">🛡️</div>
+                        <div class="track-info">
+                            <span class="track-title">Compliance Architecture Track</span>
+                            <span class="track-desc">Validator onboarding logic sequences, data isolation, and RLS relational database security constraints.</span>
+                        </div>
+                    </div>
+                    <div class="track-card" data-value="Linguistics" onclick="selectTrackCard(this)">
+                        <div class="track-graphic">🗣️</div>
+                        <div class="track-info">
+                            <span class="track-title">Linguistics Track</span>
+                            <span class="track-desc">Semantic labeling parsing engines, token optimization mechanics, and lateral boundary traversal.</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SLIDE 2: Core Competencies (Populated dynamically via JS) -->
         <section class="webstory-slide" id="slide-2">
             <div>
                 <h2>02 / Logical Depth Assessment</h2>
                 <p class="slide-description">The database indexes matching pipelines using specific competence tags. Select all sub-domains where you have actively deployed production code.</p>
             </div>
 
-            <div class="checkbox-grid" id="competency-checkbox-container">
-                <!-- Checkboxes injected dynamically by routing script -->
-            </div>
+            <div class="checkbox-grid" id="competency-checkbox-container"></div>
         </section>
 
-        <!-- SLIDE 3: Constraints & Throughput Sliders -->
         <section class="webstory-slide" id="slide-3">
             <div>
                 <h2>03 / Production Constraints</h2>
@@ -520,7 +593,6 @@
             </div>
         </section>
 
-        <!-- SLIDE 4: Gamified SJT (Owiwi Framework) -->
         <section class="webstory-slide" id="slide-4">
             <div>
                 <h2>04 / Situational Validation</h2>
@@ -541,7 +613,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><p><strong>Option A:</strong> Halt the entire ingestion queue immediately to conduct a comprehensive database isolation audit, preserving absolute data integrity while tolerating routing latency.</p></td>
+                        <td><p><strong>Option A:</strong> Halt the entire ingestion queue immediately to conduct a comprehensive database isolation audit, preserving data integrity while tolerating routing latency.</p></td>
                         <td class="col-radio"><input type="radio" name="sjt-ml" value="A"></td>
                         <td class="col-radio"><input type="radio" name="sjt-ll" value="A"></td>
                     </tr>
@@ -564,7 +636,6 @@
             </table>
         </section>
 
-        <!-- SLIDE 5: Diagnostic Profile Results Dashboard -->
         <section class="webstory-slide" id="slide-5">
             <div>
                 <h2>05 / Diagnostic Character Profile</h2>
@@ -595,12 +666,9 @@
             </div>
 
             <div class="result-label" style="text-align: center; margin-top: 10px;">Calculated Token Fingerprint</div>
-            <div class="emoji-fingerprint-box" id="display-emoji-mark">
-                🛡️ 💻 🧠
-            </div>
+            <div class="emoji-fingerprint-box" id="display-emoji-mark">🛡️ 💻 🧠</div>
         </section>
 
-        <!-- Dynamic Control Bar -->
         <footer class="button-bar">
             <button class="btn" id="prev-btn" onclick="labmatchRouter.goToSlide(labmatchRouter.currentSlide - 1)">Back</button>
             <button class="btn btn-primary" id="next-btn" onclick="if(labmatchRouter.currentSlide === 5) { labmatchRouter.triggerLinkedInWindow() } else { labmatchRouter.goToSlide(labmatchRouter.currentSlide + 1) }">Next</button>
@@ -608,10 +676,17 @@
     </main>
 </div>
 
-<!-- Onboarding routing engine code dependency -->
-<script src="./labmatch-routing.js"></script>
+<script src="./labmatch-router.js"></script>
 <script>
-    // Live reactive adjustments on control bar states
+    // Handle UI card selection sync directly with backend router tracking hooks
+    function selectTrackCard(cardElement) {
+        document.querySelectorAll('.track-card').forEach(card => card.classList.remove('selected'));
+        cardElement.classList.add('selected');
+        
+        const chosenVal = cardElement.getAttribute('data-value');
+        document.getElementById('domain-select').value = chosenVal;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const checkButtons = () => {
             const current = labmatchRouter.currentSlide;
@@ -625,7 +700,6 @@
             }
         };
 
-        // Override original slide transition slightly to bind reactive control button triggers
         const originGoToSlide = labmatchRouter.goToSlide;
         labmatchRouter.goToSlide = function(id) {
             originGoToSlide.call(this, id);
