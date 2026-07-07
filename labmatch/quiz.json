@@ -1,7 +1,7 @@
 {
   "branding": {
     "engineName": "LabMatch",
-    "version": "2.4.0",
+    "version": "2.4.1",
     "studioSignature": "SonicBloom",
     "platformUrl": "https://sonicbloom.dev"
   },
@@ -47,10 +47,10 @@
       }
     ],
     "emojis": {
-      "Compliance Engineer": "\ud83d\udee1\ufe0f",
-      "Code Evaluator": "\ud83d\udcbb",
-      "Data Critic": "\ud83e\udde0",
-      "Linguistics Expert": "\ud83d\udde3\ufe0f"
+      "Compliance Engineer": "🛡️",
+      "Code Evaluator": "💻",
+      "Data Critic": "🧠",
+      "Linguistics Expert": "🗣️"
     }
   },
   "sjt_scenarios": [
@@ -107,6 +107,6 @@
     }
   ],
   "sharing": {
-    "templateText": "My VAR_SEGMENT profile is VAR_WORK_STYLE, indexing at VAR_ROLE with a rate range of VAR_LOWEST_HOURLY to VAR_HIGHEST_HOURLY per hour. Verify your logic index on LabMatch:\n\nhttps://sonicbloom.dev/labmatch"
+    "templateText": "My VAR_SEGMENT profile is VAR_WORK_STYLE, indexing at VAR_ROLE with a rate range of VAR_LOWEST_HOURLY to VAR_HIGHEST_HOURLY per hour. Verify your logic index on LabMatch: https://sonicbloom.dev/labmatch"
   }
 }
