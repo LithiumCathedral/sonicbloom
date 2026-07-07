@@ -56,7 +56,7 @@ class LabMatchRouter {
 
         // Safe client-side fetch for the local configuration
         try {
-            const response = await fetch('./labmatch-quiz.json');
+            const response = await fetch('./quiz.json');
             if (!response.ok) throw new Error("Failed to retrieve quiz matrix JSON");
             this.matrix = await response.json();
             console.log("💾 Config Matrix loaded successfully:", this.matrix);
