@@ -184,7 +184,6 @@
             box-shadow: 0 0 8px var(--brand-glow);
         }
 
-        /* Interactive Track Cards Layout */
         .track-cards-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -676,15 +675,20 @@
     </main>
 </div>
 
-<script src="./labmatch-router.js"></script>
+<script src="./labmatch-routing.js"></script>
 <script>
-    // Handle UI card selection sync directly with backend router tracking hooks
     function selectTrackCard(cardElement) {
         document.querySelectorAll('.track-card').forEach(card => card.classList.remove('selected'));
         cardElement.classList.add('selected');
         
         const chosenVal = cardElement.getAttribute('data-value');
         document.getElementById('domain-select').value = chosenVal;
+        
+        // Push choices immediately to the engine states to sync the array layer early
+        if (typeof labmatchRouter !== 'undefined') {
+            labmatchRouter.state.selectedDomain = chosenVal;
+            labmatchRouter.state.selectedDomains = [chosenVal];
+        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
