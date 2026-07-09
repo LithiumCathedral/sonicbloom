@@ -376,35 +376,43 @@ class LabMatchRouter {
     }
 
     async dispatchTelemetryLog() {
+        // Flattening metrics to provide explicit primary user parameters to the API
         const payload = {
             timestamp: new Date().toISOString(),
             email: this.state.email,
             core_domain: this.state.selectedDomain,
-            competency_tags: this.state.experienceLayer ? this.state.experienceLayer.split(', ') : [],
-            weekly_hours_capacity: parseInt(document.getElementById('hours-slider')?.value || 20),
-            throughput_metrics: {
-                sampled_precision: parseFloat(this.state.profileOutcome.precisionScore),
-                sjt_selections: {
-                    ml: this.state.sjtMostLikely,
-                    ll: this.state.sjtLeastLikely
-                },
-                dwell_times: this.state.slideDwellTimes || {}
-            },
-            hourly_rate_index: parseFloat(this.state.profileOutcome.hourlyRateMin),
             assigned_tier: this.state.profileOutcome.assignedTier,
+            hourly_rate_index: parseFloat(this.state.profileOutcome.hourlyRateMin),
+            weekly_hours_capacity: parseInt(document.getElementById('hours-slider')?.value || 20),
+            
+            // Explicit primary parameters extracted from the state layers
+            sjt_most_likely: this.state.sjtMostLikely,
+            sjt_least_likely: this.state.sjtLeastLikely,
+            sampled_precision: parseFloat(this.state.profileOutcome.precisionScore),
+            
+            // Supporting structural arrays/objects
+            competency_tags: this.state.experienceLayer ? this.state.experienceLayer.split(', ') : [],
+            dwell_times: this.state.slideDwellTimes || {},
             is_anonymized: true
         };
 
-        console.log("[SUPABASE CAPTURE] Syncing payload:", payload);
+        console.log("[SUPABASE CAPTURE] Syncing payload to API:", payload);
         
         try {
-            await fetch('/api/capture', {
+            const response = await fetch('/api/capture', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
+            
+            if (!response.ok) {
+                const errData = await response.json();
+                console.error("[SUPABASE CAPTURE] Server rejected flattened payload:", errData);
+            } else {
+                console.log("[SUPABASE CAPTURE] Success sync confirmed.");
+            }
         } catch (e) {
-            console.warn("[SUPABASE CAPTURE] Write bypassed (Local cache fallback).");
+            console.warn("[SUPABASE CAPTURE] Write bypassed (Network/Local cache fallback).");
         }
     }
 
