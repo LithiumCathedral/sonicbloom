@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SonicBloom // LabMatch Diagnostic Webstory</title>
+    <title>SonicBloom // LabMatch Diagnostic </title>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -519,17 +519,17 @@
         
         <section class="webstory-slide active" id="slide-1">
             <div>
-                <h2>01 / Operator Identification</h2>
-                <p class="slide-description">Onboarding into the active calibration queues requires validation. Specify your communication parameter and select an active engineering domain track.</p>
+                <h2>01 / Who Are You?</h2>
+                <p class="slide-description">We need to check your info before matching you to open work. Give us your email and choose a career track to start.</p>
             </div>
             
             <div class="input-group" style="margin-bottom: 10px;">
-                <label class="input-label" for="email-input">Email Credential</label>
+                <label class="input-label" for="email-input">Email Address</label>
                 <input type="email" id="email-input" placeholder="e.g. engineer@sonicbloom.dev" required>
             </div>
 
             <div class="input-group">
-                <label class="input-label">Active Operational Track</label>
+                <label class="input-label">Choose Your Career Track</label>
                 
                 <input type="hidden" id="domain-select" value="">
 
@@ -538,21 +538,21 @@
                         <div class="track-graphic">💻</div>
                         <div class="track-info">
                             <span class="track-title">Software Engineering Track</span>
-                            <span class="track-desc">AST frameworks, algorithmic scaling, code constraints evaluation, and logical routing optimization models.</span>
+                            <span class="track-desc">Test code limits, make algorithms run faster, and improve routing systems.</span>
                         </div>
                     </div>
                     <div class="track-card" data-value="Compliance Architecture" onclick="selectTrackCard(this)">
                         <div class="track-graphic">🛡️</div>
                         <div class="track-info">
                             <span class="track-title">Compliance Architecture Track</span>
-                            <span class="track-desc">Validator onboarding logic sequences, data isolation, and RLS relational database security constraints.</span>
+                            <span class="track-desc">Set up user verification, keep data safe, and check database security rules.</span>
                         </div>
                     </div>
                     <div class="track-card" data-value="Linguistics" onclick="selectTrackCard(this)">
                         <div class="track-graphic">🗣️</div>
                         <div class="track-info">
                             <span class="track-title">Linguistics Track</span>
-                            <span class="track-desc">Semantic labeling parsing engines, token optimization mechanics, and lateral boundary traversal.</span>
+                            <span class="track-desc">Build language parsing tools, lower token costs, and study semantic patterns.</span>
                         </div>
                     </div>
                 </div>
@@ -561,8 +561,8 @@
 
         <section class="webstory-slide" id="slide-2">
             <div>
-                <h2>02 / Logical Depth Assessment</h2>
-                <p class="slide-description">The database indexes matching pipelines using specific competence tags. Select all sub-domains where you have actively deployed production code.</p>
+                <h2>02 / Skill Assessment</h2>
+                <p class="slide-description">Our database matches jobs using your skills. Check every box where you have built and deployed real code.</p>
             </div>
 
             <div class="checkbox-grid" id="competency-checkbox-container"></div>
@@ -570,64 +570,64 @@
 
         <section class="webstory-slide" id="slide-3">
             <div>
-                <h2>03 / Production Constraints</h2>
-                <p class="slide-description">Define your weekly throughput limitations and active queue availability parameters. Rates map directly to commitment density values.</p>
+                <h2>03 / Work Preferences</h2>
+                <p class="slide-description">Tell us how many hours you can work each week and choose your pace. Your hours will directly affect your pay rate.</p>
             </div>
 
             <div class="slider-container">
                 <div class="slider-header">
-                    <span>Weekly Availability Range</span>
+                    <span>Weekly Availability</span>
                     <span><strong id="hours-val">20</strong> hrs/week</span>
                 </div>
                 <input type="range" id="hours-slider" min="5" max="80" value="20" oninput="document.getElementById('hours-val').innerText = this.value">
             </div>
 
             <div class="input-group">
-                <label class="input-label" for="throughput-select">Expected Throughput Capacity</label>
+                <label class="input-label" for="throughput-select">Expected Work Pace</label>
                 <select id="throughput-select">
-                    <option value="Standard">Standard Execution (Passive pacing)</option>
-                    <option value="Optimized" selected>Optimized Pipeline Synchronization</option>
-                    <option value="High Velocity">High Velocity / Intensive Stress-testing</option>
+                    <option value="Standard">Standard Pace (Steady and relaxed)</option>
+                    <option value="Optimized" selected>Optimized Pace (Fast and steady)</option>
+                    <option value="High Velocity">High Velocity (Intense stress-testing)</option>
                 </select>
             </div>
         </section>
 
         <section class="webstory-slide" id="slide-4">
             <div>
-                <h2>04 / Situational Validation</h2>
-                <p class="slide-description">Assess the following real-world scenario. To validate decision resilience, designate exactly ONE action as Most Likely (ML) and ONE action as Least Likely (LL).</p>
+                <h2>04 / Scenario Test</h2>
+                <p class="slide-description">Read the real-world problem below. Pick exactly ONE action as your Most Likely (ML) choice and ONE action as your Least Likely (LL) choice.</p>
             </div>
 
             <div class="sjt-scenario-card">
-                "A critical validation logic drift occurs in your parsing pipeline, causing 15% of downstream evaluation tokens to fail validation constraints during peak execution hours. What is your action?"
+                "A data validation error hits your pipeline. It causes 15% of your tokens to fail right during peak hours. What do you do?"
             </div>
 
             <table class="sjt-table">
                 <thead>
                     <tr>
-                        <th class="sjt-col-text">Action Response Option</th>
+                        <th class="sjt-col-text">Your Action Options</th>
                         <th>ML</th>
                         <th>LL</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><p><strong>Option A:</strong> Halt the entire ingestion queue immediately to conduct a comprehensive database isolation audit, preserving data integrity while tolerating routing latency.</p></td>
+                        <td><p><strong>Option A:</strong> Stop the whole incoming queue right away to run an audit. This protects your data but creates a delay for users.</p></td>
                         <td class="col-radio"><input type="radio" name="sjt-ml" value="A"></td>
                         <td class="col-radio"><input type="radio" name="sjt-ll" value="A"></td>
                     </tr>
                     <tr>
-                        <td><p><strong>Option B:</strong> Deploy a quick client-side bypass script to route failed tokens to a staging waitlist and allow processing to continue, planning to patch the validation parser during off-peak hours.</p></td>
+                        <td><p><strong>Option B:</strong> Deploy a quick script to send failing tokens to a temporary waitlist. Keep everything else running and patch the system later.</p></td>
                         <td class="col-radio"><input type="radio" name="sjt-ml" value="B"></td>
                         <td class="col-radio"><input type="radio" name="sjt-ll" value="B"></td>
                     </tr>
                     <tr>
-                        <td><p><strong>Option C:</strong> Escalate the schema issue immediately to lead systems architects while continuing to log the erroneous token streams in background analytics.</p></td>
+                        <td><p><strong>Option C:</strong> Report the schema issue to the lead architects immediately. Keep logging the broken data streams in the background.</p></td>
                         <td class="col-radio"><input type="radio" name="sjt-ml" value="C"></td>
                         <td class="col-radio"><input type="radio" name="sjt-ll" value="C"></td>
                     </tr>
                     <tr>
-                        <td><p><strong>Option D:</strong> Execute a semantic pruning routine, automatically isolating the anomalous syntactic pathways and dynamically adjusting downstream model calibration values.</p></td>
+                        <td><p><strong>Option D:</strong> Run a cleanup routine to drop the bad pathways automatically and adjust your model values on the fly.</p></td>
                         <td class="col-radio"><input type="radio" name="sjt-ml" value="D"></td>
                         <td class="col-radio"><input type="radio" name="sjt-ll" value="D"></td>
                     </tr>
@@ -637,34 +637,34 @@
 
         <section class="webstory-slide" id="slide-5">
             <div>
-                <h2>05 / Diagnostic Character Profile</h2>
-                <p class="slide-description">Onboarding compilation complete. Your operational characteristics, calculated hourly rate indexing, and behavioral styles are matched below.</p>
+                <h2>05 / Your Diagnostic Profile</h2>
+                <p class="slide-description">We finished processing your information! Review your career level, estimated hourly pay, and work style below.</p>
             </div>
 
             <div class="results-grid">
                 <div class="result-block">
-                    <span class="result-label">Assigned Labor Tier</span>
+                    <span class="result-label">Assigned Work Level</span>
                     <span class="result-val" id="display-tier">...</span>
                 </div>
                 <div class="result-block">
-                    <span class="result-label">Hourly Compensation Index</span>
+                    <span class="result-label">Hourly Pay Range</span>
                     <span class="result-val highlight" id="display-rate">...</span>
                 </div>
                 <div class="result-block">
-                    <span class="result-label">Cognitive Style</span>
+                    <span class="result-label">Thinking Style</span>
                     <span class="result-val" id="display-style">...</span>
                 </div>
                 <div class="result-block">
-                    <span class="result-label">Cognitive Precision</span>
+                    <span class="result-label">Accuracy Score</span>
                     <span class="result-val" id="display-precision">...</span>
                 </div>
                 <div class="result-block full-row">
-                    <span class="result-label">Psychometric Character Focus</span>
+                    <span class="result-label">Your Core Work Focus</span>
                     <p class="result-desc" id="display-focus">...</p>
                 </div>
             </div>
 
-            <div class="result-label" style="text-align: center; margin-top: 10px;">Calculated Token Fingerprint</div>
+            <div class="result-label" style="text-align: center; margin-top: 10px;">Your Security Fingerprint</div>
             <div class="emoji-fingerprint-box" id="display-emoji-mark">🛡️ 💻 🧠</div>
         </section>
 
@@ -684,7 +684,8 @@
         const chosenVal = cardElement.getAttribute('data-value');
         document.getElementById('domain-select').value = chosenVal;
         
-        if (typeof labmatchRouter !== 'undefined' && labmatchRouter.state) {
+        // Push choices immediately to the engine states to sync the array layer early
+        if (typeof labmatchRouter !== 'undefined') {
             labmatchRouter.state.selectedDomain = chosenVal;
             labmatchRouter.state.selectedDomains = [chosenVal];
         }
@@ -693,26 +694,21 @@
     document.addEventListener('DOMContentLoaded', () => {
         const checkButtons = () => {
             const current = labmatchRouter.currentSlide;
-            const prevBtn = document.getElementById('prev-btn');
-            if (prevBtn) prevBtn.disabled = (current === 1);
+            document.getElementById('prev-btn').disabled = (current === 1);
             
             const nextBtn = document.getElementById('next-btn');
-            if (nextBtn) {
-                if (current === 5) {
-                    nextBtn.innerText = "Share Profile to LinkedIn";
-                } else {
-                    nextBtn.innerText = "Next >>";
-                }
+            if (current === 5) {
+                nextBtn.innerText = "Share Profile to LinkedIn";
+            } else {
+                nextBtn.innerText = "Next >>";
             }
         };
 
-        if (typeof labmatchRouter !== 'undefined') {
-            const originGoToSlide = labmatchRouter.goToSlide;
-            labmatchRouter.goToSlide = function(id) {
-                originGoToSlide.call(this, id);
-                checkButtons();
-            };
-        }
+        const originGoToSlide = labmatchRouter.goToSlide;
+        labmatchRouter.goToSlide = function(id) {
+            originGoToSlide.call(this, id);
+            checkButtons();
+        };
 
         checkButtons();
     });
