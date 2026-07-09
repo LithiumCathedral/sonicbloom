@@ -1,14 +1,5 @@
 /**
- * SonicBloom LabMatch // Programmatic Unified Routing & Onboarding Engine (v2.4.0)
- * 
- * DESIGN PRINCIPLES:
- * 1. ZERO SLOP / CLEAN CODE: No redundant boilerplate, clear variables, well-commented modules.
- * 2. PROVENANCE LOGGING (vialab model): Tracks background telemetry (dwell times, mouse moves, 
- *    keystroke delays) to calculate a "Cognitive Precision Index" representing user working style.
- * 3. SITUATIONAL JUDGMENT (Owiwi model): Evaluates gamified choices (Most Likely vs. Least Likely)
- *    to measure core behavioral traits (Resilience, Adaptability, Flexibility, Decision-Making).
- * 4. DETERMINISTIC SYNC: Compiles metrics and prepares a direct PostgreSQL-ready payload 
- *    for server-to-server Conversions API synchronization to a Supabase backend.
+ * SonicBloom LabMatch // Programmatic Unified Routing & Onboarding Engine (v2.4.1)
  */
 
 class LabMatchRouter {
@@ -51,7 +42,7 @@ class LabMatchRouter {
         this.currentSlide = 1;
         this.totalSlides = 5;
 
-        // Quiz Matrix (Grounded in corrected rates to resolve misalignment)
+        // Quiz Matrix
         this.matrix = null;
     }
 
@@ -63,7 +54,7 @@ class LabMatchRouter {
         this.bindEvents();
         this.updateProgressBar();
 
-        // Safe client-side fetch for the local configuration
+        // Safe client-side fetch redirected to point strictly to local quiz.json
         try {
             const response = await fetch('./quiz.json');
             if (!response.ok) throw new Error("Failed to retrieve quiz matrix JSON");
@@ -80,15 +71,14 @@ class LabMatchRouter {
     }
 
     /**
-     * Fallback configuration matrix to guarantee zero-fault offline resilience
+     * Fallback configuration matrix matching HTML options perfectly
      */
     useLocalMatrixFallback() {
         this.matrix = {
-            branding: { engineName: "LabMatch", version: "2.4.0", studioSignature: "SonicBloom" },
+            branding: { engineName: "LabMatch", version: "2.4.1", studioSignature: "SonicBloom", platformUrl: "https://sonicbloom.dev" },
             matrices: {
                 tracks: [
                     { segment: "Software Engineering", role: "Code Evaluator", rateIndex: "$55 - $70" },
-                    { segment: "Data Analysis", role: "Data Critic", rateIndex: "$70 - $85+" },
                     { segment: "Compliance Architecture", role: "Compliance Engineer", rateIndex: "$40 - $55" },
                     { segment: "Linguistics", role: "Linguistics Expert", rateIndex: "$35 - $50" }
                 ],
@@ -105,7 +95,7 @@ class LabMatchRouter {
                 }
             },
             sharing: {
-                templateText: "My VAR_SEGMENT profile is VAR_WORK_STYLE, indexing at VAR_ROLE with a rate range of VAR_LOWEST_HOURLY to VAR_HIGHEST_HOURLY per hour. Verify your logic index on LabMatch:\n\nhttps://sonicbloom.dev/labmatch"
+                templateText: "My VAR_SEGMENT profile is VAR_WORK_STYLE, indexing at VAR_ROLE with a rate range of VAR_LOWEST_HOURLY to VAR_HIGHEST_HOURLY per hour."
             }
         };
     }
@@ -114,34 +104,29 @@ class LabMatchRouter {
      * Binds general client interactions and interaction logging loops
      */
     bindEvents() {
-        // Document-wide click logging
         document.addEventListener('click', (e) => {
             this.telemetry.clickCount++;
-            
-            // Check if clicked element was a checkbox or input to count as adjustment/correction
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
                 this.telemetry.correctionsCount++;
             }
         });
 
-        // Mouse movement density sampling (throttled)
         let lastMove = 0;
         document.addEventListener('mousemove', () => {
             const now = Date.now();
-            if (now - lastMove > 100) { // Sample every 100ms
+            if (now - lastMove > 100) {
                 this.telemetry.mouseMoveCount++;
                 lastMove = now;
             }
         });
 
-        // Keystroke latency tracker for email input (working memory and precision indicator)
         const emailField = document.getElementById('email-input');
         if (emailField) {
             emailField.addEventListener('keydown', (e) => {
                 const now = Date.now();
                 if (this.telemetry.lastKeystrokeTime) {
                     const diff = now - this.telemetry.lastKeystrokeTime;
-                    if (diff < 2000) { // Filter out long pauses between sessions
+                    if (diff < 2000) {
                         this.telemetry.keystrokeDelays.push(diff);
                     }
                 }
@@ -151,7 +136,7 @@ class LabMatchRouter {
     }
 
     /**
-     * Updates the top scannable grid progress bar
+     * Updates progress steps UI safely
      */
     updateProgressBar() {
         const steps = document.querySelectorAll('.progress-step');
@@ -168,40 +153,33 @@ class LabMatchRouter {
     }
 
     /**
-     * Orchestrates animated transitions between assessment panels
+     * Handles transitions between slides
      */
     goToSlide(slideId) {
-        if (slideId < 1 || slideId > this.totalSlides) return; // Prevent out-of-bounds
+        if (slideId < 1 || slideId > this.totalSlides) return;
 
-        // Save current slide dwell time before moving
         const now = Date.now();
         const duration = Math.round((now - (this.telemetry.currentSlideStart || now)) / 1000);
         this.trackSlideDwellTime(this.currentSlide, duration);
         this.telemetry.currentSlideStart = now;
 
-        // Validation barriers per step (moving forward)
         if (slideId > this.currentSlide) {
             if (!this.validateCurrentSlide()) return;
         }
 
-        // Hide current visible slides
         document.querySelectorAll('.webstory-slide').forEach(slide => {
             slide.classList.remove('active');
         });
 
-        // Show target slide
         const targetSlideEl = document.getElementById(`slide-${slideId}`);
         if (targetSlideEl) {
             targetSlideEl.classList.add('active');
             this.currentSlide = slideId;
             this.updateProgressBar();
-            
-            // Intermediary script firing: execute logic based on destination slide
             this.executeIntermediaryTrigger(slideId);
         }
     }
 
-    // Runs logic immediately on slide mount to render options dynamically
     executeIntermediaryTrigger(slideId) {
         if (slideId === 2) {
             this.populateDynamicCompetencyCheckboxes();
@@ -211,17 +189,15 @@ class LabMatchRouter {
     }
 
     /**
-     * Dynamic Onboarding: Generates checkboxes on Slide 2 based on Domain chosen in Slide 1
+     * Generates checkboxes on Slide 2 based on chosen Track
      */
     populateDynamicCompetencyCheckboxes() {
         const container = document.getElementById('competency-checkbox-container');
-        const domainSelect = document.getElementById('domain-select');
-        if (!container || !domainSelect) return;
+        if (!container) return;
 
-        const domain = domainSelect.value;
-        this.state.selectedDomain = domain;
-
+        const domain = this.state.selectedDomain;
         let options = [];
+
         if (domain === 'Software Engineering') {
             options = [
                 { id: 'ast', text: 'Abstract Syntax Tree (AST) Framework Design' },
@@ -237,7 +213,7 @@ class LabMatchRouter {
                 { id: 'privacy', text: 'Database Isolation & End-User Anonymization Protocols' },
                 { id: 'latency', text: 'Audit Latency Minimization & Edge Calibration' }
             ];
-        } else { // Linguistics
+        } else if (domain === 'Linguistics') {
             options = [
                 { id: 'parse', text: 'Semantic Role Labeling & Parsing Logic Engines' },
                 { id: 'token', text: 'Token-to-Cost Optimization Architectures' },
@@ -246,7 +222,7 @@ class LabMatchRouter {
             ];
         }
 
-        container.innerHTML = ''; // Clean placeholder
+        container.innerHTML = '';
         options.forEach(opt => {
             const div = document.createElement('div');
             div.className = 'checkbox-wrapper';
@@ -259,12 +235,18 @@ class LabMatchRouter {
     }
 
     /**
-     * Ensures all fields are answered before allowing progress to reduce pipeline drift
+     * Validates form parameters
      */
     validateCurrentSlide() {
         if (this.currentSlide === 1) {
-            const email = document.getElementById('email-input').value;
-            const domain = document.getElementById('domain-select').value;
+            const emailEl = document.getElementById('email-input');
+            const domainEl = document.getElementById('domain-select');
+            
+            if (!emailEl || !domainEl) return false;
+
+            const email = emailEl.value.trim();
+            const domain = domainEl.value;
+
             if (!email || !email.includes('@')) {
                 alert('CRITICAL: Valid email credential required.');
                 return false;
@@ -273,7 +255,9 @@ class LabMatchRouter {
                 alert('CRITICAL: Please choose a valid target domain.');
                 return false;
             }
+            
             this.state.email = email;
+            this.state.selectedDomain = domain;
             this.state.selectedDomains = [domain];
         } else if (this.currentSlide === 2) {
             const checked = document.querySelectorAll('input[name="competencies"]:checked');
@@ -284,7 +268,6 @@ class LabMatchRouter {
             const selected = Array.from(checked).map(cb => cb.value);
             this.state.experienceLayer = selected.join(', ');
         } else if (this.currentSlide === 4) {
-            // Validate SJT selections
             const mlSelected = document.querySelector('input[name="sjt-ml"]:checked');
             const llSelected = document.querySelector('input[name="sjt-ll"]:checked');
             if (!mlSelected || !llSelected) {
@@ -307,29 +290,25 @@ class LabMatchRouter {
     }
 
     /**
-     * Compile Assessment Engine: Maps variables, determines tiers, and computes cognitive precision index
+     * Compile Metrics & Outputs Dashboard results
      */
     finalizeAssessment() {
-        // Collect hours and throughput slider parameters
         const hours = document.getElementById('hours-slider')?.value || 20;
         const throughput = document.getElementById('throughput-select')?.value || 'Optimized';
         this.state.workRhythm = `Capacity: ${hours} hrs/week | Throughput: ${throughput}`;
 
-        // Compute Implicit Behavioral Tracking: Cognitive Precision Index (vialab model)
         const totalKeystrokeDelays = this.telemetry.keystrokeDelays.length;
         const avgKeystrokeDelay = totalKeystrokeDelays > 0 
             ? this.telemetry.keystrokeDelays.reduce((a, b) => a + b, 0) / totalKeystrokeDelays 
             : 250;
         
-        // Formulate Precision Index (Lower corrections + stable typing latency = higher precision)
         const correctionsPenalty = Math.min(this.telemetry.correctionsCount * 0.05, 0.4);
         let calculatedPrecision = 1.0 - correctionsPenalty;
-        if (avgKeystrokeDelay > 400) calculatedPrecision -= 0.15; // Unstable working memory indicators
+        if (avgKeystrokeDelay > 400) calculatedPrecision -= 0.15;
         calculatedPrecision = Math.max(0.35, Math.min(calculatedPrecision, 1.0));
         
         this.state.profileOutcome.precisionScore = calculatedPrecision.toFixed(2);
 
-        // Map Cognitive Style (HEXACO/vialab alignment)
         let matchedStyle = "Synthetic Structural";
         if (calculatedPrecision >= 0.80) {
             matchedStyle = "Granular Adversarial";
@@ -338,7 +317,6 @@ class LabMatchRouter {
         }
         this.state.cognitiveStyle = matchedStyle;
 
-        // Perform Deterministic Labor Tier Matching & Hourly Rate Calculation
         let tier = "Compliance Engineer";
         let minRate = 40;
         let maxRate = 55;
@@ -350,17 +328,17 @@ class LabMatchRouter {
             if (matchedStyle === "Granular Adversarial") {
                 tier = "Data Critic";
                 minRate = 70;
-                maxRate = 85; // Corrected high rate aligning with backend
+                maxRate = 85;
             } else {
                 tier = "Code Evaluator";
                 minRate = 55;
-                maxRate = 70; // Corrected mid rate
+                maxRate = 70;
             }
         } else if (isCompliance) {
             tier = "Compliance Engineer";
             minRate = 40;
             maxRate = 55;
-        } else { // Linguistics
+        } else {
             tier = "Linguistics Expert";
             minRate = 35;
             maxRate = 50;
@@ -371,36 +349,38 @@ class LabMatchRouter {
         this.state.profileOutcome.hourlyRateMax = maxRate;
         this.state.profileOutcome.workStyle = matchedStyle;
 
-        // Render dashboard values dynamically on DOM
-        document.getElementById('display-tier').innerText = tier;
-        document.getElementById('display-rate').innerText = `$${minRate} - $${maxRate}/hr`;
-        document.getElementById('display-style').innerText = matchedStyle;
-        document.getElementById('display-precision').innerText = `${Math.round(calculatedPrecision * 100)}%`;
+        const dTier = document.getElementById('display-tier');
+        if (dTier) dTier.innerText = tier;
         
-        const focusDesc = this.matrix.matrices.psychometrics.find(p => p.type === matchedStyle)?.focus 
+        const dRate = document.getElementById('display-rate');
+        if (dRate) dRate.innerText = `$${minRate} - $${maxRate}/hr`;
+        
+        const dStyle = document.getElementById('display-style');
+        if (dStyle) dStyle.innerText = matchedStyle;
+        
+        const dPrecision = document.getElementById('display-precision');
+        if (dPrecision) dPrecision.innerText = `${Math.round(calculatedPrecision * 100)}%`;
+        
+        const focusDesc = this.matrix?.matrices?.psychometrics?.find(p => p.type === matchedStyle)?.focus 
             || "Structured evaluation mechanics.";
-        document.getElementById('display-focus').innerText = focusDesc;
+        const dFocus = document.getElementById('display-focus');
+        if (dFocus) dFocus.innerText = focusDesc;
 
-        // Generate Sharing Fingerprint Emojis
-        const tierEmoji = this.matrix.matrices.emojis[tier] || '🛡️';
-        document.getElementById('display-emoji-mark').innerText = `${tierEmoji} 🎛️ 🔒`;
+        const tierEmoji = this.matrix?.matrices?.emojis?.[tier] || '🛡️';
+        const dEmoji = document.getElementById('display-emoji-mark');
+        if (dEmoji) dEmoji.innerText = `${tierEmoji} 🎛️ 🔒`;
 
-        // Generate Sharing String
         this.generatedShareString = `My ${this.state.selectedDomain} operational style is classified as ${matchedStyle}, mapping to an indexed rate of $${minRate}-$${maxRate}/hr on LabMatch. Check your index: https://sonicbloom.dev/labmatch`;
 
-        // Dispatch telemetry log silently to background
         this.dispatchTelemetryLog();
     }
 
-    /**
-     * Dispatch Telemetry Log: Authenticated serverless payload transmission to Supabase DB Layer
-     */
     async dispatchTelemetryLog() {
         const payload = {
             timestamp: new Date().toISOString(),
             email: this.state.email,
             core_domain: this.state.selectedDomain,
-            competency_tags: this.state.experienceLayer.split(', '),
+            competency_tags: this.state.experienceLayer ? this.state.experienceLayer.split(', ') : [],
             weekly_hours_capacity: parseInt(document.getElementById('hours-slider')?.value || 20),
             throughput_metrics: {
                 sampled_precision: parseFloat(this.state.profileOutcome.precisionScore),
@@ -408,40 +388,32 @@ class LabMatchRouter {
                     ml: this.state.sjtMostLikely,
                     ll: this.state.sjtLeastLikely
                 },
-                dwell_times: this.telemetry.slideDurations
+                dwell_times: this.state.slideDwellTimes || {}
             },
             hourly_rate_index: parseFloat(this.state.profileOutcome.hourlyRateMin),
             assigned_tier: this.state.profileOutcome.assignedTier,
             is_anonymized: true
         };
 
-        console.log("[SUPABASE CAPTURE] Syncing payload to /api/capture:", payload);
+        console.log("[SUPABASE CAPTURE] Syncing payload:", payload);
         
         try {
-            const response = await fetch('/api/capture', {
+            await fetch('/api/capture', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            if (response.ok) {
-                console.log("[SUPABASE CAPTURE] PostgreSQL synchronization complete.");
-            }
         } catch (e) {
-            console.warn("[SUPABASE CAPTURE] Relational write bypassed (Local caching active).");
+            console.warn("[SUPABASE CAPTURE] Write bypassed (Local cache fallback).");
         }
     }
 
-    /**
-     * Launches the LinkedIn sharing overlay with tokenized metrics
-     */
     triggerLinkedInWindow() {
         if (!this.generatedShareString) return;
-        const platformUrl = this.matrix.branding.platformUrl || "https://sonicbloom.dev";
-        const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(platformUrl)}&text=${encodeURIComponent(this.generatedShareString)}`;
+        const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("https://sonicbloom.dev")}&text=${encodeURIComponent(this.generatedShareString)}`;
         window.open(url, '_blank', 'width=600,height=600');
     }
 }
 
-// Instantiate and bind to load events
 const labmatchRouter = new LabMatchRouter();
 document.addEventListener('DOMContentLoaded', () => labmatchRouter.init());
