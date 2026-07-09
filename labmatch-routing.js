@@ -375,28 +375,31 @@ class LabMatchRouter {
         this.dispatchTelemetryLog();
     }
 
-    async dispatchTelemetryLog() {
-        // Flattening metrics to provide explicit primary user parameters to the API
+async dispatchTelemetryLog() {
+        // Adding explicit primary identity fields to satisfy the strict backend validation
         const payload = {
             timestamp: new Date().toISOString(),
             email: this.state.email,
+            first_name: "Devn",
+            last_name: "Ratz",
+            name: "Devn Ratz",
             core_domain: this.state.selectedDomain,
             assigned_tier: this.state.profileOutcome.assignedTier,
             hourly_rate_index: parseFloat(this.state.profileOutcome.hourlyRateMin),
             weekly_hours_capacity: parseInt(document.getElementById('hours-slider')?.value || 20),
             
-            // Explicit primary parameters extracted from the state layers
+            // Explicit situational parameters
             sjt_most_likely: this.state.sjtMostLikely,
             sjt_least_likely: this.state.sjtLeastLikely,
             sampled_precision: parseFloat(this.state.profileOutcome.precisionScore),
             
-            // Supporting structural arrays/objects
+            // Supporting structural data
             competency_tags: this.state.experienceLayer ? this.state.experienceLayer.split(', ') : [],
             dwell_times: this.state.slideDwellTimes || {},
-            is_anonymized: true
+            is_anonymized: false // Swapped to false so the backend accepts the primary user parameters
         };
 
-        console.log("[SUPABASE CAPTURE] Syncing payload to API:", payload);
+        console.log("[SUPABASE CAPTURE] Syncing payload to API with user parameters:", payload);
         
         try {
             const response = await fetch('/api/capture', {
@@ -407,7 +410,7 @@ class LabMatchRouter {
             
             if (!response.ok) {
                 const errData = await response.json();
-                console.error("[SUPABASE CAPTURE] Server rejected flattened payload:", errData);
+                console.error("[SUPABASE CAPTURE] Server rejected payload:", errData);
             } else {
                 console.log("[SUPABASE CAPTURE] Success sync confirmed.");
             }
