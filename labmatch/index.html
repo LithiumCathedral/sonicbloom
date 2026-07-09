@@ -684,8 +684,7 @@
         const chosenVal = cardElement.getAttribute('data-value');
         document.getElementById('domain-select').value = chosenVal;
         
-        // Push choices immediately to the engine states to sync the array layer early
-        if (typeof labmatchRouter !== 'undefined') {
+        if (typeof labmatchRouter !== 'undefined' && labmatchRouter.state) {
             labmatchRouter.state.selectedDomain = chosenVal;
             labmatchRouter.state.selectedDomains = [chosenVal];
         }
@@ -694,21 +693,26 @@
     document.addEventListener('DOMContentLoaded', () => {
         const checkButtons = () => {
             const current = labmatchRouter.currentSlide;
-            document.getElementById('prev-btn').disabled = (current === 1);
+            const prevBtn = document.getElementById('prev-btn');
+            if (prevBtn) prevBtn.disabled = (current === 1);
             
             const nextBtn = document.getElementById('next-btn');
-            if (current === 5) {
-                nextBtn.innerText = "Share Profile to LinkedIn";
-            } else {
-                nextBtn.innerText = "Next >>";
+            if (nextBtn) {
+                if (current === 5) {
+                    nextBtn.innerText = "Share Profile to LinkedIn";
+                } else {
+                    nextBtn.innerText = "Next >>";
+                }
             }
         };
 
-        const originGoToSlide = labmatchRouter.goToSlide;
-        labmatchRouter.goToSlide = function(id) {
-            originGoToSlide.call(this, id);
-            checkButtons();
-        };
+        if (typeof labmatchRouter !== 'undefined') {
+            const originGoToSlide = labmatchRouter.goToSlide;
+            labmatchRouter.goToSlide = function(id) {
+                originGoToSlide.call(this, id);
+                checkButtons();
+            };
+        }
 
         checkButtons();
     });
