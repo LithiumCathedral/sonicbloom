@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Garment Alterations Estimator</title>
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #bfa15f; /* Luxury Gold tone */
+            --bg: #f9f9f9;
+            --card-bg: #ffffff;
+            --border: #e0e0e0;
+            --text: #333333;
+            --rush-color: #d9534f;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Collapsible Settings Panel */
+        details.settings-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 25px;
+            padding: 15px;
+        }
+
+        details.settings-panel summary {
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--accent);
+            outline: none;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        input[type="text"], input[type="number"], select {
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        /* Layout Main Sections */
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .workspace { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .panel h2 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .rush-label {
+            color: var(--rush-color);
+            font-weight: bold !important;
+        }
+
+        /* Dynamic formulas section */
+        .dynamic-fields {
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            min-height: 100px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            transition: background 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover { background: #333; }
+        .btn-accent { background: var(--accent); }
+        .btn-accent:hover { background: #a6894c; }
+
+        /* Invoice Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        th { background: #f5f5f5; font-weight: 600; }
+
+        .live-preview-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-align: right;
+            margin: 10px 0;
+        }
+
+        .total-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+            border-top: 2px dashed var(--border);
+            padding-top: 10px;
+        }
+
+        /* Export Textareas */
+        .export-section {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .export-section { grid-template-columns: 1fr; }
+        }
+
+        .export-box textarea {
+            width: 100%;
+            height: 120px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: #fafafa;
+        }
+
+        .export-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Workshop Invoicing & Estimation Utility</h1>
+        <p style="color: #666; font-style: italic; margin: 5px 0 0 0;">High-End Tailoring Architecture</p>
+    </header>
+
+    <details class="settings-panel">
+        <summary>⚙️ Global Rates & Variable Configuration Panel</summary>
+        <div class="grid-3">
+            <div class="form-group">
+                <label>Hem: Base Fee ($)</label>
+                <input type="number" id="rate_hem_base" value="75" step="5">
+            </div>
+            <div class="form-group">
+                <label>Hem: Per-Inch Rate ($)</label>
+                <input type="number" id="rate_hem_inch" value="15" step="1">
+            </div>
+            <div class="form-group">
+                <label>Hem: Per-Layer Multiplier ($)</label>
+                <input type="number" id="rate_hem_layer" value="35" step="5">
+            </div>
+            <div class="form-group">
+                <label>Sides/Waist: Base Fee ($)</label>
+                <input type="number" id="rate_side_base" value="90" step="5">
+            </div>
+            <div class="form-group">
+                <label>Sides/Waist: Per-Inch Rate ($)</label>
+                <input type="number" id="rate_side_inch" value="20" step="1">
+            </div>
+            <div class="form-group">
+                <label>Handwork: Artisan Hourly Rate ($)</label>
+                <input type="number" id="rate_hand_hourly" value="65" step="5">
+            </div>
+            <div class="form-group">
+                <label>Handwork: Sq. Inch Rate ($)</label>
+                <input type="number" id="rate_hand_sq_inch" value="4.50" step="0.5">
+            </div>
+            <div class="form-group">
+                <label>Shoulders/Neck: Fixed Pattern Fee ($)</label>
+                <input type="number" id="rate_pattern_fixed" value="120" step="5">
+            </div>
+            <div class="form-group">
+                <label>Shoulders/Neck: Anatomical Rate ($)</label>
+                <input type="number" id="rate_anatomical" value="25" step="5">
+            </div>
+            <div class="form-group">
+                <label>Hardware: Standard Flat Fee ($)</label>
+                <input type="number" id="rate_hardware_flat" value="25" step="5">
+            </div>
+            <div class="form-group">
+                <label>Seam Complication Surcharge ($)</label>
+                <input type="number" id="fee_seam" value="50" step="5">
+            </div>
+            <div class="form-group">
+                <label>Lining Complication Surcharge ($)</label>
+                <input type="number" id="fee_lining" value="45" step="5">
+            </div>
+        </div>
+    </details>
+
+    <div class="workspace">
+        <div class="panel">
+            <h2>1. Structural Input Builder</h2>
+            
+            <h3 style="font-size:1rem; text-transform:uppercase; color:#777; margin-bottom:5px;">Client & Garment Grouping</h3>
+            <div class="grid-3" style="grid-template-columns: 1fr 1fr; margin-bottom:15px;">
+                <div class="form-group">
+                    <label>Client Name</label>
+                    <input type="text" id="client_name" placeholder="e.g. Silvia Zoullas">
+                </div>
+                <div class="form-group">
+                    <label>Item Code (Alphanumeric)</label>
+                    <input type="text" id="item_code" placeholder="e.g. ODLR-2026-X">
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom:20px;">
+                <label>Item Name / Garment Description</label>
+                <input type="text" id="item_name" placeholder="e.g. Strapless Silk Faille Gown">
+            </div>
+
+            <h3 style="font-size:1rem; text-transform:uppercase; color:#777; margin-bottom:5px;">Service Specifications</h3>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label>Select Core Service Profile</label>
+                <select id="service_select" onchange="renderDynamicForm()">
+                    <option value="hem">Hem Adjustments (Standard / Multi-Layer)</option>
+                    <option value="side">Side, Back & Waist Adjustments</option>
+                    <option value="handwork">Handwork (Manual Embroidery & Beading Formula)</option>
+                    <option value="shoulder">Shoulder, Neck & Sleeve Adjustments</option>
+                    <option value="hardware">Small Additions (Hardware, Hooks, Zippers)</option>
+                </select>
+            </div>
+
+            <div class="dynamic-fields" id="dynamic_form_container">
+                </div>
+
+            <h3 style="font-size:1rem; text-transform:uppercase; color:#777; margin-bottom:5px;">Complications & Adjusters</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox" id="chk_seams" onchange="calculateLiveEstimate()"> Seam Complication</label>
+                <label><input type="checkbox" id="chk_lining" onchange="calculateLiveEstimate()"> Lining Complication</label>
+                <label class="rush-label"><input type="checkbox" id="chk_rush" onchange="calculateLiveEstimate()"> ⚡ RUSH ORDER (1.5x Multiplier)</label>
+            </div>
+
+            <div class="form-group" style="margin-bottom:15px;">
+                <label>Specific Work Notes / Execution Details</label>
+                <input type="text" id="work_notes" placeholder="e.g. Adjusted 3.75 in. through delicate lace layers">
+            </div>
+
+            <div class="live-preview-price">
+                Live Preview Rate: $<span id="live_price_display">0.00</span>
+            </div>
+
+            <button type="button" class="btn btn-accent" onclick="addAlterationToInvoice()">Add Component to Invoice</button>
+        </div>
+
+        <div class="panel">
+            <h2>2. Itemized Ledger Preview</h2>
+            <div style="overflow-x: auto;">
+                <table id="invoice_table">
+                    <thead>
+                        <tr>
+                            <th>Garment / Code</th>
+                            <th>Service</th>
+                            <th>Details</th>
+                            <th>Rush</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+            <div class="total-display">
+                Total Estimate: $<span id="running_total_display">0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="export-section">
+        <div class="export-box">
+            <h3 style="margin-top:0;">📋 Copy-Paste E-mail Format</h3>
+            <textarea id="text_export_area" readonly placeholder="Itemized breakdown for client correspondence..."></textarea>
+            <div class="export-actions">
+                <button class="btn btn-sm" onclick="copyToClipboard('text_export_area')">Copy Summary Text</button>
+            </div>
+        </div>
+        <div class="export-box">
+            <h3 style="margin-top:0;">📊 Flat-File CSV Export Output</h3>
+            <textarea id="csv_export_area" readonly placeholder="CSV format data tracking rows..."></textarea>
+            <div class="export-actions">
+                <button class="btn btn-sm" onclick="copyToClipboard('csv_export_area')">Copy CSV Data</button>
+                <button class="btn btn-sm btn-accent" onclick="downloadCSV()">Download .CSV File</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // System Master Data Array Store
+    let invoiceItems = [];
+
+    // Trigger dynamic layout rendering instantly upon load
+    window.onload = function() {
+        renderDynamicForm();
+    };
+
+    function getGlobalRates() {
+        return {
+            hemBase: parseFloat(document.getElementById('rate_hem_base').value) || 0,
+            hemInch: parseFloat(document.getElementById('rate_hem_inch').value) || 0,
+            hemLayer: parseFloat(document.getElementById('rate_hem_layer').value) || 0,
+            sideBase: parseFloat(document.getElementById('rate_side_base').value) || 0,
+            sideInch: parseFloat(document.getElementById('rate_side_inch').value) || 0,
+            handHourly: parseFloat(document.getElementById('rate_hand_hourly').value) || 0,
+            handSqInch: parseFloat(document.getElementById('rate_hand_sq_inch').value) || 0,
+            patternFixed: parseFloat(document.getElementById('rate_pattern_fixed').value) || 0,
+            anatomical: parseFloat(document.getElementById('rate_anatomical').value) || 0,
+            hardwareFlat: parseFloat(document.getElementById('rate_hardware_flat').value) || 0,
+            feeSeam: parseFloat(document.getElementById('fee_seam').value) || 0,
+            feeLining: parseFloat(document.getElementById('fee_lining').value) || 0
+        };
+    }
+
+    function renderDynamicForm() {
+        const service = document.getElementById('service_select').value;
+        const container = document.getElementById('dynamic_form_container');
+        let html = '';
+
+        if (service === 'hem') {
+            html = `
+                <div class="grid-3" style="grid-template-columns: 1fr 1fr;">
+                    <div class="form-group">
+                        <label>Linear Inches Extended/Shortened</label>
+                        <input type="number" id="input_inches" value="0" step="0.125" oninput="calculateLiveEstimate()">
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Fabric/Tulle Layers</label>
+                        <input type="number" id="input_layers" value="1" min="1" step="1" oninput="calculateLiveEstimate()">
+                    </div>
+                </div>
+            `;
+        } else if (service === 'side') {
+            html = `
+                <div class="form-group">
+                    <label>Total Inches Taken In / Released</label>
+                    <input type="number" id="input_inches" value="0" step="0.125" oninput="calculateLiveEstimate()">
+                </div>
+            `;
+        } else if (service === 'handwork') {
+            html = `
+                <div class="grid-3" style="grid-template-columns: 1fr 1fr 1fr;">
+                    <div class="form-group">
+                        <label>Hours Logged</label>
+                        <input type="number" id="input_hours" value="0" step="0.5" oninput="calculateLiveEstimate()">
+                    </div>
+                    <div class="form-group">
+                        <label>Service Area (Sq. Inches)</label>
+                        <input type="number" id="input_sq_inches" value="0" step="1" oninput="calculateLiveEstimate()">
+                    </div>
+                    <div class="form-group">
+                        <label>Raw Structural Material Cost ($)</label>
+                        <input type="number" id="input_mat_cost" value="0" step="5" oninput="calculateLiveEstimate()">
+                    </div>
+                </div>
+            `;
+        } else if (service === 'shoulder') {
+            html = `
+                <div class="form-group">
+                    <label>Total Precision Adjustment Inches</label>
+                    <input type="number" id="input_inches" value="0" step="0.125" oninput="calculateLiveEstimate()">
+                </div>
+            `;
+        } else if (service === 'hardware') {
+            html = `
+                <div class="form-group">
+                    <label>Component Hardware Unit Quantity</label>
+                    <input type="number" id="input_qty" value="1" min="1" step="1" oninput="calculateLiveEstimate()">
+                </div>
+            `;
+        }
+
+        container.innerHTML = html;
+        calculateLiveEstimate();
+    }
+
+    function parseCalculatedMetrics() {
+        const service = document.getElementById('service_select').value;
+        const rates = getGlobalRates();
+        
+        let baseSubtotal = 0;
+        let breakdownDesc = "";
+
+        // Collect inputs check validations
+        const inchInput = document.getElementById('input_inches');
+        const inches = inchInput ? parseFloat(inchInput.value) || 0 : 0;
+
+        if (service === 'hem') {
+            const layers = parseInt(document.getElementById('input_layers').value) || 1;
+            baseSubtotal = rates.hemBase + (inches * rates.hemInch) + (layers * rates.hemLayer);
+            breakdownDesc = `Hem: ${inches}" altered across ${layers} layer(s)`;
+        } else if (service === 'side') {
+            baseSubtotal = rates.sideBase + (inches * rates.sideInch);
+            breakdownDesc = `Sides/Waist Adjustments: ${inches}" total modifications`;
+        } else if (service === 'handwork') {
+            const hours = parseFloat(document.getElementById('input_hours').value) || 0;
+            const sqInches = parseFloat(document.getElementById('input_sq_inches').value) || 0;
+            const matCost = parseFloat(document.getElementById('input_mat_cost').value) || 0;
+            baseSubtotal = (hours * rates.handHourly) + (sqInches * rates.handSqInch) + matCost;
+            breakdownDesc = `Handwork: ${hours} hrs execution, ${sqInches} sq. in. footprint area`;
+        } else if (service === 'shoulder') {
+            baseSubtotal = rates.patternFixed + (inches * rates.anatomical);
+            breakdownDesc = `Pattern Reset Adjustments: ${inches}" modified`;
+        } else if (service === 'hardware') {
+            const qty = parseInt(document.getElementById('input_qty').value) || 1;
+            baseSubtotal = rates.hardwareFlat * qty;
+            breakdownDesc = `Hardware Additions: Qty ${qty}`;
+        }
+
+        // Add modular component check flags
+        if (document.getElementById('chk_seams').checked) {
+            baseSubtotal += rates.feeSeam;
+            breakdownDesc += " [+Seam Comp]";
+        }
+        if (document.getElementById('chk_lining').checked) {
+            baseSubtotal += rates.feeLining;
+            breakdownDesc += " [+Lining Comp]";
+        }
+
+        // Calculate exact Multiplier against total execution
+        const isRush = document.getElementById('chk_rush').checked;
+        const finalPrice = isRush ? baseSubtotal * 1.5 : baseSubtotal;
+
+        return {
+            finalPrice: finalPrice,
+            details: breakdownDesc,
+            isRush: isRush
+        };
+    }
+
+    function calculateLiveEstimate() {
+        const metrics = parseCalculatedMetrics();
+        document.getElementById('live_price_display').innerText = metrics.finalPrice.toFixed(2);
+    }
+
+    function addAlterationToInvoice() {
+        const client = document.getElementById('client_name').value.trim() || "Unnamed Client";
+        const code = document.getElementById('item_code').value.trim() || "N/A-CODE";
+        const name = document.getElementById('item_name').value.trim() || "Standard Garment Item";
+        const notes = document.getElementById('work_notes').value.trim();
+        
+        const selectElem = document.getElementById('service_select');
+        const serviceText = selectElem.options[selectElem.selectedIndex].text;
+        
+        const metrics = parseCalculatedMetrics();
+
+        // Push unified architectural mapping frame row structure
+        invoiceItems.push({
+            client: client,
+            itemCode: code,
+            itemName: name,
+            service: serviceText,
+            details: metrics.details + (notes ? ` (${notes})` : ''),
+            isRush: metrics.isRush ? "YES" : "NO",
+            price: metrics.finalPrice
+        });
+
+        // Clear sub-inputs but preserve parent fields for rapid data entry sequence loops
+        document.getElementById('work_notes').value = "";
+        document.getElementById('chk_seams').checked = false;
+        document.getElementById('chk_lining').checked = false;
+        document.getElementById('chk_rush').checked = false;
+        
+        renderDynamicForm();
+        renderInvoiceTable();
+    }
+
+    function deleteItem(index) {
+        invoiceItems.splice(index, 1);
+        renderInvoiceTable();
+    }
+
+    function renderInvoiceTable() {
+        const tbody = document.querySelector('#invoice_table tbody');
+        tbody.innerHTML = '';
+        let globalTotal = 0;
+
+        invoiceItems.forEach((item, index) => {
+            globalTotal += item.price;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${item.itemCode}</strong><br><span style="font-size:0.8rem; color:#666;">${item.itemName}</span></td>
+                <td>${item.service}</td>
+                <td>${item.details}</td>
+                <td style="color: ${item.isRush === 'YES' ? 'var(--rush-color)' : 'inherit'}; font-weight: ${item.isRush === 'YES' ? 'bold' : 'normal'};">${item.isRush}</td>
+                <td><strong>$${item.price.toFixed(2)}</strong></td>
+                <td><button class="btn btn-sm" style="background:#cc0000;" onclick="deleteItem(${index})">✕</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        document.getElementById('running_total_display').innerText = globalTotal.toFixed(2);
+        generateExports();
+    }
+
+    function generateExports() {
+        if (invoiceItems.length === 0) {
+            document.getElementById('text_export_area').value = "";
+            document.getElementById('csv_export_area').value = "";
+            return;
+        }
+
+        // 1. Text Summary Generation Panel
+        let clientName = invoiceItems[0].client;
+        let txt = `CLIENT ALTERATION ESTIMATE SUMMARY\n`;
+        txt += `Client Name: ${clientName}\n`;
+        txt += `Generated Date: ${new Date().toLocaleDateString()}\n`;
+        txt += `---------------------------------------------------------\n`;
+        
+        let grandTotal = 0;
+        invoiceItems.forEach(item => {
+            txt += `Garment: ${item.itemName} [${item.itemCode}]\n`;
+            txt += ` - Service: ${item.service}\n`;
+            txt += ` - Details: ${item.details}\n`;
+            txt += ` - Rush Priority: ${item.isRush}\n`;
+            txt += ` - Component Price: $${item.price.toFixed(2)}\n\n`;
+            grandTotal += item.price;
+        });
+        txt += `---------------------------------------------------------\n`;
+        txt += `ESTIMATED GRAND TOTAL: $${grandTotal.toFixed(2)}`;
+        document.getElementById('text_export_area').value = txt;
+
+        // 2. Comma Separated Structure Exporter Matrix
+        let csv = `"Client Name","Item Code","Item Name","Service Name","Details/Notes","Is Rush","Calculated Price"\n`;
+        invoiceItems.forEach(item => {
+            csv += `"${item.client.replace(/"/g, '""')}",`;
+            csv += `"${item.itemCode.replace(/"/g, '""')}",`;
+            csv += `"${item.itemName.replace(/"/g, '""')}",`;
+            csv += `"${item.service.replace(/"/g, '""')}",`;
+            csv += `"${item.details.replace(/"/g, '""')}",`;
+            csv += `"${item.isRush}",`;
+            csv += `${item.price.toFixed(2)}\n`;
+        });
+        document.getElementById('csv_export_area').value = csv;
+    }
+
+    function copyToClipboard(id) {
+        const area = document.getElementById(id);
+        area.select();
+        area.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("Data structural markup copied cleanly to clipboard workspace context.");
+    }
+
+    function downloadCSV() {
+        const csvContent = document.getElementById('csv_export_area').value;
+        if (!csvContent) {
+            alert("No structured records exist within the dynamic session matrix to drop.");
+            return;
+        }
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", `Alteration_Export_${new Date().toISOString().slice(0,10)}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+</body>
+</html>
