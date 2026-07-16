@@ -3,658 +3,682 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Garment Alterations Estimator</title>
+    <title>Oscar de la Renta Atelier Invoice Utility</title>
     <style>
         :root {
             --primary: #1a1a1a;
-            --accent: #bfa15f; /* Luxury Gold tone */
-            --bg: #f9f9f9;
-            --card-bg: #ffffff;
-            --border: #e0e0e0;
-            --text: #333333;
-            --rush-color: #d9534f;
+            --accent: #bfa15f; /* Atelier Dull Gold */
+            --bg: #fdfdfd;
+            --panel-bg: #f9f9f7;
+            --border: #dcdcd8;
+            --text: #2c2c2c;
+            --rush: #a94442;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: "Didot", "Playfair Display", "Georgia", serif;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.5;
             margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 30px;
         }
 
         header {
             text-align: center;
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 15px;
             margin-bottom: 30px;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 10px;
         }
 
         header h1 {
-            margin: 0;
             font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header p {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.8rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+            color: #777;
+            margin: 5px 0 0 0;
         }
 
-        /* Collapsible Settings Panel */
-        details.settings-panel {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            margin-bottom: 25px;
-            padding: 15px;
-        }
-
-        details.settings-panel summary {
-            font-weight: bold;
-            cursor: pointer;
-            color: var(--accent);
-            outline: none;
-        }
-
-        .grid-3 {
+        /* Three-Column Grid Setup */
+        .three-column-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+            grid-template-columns: 1fr 1.1fr 1.4fr;
+            gap: 25px;
+            align-items: start;
         }
 
+        @media (max-width: 1100px) {
+            .three-column-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .col {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 2px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .col h2 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        /* Form Controls */
         .form-group {
+            margin-bottom: 15px;
             display: flex;
             flex-direction: column;
         }
 
         .form-group label {
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #666;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            color: #555;
         }
 
         input[type="text"], input[type="number"], select {
-            padding: 8px;
+            font-family: -apple-system, sans-serif;
+            padding: 10px;
             border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 1rem;
+            border-radius: 0;
+            background-color: #fff;
+            font-size: 0.9rem;
+            color: var(--text);
         }
 
-        /* Layout Main Sections */
-        .workspace {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+        input:focus, select:focus {
+            outline: 1px solid var(--accent);
         }
 
-        @media (max-width: 900px) {
-            .workspace { grid-template-columns: 1fr; }
-        }
-
-        .panel {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .panel h2 {
-            margin-top: 0;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
-            font-weight: 400;
-        }
-
+        /* Elective Options (Switches/Checkboxes) */
         .checkbox-group {
-            display: flex;
-            gap: 15px;
+            background-color: #fff;
+            border: 1px solid var(--border);
+            padding: 12px;
             margin: 15px 0;
-            flex-wrap: wrap;
         }
 
-        .checkbox-group label {
+        .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-weight: 500;
+            gap: 10px;
+            font-family: -apple-system, sans-serif;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
             cursor: pointer;
         }
 
-        .rush-label {
-            color: var(--rush-color);
-            font-weight: bold !important;
+        .checkbox-item:last-child {
+            margin-bottom: 0;
         }
 
-        /* Dynamic formulas section */
-        .dynamic-fields {
-            background: #f0f4f8;
+        .checkbox-item input {
+            cursor: pointer;
+        }
+
+        .rush-text {
+            color: var(--rush);
+            font-weight: bold;
+        }
+
+        /* Dynamic Preview Price */
+        .live-pricing-panel {
+            background-color: #fff;
+            border-left: 3px solid var(--accent);
             padding: 15px;
-            border-radius: 4px;
+            margin-top: auto;
             margin-bottom: 15px;
-            min-height: 100px;
+            text-align: right;
         }
 
-        .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 4px;
-            width: 100%;
-            transition: background 0.2s;
+        .live-pricing-panel div {
+            font-family: -apple-system, sans-serif;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: #777;
         }
 
-        .btn:hover { background: #333; }
-        .btn-accent { background: var(--accent); }
-        .btn-accent:hover { background: #a6894c; }
+        .live-pricing-panel span {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
 
-        /* Invoice Table styling */
+        /* Buttons */
+        .btn {
+            font-family: -apple-system, sans-serif;
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #eee;
+            color: var(--primary);
+        }
+
+        /* Ledgers & Outputs */
+        .table-container {
+            overflow-x: auto;
+            background-color: #fff;
+            border: 1px solid var(--border);
+            height: 320px;
+            margin-bottom: 15px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            font-family: -apple-system, sans-serif;
+            font-size: 0.8rem;
         }
 
-        th, td {
-            text-align: left;
+        th {
+            background-color: #f0f0ed;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.7rem;
             padding: 10px;
             border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
+            position: sticky;
+            top: 0;
         }
 
-        th { background: #f5f5f5; font-weight: 600; }
-
-        .live-preview-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            text-align: right;
-            margin: 10px 0;
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
         }
 
-        .total-display {
-            font-size: 1.8rem;
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #cc0000;
+            cursor: pointer;
             font-weight: bold;
+        }
+
+        .invoice-summary {
+            font-family: -apple-system, sans-serif;
             text-align: right;
-            margin-top: 20px;
-            border-top: 2px dashed var(--border);
             padding-top: 10px;
+            border-top: 1px solid var(--border);
         }
 
-        /* Export Textareas */
+        .invoice-summary div {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .invoice-summary h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        /* Bottom Textareas */
         .export-section {
             margin-top: 30px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .export-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
-        @media (max-width: 768px) {
-            .export-section { grid-template-columns: 1fr; }
-        }
-
-        .export-box textarea {
-            width: 100%;
-            height: 120px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            box-sizing: border-box;
-            padding: 10px;
+        .export-container {
+            background-color: var(--panel-bg);
             border: 1px solid var(--border);
-            border-radius: 4px;
-            background: #fafafa;
+            padding: 15px;
         }
 
-        .export-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 5px;
-        }
-
-        .btn-sm {
-            padding: 6px 12px;
+        .export-container h3 {
+            font-family: -apple-system, sans-serif;
             font-size: 0.8rem;
-            width: auto;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+            padding: 8px;
+            box-sizing: border-box;
+            background-color: #fff;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Workshop Invoicing & Estimation Utility</h1>
-        <p style="color: #666; font-style: italic; margin: 5px 0 0 0;">High-End Tailoring Architecture</p>
-    </header>
+<header>
+    <h1>Oscar de la Renta</h1>
+    <p>Atelier Alterations Estimator & Billing Engine</p>
+</header>
 
-    <details class="settings-panel">
-        <summary>⚙️ Global Rates & Variable Configuration Panel</summary>
-        <div class="grid-3">
-            <div class="form-group">
-                <label>Hem: Base Fee ($)</label>
-                <input type="number" id="rate_hem_base" value="75" step="5">
-            </div>
-            <div class="form-group">
-                <label>Hem: Per-Inch Rate ($)</label>
-                <input type="number" id="rate_hem_inch" value="15" step="1">
-            </div>
-            <div class="form-group">
-                <label>Hem: Per-Layer Multiplier ($)</label>
-                <input type="number" id="rate_hem_layer" value="35" step="5">
-            </div>
-            <div class="form-group">
-                <label>Sides/Waist: Base Fee ($)</label>
-                <input type="number" id="rate_side_base" value="90" step="5">
-            </div>
-            <div class="form-group">
-                <label>Sides/Waist: Per-Inch Rate ($)</label>
-                <input type="number" id="rate_side_inch" value="20" step="1">
-            </div>
-            <div class="form-group">
-                <label>Handwork: Artisan Hourly Rate ($)</label>
-                <input type="number" id="rate_hand_hourly" value="65" step="5">
-            </div>
-            <div class="form-group">
-                <label>Handwork: Sq. Inch Rate ($)</label>
-                <input type="number" id="rate_hand_sq_inch" value="4.50" step="0.5">
-            </div>
-            <div class="form-group">
-                <label>Shoulders/Neck: Fixed Pattern Fee ($)</label>
-                <input type="number" id="rate_pattern_fixed" value="120" step="5">
-            </div>
-            <div class="form-group">
-                <label>Shoulders/Neck: Anatomical Rate ($)</label>
-                <input type="number" id="rate_anatomical" value="25" step="5">
-            </div>
-            <div class="form-group">
-                <label>Hardware: Standard Flat Fee ($)</label>
-                <input type="number" id="rate_hardware_flat" value="25" step="5">
-            </div>
-            <div class="form-group">
-                <label>Seam Complication Surcharge ($)</label>
-                <input type="number" id="fee_seam" value="50" step="5">
-            </div>
-            <div class="form-group">
-                <label>Lining Complication Surcharge ($)</label>
-                <input type="number" id="fee_lining" value="45" step="5">
-            </div>
-        </div>
-    </details>
+<div class="three-column-grid">
 
-    <div class="workspace">
-        <div class="panel">
-            <h2>1. Structural Input Builder</h2>
+    <div class="col">
+        <div>
+            <h2>1. Core Configurations</h2>
             
-            <h3 style="font-size:1rem; text-transform:uppercase; color:#777; margin-bottom:5px;">Client & Garment Grouping</h3>
-            <div class="grid-3" style="grid-template-columns: 1fr 1fr; margin-bottom:15px;">
-                <div class="form-group">
-                    <label>Client Name</label>
-                    <input type="text" id="client_name" placeholder="e.g. Silvia Zoullas">
+            <div class="form-group">
+                <label>Client Name</label>
+                <input type="text" id="client_name" placeholder="Silvia Zoullas">
+            </div>
+
+            <div class="grid-2" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:15px;">
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>Garment Code</label>
+                    <input type="text" id="item_code" placeholder="ODLR-2026-X">
                 </div>
-                <div class="form-group">
-                    <label>Item Code (Alphanumeric)</label>
-                    <input type="text" id="item_code" placeholder="e.g. ODLR-2026-X">
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>Garment Name</label>
+                    <input type="text" id="item_name" placeholder="Silk Faille Gown">
                 </div>
             </div>
-            <div class="form-group" style="margin-bottom:20px;">
-                <label>Item Name / Garment Description</label>
-                <input type="text" id="item_name" placeholder="e.g. Strapless Silk Faille Gown">
+
+            <hr style="border:none; border-top:1px dashed var(--border); margin:20px 0;">
+
+            <div class="form-group">
+                <label>Hem Base Fee ($)</label>
+                <input type="number" id="base_hem" value="80" oninput="calculateLiveTotal()">
             </div>
-
-            <h3 style="font-size:1rem; text-transform:uppercase; color:#777; margin-bottom:5px;">Service Specifications</h3>
-            <div class="form-group" style="margin-bottom:15px;">
-                <label>Select Core Service Profile</label>
-                <select id="service_select" onchange="renderDynamicForm()">
-                    <option value="hem">Hem Adjustments (Standard / Multi-Layer)</option>
-                    <option value="side">Side, Back & Waist Adjustments</option>
-                    <option value="handwork">Handwork (Manual Embroidery & Beading Formula)</option>
-                    <option value="shoulder">Shoulder, Neck & Sleeve Adjustments</option>
-                    <option value="hardware">Small Additions (Hardware, Hooks, Zippers)</option>
-                </select>
+            <div class="form-group">
+                <label>Side Taper Base Fee ($)</label>
+                <input type="number" id="base_side" value="95" oninput="calculateLiveTotal()">
             </div>
-
-            <div class="dynamic-fields" id="dynamic_form_container">
-                </div>
-
-            <h3 style="font-size:1rem; text-transform:uppercase; color:#777; margin-bottom:5px;">Complications & Adjusters</h3>
-            <div class="checkbox-group">
-                <label><input type="checkbox" id="chk_seams" onchange="calculateLiveEstimate()"> Seam Complication</label>
-                <label><input type="checkbox" id="chk_lining" onchange="calculateLiveEstimate()"> Lining Complication</label>
-                <label class="rush-label"><input type="checkbox" id="chk_rush" onchange="calculateLiveEstimate()"> ⚡ RUSH ORDER (1.5x Multiplier)</label>
+            <div class="form-group">
+                <label>Artisan Handwork Rate ($/Hr)</label>
+                <input type="number" id="base_hand" value="70" oninput="calculateLiveTotal()">
             </div>
-
-            <div class="form-group" style="margin-bottom:15px;">
-                <label>Specific Work Notes / Execution Details</label>
-                <input type="text" id="work_notes" placeholder="e.g. Adjusted 3.75 in. through delicate lace layers">
+            <div class="form-group">
+                <label>Shoulder / Neck Base Fee ($)</label>
+                <input type="number" id="base_shoulder" value="125" oninput="calculateLiveTotal()">
             </div>
-
-            <div class="live-preview-price">
-                Live Preview Rate: $<span id="live_price_display">0.00</span>
-            </div>
-
-            <button type="button" class="btn btn-accent" onclick="addAlterationToInvoice()">Add Component to Invoice</button>
         </div>
-
-        <div class="panel">
-            <h2>2. Itemized Ledger Preview</h2>
-            <div style="overflow-x: auto;">
-                <table id="invoice_table">
-                    <thead>
-                        <tr>
-                            <th>Garment / Code</th>
-                            <th>Service</th>
-                            <th>Details</th>
-                            <th>Rush</th>
-                            <th>Total</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        </tbody>
-                </table>
-            </div>
-            <div class="total-display">
-                Total Estimate: $<span id="running_total_display">0.00</span>
-            </div>
+        <div style="font-size: 0.7rem; color: #888; font-family: -apple-system, sans-serif; text-align: center;">
+            ODLR-Cris Eolo Database Standard Compliance
         </div>
     </div>
 
-    <div class="export-section">
-        <div class="export-box">
-            <h3 style="margin-top:0;">📋 Copy-Paste E-mail Format</h3>
-            <textarea id="text_export_area" readonly placeholder="Itemized breakdown for client correspondence..."></textarea>
-            <div class="export-actions">
-                <button class="btn btn-sm" onclick="copyToClipboard('text_export_area')">Copy Summary Text</button>
+    <div class="col">
+        <div>
+            <h2>2. Active Custom Builder</h2>
+
+            <div class="form-group">
+                <label>Service Category</label>
+                <select id="active_service" onchange="switchServiceInputs()">
+                    <option value="hem">Hem Adjustments (Standard / Multi-Layer)</option>
+                    <option value="side">Sides, Back & Waist Take-In/Out</option>
+                    <option value="handwork">Manual Beading & Hand Embroidery</option>
+                    <option value="shoulder">Shoulder, Neck & Sleeve Structural Adjusts</option>
+                </select>
+            </div>
+
+            <div id="dynamic_inputs" style="background-color:#fff; border:1px solid var(--border); padding:15px; min-height:100px;">
+                </div>
+
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="elect_lining" onchange="calculateLiveTotal()">
+                    <span>Lining Complication (1.25x Modifier)</span>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="elect_seam" onchange="calculateLiveTotal()">
+                    <span>Complex Seam Construction (+$50 flat)</span>
+                </div>
+                <div class="checkbox-item rush-text">
+                    <input type="checkbox" id="elect_rush" onchange="calculateLiveTotal()">
+                    <span>⚡ Rush Turnaround Execution (1.50x Modifier)</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Specific Work Notes / Modifications Details</label>
+                <input type="text" id="item_notes" placeholder="e.g. Hemmed 3.25 in through lace appliqué">
             </div>
         </div>
-        <div class="export-box">
-            <h3 style="margin-top:0;">📊 Flat-File CSV Export Output</h3>
-            <textarea id="csv_export_area" readonly placeholder="CSV format data tracking rows..."></textarea>
-            <div class="export-actions">
-                <button class="btn btn-sm" onclick="copyToClipboard('csv_export_area')">Copy CSV Data</button>
-                <button class="btn btn-sm btn-accent" onclick="downloadCSV()">Download .CSV File</button>
+
+        <div>
+            <div class="live-pricing-panel">
+                <div>Trans-Election Item Value</div>
+                $<span id="live_total_val">0.00</span>
             </div>
+            <button class="btn" onclick="addComponentToInvoice()">Append to Ledger</button>
+        </div>
+    </div>
+
+    <div class="col" style="justify-content: flex-start;">
+        <h2>3. Active Invoice Ledger</h2>
+
+        <div class="table-container">
+            <table id="invoice_table">
+                <thead>
+                    <tr>
+                        <th>Garment (Code)</th>
+                        <th>Alteration</th>
+                        <th>Notes</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="invoice-summary">
+            <div>Subtotal: $<span id="lbl_subtotal">0.00</span></div>
+            <div>Atelier Tax (6%): $<span id="lbl_tax">0.00</span></div>
+            <h3>Total: $<span id="lbl_total">0.00</span></h3>
+        </div>
+    </div>
+
+</div>
+
+<div class="export-section">
+    <div class="export-grid">
+        <div class="export-container">
+            <h3>📋 Direct Text Receipt (Client Copy)</h3>
+            <textarea id="text_export" readonly></textarea>
+            <button class="btn btn-secondary" onclick="copyClip('text_export')">Copy Summary Text</button>
+        </div>
+        <div class="export-container">
+            <h3>📊 ODLR-Cris Eolo Flat-File CSV</h3>
+            <textarea id="csv_export" readonly></textarea>
+            <button class="btn btn-secondary" style="display:inline-block; width:48%; margin-right:2%;" onclick="copyClip('csv_export')">Copy CSV Data</button>
+            <button class="btn" style="display:inline-block; width:48%;" onclick="downloadCSVFile()">Export CSV</button>
         </div>
     </div>
 </div>
 
 <script>
-    // System Master Data Array Store
-    let invoiceItems = [];
+    let ledgerItems = [];
 
-    // Trigger dynamic layout rendering instantly upon load
+    // Initialize inputs
     window.onload = function() {
-        renderDynamicForm();
-    };
-
-    function getGlobalRates() {
-        return {
-            hemBase: parseFloat(document.getElementById('rate_hem_base').value) || 0,
-            hemInch: parseFloat(document.getElementById('rate_hem_inch').value) || 0,
-            hemLayer: parseFloat(document.getElementById('rate_hem_layer').value) || 0,
-            sideBase: parseFloat(document.getElementById('rate_side_base').value) || 0,
-            sideInch: parseFloat(document.getElementById('rate_side_inch').value) || 0,
-            handHourly: parseFloat(document.getElementById('rate_hand_hourly').value) || 0,
-            handSqInch: parseFloat(document.getElementById('rate_hand_sq_inch').value) || 0,
-            patternFixed: parseFloat(document.getElementById('rate_pattern_fixed').value) || 0,
-            anatomical: parseFloat(document.getElementById('rate_anatomical').value) || 0,
-            hardwareFlat: parseFloat(document.getElementById('rate_hardware_flat').value) || 0,
-            feeSeam: parseFloat(document.getElementById('fee_seam').value) || 0,
-            feeLining: parseFloat(document.getElementById('fee_lining').value) || 0
-        };
+        switchServiceInputs();
     }
 
-    function renderDynamicForm() {
-        const service = document.getElementById('service_select').value;
-        const container = document.getElementById('dynamic_form_container');
+    function switchServiceInputs() {
+        const service = document.getElementById('active_service').value;
+        const container = document.getElementById('dynamic_inputs');
         let html = '';
 
         if (service === 'hem') {
             html = `
-                <div class="grid-3" style="grid-template-columns: 1fr 1fr;">
-                    <div class="form-group">
-                        <label>Linear Inches Extended/Shortened</label>
-                        <input type="number" id="input_inches" value="0" step="0.125" oninput="calculateLiveEstimate()">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Inches Altered</label>
+                        <input type="number" id="val_inches" value="0" step="0.25" oninput="calculateLiveTotal()">
                     </div>
-                    <div class="form-group">
-                        <label>Number of Fabric/Tulle Layers</label>
-                        <input type="number" id="input_layers" value="1" min="1" step="1" oninput="calculateLiveEstimate()">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Rate / Inch ($)</label>
+                        <input type="number" id="val_inch_rate" value="15" step="1" oninput="calculateLiveTotal()">
                     </div>
                 </div>
             `;
         } else if (service === 'side') {
             html = `
-                <div class="form-group">
-                    <label>Total Inches Taken In / Released</label>
-                    <input type="number" id="input_inches" value="0" step="0.125" oninput="calculateLiveEstimate()">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Total Inches In/Out</label>
+                        <input type="number" id="val_inches" value="0" step="0.25" oninput="calculateLiveTotal()">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Rate / Inch ($)</label>
+                        <input type="number" id="val_inch_rate" value="20" step="1" oninput="calculateLiveTotal()">
+                    </div>
                 </div>
             `;
         } else if (service === 'handwork') {
             html = `
-                <div class="grid-3" style="grid-template-columns: 1fr 1fr 1fr;">
-                    <div class="form-group">
-                        <label>Hours Logged</label>
-                        <input type="number" id="input_hours" value="0" step="0.5" oninput="calculateLiveEstimate()">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label>Artisan Hours Logged</label>
+                        <input type="number" id="val_hours" value="0" step="0.5" oninput="calculateLiveTotal()">
                     </div>
-                    <div class="form-group">
-                        <label>Service Area (Sq. Inches)</label>
-                        <input type="number" id="input_sq_inches" value="0" step="1" oninput="calculateLiveEstimate()">
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label>Footprint Area (Sq In)</label>
+                        <input type="number" id="val_sq_inches" value="0" step="1" oninput="calculateLiveTotal()">
                     </div>
-                    <div class="form-group">
-                        <label>Raw Structural Material Cost ($)</label>
-                        <input type="number" id="input_mat_cost" value="0" step="5" oninput="calculateLiveEstimate()">
-                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>Area Execution Surcharge ($/SqIn)</label>
+                    <input type="number" id="val_sq_inch_rate" value="5.00" step="0.5" oninput="calculateLiveTotal()">
                 </div>
             `;
         } else if (service === 'shoulder') {
             html = `
-                <div class="form-group">
-                    <label>Total Precision Adjustment Inches</label>
-                    <input type="number" id="input_inches" value="0" step="0.125" oninput="calculateLiveEstimate()">
-                </div>
-            `;
-        } else if (service === 'hardware') {
-            html = `
-                <div class="form-group">
-                    <label>Component Hardware Unit Quantity</label>
-                    <input type="number" id="input_qty" value="1" min="1" step="1" oninput="calculateLiveEstimate()">
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>Adjustment Factor Multiplier (Qty)</label>
+                    <input type="number" id="val_qty" value="1" min="1" step="1" oninput="calculateLiveTotal()">
                 </div>
             `;
         }
 
         container.innerHTML = html;
-        calculateLiveEstimate();
+        calculateLiveTotal();
     }
 
-    function parseCalculatedMetrics() {
-        const service = document.getElementById('service_select').value;
-        const rates = getGlobalRates();
-        
-        let baseSubtotal = 0;
-        let breakdownDesc = "";
+    function calculateLiveTotal() {
+        const service = document.getElementById('active_service').value;
+        let subtotal = 0;
 
-        // Collect inputs check validations
-        const inchInput = document.getElementById('input_inches');
-        const inches = inchInput ? parseFloat(inchInput.value) || 0 : 0;
+        // Base elements from col 1
+        const baseHem = parseFloat(document.getElementById('base_hem').value) || 0;
+        const baseSide = parseFloat(document.getElementById('base_side').value) || 0;
+        const baseHand = parseFloat(document.getElementById('base_hand').value) || 0;
+        const baseShoulder = parseFloat(document.getElementById('base_shoulder').value) || 0;
+
+        // Collect elections checkboxes
+        const hasLining = document.getElementById('elect_lining').checked;
+        const hasSeam = document.getElementById('elect_seam').checked;
+        const isRush = document.getElementById('elect_rush').checked;
 
         if (service === 'hem') {
-            const layers = parseInt(document.getElementById('input_layers').value) || 1;
-            baseSubtotal = rates.hemBase + (inches * rates.hemInch) + (layers * rates.hemLayer);
-            breakdownDesc = `Hem: ${inches}" altered across ${layers} layer(s)`;
+            const inches = parseFloat(document.getElementById('val_inches').value) || 0;
+            const inchRate = parseFloat(document.getElementById('val_inch_rate').value) || 0;
+            subtotal = baseHem + (inches * inchRate);
+            if (hasLining) subtotal *= 1.25; // 1.25x lining factor applied directly
         } else if (service === 'side') {
-            baseSubtotal = rates.sideBase + (inches * rates.sideInch);
-            breakdownDesc = `Sides/Waist Adjustments: ${inches}" total modifications`;
+            const inches = parseFloat(document.getElementById('val_inches').value) || 0;
+            const inchRate = parseFloat(document.getElementById('val_inch_rate').value) || 0;
+            subtotal = baseSide + (inches * inchRate);
+            if (hasSeam) subtotal += 50; // Flat seam surcharge
         } else if (service === 'handwork') {
-            const hours = parseFloat(document.getElementById('input_hours').value) || 0;
-            const sqInches = parseFloat(document.getElementById('input_sq_inches').value) || 0;
-            const matCost = parseFloat(document.getElementById('input_mat_cost').value) || 0;
-            baseSubtotal = (hours * rates.handHourly) + (sqInches * rates.handSqInch) + matCost;
-            breakdownDesc = `Handwork: ${hours} hrs execution, ${sqInches} sq. in. footprint area`;
+            const hours = parseFloat(document.getElementById('val_hours').value) || 0;
+            const sqInches = parseFloat(document.getElementById('val_sq_inches').value) || 0;
+            const sqInRate = parseFloat(document.getElementById('val_sq_inch_rate').value) || 0;
+            subtotal = (hours * baseHand) + (sqInches * sqInRate);
         } else if (service === 'shoulder') {
-            baseSubtotal = rates.patternFixed + (inches * rates.anatomical);
-            breakdownDesc = `Pattern Reset Adjustments: ${inches}" modified`;
-        } else if (service === 'hardware') {
-            const qty = parseInt(document.getElementById('input_qty').value) || 1;
-            baseSubtotal = rates.hardwareFlat * qty;
-            breakdownDesc = `Hardware Additions: Qty ${qty}`;
+            const qty = parseInt(document.getElementById('val_qty').value) || 1;
+            subtotal = baseShoulder * qty;
         }
 
-        // Add modular component check flags
-        if (document.getElementById('chk_seams').checked) {
-            baseSubtotal += rates.feeSeam;
-            breakdownDesc += " [+Seam Comp]";
-        }
-        if (document.getElementById('chk_lining').checked) {
-            baseSubtotal += rates.feeLining;
-            breakdownDesc += " [+Lining Comp]";
+        // Apply Global Flat Complications if applicable outside normal flow
+        if (service !== 'side' && hasSeam) subtotal += 50;
+        if (service !== 'hem' && hasLining) subtotal *= 1.25;
+
+        // Rush Multiplier Application
+        if (isRush) {
+            subtotal *= 1.5;
         }
 
-        // Calculate exact Multiplier against total execution
-        const isRush = document.getElementById('chk_rush').checked;
-        const finalPrice = isRush ? baseSubtotal * 1.5 : baseSubtotal;
-
-        return {
-            finalPrice: finalPrice,
-            details: breakdownDesc,
-            isRush: isRush
-        };
+        document.getElementById('live_total_val').innerText = subtotal.toFixed(2);
+        return subtotal;
     }
 
-    function calculateLiveEstimate() {
-        const metrics = parseCalculatedMetrics();
-        document.getElementById('live_price_display').innerText = metrics.finalPrice.toFixed(2);
-    }
+    function addComponentToInvoice() {
+        const client = document.getElementById('client_name').value.trim() || "Unspecified Client";
+        const code = document.getElementById('item_code').value.trim() || "N/A";
+        const garment = document.getElementById('item_name').value.trim() || "Atelier Dress Piece";
+        const noteText = document.getElementById('item_notes').value.trim();
 
-    function addAlterationToInvoice() {
-        const client = document.getElementById('client_name').value.trim() || "Unnamed Client";
-        const code = document.getElementById('item_code').value.trim() || "N/A-CODE";
-        const name = document.getElementById('item_name').value.trim() || "Standard Garment Item";
-        const notes = document.getElementById('work_notes').value.trim();
-        
-        const selectElem = document.getElementById('service_select');
-        const serviceText = selectElem.options[selectElem.selectedIndex].text;
-        
-        const metrics = parseCalculatedMetrics();
+        const serviceType = document.getElementById('active_service');
+        const serviceName = serviceType.options[serviceType.selectedIndex].text.split(" (")[0];
 
-        // Push unified architectural mapping frame row structure
-        invoiceItems.push({
+        const calculatedVal = calculateLiveTotal();
+        if (calculatedVal === 0) return;
+
+        ledgerItems.push({
             client: client,
-            itemCode: code,
-            itemName: name,
-            service: serviceText,
-            details: metrics.details + (notes ? ` (${notes})` : ''),
-            isRush: metrics.isRush ? "YES" : "NO",
-            price: metrics.finalPrice
+            code: code,
+            garment: garment,
+            service: serviceName,
+            notes: noteText || "Standard application",
+            price: calculatedVal
         });
 
-        // Clear sub-inputs but preserve parent fields for rapid data entry sequence loops
-        document.getElementById('work_notes').value = "";
-        document.getElementById('chk_seams').checked = false;
-        document.getElementById('chk_lining').checked = false;
-        document.getElementById('chk_rush').checked = false;
-        
-        renderDynamicForm();
-        renderInvoiceTable();
+        // Soft Reset dynamic values inside builder
+        document.getElementById('item_notes').value = "";
+        document.getElementById('elect_lining').checked = false;
+        document.getElementById('elect_seam').checked = false;
+        document.getElementById('elect_rush').checked = false;
+
+        switchServiceInputs();
+        renderActiveTable();
     }
 
-    function deleteItem(index) {
-        invoiceItems.splice(index, 1);
-        renderInvoiceTable();
+    function deleteLedgerItem(index) {
+        ledgerItems.splice(index, 1);
+        renderActiveTable();
     }
 
-    function renderInvoiceTable() {
+    function renderActiveTable() {
         const tbody = document.querySelector('#invoice_table tbody');
         tbody.innerHTML = '';
-        let globalTotal = 0;
+        let subtotal = 0;
 
-        invoiceItems.forEach((item, index) => {
-            globalTotal += item.price;
+        ledgerItems.forEach((item, idx) => {
+            subtotal += item.price;
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><strong>${item.itemCode}</strong><br><span style="font-size:0.8rem; color:#666;">${item.itemName}</span></td>
+                <td><strong>${item.code}</strong><br><span style="font-size:0.75rem; color:#666;">${item.garment}</span></td>
                 <td>${item.service}</td>
-                <td>${item.details}</td>
-                <td style="color: ${item.isRush === 'YES' ? 'var(--rush-color)' : 'inherit'}; font-weight: ${item.isRush === 'YES' ? 'bold' : 'normal'};">${item.isRush}</td>
+                <td style="color:#666;">${item.notes}</td>
                 <td><strong>$${item.price.toFixed(2)}</strong></td>
-                <td><button class="btn btn-sm" style="background:#cc0000;" onclick="deleteItem(${index})">✕</button></td>
+                <td><button class="delete-btn" onclick="deleteLedgerItem(${idx})">✕</button></td>
             `;
             tbody.appendChild(tr);
         });
 
-        document.getElementById('running_total_display').innerText = globalTotal.toFixed(2);
-        generateExports();
+        const tax = subtotal * 0.06;
+        const grandTotal = subtotal + tax;
+
+        document.getElementById('lbl_subtotal').innerText = subtotal.toFixed(2);
+        document.getElementById('lbl_tax').innerText = tax.toFixed(2);
+        document.getElementById('lbl_total').innerText = grandTotal.toFixed(2);
+
+        compileExports(subtotal, tax, grandTotal);
     }
 
-    function generateExports() {
-        if (invoiceItems.length === 0) {
-            document.getElementById('text_export_area').value = "";
-            document.getElementById('csv_export_area').value = "";
+    function compileExports(sub, tax, grand) {
+        if (ledgerItems.length === 0) {
+            document.getElementById('text_export').value = "";
+            document.getElementById('csv_export').value = "";
             return;
         }
 
-        // 1. Text Summary Generation Panel
-        let clientName = invoiceItems[0].client;
-        let txt = `CLIENT ALTERATION ESTIMATE SUMMARY\n`;
-        txt += `Client Name: ${clientName}\n`;
-        txt += `Generated Date: ${new Date().toLocaleDateString()}\n`;
-        txt += `---------------------------------------------------------\n`;
-        
-        let grandTotal = 0;
-        invoiceItems.forEach(item => {
-            txt += `Garment: ${item.itemName} [${item.itemCode}]\n`;
-            txt += ` - Service: ${item.service}\n`;
-            txt += ` - Details: ${item.details}\n`;
-            txt += ` - Rush Priority: ${item.isRush}\n`;
-            txt += ` - Component Price: $${item.price.toFixed(2)}\n\n`;
-            grandTotal += item.price;
+        // Direct Text Client Note
+        let client = ledgerItems[0].client;
+        let textSummary = `OSCAR DE LA RENTA ATELIER\n`;
+        textSummary += `Date: ${new Date().toLocaleDateString()}\n`;
+        textSummary += `Client: ${client}\n`;
+        textSummary += `=================================================\n`;
+        ledgerItems.forEach(i => {
+            textSummary += `[${i.code}] ${i.garment}\n`;
+            textSummary += ` - ${i.service}: $${i.price.toFixed(2)} (${i.notes})\n\n`;
         });
-        txt += `---------------------------------------------------------\n`;
-        txt += `ESTIMATED GRAND TOTAL: $${grandTotal.toFixed(2)}`;
-        document.getElementById('text_export_area').value = txt;
+        textSummary += `=================================================\n`;
+        textSummary += `SUBTOTAL: $${sub.toFixed(2)}\n`;
+        textSummary += `TAX (6%): $${tax.toFixed(2)}\n`;
+        textSummary += `TOTAL DUE: $${grand.toFixed(2)}\n`;
+        document.getElementById('text_export').value = textSummary;
 
-        // 2. Comma Separated Structure Exporter Matrix
-        let csv = `"Client Name","Item Code","Item Name","Service Name","Details/Notes","Is Rush","Calculated Price"\n`;
-        invoiceItems.forEach(item => {
-            csv += `"${item.client.replace(/"/g, '""')}",`;
-            csv += `"${item.itemCode.replace(/"/g, '""')}",`;
-            csv += `"${item.itemName.replace(/"/g, '""')}",`;
-            csv += `"${item.service.replace(/"/g, '""')}",`;
-            csv += `"${item.details.replace(/"/g, '""')}",`;
-            csv += `"${item.isRush}",`;
-            csv += `${item.price.toFixed(2)}\n`;
+        // Comma-Separated Values (Aligns directly to ODLR-Cris Eolo Tracking parameters)
+        let csv = `"Client Name","Garment Code","Garment Description","Alteration Service","Execution Notes","Calculated Price"\n`;
+        ledgerItems.forEach(i => {
+            csv += `"${i.client.replace(/"/g, '""')}",`;
+            csv += `"${i.code.replace(/"/g, '""')}",`;
+            csv += `"${i.garment.replace(/"/g, '""')}",`;
+            csv += `"${i.service.replace(/"/g, '""')}",`;
+            csv += `"${i.notes.replace(/"/g, '""')}",`;
+            csv += `${i.price.toFixed(2)}\n`;
         });
-        document.getElementById('csv_export_area').value = csv;
+        document.getElementById('csv_export').value = csv;
     }
 
-    function copyToClipboard(id) {
-        const area = document.getElementById(id);
-        area.select();
-        area.setSelectionRange(0, 99999);
-        document.execCommand("copy");
-        alert("Data structural markup copied cleanly to clipboard workspace context.");
+    function copyClip(elementId) {
+        const field = document.getElementById(elementId);
+        field.select();
+        document.execCommand('copy');
+        alert("Atelier details saved to clipboard context.");
     }
 
-    function downloadCSV() {
-        const csvContent = document.getElementById('csv_export_area').value;
-        if (!csvContent) {
-            alert("No structured records exist within the dynamic session matrix to drop.");
-            return;
-        }
+    function downloadCSVFile() {
+        const csvContent = document.getElementById('csv_export').value;
+        if (!csvContent) return;
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement("a");
         const url = URL.createObjectURL(blob);
         link.setAttribute("href", url);
-        link.setAttribute("download", `Alteration_Export_${new Date().toISOString().slice(0,10)}.csv`);
-        link.style.visibility = 'hidden';
+        link.setAttribute("download", `Atelier_Billing_${ledgerItems[0].client.replace(/\s+/g, '_')}.csv`);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
