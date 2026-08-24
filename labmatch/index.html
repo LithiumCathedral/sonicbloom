@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SonicBloom LabMatch | Unified Routing Engine</title>
+  <title>SonicBloom LabMatch | Pivot into AI </title>
   <style>
     :root {
       --bg-canvas: #f8fafc;
@@ -17,7 +17,9 @@
       --accent-fastpass-hover: #b45309;
       --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
     body {
       background: var(--bg-canvas);
       color: var(--text-main);
@@ -28,6 +30,7 @@
       justify-content: center;
       padding: 24px;
     }
+
     .container {
       width: 100%;
       max-width: 680px;
@@ -39,13 +42,18 @@
       display: flex;
       flex-direction: column;
     }
+
     .progress-bar-container { width: 100%; height: 6px; background: #e2e8f0; }
-    .progress-bar { width: 16.6%; height: 100%; background: var(--brand-primary); transition: width 0.3s ease; }
+    .progress-bar { width: 14%; height: 100%; background: var(--brand-primary); transition: width 0.3s ease; }
+
     .slide { display: none; padding: 40px 32px; }
     .slide.active { display: flex; flex-direction: column; gap: 20px; }
-    h1, h2 { font-weight: 800; color: var(--text-main); line-height: 1.2; }
+
+    h1, h2, h3 { font-weight: 800; color: var(--text-main); line-height: 1.2; }
     p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.5; }
+
     .option-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px; }
+
     .btn-option {
       background: #f1f5f9;
       border: 2px solid #e2e8f0;
@@ -63,6 +71,7 @@
       background: #eef2ff;
       color: var(--brand-primary);
     }
+
     .action-bar {
       display: flex;
       justify-content: space-between;
@@ -71,6 +80,7 @@
       padding-top: 20px;
       border-top: 1px solid var(--border-subtle);
     }
+
     .btn {
       padding: 12px 24px;
       border-radius: 10px;
@@ -84,6 +94,7 @@
     .btn-back:hover { background: #cbd5e1; }
     .btn-next { background: var(--brand-primary); color: #fff; margin-left: auto; }
     .btn-next:hover { background: var(--brand-primary-hover); }
+
     .btn-fastpass {
       background: var(--accent-fastpass);
       color: #fff;
@@ -94,6 +105,28 @@
       letter-spacing: 0.5px;
     }
     .btn-fastpass:hover { background: var(--accent-fastpass-hover); }
+
+    .btn-linkedin {
+      background: #0a66c2;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-linkedin:hover { background: #084e96; }
+
+    .input-field {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--border-subtle);
+      border-radius: 10px;
+      font-size: 1rem;
+      color: var(--text-main);
+      outline: none;
+      margin-top: 8px;
+    }
+    .input-field:focus { border-color: var(--brand-primary); }
+
     .workprint-box {
       background: #f8fafc;
       border: 2px dashed var(--brand-primary);
@@ -102,6 +135,7 @@
       text-align: center;
     }
     .workprint-emojis { font-size: 2.2rem; letter-spacing: 8px; margin: 12px 0; }
+
     .referral-card {
       background: #eef2ff;
       border: 1px solid #c7d2fe;
@@ -130,23 +164,24 @@
 
   <!-- Slide 1: Welcome -->
   <div class="slide active" id="slide-1">
-    <h1>Welcome to LabMatch</h1>
-    <p>Calibrate your technical and cognitive signature to match top AI research labs and production pipelines.</p>
+    <h1>Find AI Work at Leading Labs</h1>
+    <p>Take this 30-second diagnostic to see AI projects for your skills and check how much you can earn.</p>
     <div class="action-bar">
-      <button class="btn btn-next" onclick="nextSlide(2)">Begin Assessment &rarr;</button>
+      <button class="btn btn-next" onclick="nextSlide(2)">Start Quiz &rarr;</button>
     </div>
   </div>
 
-  <!-- Slide 2: Domain Segment Selection -->
+  <!-- Slide 2: Q1 - Segment / Field -->
   <div class="slide" id="slide-2">
-    <h2>Primary Knowledge Domain</h2>
-    <p>Select your primary operational strength:</p>
+    <h2>1. What is your ideal work area?</h2>
+    <p>Pick the field you know best:</p>
     <div class="option-grid">
-      <button class="btn-option" onclick="selectDomain('Software Engineering')">💻 Software Engineering</button>
-      <button class="btn-option" onclick="selectDomain('Medicine')">🩺 Medicine & Healthcare</button>
-      <button class="btn-option" onclick="selectDomain('Humanities')">📚 Humanities & Content Writing</button>
-      <button class="btn-option" onclick="selectDomain('Data Analysis')">📊 Data Analysis & Ops</button>
-      <button class="btn-option" onclick="selectDomain('Law')">⚖️ Legal & Compliance</button>
+      <button class="btn-option" onclick="selectDomain('Coding & Tech')">💻 Coding & Tech ($45 - $65/hr)</button>
+      <button class="btn-option" onclick="selectDomain('Healthcare & Medicine')">🩺 Healthcare & Medicine ($60 - $85/hr)</button>
+      <button class="btn-option" onclick="selectDomain('Writing & Reading')">📚 Writing & Reading ($35 - $50/hr)</button>
+      <button class="btn-option" onclick="selectDomain('Data & Numbers')">📊 Data & Numbers ($40 - $55/hr)</button>
+      <button class="btn-option" onclick="selectDomain('Law & Rules')">⚖️ Law & Rules ($50 - $75/hr)</button>
+      <button class="btn-option" onclick="selectDomain('Money & Business')">📈 Money & Business ($45 - $60/hr)</button>
     </div>
     <div class="action-bar">
       <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
@@ -154,13 +189,15 @@
     </div>
   </div>
 
-  <!-- Slide 3: Experience Layer -->
+  <!-- Slide 3: Q2 - Experience in Years -->
   <div class="slide" id="slide-3">
-    <h2>Experience Calibration</h2>
-    <p>How do you navigate problem spaces?</p>
+    <h2>2. How much professional experience do you have?</h2>
+    <p>Choose the option that fits you best:</p>
     <div class="option-grid">
-      <button class="btn-option" onclick="selectExperience('Senior Principal / Edge Architect')">Senior Principal / Edge Architect</button>
-      <button class="btn-option" onclick="selectExperience('Domain Evaluator / Applied Practitioner')">Domain Evaluator / Applied Practitioner</button>
+      <button class="btn-option" onclick="selectYears('Under 1 year (Just starting out)')">🌱 Under 1 year (Just starting out)</button>
+      <button class="btn-option" onclick="selectYears('1 to 3 years (Some good practice)')">🚀 1 to 3 years (Some good practice)</button>
+      <button class="btn-option" onclick="selectYears('3 to 5 years (Solid background)')">⭐ 3 to 5 years (Solid background)</button>
+      <button class="btn-option" onclick="selectYears('5+ years (Expert level)')">🏆 5+ years (Expert level)</button>
     </div>
     <div class="action-bar">
       <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
@@ -168,14 +205,14 @@
     </div>
   </div>
 
-  <!-- Slide 4: Cognitive & Psychometric Style -->
+  <!-- Slide 4: Q3 - Work Style -->
   <div class="slide" id="slide-4">
-    <h2>Cognitive Style</h2>
-    <p>Select your dominant evaluation rhythm:</p>
+    <h2>3. How do you prefer to solve problems?</h2>
+    <p>Pick your favorite way to work:</p>
     <div class="option-grid">
-      <button class="btn-option" onclick="selectPsychometric('Granular Adversarial')">Granular Adversarial (Finding edge bugs & logical failure modes)</button>
-      <button class="btn-option" onclick="selectPsychometric('Synthetic Structural')">Synthetic Structural (System architecture & schema alignment)</button>
-      <button class="btn-option" onclick="selectPsychometric('Heuristic Creative')">Heuristic Creative (Generative lateral boundary traversal)</button>
+      <button class="btn-option" onclick="selectWorkStyle('Bug Finding')">🔍 Bug Finder: I like finding mistakes and fixing them.</button>
+      <button class="btn-option" onclick="selectWorkStyle('System Building')">📐 System Builder: I like neat steps and clear organization.</button>
+      <button class="btn-option" onclick="selectWorkStyle('Creative Thinking')">💡 Creative Thinker: I like trying new ideas and brainstorming.</button>
     </div>
     <div class="action-bar">
       <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
@@ -183,41 +220,73 @@
     </div>
   </div>
 
-  <!-- Slide 5: Results & Universal AI Workprint -->
+  <!-- Slide 5: Q4 - Learning Style -->
   <div class="slide" id="slide-5">
-    <h2>Your AI Workprint Results</h2>
+    <h2>4. How do you learn?</h2>
+    <p>Choose what works best when learning new skills:</p>
+    <div class="option-grid">
+      <button class="btn-option" onclick="selectLearningStyle('Visual')">👁️ Visual: Watching videos, looking at charts, and seeing pictures.</button>
+      <button class="btn-option" onclick="selectLearningStyle('Audio')">🎧 Audio: Listening to guides, podcasts, and spoken words.</button>
+      <button class="btn-option" onclick="selectLearningStyle('Hands-On')">✍️ Hands-On: Reading instructions and doing it myself step-by-step.</button>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
+    </div>
+  </div>
+
+  <!-- Slide 6: Q5 - Commitment Level -->
+  <div class="slide" id="slide-6">
+    <h2>5. How much time can you contribute?</h2>
+    <p>Pick the best work schedule for you:</p>
+    <div class="option-grid">
+      <button class="btn-option" onclick="selectCommitment('Full-Time (30+ hours a week)')">🏢 Full-Time (30+ hours/week)</button>
+      <button class="btn-option" onclick="selectCommitment('Part-Time (10 to 20 hours a week)')">⏱️ Part-Time (10 to 20 hours/week)</button>
+      <button class="btn-option" onclick="selectCommitment('Flexible (Pick my own hours whenever I want)')">🎯 Flexible (Pick my own hours)</button>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
+    </div>
+  </div>
+
+  <!-- Slide 7: Penultimate Slide - Email Capture -->
+  <div class="slide" id="slide-7">
+    <h2>Where should we send your results?</h2>
+    <p>Get your custom AI lab invite and pay rate. No spam, ever.</p>
+    <div style="margin-top: 12px;">
+      <label for="userEmailInput" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">YOUR EMAIL ADDRESS</label>
+      <input type="email" id="userEmailInput" class="input-field" placeholder="name@example.com" required />
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+      <button class="btn btn-next" onclick="submitEmailAndFinish()">See My Match &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Slide 8: Custom Results & Direct Referral Link Deck -->
+  <div class="slide" id="slide-8">
+    <h2>Your AI Workprint is...</h2>
     <div class="workprint-box">
-      <div class="workprint-emojis" id="workprintEmojiDisplay">⚡️ 🧠 🔬 🛡️</div>
-      <h3 id="workprintRoleDisplay">Code Evaluator</h3>
-      <p id="workprintRateDisplay">Estimated Rate Index: $45 - $65 / hr</p>
+      <div class="workprint-emojis" id="workprintEmojiDisplay">⚡️ 🔍 🛠️ 🛡️</div>
+      <h3 id="workprintRoleDisplay">Code Helper</h3>
+      <p id="workprintRateDisplay">Estimated Pay: $45 - $65 per hour</p>
     </div>
     <div class="referral-card" id="standardReferralCard">
-      <h4>Direct Matched Lab Pipeline</h4>
+      <h4>Your Matched AI Lab</h4>
       <p id="labPartnerName">Turing AI Lab</p>
-      <a href="#" id="directLabUrl" target="_blank" rel="noopener">Enter Lab Evaluation Deck &rarr;</a>
+      <a href="#" id="directLabUrl" target="_blank" rel="noopener">Open Lab Invite &rarr;</a>
     </div>
     <div class="action-bar">
       <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-      <button class="btn btn-next" onclick="shareWorkprint()">🚀 Share AI Workprint</button>
-    </div>
-  </div>
-
-  <!-- Slide 6: FAST PASS Routing Slide -->
-  <div class="slide" id="slide-6">
-    <h2>⚡ Fast Pass Direct Lab Routing</h2>
-    <p>Skipped deep psychometrics. Based on your active selections, here is your expedited direct routing:</p>
-    <div class="referral-card">
-      <h3 id="fastPassLabName">Turing AI Lab</h3>
-      <p id="fastPassRole">Target Track: Code Evaluator</p>
-      <p id="fastPassRate">Rate Band: $45 - $65 / hr</p>
-      <a href="#" id="fastPassLink" target="_blank" rel="noopener">Access Expedited Pipeline &rarr;</a>
-    </div>
-    <div class="action-bar">
-      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+      <button class="btn btn-linkedin" onclick="shareToLinkedIn()">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        Share on LinkedIn
+      </button>
     </div>
   </div>
 </div>
 
-<script src="labmatch-router.js"></script>
+<script src="labmatch-router.js?v=2.6.0"></script>
 </body>
 </html>
