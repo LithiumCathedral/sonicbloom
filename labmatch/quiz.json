@@ -1,102 +1,95 @@
 {
   "branding": {
     "engineName": "LabMatch",
-    "version": "2.5.0",
+    "version": "2.6.0",
     "studioSignature": "SonicBloom",
     "platformUrl": "https://sonicbloom.dev/labmatch"
   },
   "matrices": {
     "tracks": [
       {
-        "segment": "Software Engineering",
-        "role": "Code Evaluator",
+        "segment": "Coding & Tech",
+        "role": "Code Helper",
         "rateIndex": "$45 - $65",
-        "referralName": "Software AI Roles",
-        "referralUrl": "https://t.mercor.com/rrVyb"
+        "referralName": "Turing AI Lab",
+        "referralUrl": "https://work.turing.com/r/lZvCS-A7-T"
       },
       {
-        "segment": "Data Analysis",
-        "role": "Data Critic",
+        "segment": "Data & Numbers",
+        "role": "Data Checker",
         "rateIndex": "$40 - $55",
-        "referralName": "Data Ops Group",
-        "referralUrl": "https://t.mercor.com/K13Z9"
+        "referralName": "Turing Data Ops",
+        "referralUrl": "https://work.turing.com/r/lZvCS-A7-T"
       },
       {
-        "segment": "Medicine",
-        "role": "Clinical Validator",
+        "segment": "Healthcare & Medicine",
+        "role": "Health Expert",
         "rateIndex": "$60 - $85",
-        "referralName": "Medical Experts in AI",
-        "referralUrl": "https://t.mercor.com/1Sxsx"
+        "referralName": "Handshake Health Labs",
+        "referralUrl": "https://joinhandshake.com"
       },
       {
-        "segment": "Human Sciences",
-        "role": "Research Accelerator",
+        "segment": "Science & Nature",
+        "role": "Science Helper",
         "rateIndex": "$45 - $65",
-        "referralName": "Life Science Network",
-        "referralUrl": "https://t.mercor.com/PEfVh"
+        "referralName": "Handshake Clinical Network",
+        "referralUrl": "https://joinhandshake.com"
       },
       {
-        "segment": "Humanities",
-        "role": "Reasoning Specialist",
+        "segment": "Writing & Reading",
+        "role": "Writing Specialist",
         "rateIndex": "$35 - $50",
-        "referralName": "Human-AI Exchange",
-        "referralUrl": "https://t.mercor.com/uP10o"
+        "referralName": "Mercor Expert Exchange",
+        "referralUrl": "https://t.mercor.com/ti1xQ"
       },
       {
-        "segment": "Language & Listening",
-        "role": "Linguistics Expert",
+        "segment": "Languages & Audio",
+        "role": "Language Expert",
         "rateIndex": "$35 - $50",
-        "referralName": "AI Language Cohort",
-        "referralUrl": "https://t.mercor.com/dWbN8"
+        "referralName": "Mercor Language Tier",
+        "referralUrl": "https://t.mercor.com/ti1xQ"
       },
       {
-        "segment": "Arts",
-        "role": "Generative Designer",
+        "segment": "Art & Design",
+        "role": "Creative Designer",
         "rateIndex": "$35 - $50",
-        "referralName": "Creative AI Hub",
-        "referralUrl": "https://t.mercor.com/P5jqE"
+        "referralName": "Mercor Creative Hub",
+        "referralUrl": "https://t.mercor.com/ti1xQ"
       },
       {
-        "segment": "Finance",
-        "role": "Quantitative Reviewer",
+        "segment": "Money & Business",
+        "role": "Business Guide",
         "rateIndex": "$45 - $60",
-        "referralName": "Quantitative Trainers",
-        "referralUrl": "https://t.mercor.com/po98d"
+        "referralName": "Mercor Quantitative",
+        "referralUrl": "https://t.mercor.com/ti1xQ"
       },
       {
-        "segment": "Law",
-        "role": "Compliance Commander",
+        "segment": "Law & Rules",
+        "role": "Rules Specialist",
         "rateIndex": "$50 - $75",
-        "referralName": "AI Governance Desk",
-        "referralUrl": "https://t.mercor.com/j41qe"
-      },
-      {
-        "segment": "Business Operations",
-        "role": "Operations Specialist",
-        "rateIndex": "$35 - $50",
-        "referralName": "Enterprise AI Lab",
-        "referralUrl": "https://t.mercor.com/YCgs8"
+        "referralName": "Mercor Governance Desk",
+        "referralUrl": "https://t.mercor.com/ti1xQ"
       }
     ],
-    "psychometrics": [
+    "workStyles": [
       {
-        "type": "Granular Adversarial",
-        "emojiPrint": "⚡️ 🧠 🔬 🛡️",
-        "focus": "Edge vulnerability identifier with systematic stress-testing skills"
+        "type": "Bug Finder",
+        "emojiPrint": "⚡️ 🔍 🛠️ 🛡️",
+        "description": "You spot mistakes and test things to make them work better."
       },
       {
-        "type": "Synthetic Structural",
+        "type": "System Builder",
         "emojiPrint": "🏛️ 📐 🧩 🌐",
-        "focus": "Clean logical schema constructor defining macro rules and patterning"
+        "description": "You like step-by-step plans and making neat, clear systems."
       },
       {
-        "type": "Heuristic Creative",
+        "type": "Creative Thinker",
         "emojiPrint": "🎨 💡 🔮 🌊",
-        "focus": "Interpretive boundary finder applying semantic logic and fluid problem-solving"
+        "description": "You share fresh ideas and look at problems from new angles."
       }
     ]
   },
   "sharing": {
-    "templateText": "⚡️ My AI Workprint: VAR_EMOJIS\n🎯 Trademark: VAR_SEGMENT (VAR_WORK_STYLE)\n💼 Recommended Role: VAR_ROLE1 | Market Index: VAR_RATE\n\nGenerated via SonicBloom LabMatch: https://sonicbloom.dev/labmatch"
+    "templateText": "⚡️ My AI Workprint: VAR_EMOJIS\n🎯 Field: VAR_SEGMENT (VAR_WORK_STYLE)\n💼 Matched Role: VAR_ROLE1 | Pay Band: VAR_RATE\n\nFind your AI work match with LabMatch: https://sonicbloom.dev/labmatch"
   }
 }
