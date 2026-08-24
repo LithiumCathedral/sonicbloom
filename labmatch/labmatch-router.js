@@ -1,8 +1,7 @@
-// SonicBloom LabMatch Unified Routing & Digital Emoji Print Engine 
 class LabMatchRouter {
   constructor() {
     this.currentSlide = 1;
-    this.totalSlides = 6; // Title, Domain, Exp, CogStyle, Full Results, FastPass Results
+    this.totalSlides = 6;
     this.quizData = null;
     this.state = {
       email: '',
@@ -23,7 +22,7 @@ class LabMatchRouter {
       this.updateProgressBar();
       console.log(`[LABMATCH] System operational: v${this.quizData.branding.version}`);
     } catch (err) {
-      console.error("[CRITICAL] Ingestion mapping configuration file failed:", err);
+      console.error("[CRITICAL] Failed to load quiz.json configuration:", err);
     }
   }
 
@@ -80,18 +79,14 @@ class LabMatchRouter {
     const matchedTrack = this.getMatchedTrack();
     const matchedPsy = this.getMatchedPsychometric();
 
-    // Render Results
     document.getElementById('workprintEmojiDisplay').innerText = matchedPsy.emojiPrint;
     document.getElementById('workprintRoleDisplay').innerText = matchedTrack.role;
     document.getElementById('workprintRateDisplay').innerText = `Estimated Rate Index: ${matchedTrack.rateIndex} / hr`;
     document.getElementById('labPartnerName').innerText = matchedTrack.referralName;
     document.getElementById('directLabUrl').setAttribute('href', matchedTrack.referralUrl);
 
-    // Compile share string
     this.compileShareString(matchedTrack, matchedPsy);
-
-    // Dispatch logging and go to results slide
-    this.dispatchTelemetryLog();
+    this.dispatchTelemetryLog('STANDARD');
     this.goToSlide(5);
   }
 
@@ -108,7 +103,7 @@ class LabMatchRouter {
   }
 
   compileShareString(track, psy) {
-    let tpl = this.quizData.sharing.templateText;
+    const tpl = this.quizData.sharing.templateText;
     this.generatedShareString = tpl
       .replace('VAR_EMOJIS', psy.emojiPrint)
       .replace('VAR_SEGMENT', track.segment)
@@ -120,7 +115,6 @@ class LabMatchRouter {
   async shareWorkprint() {
     if (!this.generatedShareString) return;
 
-    // Use Web Share API if supported (mobile/modern desktop), fallback to clipboard
     if (navigator.share) {
       try {
         await navigator.share({
@@ -130,7 +124,7 @@ class LabMatchRouter {
         });
         return;
       } catch (err) {
-        console.warn('Native share dismissed or failed, defaulting to clipboard:', err);
+        console.warn('Native share dismissed, copying to clipboard instead:', err);
       }
     }
 
@@ -142,36 +136,32 @@ class LabMatchRouter {
     }
   }
 
-async dispatchTelemetryLog(mode = 'STANDARD') {
-  const payload = {
-    timestamp: new Date().toISOString(),
-    routingMode: mode,
-    metrics: this.state
-  };
+  async dispatchTelemetryLog(mode = 'STANDARD') {
+    const payload = {
+      timestamp: new Date().toISOString(),
+      routingMode: mode,
+      email: this.state.email,
+      state: this.state
+    };
 
-  // 1. Browser LocalStorage redundancy
-  try {
-    const queue = JSON.parse(localStorage.getItem('labmatch_telemetry_queue') || '[]');
-    queue.push(payload);
-    localStorage.setItem('labmatch_telemetry_queue', JSON.stringify(queue));
-  } catch (storageErr) {
-    console.warn("[TELEMETRY] Local cache write failed:", storageErr);
-  }
-
-  // 2. Direct Ingestion to Google Sheets / Drive
-  const GOOGLE_DRIVE_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwC_oRSh_cUenl8DdVFDPRiIql0rN70fjMjGICg77FhMQxXjPUlRVX6b7UcssKnM10wJw/exec';
-
-  if (GOOGLE_DRIVE_WEBHOOK_URL && GOOGLE_DRIVE_WEBHOOK_URL !== 'https://script.google.com/macros/s/AKfycbwC_oRSh_cUenl8DdVFDPRiIql0rN70fjMjGICg77FhMQxXjPUlRVX6b7UcssKnM10wJw/exec') {
+    // 1. Local Browser Storage Queue
     try {
-      await fetch(GOOGLE_DRIVE_WEBHOOK_URL, {
+      const existingQueue = JSON.parse(localStorage.getItem('labmatch_telemetry_queue') || '[]');
+      existingQueue.push(payload);
+      localStorage.setItem('labmatch_telemetry_queue', JSON.stringify(existingQueue));
+    } catch (storageErr) {
+      console.warn("[TELEMETRY] Local storage backup failed:", storageErr);
+    }
+
+    // 2. Vercel Serverless Endpoint
+    try {
+      await fetch('/api/capture', {
         method: 'POST',
-        mode: 'no-cors', // Required for Google Apps Script redirects
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      console.log("[LABMATCH TELEMETRY] Log transmitted to Google Drive / Sheets.");
     } catch (e) {
-      console.warn("[LABMATCH TELEMETRY] Direct transmission failed, stored locally.", e);
+      console.warn("[TELEMETRY] API capture unreachable, data saved locally.", e);
     }
   }
 }
