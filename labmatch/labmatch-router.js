@@ -142,38 +142,36 @@ class LabMatchRouter {
     }
   }
 
-  async dispatchTelemetryLog(mode = 'STANDARD') {
-    const payload = {
-      timestamp: new Date().toISOString(),
-      routingMode: mode,
-      state: this.state
-    };
+async dispatchTelemetryLog(mode = 'STANDARD') {
+  const payload = {
+    timestamp: new Date().toISOString(),
+    routingMode: mode,
+    metrics: this.state
+  };
 
-    console.log("[LABMATCH TELEMETRY] Capturing state snapshot:", payload);
+  // 1. Browser LocalStorage redundancy
+  try {
+    const queue = JSON.parse(localStorage.getItem('labmatch_telemetry_queue') || '[]');
+    queue.push(payload);
+    localStorage.setItem('labmatch_telemetry_queue', JSON.stringify(queue));
+  } catch (storageErr) {
+    console.warn("[TELEMETRY] Local cache write failed:", storageErr);
+  }
 
-    // Save to local storage queue to guarantee zero data loss
+  // 2. Direct Ingestion to Google Sheets / Drive
+  const GOOGLE_DRIVE_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwC_oRSh_cUenl8DdVFDPRiIql0rN70fjMjGICg77FhMQxXjPUlRVX6b7UcssKnM10wJw/exec';
+
+  if (GOOGLE_DRIVE_WEBHOOK_URL && GOOGLE_DRIVE_WEBHOOK_URL !== 'https://script.google.com/macros/s/AKfycbwC_oRSh_cUenl8DdVFDPRiIql0rN70fjMjGICg77FhMQxXjPUlRVX6b7UcssKnM10wJw/exec') {
     try {
-      const existingQueue = JSON.parse(localStorage.getItem('labmatch_telemetry_queue') || '[]');
-      existingQueue.push(payload);
-      localStorage.setItem('labmatch_telemetry_queue', JSON.stringify(existingQueue));
-    } catch (storageErr) {
-      console.warn("[TELEMETRY] Local storage write failed:", storageErr);
-    }
-
-    // Remote capture attempt
-    try {
-      const resp = await fetch('/api/capture', {
+      await fetch(GOOGLE_DRIVE_WEBHOOK_URL, {
         method: 'POST',
+        mode: 'no-cors', // Required for Google Apps Script redirects
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      if (resp.ok) {
-        console.log("[LABMATCH TELEMETRY] Remote transmission verified.");
-      } else {
-        console.warn("[LABMATCH TELEMETRY] Remote server responded with status:", resp.status);
-      }
+      console.log("[LABMATCH TELEMETRY] Log transmitted to Google Drive / Sheets.");
     } catch (e) {
-      console.warn("[LABMATCH TELEMETRY] Remote server unreachable. Log preserved in local telemetry queue.", e);
+      console.warn("[LABMATCH TELEMETRY] Direct transmission failed, stored locally.", e);
     }
   }
 }
