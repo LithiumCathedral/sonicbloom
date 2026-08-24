@@ -3,530 +3,413 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SonicBloom | Technical Architecture & RLHF Lab Routing</title>
-  <meta name="description" content="Calibrate your technical signature, evaluate logic density, and route directly into verified AI research lab compensation tiers.">
+  <title>SonicBloom | Digital Architecture & Talent Diagnostic Infrastructure</title>
+  <meta name="description" content="Minimalist digital sandbox and structured data pipelines calibrating human talent to AI research lab tiers.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0f19;
-      --bg-card: #111827;
-      --bg-terminal: #0d121f;
-      --border: #1e293b;
-      --border-focus: #334155;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg-page: #f8fafc;
+      --card-white: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border-light: #e2e8f0;
+      
+      /* Dark Terminal Theme */
+      --terminal-bg: #090d16;
+      --terminal-sidebar: #0d121f;
+      --terminal-card: #111827;
+      --terminal-border: #1e293b;
+      --terminal-text: #f8fafc;
+      --terminal-text-muted: #94a3b8;
       --brand-orange: #ff6a00;
-      --brand-orange-hover: #e05d00;
-      --brand-orange-dim: rgba(255, 106, 0, 0.08);
+      --brand-orange-dim: rgba(255, 106, 0, 0.12);
       --rate-green: #34d399;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: var(--bg-page);
+      color: var(--text-dark);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* Top Compensation Index Strip */
-    .rate-bar {
-      background: #060911;
-      border-bottom: 1px solid var(--border);
-      padding: 10px 24px;
+    /* Top Strip Header */
+    .top-header {
+      background: var(--card-white);
+      border-bottom: 1px solid var(--border-light);
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-decoration: none;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      gap: 8px;
     }
 
-    .rate-bar-items {
+    .brand-logo .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--brand-orange);
+      box-shadow: 0 0 8px var(--brand-orange);
+    }
+
+    .top-nav {
       display: flex;
-      gap: 24px;
-      overflow-x: auto;
-      white-space: nowrap;
+      gap: 20px;
+      font-size: 0.85rem;
     }
 
-    .rate-bar-items span b {
-      color: var(--rate-green);
-      font-weight: 700;
+    .top-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .top-nav a:hover { color: var(--brand-orange); }
+
+    /* Main Container Frame */
+    .main-wrapper {
+      max-width: 1300px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
     }
 
-    /* Main Grid */
-    .workspace-grid {
+    .hero-intro {
+      max-width: 800px;
+    }
+
+    .hero-intro h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .hero-intro p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* Unified Dark Terminal Shell */
+    .terminal-window {
+      background: var(--terminal-bg);
+      border: 1px solid var(--terminal-border);
+      border-radius: 12px;
+      overflow: hidden;
       display: grid;
       grid-template-columns: 280px 1fr;
-      flex: 1;
-      max-width: 1400px;
-      width: 100%;
-      margin: 0 auto;
-      border-left: 1px solid var(--border);
-      border-right: 1px solid var(--border);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+      color: var(--terminal-text);
+      min-height: 580px;
     }
 
     @media (max-width: 900px) {
-      .workspace-grid { grid-template-columns: 1fr; }
+      .terminal-window { grid-template-columns: 1fr; }
     }
 
-    /* Clean Sidebar */
-    .sidebar {
-      background: var(--bg-terminal);
-      border-right: 1px solid var(--border);
-      padding: 28px 24px;
+    /* Terminal Sidebar */
+    .terminal-sidebar {
+      background: var(--terminal-sidebar);
+      border-right: 1px solid var(--terminal-border);
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 24px;
     }
 
-    .brand-header h1 {
-      font-family: 'Space Mono', monospace;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      letter-spacing: -0.5px;
-    }
-
-    .brand-header .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--brand-orange);
-      box-shadow: 0 0 10px var(--brand-orange);
-    }
-
-    .discovery-tree {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .tree-group-title {
+    .tree-title {
       font-family: 'Space Mono', monospace;
       font-size: 0.7rem;
-      color: var(--text-muted);
+      color: var(--terminal-text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 8px;
     }
 
-    .tree-branch {
+    .tree-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      border-left: 1px solid var(--border);
-      padding-left: 14px;
+      gap: 6px;
+      border-left: 1px solid var(--terminal-border);
+      padding-left: 12px;
       margin-left: 4px;
     }
 
     .tree-link {
-      color: var(--text-muted);
+      color: var(--terminal-text-muted);
       text-decoration: none;
       font-size: 0.85rem;
-      padding: 6px 10px;
-      border-radius: 6px;
+      padding: 5px 8px;
+      border-radius: 4px;
       transition: all 0.15s ease;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
 
     .tree-link:hover, .tree-link.active {
-      color: var(--text);
       background: var(--brand-orange-dim);
       color: var(--brand-orange);
     }
 
-    .sidebar-footer {
-      margin-top: auto;
+    .status-badge {
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
     }
+    .status-badge.live { background: rgba(52, 211, 153, 0.15); color: var(--rate-green); }
+    .status-badge.staged { background: rgba(148, 163, 184, 0.15); color: var(--terminal-text-muted); }
 
-    /* Main Viewport */
-    .content-viewport {
-      padding: 40px 48px;
+    /* Terminal Content Area */
+    .terminal-content {
+      padding: 36px;
       display: flex;
       flex-direction: column;
-      gap: 36px;
-    }
-
-    @media (max-width: 600px) {
-      .content-viewport { padding: 24px 16px; }
-    }
-
-    .hero-banner h2 {
-      font-size: 1.9rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .hero-banner p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      max-width: 720px;
-    }
-
-    /* Embedded Terminal Card */
-    .terminal-container {
-      background: var(--bg-terminal);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
+      gap: 24px;
     }
 
     .terminal-topbar {
-      background: #080c14;
-      border-bottom: 1px solid var(--border);
-      padding: 12px 20px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--terminal-border);
+      padding-bottom: 16px;
     }
 
-    .terminal-signals {
+    .terminal-signals { display: flex; gap: 6px; }
+    .dot-signal { width: 10px; height: 10px; border-radius: 50%; background: #1e293b; }
+    .dot-signal.red { background: #ef4444; }
+    .dot-signal.yellow { background: #f59e0b; }
+    .dot-signal.green { background: #10b981; }
+
+    /* Project Tiles Grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .project-tile {
+      background: var(--terminal-card);
+      border: 1px solid var(--terminal-border);
+      border-radius: 10px;
+      padding: 24px;
       display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project-tile.active-link {
+      border-color: var(--brand-orange);
+      cursor: pointer;
+    }
+    .project-tile.active-link:hover {
+      box-shadow: 0 0 15px rgba(255, 106, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .project-tile.disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .tile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tile-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--terminal-text);
+    }
+
+    .tile-desc {
+      color: var(--terminal-text-muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .tile-action {
+      margin-top: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--brand-orange);
+      display: flex;
+      align-items: center;
       gap: 6px;
     }
 
-    .signal-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #1e293b;
-    }
-    .signal-dot.red { background: #ef4444; }
-    .signal-dot.yellow { background: #f59e0b; }
-    .signal-dot.green { background: #10b981; }
-
-    .terminal-title {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+    .tile-action.locked {
+      color: var(--terminal-text-muted);
     }
 
-    .terminal-body {
-      padding: 32px;
-    }
-
-    /* Quiz Slide Transitions */
-    .quiz-slide { display: none; flex-direction: column; gap: 20px; }
-    .quiz-slide.active { display: flex; }
-
-    .quiz-slide h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .quiz-slide p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .option-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    @media (max-width: 650px) {
-      .option-grid { grid-template-columns: 1fr; }
-    }
-
-    .btn-matrix {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 14px 18px;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 500;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .btn-matrix:hover {
-      border-color: var(--brand-orange);
-      background: var(--brand-orange-dim);
-      color: var(--brand-orange);
-    }
-
-    .btn-matrix .rate-badge {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--rate-green);
-    }
-
-    .action-row {
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-light);
+      background: var(--card-white);
+      padding: 24px 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-
-    .btn {
-      padding: 10px 22px;
-      border-radius: 8px;
       font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.15s ease;
+      color: var(--text-muted);
     }
 
-    .btn-back { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
-    .btn-back:hover { color: var(--text); border-color: var(--border-focus); }
-    .btn-action { background: var(--brand-orange); color: #ffffff; }
-    .btn-action:hover { background: var(--brand-orange-hover); }
-    .btn-fastpass { background: transparent; color: var(--brand-orange); border: 1px dashed var(--brand-orange); font-family: 'Space Mono', monospace; font-size: 0.75rem; }
-    .btn-fastpass:hover { background: var(--brand-orange-dim); }
-
-    /* Results */
-    .result-summary-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 28px;
-      text-align: center;
-    }
-
-    .result-emojis {
-      font-size: 2.2rem;
-      letter-spacing: 10px;
-      margin-bottom: 12px;
-    }
-
-    .result-card-link {
-      display: inline-block;
-      margin-top: 18px;
-      background: var(--brand-orange);
-      color: #ffffff;
+    footer a {
+      color: var(--text-muted);
       text-decoration: none;
-      padding: 12px 26px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
+      margin-left: 16px;
     }
+    footer a:hover { color: var(--brand-orange); }
   </style>
 </head>
 <body>
 
-  <!-- Top Metric Index -->
-  <div class="rate-bar">
-    <span>SYSTEM: <b>ONLINE (v2.5.0)</b></span>
-    <div class="rate-bar-items">
-      <span>MEDICINE <b>$60 - $85/HR</b></span>
-      <span>LAW <b>$50 - $75/HR</b></span>
-      <span>SOFTWARE <b>$45 - $65/HR</b></span>
-      <span>DATA OPS <b>$40 - $55/HR</b></span>
-      <span>HUMANITIES <b>$35 - $50/HR</b></span>
+  <header class="top-header">
+    <a href="/" class="brand-logo">
+      <span class="dot"></span>
+      SonicBloom
+    </a>
+    <nav class="top-nav">
+      <a href="/labmatch/">LabMatch Engine</a>
+      <a href="/content/">Knowledge Hub</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="main-wrapper">
+    <div class="hero-intro">
+      <h1>Deterministic Intake & Diagnostic Infrastructure</h1>
+      <p>A production environment mapping specialized domain labor, data density calibrations, and automated research lab routing pathways.</p>
     </div>
-  </div>
 
-  <div class="workspace-grid">
-    <!-- Branched Discovery Sidebar -->
-    <aside class="sidebar">
-      <div class="brand-header">
-        <span class="dot"></span>
-        <h1>SonicBloom</h1>
-      </div>
-
-      <nav class="discovery-tree">
+    <!-- Dark Terminal System -->
+    <div class="terminal-window">
+      <!-- 2 Divisions in Terminal Tree + Utility Links -->
+      <aside class="terminal-sidebar">
         <div>
-          <div class="tree-group-title">01 / Engine Core</div>
-          <ul class="tree-branch">
-            <li><a href="#diagnostic" class="tree-link active">⚡ LabMatch Diagnostic</a></li>
-            <li><a href="/content/" class="tree-link">📁 Knowledge Hub</a></li>
+          <div class="tree-title">01 / Active Projects</div>
+          <ul class="tree-list">
+            <li><a href="/labmatch/" class="tree-link active">LabMatch <span>v2.5</span></a></li>
+            <li><a href="#projects" class="tree-link">Plath Matrix <span class="status-badge staged">STAGED</span></a></li>
+            <li><a href="#projects" class="tree-link">Go Grid Engine <span class="status-badge staged">STAGED</span></a></li>
           </ul>
         </div>
 
         <div>
-          <div class="tree-group-title">02 / Technical Nodes</div>
-          <ul class="tree-branch">
+          <div class="tree-title">02 / Content System</div>
+          <ul class="tree-list">
+            <li><a href="/content/" class="tree-link">Master Index</a></li>
+            <li><a href="/content/articles/calculating-logic-density.html" class="tree-link">Logic Density Guide</a></li>
+            <li><a href="/content/articles/semantic-pruning-mechanics.html" class="tree-link">Semantic Pruning</a></li>
             <li><a href="/content/nodes/n1-parsing-logic.html" class="tree-link">01 Parsing Logic</a></li>
             <li><a href="/content/nodes/n2-rate-architecture.html" class="tree-link">02 Rate Matrix</a></li>
-            <li><a href="/content/nodes/n3-adversarial-mitigation.html" class="tree-link">03 Adversarial Loops</a></li>
           </ul>
+        </div>
+
+        <div style="margin-top: auto;">
+          <div class="tree-title">03 / Platform Ops</div>
+          <ul class="tree-list">
+            <li><a href="/about.html" class="tree-link">About Terminal</a></li>
+            <li><a href="/contact.html" class="tree-link">Contact Desk</a></li>
+            <li><a href="/privacy.html" class="tree-link">Privacy Guarantee</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Terminal Body: Project Tiles Deck -->
+      <section class="terminal-content" id="projects">
+        <div class="terminal-topbar">
+          <div class="terminal-signals">
+            <span class="dot-signal red"></span>
+            <span class="dot-signal yellow"></span>
+            <span class="dot-signal green"></span>
+          </div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--terminal-text-muted);">
+            infrastructure-deck.sys
+          </div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--rate-green);">
+            ONLINE
+          </div>
         </div>
 
         <div>
-          <div class="tree-group-title">03 / Strategic Pillars</div>
-          <ul class="tree-branch">
-            <li><a href="/content/articles/calculating-logic-density.html" class="tree-link">Logic Density Scale</a></li>
-            <li><a href="/content/articles/semantic-pruning-mechanics.html" class="tree-link">Semantic Pruning</a></li>
-          </ul>
-        </div>
-      </nav>
-
-      <div class="sidebar-footer">
-        <span>TAXONOMY</span>
-        <span style="color: var(--rate-green);">CALIBRATED</span>
-      </div>
-    </aside>
-
-    <!-- Content & Embedded Diagnostic -->
-    <main class="content-viewport">
-      <section class="hero-banner">
-        <h2>Deterministic Intake & Lab Calibration</h2>
-        <p>Calibrate your technical signature across active RLHF lines and domain-specific verification pipelines. Evaluate compensation scaling against verified cognitive depth.</p>
-      </section>
-
-      <section class="terminal-container" id="diagnostic">
-        <div class="terminal-topbar">
-          <div class="terminal-signals">
-            <span class="signal-dot red"></span>
-            <span class="signal-dot yellow"></span>
-            <span class="signal-dot green"></span>
-          </div>
-          <div class="terminal-title">labmatch-diagnostic.sh</div>
-          <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--rate-green);">READY</div>
+          <h2 style="font-size: 1.3rem; margin-bottom: 6px;">Ecosystem Project Pipelines</h2>
+          <p style="color: var(--terminal-text-muted); font-size: 0.85rem;">Select an active project pipeline to initiate calibration and diagnostic workflows.</p>
         </div>
 
-        <div class="terminal-body">
-          <!-- Slide 1 -->
-          <div class="quiz-slide active" id="slide-1">
-            <h3>Initialize Cognitive Benchmark</h3>
-            <p>Select your primary operational strength to index your compensation baseline.</p>
-            <div class="action-row">
-              <div></div>
-              <button class="btn btn-action" onclick="nextSlide(2)">Begin Assessment &rarr;</button>
+        <div class="project-grid">
+          <!-- Active Project: LabMatch -->
+          <a href="/labmatch/" class="project-tile active-link">
+            <div class="tile-header">
+              <span class="tile-title">LabMatch</span>
+              <span class="status-badge live">ACTIVE</span>
             </div>
+            <p class="tile-desc">Algorithmic intake engine mapping talent cognitive styles, logic density benchmarks, and direct referral decks across verified research labs.</p>
+            <div class="tile-action">Launch Diagnostic &rarr;</div>
+          </a>
+
+          <!-- Locked Staging: Plath Framework -->
+          <div class="project-tile disabled">
+            <div class="tile-header">
+              <span class="tile-title">Plath Matrix</span>
+              <span class="status-badge staged">STAGING</span>
+            </div>
+            <p class="tile-desc">Deterministic framework mapping personal numerology architectures, lifecycle forecasting, and transitional alignment layers.</p>
+            <div class="tile-action locked">Pipeline Locked (Waitlist)</div>
           </div>
 
-          <!-- Slide 2 -->
-          <div class="quiz-slide" id="slide-2">
-            <h3>01 / Select Primary Domain</h3>
-            <div class="option-grid">
-              <button class="btn-matrix" onclick="selectDomain('Software Engineering')">
-                <span>💻 Software Engineering</span>
-                <span class="rate-badge">$45 - $65/hr</span>
-              </button>
-              <button class="btn-matrix" onclick="selectDomain('Medicine')">
-                <span>🩺 Medicine & Health</span>
-                <span class="rate-badge">$60 - $85/hr</span>
-              </button>
-              <button class="btn-matrix" onclick="selectDomain('Humanities')">
-                <span>📚 Humanities & Writing</span>
-                <span class="rate-badge">$35 - $50/hr</span>
-              </button>
-              <button class="btn-matrix" onclick="selectDomain('Data Analysis')">
-                <span>📊 Data Ops & Analysis</span>
-                <span class="rate-badge">$40 - $55/hr</span>
-              </button>
-              <button class="btn-matrix" onclick="selectDomain('Law')">
-                <span>⚖️ Legal & Compliance</span>
-                <span class="rate-badge">$50 - $75/hr</span>
-              </button>
-              <button class="btn-matrix" onclick="selectDomain('Finance')">
-                <span>📈 Quantitative Finance</span>
-                <span class="rate-badge">$45 - $60/hr</span>
-              </button>
+          <!-- Locked Staging: Go Grid Engine -->
+          <div class="project-tile disabled">
+            <div class="tile-header">
+              <span class="tile-title">Go Grid Engine</span>
+              <span class="status-badge staged">STAGING</span>
             </div>
-            <div class="action-row">
-              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-              <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
-            </div>
+            <p class="tile-desc">Spatial data arrays, token routing paths, and architectural grid logic built for structured dataset ingestion.</p>
+            <div class="tile-action locked">Pipeline Locked (Waitlist)</div>
           </div>
-
-          <!-- Slide 3 -->
-          <div class="quiz-slide" id="slide-3">
-            <h3>02 / Experience Calibration</h3>
-            <p>How do you navigate complex problem spaces?</p>
-            <div class="option-grid">
-              <button class="btn-matrix" onclick="selectExperience('Senior Principal / Edge Architect')">
-                <span>Senior Principal / Edge Architect</span>
-              </button>
-              <button class="btn-matrix" onclick="selectExperience('Domain Evaluator / Applied Practitioner')">
-                <span>Domain Evaluator / Practitioner</span>
-              </button>
-            </div>
-            <div class="action-row">
-              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-              <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
-            </div>
-          </div>
-
-          <!-- Slide 4 -->
-          <div class="quiz-slide" id="slide-4">
-            <h3>03 / Cognitive Signature</h3>
-            <p>Select your dominant evaluation rhythm:</p>
-            <div class="option-grid">
-              <button class="btn-matrix" onclick="selectPsychometric('Granular Adversarial')">
-                <span>Granular Adversarial (Finding Edge Bugs)</span>
-              </button>
-              <button class="btn-matrix" onclick="selectPsychometric('Synthetic Structural')">
-                <span>Synthetic Structural (System Architecture)</span>
-              </button>
-              <button class="btn-matrix" onclick="selectPsychometric('Heuristic Creative')">
-                <span>Heuristic Creative (Lateral Semantics)</span>
-              </button>
-            </div>
-            <div class="action-row">
-              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-              <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
-            </div>
-          </div>
-
-          <!-- Slide 5 -->
-          <div class="quiz-slide" id="slide-5">
-            <h3>Calibration Verified</h3>
-            <div class="result-summary-box">
-              <div class="result-emojis" id="workprintEmojiDisplay">⚡️ 🧠 🔬 🛡️</div>
-              <h4 id="workprintRoleDisplay" style="color: var(--brand-orange); font-size: 1.15rem; font-weight: 700;">Code Evaluator</h4>
-              <p id="workprintRateDisplay" style="margin-top: 6px; color: var(--text-muted); font-family: 'Space Mono', monospace; font-size: 0.85rem;">Estimated Index: $45 - $65 / hr</p>
-              <a href="#" id="directLabUrl" class="result-card-link" target="_blank" rel="noopener">Enter Lab Pipeline &rarr;</a>
-            </div>
-            <div class="action-row">
-              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-              <button class="btn btn-action" onclick="shareWorkprint()">🚀 Share AI Workprint</button>
-            </div>
-          </div>
-
-          <!-- Slide 6 -->
-          <div class="quiz-slide" id="slide-6">
-            <h3>⚡ Fast Pass Expedited Routing</h3>
-            <div class="result-summary-box">
-              <h4 id="fastPassLabName" style="color: var(--brand-orange); font-size: 1.15rem; font-weight: 700;">Matched Research Lab</h4>
-              <p id="fastPassRole" style="margin-top: 6px;">Target Track: Evaluator</p>
-              <p id="fastPassRate" style="color: var(--rate-green); margin-top: 4px; font-family: 'Space Mono', monospace; font-size: 0.85rem;">Rate Band: Dynamic</p>
-              <a href="#" id="fastPassLink" class="result-card-link" target="_blank" rel="noopener">Access Expedited Pipeline &rarr;</a>
-            </div>
-            <div class="action-row">
-              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-            </div>
-          </div>
-
         </div>
       </section>
-    </main>
-  </div>
+    </div>
+  </main>
 
-  <script src="/labmatch/labmatch-router.js"></script>
+  <footer>
+    <div>&copy; 2026 SonicBloom Ecosystem. All rights reserved.</div>
+    <div>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
 </body>
 </html>
