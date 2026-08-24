@@ -11,70 +11,70 @@
         "segment": "Software Engineering",
         "role": "Code Evaluator",
         "rateIndex": "$45 - $65",
-        "referralName": "Turing AI Lab",
-        "referralUrl": "https://www.turing.com"
+        "referralName": "Software AI Roles",
+        "referralUrl": "https://t.mercor.com/rrVyb"
       },
       {
         "segment": "Data Analysis",
         "role": "Data Critic",
         "rateIndex": "$40 - $55",
-        "referralName": "Turing Data Ops",
-        "referralUrl": "https://www.turing.com"
+        "referralName": "Data Ops Group",
+        "referralUrl": "https://t.mercor.com/K13Z9"
       },
       {
         "segment": "Medicine",
         "role": "Clinical Validator",
         "rateIndex": "$60 - $85",
-        "referralName": "Handshake Health Labs",
-        "referralUrl": "https://joinhandshake.com"
+        "referralName": "Medical Experts in AI",
+        "referralUrl": "https://t.mercor.com/1Sxsx"
       },
       {
-        "segment": "Life Sciences",
+        "segment": "Human Sciences",
         "role": "Research Accelerator",
         "rateIndex": "$45 - $65",
-        "referralName": "Handshake Clinical Network",
-        "referralUrl": "https://joinhandshake.com"
+        "referralName": "Life Science Network",
+        "referralUrl": "https://t.mercor.com/PEfVh"
       },
       {
         "segment": "Humanities",
         "role": "Reasoning Specialist",
         "rateIndex": "$35 - $50",
-        "referralName": "Mercor Expert Exchange",
+        "referralName": "Human-AI Exchange",
         "referralUrl": "https://t.mercor.com/uP10o"
       },
       {
-        "segment": "Language/Audio",
+        "segment": "Language & Listening",
         "role": "Linguistics Expert",
         "rateIndex": "$35 - $50",
-        "referralName": "Mercor Language Tier",
+        "referralName": "AI Language Cohort",
         "referralUrl": "https://t.mercor.com/dWbN8"
       },
       {
         "segment": "Arts",
         "role": "Generative Designer",
         "rateIndex": "$35 - $50",
-        "referralName": "Mercor Creative Hub",
+        "referralName": "Creative AI Hub",
         "referralUrl": "https://t.mercor.com/P5jqE"
       },
       {
         "segment": "Finance",
         "role": "Quantitative Reviewer",
         "rateIndex": "$45 - $60",
-        "referralName": "Mercor Quantitative",
+        "referralName": "Quantitative Trainers",
         "referralUrl": "https://t.mercor.com/po98d"
       },
       {
         "segment": "Law",
         "role": "Compliance Commander",
         "rateIndex": "$50 - $75",
-        "referralName": "Mercor Governance Desk",
+        "referralName": "AI Governance Desk",
         "referralUrl": "https://t.mercor.com/j41qe"
       },
       {
         "segment": "Business Operations",
         "role": "Operations Specialist",
         "rateIndex": "$35 - $50",
-        "referralName": "Mercor Enterprise",
+        "referralName": "Enterprise AI Lab",
         "referralUrl": "https://t.mercor.com/YCgs8"
       }
     ],
@@ -82,17 +82,17 @@
       {
         "type": "Granular Adversarial",
         "emojiPrint": "⚡️ 🧠 🔬 🛡️",
-        "focus": "Edge vulnerability identification via systematic analytical stress-testing"
+        "focus": "Edge vulnerability identifier with systematic stress-testing skills"
       },
       {
         "type": "Synthetic Structural",
         "emojiPrint": "🏛️ 📐 🧩 🌐",
-        "focus": "Clean logical schema construction for macro concept definitions"
+        "focus": "Clean logical schema constructor defining macro rules and patterning"
       },
       {
         "type": "Heuristic Creative",
         "emojiPrint": "🎨 💡 🔮 🌊",
-        "focus": "Interpretive lateral boundary traversal through fluid semantic logic"
+        "focus": "Interpretive boundary finder applying semantic logic and fluid problem-solving"
       }
     ]
   },
