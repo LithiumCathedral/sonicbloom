@@ -1,15 +1,15 @@
 class LabMatchRouter {
   constructor() {
     this.currentSlide = 1;
-    this.totalSlides = 8; // 1: Welcome, 2: Segment, 3: Years, 4: Work Style, 5: Learning, 6: Hours, 7: Email, 8: Results (FastPass routes to 8)
+    this.totalSlides = 8; // 1: Welcome, 2: Segment, 3: Years, 4: Work Style, 5: Learning, 6: Commitment, 7: Email, 8: Results
     this.quizData = null;
     this.state = {
       email: '',
-      selectedDomain: 'Coding & Tech',
+      selectedDomain: 'Software Engineering',
       yearsExperience: '1 to 3 years',
       workStyle: 'Bug Finder',
-      learningStyle: 'Visual (Seeing & Watching)',
-      commitmentLevel: 'Flexible Hours (Pick my own times)'
+      learningStyle: 'Visual',
+      commitmentLevel: 'Flexible'
     };
     this.generatedShareString = '';
   }
@@ -57,13 +57,10 @@ class LabMatchRouter {
     // Q5: Commitment Level
     window.selectCommitment = (level) => {
       this.state.commitmentLevel = level;
-      this.goToSlide(7); // Go to Email Capture
+      this.goToSlide(7); // Routes to Penultimate Slide (Email)
     };
 
-    // Penultimate: Email Capture
     window.submitEmailAndFinish = () => this.handleEmailSubmission();
-
-    // Fast Pass & Share
     window.triggerFastPass = () => this.handleFastPass();
     window.shareToLinkedIn = () => this.triggerLinkedInWindow();
   }
@@ -89,7 +86,9 @@ class LabMatchRouter {
 
   getMatchedTrack() {
     const tracks = this.quizData?.matrices?.tracks || [];
-    return tracks.find(t => t.segment.toLowerCase() === this.state.selectedDomain.toLowerCase()) || tracks[0];
+    const current = (this.state.selectedDomain || '').toLowerCase().trim();
+    // String matching to ensure proper lookup
+    return tracks.find(t => t.segment.toLowerCase().trim() === current) || tracks[0];
   }
 
   getMatchedWorkStyle() {
@@ -102,7 +101,7 @@ class LabMatchRouter {
     const emailVal = emailInput ? emailInput.value.trim() : '';
 
     if (!emailVal || !emailVal.includes('@')) {
-      alert('Please enter your email address to see your results.');
+      alert('Please enter a valid email address to see your results.');
       return;
     }
 
@@ -114,34 +113,27 @@ class LabMatchRouter {
     const matchedTrack = this.getMatchedTrack();
     const matchedStyle = this.getMatchedWorkStyle();
 
-    // Fill in Results UI
-    document.getElementById('workprintEmojiDisplay').innerText = matchedStyle.emojiPrint;
-    document.getElementById('workprintRoleDisplay').innerText = matchedTrack.role;
-    document.getElementById('workprintRateDisplay').innerText = `Estimated Pay: ${matchedTrack.rateIndex} per hour`;
-    document.getElementById('labPartnerName').innerText = matchedTrack.referralName;
-    document.getElementById('directLabUrl').setAttribute('href', matchedTrack.referralUrl);
-
-    // Build the share text
-    this.compileShareString(matchedTrack, matchedStyle);
-
-    // Save data and open results
+    this.populateResultsUI(matchedTrack, matchedStyle);
     this.dispatchTelemetryLog('STANDARD');
     this.goToSlide(8);
   }
 
   handleFastPass() {
     const matchedTrack = this.getMatchedTrack();
-    const matchedStyle = this.getMatchedWorkStyle();
+    const matchedStyle = this.getMatchedWorkStyle(); // Uses defaults if skipped
 
-    document.getElementById('workprintEmojiDisplay').innerText = matchedStyle.emojiPrint;
-    document.getElementById('workprintRoleDisplay').innerText = matchedTrack.role;
-    document.getElementById('workprintRateDisplay').innerText = `Estimated Pay: ${matchedTrack.rateIndex} per hour`;
-    document.getElementById('labPartnerName').innerText = matchedTrack.referralName;
-    document.getElementById('directLabUrl').setAttribute('href', matchedTrack.referralUrl);
-
-    this.compileShareString(matchedTrack, matchedStyle);
+    this.populateResultsUI(matchedTrack, matchedStyle);
     this.dispatchTelemetryLog('FAST_PASS');
     this.goToSlide(8);
+  }
+
+  populateResultsUI(track, style) {
+    document.getElementById('workprintEmojiDisplay').innerText = style.emojiPrint;
+    document.getElementById('workprintRoleDisplay').innerText = track.role;
+    document.getElementById('workprintRateDisplay').innerText = `Estimated Pay: ${track.rateIndex} per hour`;
+    document.getElementById('labPartnerName').innerText = track.referralName;
+    document.getElementById('directLabUrl').setAttribute('href', track.referralUrl);
+    this.compileShareString(track, style);
   }
 
   compileShareString(track, style) {
@@ -168,7 +160,7 @@ class LabMatchRouter {
       state: this.state
     };
 
-    // Save to local storage queue
+    // Write to local cache to ensure data preservation
     try {
       const existingQueue = JSON.parse(localStorage.getItem('labmatch_telemetry_queue') || '[]');
       existingQueue.push(payload);
@@ -176,6 +168,8 @@ class LabMatchRouter {
     } catch (err) {
       console.warn("[TELEMETRY] Local storage write failed:", err);
     }
+    
+    // Remote webhook POST would go here
   }
 }
 
