@@ -4,24 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SonicBloom | Technical Architecture & RLHF Lab Routing</title>
-  <meta name="description" content="Discover your AI Workprint signature, evaluate logic density, and route directly into verified AI research lab compensation tiers.">
+  <meta name="description" content="Calibrate your technical signature, evaluate logic density, and route directly into verified AI research lab compensation tiers.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090d16;
+      --bg: #0b0f19;
       --bg-card: #111827;
-      --bg-terminal: #0d1117;
+      --bg-terminal: #0d121f;
       --border: #1e293b;
-      --border-accent: #334155;
+      --border-focus: #334155;
       --text: #f8fafc;
       --text-muted: #94a3b8;
-      --orange: #ff6a00;
-      --orange-hover: #e05d00;
-      --orange-dim: rgba(255, 106, 0, 0.12);
-      --cyan: #38bdf8;
-      --green: #4ade80;
+      --brand-orange: #ff6a00;
+      --brand-orange-hover: #e05d00;
+      --brand-orange-dim: rgba(255, 106, 0, 0.08);
+      --rate-green: #34d399;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,56 +28,41 @@
     body {
       background-color: var(--bg);
       color: var(--text);
-      font-family: 'Space Mono', monospace;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
     }
 
-    /* Pixel Ticker Banner */
-    .pixel-ticker-wrap {
-      width: 100%;
-      background: #000000;
-      border-bottom: 2px solid var(--orange);
-      padding: 12px 0;
-      overflow: hidden;
+    /* Top Compensation Index Strip */
+    .rate-bar {
+      background: #060911;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .rate-bar-items {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
       white-space: nowrap;
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
-    .pixel-ticker {
-      display: inline-block;
-      animation: ticker-slide 28s linear infinite;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 1px;
-      color: var(--orange);
+    .rate-bar-items span b {
+      color: var(--rate-green);
+      font-weight: 700;
     }
 
-    .pixel-ticker span {
-      margin: 0 24px;
-    }
-
-    .pixel-ticker .rate {
-      color: #ffffff;
-      background: var(--orange);
-      color: #000;
-      padding: 2px 6px;
-      border-radius: 2px;
-    }
-
-    @keyframes ticker-slide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* Main Hub Layout */
+    /* Main Grid */
     .workspace-grid {
       display: grid;
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 280px 1fr;
       flex: 1;
       max-width: 1400px;
       width: 100%;
@@ -91,140 +75,128 @@
       .workspace-grid { grid-template-columns: 1fr; }
     }
 
-    /* Branched Discovery Sidebar */
+    /* Clean Sidebar */
     .sidebar {
       background: var(--bg-terminal);
       border-right: 1px solid var(--border);
-      padding: 24px;
+      padding: 28px 24px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 28px;
     }
 
     .brand-header h1 {
-      font-size: 1.1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      letter-spacing: -0.5px;
     }
 
     .brand-header .dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--orange);
-      display: inline-block;
-      box-shadow: 0 0 8px var(--orange);
+      background: var(--brand-orange);
+      box-shadow: 0 0 10px var(--brand-orange);
     }
 
     .discovery-tree {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
     }
 
     .tree-group-title {
+      font-family: 'Space Mono', monospace;
       font-size: 0.7rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .tree-branch {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      border-left: 1px dashed var(--border-accent);
-      padding-left: 12px;
+      gap: 4px;
+      border-left: 1px solid var(--border);
+      padding-left: 14px;
       margin-left: 4px;
     }
 
     .tree-link {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 4px 8px;
-      border-radius: 4px;
-      transition: all 0.2s ease;
+      justify-content: space-between;
     }
 
     .tree-link:hover, .tree-link.active {
       color: var(--text);
-      background: var(--orange-dim);
-      color: var(--orange);
+      background: var(--brand-orange-dim);
+      color: var(--brand-orange);
     }
 
-    .sidebar-stats {
+    .sidebar-footer {
       margin-top: auto;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-    }
-
-    .sidebar-stats .status-item {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
-      margin-bottom: 6px;
-      color: var(--text-muted);
     }
 
-    .sidebar-stats .status-item span:last-child {
-      color: var(--green);
-    }
-
-    /* Workspace Content & Embedded Diagnostic */
+    /* Main Viewport */
     .content-viewport {
-      padding: 36px 40px;
+      padding: 40px 48px;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 36px;
     }
 
-    .hero-banner {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    @media (max-width: 600px) {
+      .content-viewport { padding: 24px 16px; }
     }
 
     .hero-banner h2 {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       font-weight: 700;
-      color: var(--text);
       letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 8px;
     }
 
     .hero-banner p {
       color: var(--text-muted);
       font-size: 0.95rem;
       line-height: 1.6;
-      max-width: 780px;
+      max-width: 720px;
     }
 
-    /* Embedded Terminal Diagnostic Frame */
+    /* Embedded Terminal Card */
     .terminal-container {
       background: var(--bg-terminal);
-      border: 1px solid var(--border-accent);
+      border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     .terminal-topbar {
-      background: #090d16;
+      background: #080c14;
       border-bottom: 1px solid var(--border);
-      padding: 10px 16px;
+      padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -239,13 +211,14 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: #27272a;
+      background: #1e293b;
     }
     .signal-dot.red { background: #ef4444; }
     .signal-dot.yellow { background: #f59e0b; }
     .signal-dot.green { background: #10b981; }
 
     .terminal-title {
+      font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
       color: var(--text-muted);
     }
@@ -254,12 +227,13 @@
       padding: 32px;
     }
 
-    /* Embedded Quiz Slides */
+    /* Quiz Slide Transitions */
     .quiz-slide { display: none; flex-direction: column; gap: 20px; }
     .quiz-slide.active { display: flex; }
 
     .quiz-slide h3 {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
+      font-weight: 600;
       color: var(--text);
     }
 
@@ -272,7 +246,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     @media (max-width: 650px) {
@@ -285,97 +259,93 @@
       color: var(--text);
       padding: 14px 18px;
       border-radius: 8px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
+      font-weight: 500;
       text-align: left;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .btn-matrix:hover {
-      border-color: var(--orange);
-      background: var(--orange-dim);
-      color: var(--orange);
+      border-color: var(--brand-orange);
+      background: var(--brand-orange-dim);
+      color: var(--brand-orange);
     }
 
     .btn-matrix .rate-badge {
+      font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
-      color: var(--green);
+      color: var(--rate-green);
     }
 
     .action-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 20px;
-      padding-top: 18px;
+      margin-top: 24px;
+      padding-top: 20px;
       border-top: 1px solid var(--border);
     }
 
     .btn {
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-family: 'Space Mono', monospace;
+      padding: 10px 22px;
+      border-radius: 8px;
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       border: none;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
     }
 
     .btn-back { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
-    .btn-back:hover { color: var(--text); border-color: var(--border-accent); }
-    .btn-action { background: var(--orange); color: #000000; }
-    .btn-action:hover { background: var(--orange-hover); }
-    .btn-fastpass { background: transparent; color: var(--orange); border: 1px dashed var(--orange); }
-    .btn-fastpass:hover { background: var(--orange-dim); }
+    .btn-back:hover { color: var(--text); border-color: var(--border-focus); }
+    .btn-action { background: var(--brand-orange); color: #ffffff; }
+    .btn-action:hover { background: var(--brand-orange-hover); }
+    .btn-fastpass { background: transparent; color: var(--brand-orange); border: 1px dashed var(--brand-orange); font-family: 'Space Mono', monospace; font-size: 0.75rem; }
+    .btn-fastpass:hover { background: var(--brand-orange-dim); }
 
-    /* Results Card */
+    /* Results */
     .result-summary-box {
       background: var(--bg-card);
-      border: 1px solid var(--border-accent);
-      border-radius: 8px;
-      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
       text-align: center;
     }
 
     .result-emojis {
-      font-size: 2.4rem;
-      letter-spacing: 12px;
+      font-size: 2.2rem;
+      letter-spacing: 10px;
       margin-bottom: 12px;
     }
 
     .result-card-link {
       display: inline-block;
-      margin-top: 16px;
-      background: var(--orange);
-      color: #000;
+      margin-top: 18px;
+      background: var(--brand-orange);
+      color: #ffffff;
       text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-weight: 700;
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-weight: 600;
       font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Scrolling Block-Pixel Rate Ticker -->
-  <div class="pixel-ticker-wrap">
-    <div class="pixel-ticker">
-      <span>MEDICINE / CLINICAL VALIDATION <span class="rate">$60 - $85/HR</span></span>
-      <span>LAW / COMPLIANCE COMMAND <span class="rate">$50 - $75/HR</span></span>
-      <span>SOFTWARE / CODE EVALUATION <span class="rate">$45 - $65/HR</span></span>
-      <span>DATA OPS & CRITIQUE <span class="rate">$40 - $55/HR</span></span>
-      <span>HUMANITIES / REASONING SPECIALIST <span class="rate">$35 - $50/HR</span></span>
-      <span>MEDICINE / CLINICAL VALIDATION <span class="rate">$60 - $85/HR</span></span>
-      <span>LAW / COMPLIANCE COMMAND <span class="rate">$50 - $75/HR</span></span>
-      <span>SOFTWARE / CODE EVALUATION <span class="rate">$45 - $65/HR</span></span>
-      <span>DATA OPS & CRITIQUE <span class="rate">$40 - $55/HR</span></span>
-      <span>HUMANITIES / REASONING SPECIALIST <span class="rate">$35 - $50/HR</span></span>
+  <!-- Top Metric Index -->
+  <div class="rate-bar">
+    <span>SYSTEM: <b>ONLINE (v2.5.0)</b></span>
+    <div class="rate-bar-items">
+      <span>MEDICINE <b>$60 - $85/HR</b></span>
+      <span>LAW <b>$50 - $75/HR</b></span>
+      <span>SOFTWARE <b>$45 - $65/HR</b></span>
+      <span>DATA OPS <b>$40 - $55/HR</b></span>
+      <span>HUMANITIES <b>$35 - $50/HR</b></span>
     </div>
   </div>
 
@@ -414,19 +384,13 @@
         </div>
       </nav>
 
-      <div class="sidebar-stats">
-        <div class="status-item">
-          <span>PIPELINE</span>
-          <span>ONLINE</span>
-        </div>
-        <div class="status-item">
-          <span>TAXONOMY</span>
-          <span>v2.5.0</span>
-        </div>
+      <div class="sidebar-footer">
+        <span>TAXONOMY</span>
+        <span style="color: var(--rate-green);">CALIBRATED</span>
       </div>
     </aside>
 
-    <!-- Main Content & Embedded Diagnostic -->
+    <!-- Content & Embedded Diagnostic -->
     <main class="content-viewport">
       <section class="hero-banner">
         <h2>Deterministic Intake & Lab Calibration</h2>
@@ -440,12 +404,12 @@
             <span class="signal-dot yellow"></span>
             <span class="signal-dot green"></span>
           </div>
-          <div class="terminal-title">labmatch-diagnostic.sh — v2.5.0</div>
-          <div style="font-size: 0.7rem; color: var(--green);">READY</div>
+          <div class="terminal-title">labmatch-diagnostic.sh</div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--rate-green);">READY</div>
         </div>
 
         <div class="terminal-body">
-          <!-- Slide 1: Welcome / Gate -->
+          <!-- Slide 1 -->
           <div class="quiz-slide active" id="slide-1">
             <h3>Initialize Cognitive Benchmark</h3>
             <p>Select your primary operational strength to index your compensation baseline.</p>
@@ -455,7 +419,7 @@
             </div>
           </div>
 
-          <!-- Slide 2: Domain -->
+          <!-- Slide 2 -->
           <div class="quiz-slide" id="slide-2">
             <h3>01 / Select Primary Domain</h3>
             <div class="option-grid">
@@ -490,7 +454,7 @@
             </div>
           </div>
 
-          <!-- Slide 3: Experience -->
+          <!-- Slide 3 -->
           <div class="quiz-slide" id="slide-3">
             <h3>02 / Experience Calibration</h3>
             <p>How do you navigate complex problem spaces?</p>
@@ -508,7 +472,7 @@
             </div>
           </div>
 
-          <!-- Slide 4: Cognitive Style -->
+          <!-- Slide 4 -->
           <div class="quiz-slide" id="slide-4">
             <h3>03 / Cognitive Signature</h3>
             <p>Select your dominant evaluation rhythm:</p>
@@ -517,7 +481,7 @@
                 <span>Granular Adversarial (Finding Edge Bugs)</span>
               </button>
               <button class="btn-matrix" onclick="selectPsychometric('Synthetic Structural')">
-                <span>Synthetic Structural (Architecture & Schema)</span>
+                <span>Synthetic Structural (System Architecture)</span>
               </button>
               <button class="btn-matrix" onclick="selectPsychometric('Heuristic Creative')">
                 <span>Heuristic Creative (Lateral Semantics)</span>
@@ -529,13 +493,13 @@
             </div>
           </div>
 
-          <!-- Slide 5: Standard Assessment Results -->
+          <!-- Slide 5 -->
           <div class="quiz-slide" id="slide-5">
             <h3>Calibration Verified</h3>
             <div class="result-summary-box">
               <div class="result-emojis" id="workprintEmojiDisplay">⚡️ 🧠 🔬 🛡️</div>
-              <h4 id="workprintRoleDisplay" style="color: var(--orange); font-size: 1.1rem;">Code Evaluator</h4>
-              <p id="workprintRateDisplay" style="margin-top: 6px; color: var(--text-muted);">Estimated Index: $45 - $65 / hr</p>
+              <h4 id="workprintRoleDisplay" style="color: var(--brand-orange); font-size: 1.15rem; font-weight: 700;">Code Evaluator</h4>
+              <p id="workprintRateDisplay" style="margin-top: 6px; color: var(--text-muted); font-family: 'Space Mono', monospace; font-size: 0.85rem;">Estimated Index: $45 - $65 / hr</p>
               <a href="#" id="directLabUrl" class="result-card-link" target="_blank" rel="noopener">Enter Lab Pipeline &rarr;</a>
             </div>
             <div class="action-row">
@@ -544,13 +508,13 @@
             </div>
           </div>
 
-          <!-- Slide 6: FAST PASS Expedited Slide -->
+          <!-- Slide 6 -->
           <div class="quiz-slide" id="slide-6">
             <h3>⚡ Fast Pass Expedited Routing</h3>
             <div class="result-summary-box">
-              <h4 id="fastPassLabName" style="color: var(--orange); font-size: 1.1rem;">Matched Research Lab</h4>
+              <h4 id="fastPassLabName" style="color: var(--brand-orange); font-size: 1.15rem; font-weight: 700;">Matched Research Lab</h4>
               <p id="fastPassRole" style="margin-top: 6px;">Target Track: Evaluator</p>
-              <p id="fastPassRate" style="color: var(--green); margin-top: 4px;">Rate Band: Dynamic</p>
+              <p id="fastPassRate" style="color: var(--rate-green); margin-top: 4px; font-family: 'Space Mono', monospace; font-size: 0.85rem;">Rate Band: Dynamic</p>
               <a href="#" id="fastPassLink" class="result-card-link" target="_blank" rel="noopener">Access Expedited Pipeline &rarr;</a>
             </div>
             <div class="action-row">
