@@ -3,30 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact & Inquiries | SonicBloom</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root { --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #64748b; --brand: #ff6a00; --border: #e2e8f0; }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background: var(--bg); color: var(--text); padding: 40px 20px; line-height: 1.6; }
-    .container { max-width: 780px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; }
-    h1 { font-size: 2.2rem; margin-bottom: 16px; font-weight: 800; }
-    p { color: var(--muted); margin-bottom: 16px; }
-    .contact-box { background: #f1f5f9; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 24px; margin-top: 20px; font-family: 'Space Mono', monospace; }
-    a { color: var(--brand); text-decoration: none; font-weight: 600; }
-  </style>
+  <title>Platform Ops & Contact | SonicBloom</title>
 </head>
 <body>
-  <div class="container">
-    <a href="/">&larr; Return to Workspace</a>
-    <h1 style="margin-top: 20px;">Operator Inquiries</h1>
-    <p>For technical infrastructure auditing, enterprise dataset subscription access, or research lab routing partnerships:</p>
+  <div class="content-frame">
+    <h1 class="content-h1">Platform Ops & Inquiries</h1>
     
-    <div class="contact-box">
-      <div>PRIMARY DISPATCH: <strong>contact@sonicbloom.dev</strong></div>
-      <div style="margin-top: 8px;">INTEGRATION DESK: <strong>ops@sonicbloom.dev</strong></div>
-      <div style="margin-top: 8px; font-size: 0.8rem; color: var(--muted);">PGP Verification Available Upon Request</div>
+    <h2 class="content-h2">About SonicBloom</h2>
+    <p class="content-p">SonicBloom is a digital sandbox and production hub focused on building minimalist web applications, structured data pipelines, and programmatic content hubs like LabMatch. We benchmark specialized human labor against mathematical logic density metrics.</p>
+    
+    <h2 class="content-h2">Privacy Guarantee</h2>
+    <p class="content-p">All evaluation data is tokenized and decoupled from identifying variables. We employ absolute cryptographic isolation—personal identifiers are never sold to external advertising networks.</p>
+    
+    <h2 class="content-h2">Operator Dispatch</h2>
+    <p class="content-p">For technical infrastructure auditing, enterprise intelligence feeds, or research lab partnerships, initiate contact below.</p>
+    
+    <!-- Unified Form with UI swap on submit -->
+    <form class="contact-form" onsubmit="event.preventDefault(); this.style.display='none'; document.getElementById('contactSuccess').style.display='block';" style="background: #0d121f; padding: 24px; border: 1px solid #1e293b; border-radius: 8px; margin-top: 20px;">
+      
+      <div style="margin-bottom: 16px;">
+        <label style="display:block; font-size:0.8rem; color:#94a3b8; font-family:'Space Mono', monospace; margin-bottom:6px;">OPERATOR NAME</label>
+        <input type="text" placeholder="First Last" required style="width:100%; padding:12px; background:#05070c; border:1px solid #1e293b; color:#f8fafc; border-radius:6px; font-family:'Inter', sans-serif;">
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label style="display:block; font-size:0.8rem; color:#94a3b8; font-family:'Space Mono', monospace; margin-bottom:6px;">* VERIFIED EMAIL</label>
+        <input type="email" placeholder="operator@domain.com" required style="width:100%; padding:12px; background:#05070c; border:1px solid #1e293b; color:#f8fafc; border-radius:6px; font-family:'Inter', sans-serif;">
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label style="display:block; font-size:0.8rem; color:#94a3b8; font-family:'Space Mono', monospace; margin-bottom:6px;">PHONE DISPATCH</label>
+        <!-- Inline JS to enforce the 1+(888)-888-8888 visual format constraint -->
+        <input type="tel" placeholder="1+(888)-888-8888" oninput="let v=this.value.replace(/\D/g,''); if(v.startsWith('1')) v=v.substring(1); let r=''; if(v.length>0){r='1+('+v.substring(0,3); if(v.length>=3)r+=')-'+v.substring(3,6); if(v.length>=6)r+='-'+v.substring(6,10);} this.value=r;" pattern="1\+\([0-9]{3}\)-[0-9]{3}-[0-9]{4}" title="Format required: 1+(888)-888-8888" required style="width:100%; padding:12px; background:#05070c; border:1px solid #1e293b; color:#f8fafc; border-radius:6px; font-family:'Inter', sans-serif;">
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label style="display:block; font-size:0.8rem; color:#94a3b8; font-family:'Space Mono', monospace; margin-bottom:6px;">PRIMARY INTENT</label>
+        <select required style="width:100%; padding:12px; background:#05070c; border:1px solid #1e293b; color:#f8fafc; border-radius:6px; font-family:'Inter', sans-serif;">
+          <option value="">Select Vector...</option>
+          <option value="Enterprise Feed">Enterprise Intelligence Feed</option>
+          <option value="Partnership">LabMatch Partnership</option>
+          <option value="Auditing">Infrastructure Auditing</option>
+          <option value="Data & Privacy">Data & Privacy Inquiry</option>
+          <option value="Other">Other Routing</option>
+        </select>
+      </div>
+
+      <button type="submit" style="background:#ff6a00; color:#000; font-weight:700; border:none; padding:12px 24px; border-radius:6px; cursor:pointer; font-family:'Space Mono', monospace; font-size:0.85rem; width: 100%;">Deploy</button>
+    </form>
+    
+    <!-- Hidden Success Micro-copy State -->
+    <div id="contactSuccess" style="display:none; color: #34d399; font-family: 'Space Mono', monospace; font-size: 0.85rem; margin-top: 24px; padding: 16px; background: rgba(52, 211, 153, 0.1); border: 1px dashed #34d399; border-radius: 4px;">
+      Message deployed. Identity shared. // Response pending (&lt;48 hours).
     </div>
+
   </div>
 </body>
 </html>
