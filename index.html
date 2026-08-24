@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SonicBloom | Digital Architecture & Talent Diagnostic Infrastructure</title>
-  <meta name="description" content="Minimalist digital sandbox and structured data pipelines calibrating human talent to AI research lab tiers.">
+  <title>SonicBloom | Technical Architecture & RLHF Lab Routing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,13 +32,12 @@
     body {
       background-color: var(--bg-page);
       color: var(--text-dark);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* Top Strip Header */
     .top-header {
       background: var(--card-white);
       border-bottom: 1px solid var(--border-light);
@@ -59,29 +57,12 @@
       align-items: center;
       gap: 8px;
     }
-
     .brand-logo .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
+      width: 10px; height: 10px; border-radius: 50%;
       background: var(--brand-orange);
       box-shadow: 0 0 8px var(--brand-orange);
     }
 
-    .top-nav {
-      display: flex;
-      gap: 20px;
-      font-size: 0.85rem;
-    }
-
-    .top-nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .top-nav a:hover { color: var(--brand-orange); }
-
-    /* Main Container Frame */
     .main-wrapper {
       max-width: 1300px;
       width: 100%;
@@ -89,25 +70,11 @@
       padding: 0 24px;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 28px;
     }
 
-    .hero-intro {
-      max-width: 800px;
-    }
-
-    .hero-intro h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 10px;
-    }
-
-    .hero-intro p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
+    .hero-intro h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .hero-intro p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; max-width: 800px; }
 
     /* Unified Dark Terminal Shell */
     .terminal-window {
@@ -116,17 +83,16 @@
       border-radius: 12px;
       overflow: hidden;
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 290px 1fr;
       box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
       color: var(--terminal-text);
-      min-height: 580px;
+      min-height: 600px;
     }
 
     @media (max-width: 900px) {
       .terminal-window { grid-template-columns: 1fr; }
     }
 
-    /* Terminal Sidebar */
     .terminal-sidebar {
       background: var(--terminal-sidebar);
       border-right: 1px solid var(--terminal-border);
@@ -149,7 +115,7 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       border-left: 1px solid var(--terminal-border);
       padding-left: 12px;
       margin-left: 4px;
@@ -158,13 +124,14 @@
     .tree-link {
       color: var(--terminal-text-muted);
       text-decoration: none;
-      font-size: 0.85rem;
-      padding: 5px 8px;
+      font-size: 0.82rem;
+      padding: 6px 8px;
       border-radius: 4px;
       transition: all 0.15s ease;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      cursor: pointer;
     }
 
     .tree-link:hover, .tree-link.active {
@@ -181,12 +148,14 @@
     .status-badge.live { background: rgba(52, 211, 153, 0.15); color: var(--rate-green); }
     .status-badge.staged { background: rgba(148, 163, 184, 0.15); color: var(--terminal-text-muted); }
 
-    /* Terminal Content Area */
+    /* Terminal Viewport Content */
     .terminal-content {
-      padding: 36px;
+      padding: 32px 36px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 20px;
+      overflow-y: auto;
+      max-height: 700px;
     }
 
     .terminal-topbar {
@@ -194,7 +163,7 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--terminal-border);
-      padding-bottom: 16px;
+      padding-bottom: 14px;
     }
 
     .terminal-signals { display: flex; gap: 6px; }
@@ -206,89 +175,42 @@
     /* Project Tiles Grid */
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 10px;
     }
 
     .project-tile {
       background: var(--terminal-card);
       border: 1px solid var(--terminal-border);
       border-radius: 10px;
-      padding: 24px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      transition: all 0.2s ease;
+      gap: 10px;
       text-decoration: none;
       color: inherit;
+      transition: all 0.2s ease;
     }
+    .project-tile.active-link { border-color: var(--brand-orange); cursor: pointer; }
+    .project-tile.active-link:hover { box-shadow: 0 0 15px rgba(255, 106, 0, 0.2); transform: translateY(-2px); }
+    .project-tile.disabled { opacity: 0.55; cursor: not-allowed; }
 
-    .project-tile.active-link {
-      border-color: var(--brand-orange);
-      cursor: pointer;
-    }
-    .project-tile.active-link:hover {
-      box-shadow: 0 0 15px rgba(255, 106, 0, 0.2);
-      transform: translateY(-2px);
-    }
+    /* In-Terminal Rendered Markdown Styling */
+    .rendered-article-container { display: flex; flex-direction: column; gap: 20px; }
+    .terminal-article-nav { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--terminal-border); padding-bottom: 12px; }
+    .btn-terminal-back { background: transparent; border: 1px solid var(--terminal-border); color: var(--terminal-text-muted); padding: 6px 12px; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.75rem; cursor: pointer; }
+    .btn-terminal-back:hover { color: var(--brand-orange); border-color: var(--brand-orange); }
+    .badge-source { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--terminal-text-muted); }
 
-    .project-tile.disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
-
-    .tile-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .tile-title {
-      font-family: 'Space Mono', monospace;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--terminal-text);
-    }
-
-    .tile-desc {
-      color: var(--terminal-text-muted);
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-
-    .tile-action {
-      margin-top: auto;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--brand-orange);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .tile-action.locked {
-      color: var(--terminal-text-muted);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border-light);
-      background: var(--card-white);
-      padding: 24px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-left: 16px;
-    }
-    footer a:hover { color: var(--brand-orange); }
+    .article-markdown-body h1 { font-family: 'Space Mono', monospace; font-size: 1.6rem; color: var(--brand-orange); margin-bottom: 16px; }
+    .article-markdown-body h2 { font-size: 1.25rem; color: #ffffff; margin: 24px 0 10px 0; border-bottom: 1px solid var(--terminal-border); padding-bottom: 6px; }
+    .article-markdown-body h3 { font-size: 1.05rem; color: var(--terminal-text-muted); margin: 18px 0 8px 0; }
+    .article-markdown-body p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.65; margin-bottom: 14px; }
+    .article-markdown-body blockquote { border-left: 3px solid var(--brand-orange); padding: 10px 16px; background: var(--brand-orange-dim); margin: 18px 0; border-radius: 4px; }
+    .article-markdown-body pre { background: #05070c; border: 1px solid var(--terminal-border); padding: 14px; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: #38bdf8; overflow-x: auto; margin: 16px 0; }
+    .article-markdown-body code.inline-code { font-family: 'Space Mono', monospace; background: #1e293b; color: var(--brand-orange); padding: 2px 5px; border-radius: 4px; font-size: 0.8rem; }
+    .article-markdown-body a { color: var(--brand-orange); text-decoration: none; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -298,41 +220,34 @@
       <span class="dot"></span>
       SonicBloom
     </a>
-    <nav class="top-nav">
-      <a href="/labmatch/">LabMatch Engine</a>
-      <a href="/content/">Knowledge Hub</a>
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
   </header>
 
-<main class="main-wrapper">
+  <main class="main-wrapper">
     <div class="hero-intro">
-      <h1>Join 1,000+ professionals added to AI talent hubs every month.</h1>
-      <p>Unlock your invite to fast-hiring partner labs and secure hourly rates starting at $40/hr.</p>
+      <h1>Deterministic Intake & Diagnostic Infrastructure</h1>
+      <p>Calibrating human operational velocity against verified research lab pipelines[cite: 3, 10]. Explore technical nodes, rate architecture matrices, and active staging environments[cite: 3, 5].</p>
     </div>
 
     <!-- Dark Terminal System -->
     <div class="terminal-window">
-      <!-- 2 Divisions in Terminal Tree + Utility Links -->
+      <!-- 2 Content Divisions in Terminal Tree -->
       <aside class="terminal-sidebar">
         <div>
           <div class="tree-title">01 / Active Projects</div>
           <ul class="tree-list">
-            <li><a href="/labmatch/" class="tree-link active">LabMatch <span>v2.5</span></a></li>
-            <li><a href="#projects" class="tree-link">Plath Matrix <span class="status-badge staged">STAGED</span></a></li>
-            <li><a href="#projects" class="tree-link">Go Grid Engine <span class="status-badge staged">STAGED</span></a></li>
+            <li><a class="tree-link active" data-content-path="PROJECT_DECK">Workspace Deck</a></li>
+            <li><a href="/labmatch/" class="tree-link">LabMatch <span>v2.7</span></a></li>
+            <li><a class="tree-link">Plath Matrix <span class="status-badge staged">STAGED</span></a></li>
+            <li><a class="tree-link">Go Grid Engine <span class="status-badge staged">STAGED</span></a></li>
           </ul>
         </div>
 
         <div>
           <div class="tree-title">02 / Content System</div>
-          <ul class="tree-list">
-            <li><a href="/content/" class="tree-link">Master Index</a></li>
-            <li><a href="/content/articles/calculating-logic-density.html" class="tree-link">Logic Density Guide</a></li>
-            <li><a href="/content/articles/semantic-pruning-mechanics.html" class="tree-link">Semantic Pruning</a></li>
-            <li><a href="/content/nodes/n1-parsing-logic.html" class="tree-link">01 Parsing Logic</a></li>
-            <li><a href="/content/nodes/n2-rate-architecture.html" class="tree-link">02 Rate Matrix</a></li>
+          <div>
+          <div class="tree-title">02 / Content System</div>
+          <ul class="tree-list" id="dynamic-content-list">
+            <li><span style="color: var(--terminal-text-muted); font-size: 0.8rem; padding-left: 8px;">Loading nodes...</span></li>
           </ul>
         </div>
 
@@ -346,70 +261,62 @@
         </div>
       </aside>
 
-      <!-- Terminal Body: Project Tiles Deck -->
-      <section class="terminal-content" id="projects">
+      <!-- Dynamic Content Viewport -->
+      <section class="terminal-content" id="terminal-viewport">
         <div class="terminal-topbar">
           <div class="terminal-signals">
             <span class="dot-signal red"></span>
             <span class="dot-signal yellow"></span>
             <span class="dot-signal green"></span>
           </div>
-          <div style="font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--terminal-text-muted);">
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--terminal-text-muted);" id="terminal-file-title">
             infrastructure-deck.sys
           </div>
-          <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--rate-green);">
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--rate-green);" id="terminal-status-tag">
             ONLINE
           </div>
         </div>
 
         <div>
           <h2 style="font-size: 1.3rem; margin-bottom: 6px;">Ecosystem Project Pipelines</h2>
-          <p style="color: var(--terminal-text-muted); font-size: 0.85rem;">Select an active project pipeline to initiate calibration and diagnostic workflows.</p>
+          <p style="color: var(--terminal-text-muted); font-size: 0.85rem;">Select an active project or click any knowledge node from the sidebar to inspect technical parameters[cite: 3, 5].</p>
         </div>
 
         <div class="project-grid">
           <!-- Active Project: LabMatch -->
           <a href="/labmatch/" class="project-tile active-link">
-            <div class="tile-header">
-              <span class="tile-title">LabMatch</span>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700;">LabMatch</span>
               <span class="status-badge live">ACTIVE</span>
             </div>
-            <p class="tile-desc">Algorithmic intake engine mapping talent cognitive styles, logic density benchmarks, and direct referral decks across verified research labs.</p>
-            <div class="tile-action">Launch Diagnostic &rarr;</div>
+            <p style="color: var(--terminal-text-muted); font-size: 0.85rem; line-height: 1.5;">Algorithmic intake engine mapping talent cognitive styles, logic density benchmarks, and direct referral decks across verified research labs[cite: 3, 10].</p>
+            <div style="color: var(--brand-orange); font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; margin-top: auto;">Launch Diagnostic &rarr;</div>
           </a>
 
           <!-- Locked Staging: Plath Framework -->
           <div class="project-tile disabled">
-            <div class="tile-header">
-              <span class="tile-title">Plath Matrix</span>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700;">Plath Matrix</span>
               <span class="status-badge staged">STAGING</span>
             </div>
-            <p class="tile-desc">Deterministic framework mapping personal numerology architectures, lifecycle forecasting, and transitional alignment layers.</p>
-            <div class="tile-action locked">Pipeline Locked (Waitlist)</div>
+            <p style="color: var(--terminal-text-muted); font-size: 0.85rem; line-height: 1.5;">Deterministic framework mapping personal numerology architectures, lifecycle forecasting, and transition layers[cite: 3].</p>
+            <div style="color: var(--terminal-text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: auto;">Pipeline Locked</div>
           </div>
 
           <!-- Locked Staging: Go Grid Engine -->
           <div class="project-tile disabled">
-            <div class="tile-header">
-              <span class="tile-title">Go Grid Engine</span>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700;">Go Grid Engine</span>
               <span class="status-badge staged">STAGING</span>
             </div>
-            <p class="tile-desc">Spatial data arrays, token routing paths, and architectural grid logic built for structured dataset ingestion.</p>
-            <div class="tile-action locked">Pipeline Locked (Waitlist)</div>
+            <p style="color: var(--terminal-text-muted); font-size: 0.85rem; line-height: 1.5;">Spatial data arrays, token routing paths, and architectural grid logic built for structured dataset ingestion[cite: 3].</p>
+            <div style="color: var(--terminal-text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: auto;">Pipeline Locked</div>
           </div>
         </div>
       </section>
     </div>
   </main>
 
-  <footer>
-    <div>&copy; 2026 SonicBloom Ecosystem. All rights reserved.</div>
-    <div>
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
-      <a href="/privacy.html">Privacy Policy</a>
-    </div>
-  </footer>
-
+  <script src="/content/content-engine.js"></script>
 </body>
 </html>
