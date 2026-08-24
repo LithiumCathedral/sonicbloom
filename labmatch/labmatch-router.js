@@ -1,15 +1,15 @@
 class LabMatchRouter {
   constructor() {
     this.currentSlide = 1;
-    this.totalSlides = 6;
+    this.totalSlides = 8; // 1: Welcome, 2: Segment, 3: Years, 4: Work Style, 5: Learning, 6: Hours, 7: Email, 8: Results (FastPass routes to 8)
     this.quizData = null;
     this.state = {
       email: '',
-      selectedDomain: 'Software Engineering',
-      experienceLayer: 'Domain Evaluator',
-      workRhythm: 'High-Throughput',
-      cognitiveStyle: 'Granular Adversarial',
-      psychometricProfile: 'Granular Adversarial'
+      selectedDomain: 'Coding & Tech',
+      yearsExperience: '1 to 3 years',
+      workStyle: 'Bug Finder',
+      learningStyle: 'Visual (Seeing & Watching)',
+      commitmentLevel: 'Flexible Hours (Pick my own times)'
     };
     this.generatedShareString = '';
   }
@@ -20,30 +20,52 @@ class LabMatchRouter {
       this.quizData = await resp.json();
       this.bindEvents();
       this.updateProgressBar();
-      console.log(`[LABMATCH] System operational: v${this.quizData.branding.version}`);
+      console.log(`[LABMATCH] Ready: v${this.quizData.branding.version}`);
     } catch (err) {
-      console.error("[CRITICAL] Failed to load quiz.json configuration:", err);
+      console.error("[CRITICAL] Could not load quiz data:", err);
     }
   }
 
   bindEvents() {
     window.nextSlide = (id) => this.goToSlide(id);
     window.prevSlide = () => this.goToSlide(this.currentSlide - 1);
+
+    // Q1: Segment
     window.selectDomain = (domain) => {
       this.state.selectedDomain = domain;
       this.goToSlide(3);
     };
-    window.selectExperience = (exp) => {
-      this.state.experienceLayer = exp;
+
+    // Q2: Experience in Years
+    window.selectYears = (years) => {
+      this.state.yearsExperience = years;
       this.goToSlide(4);
     };
-    window.selectPsychometric = (psy) => {
-      this.state.cognitiveStyle = psy;
-      this.state.psychometricProfile = psy;
-      this.finalizeAssessment();
+
+    // Q3: Work Style
+    window.selectWorkStyle = (style) => {
+      this.state.workStyle = style;
+      this.goToSlide(5);
     };
+
+    // Q4: Learning Style
+    window.selectLearningStyle = (style) => {
+      this.state.learningStyle = style;
+      this.goToSlide(6);
+    };
+
+    // Q5: Commitment Level
+    window.selectCommitment = (level) => {
+      this.state.commitmentLevel = level;
+      this.goToSlide(7); // Go to Email Capture
+    };
+
+    // Penultimate: Email Capture
+    window.submitEmailAndFinish = () => this.handleEmailSubmission();
+
+    // Fast Pass & Share
     window.triggerFastPass = () => this.handleFastPass();
-    window.shareWorkprint = () => this.shareWorkprint();
+    window.shareToLinkedIn = () => this.triggerLinkedInWindow();
   }
 
   goToSlide(id) {
@@ -60,8 +82,8 @@ class LabMatchRouter {
   updateProgressBar() {
     const bar = document.getElementById('progressBar');
     if (bar) {
-      const progressPercent = (this.currentSlide / this.totalSlides) * 100;
-      bar.style.width = `${progressPercent}%`;
+      const progressPercent = (this.currentSlide / (this.totalSlides - 1)) * 100;
+      bar.style.width = `${Math.min(progressPercent, 100)}%`;
     }
   }
 
@@ -70,70 +92,72 @@ class LabMatchRouter {
     return tracks.find(t => t.segment.toLowerCase() === this.state.selectedDomain.toLowerCase()) || tracks[0];
   }
 
-  getMatchedPsychometric() {
-    const psychometrics = this.quizData?.matrices?.psychometrics || [];
-    return psychometrics.find(p => p.type.toLowerCase() === this.state.psychometricProfile.toLowerCase()) || psychometrics[0];
+  getMatchedWorkStyle() {
+    const styles = this.quizData?.matrices?.workStyles || [];
+    return styles.find(w => w.type.toLowerCase() === this.state.workStyle.toLowerCase()) || styles[0];
+  }
+
+  handleEmailSubmission() {
+    const emailInput = document.getElementById('userEmailInput');
+    const emailVal = emailInput ? emailInput.value.trim() : '';
+
+    if (!emailVal || !emailVal.includes('@')) {
+      alert('Please enter your email address to see your results.');
+      return;
+    }
+
+    this.state.email = emailVal;
+    this.finalizeAssessment();
   }
 
   finalizeAssessment() {
     const matchedTrack = this.getMatchedTrack();
-    const matchedPsy = this.getMatchedPsychometric();
+    const matchedStyle = this.getMatchedWorkStyle();
 
-    document.getElementById('workprintEmojiDisplay').innerText = matchedPsy.emojiPrint;
+    // Fill in Results UI
+    document.getElementById('workprintEmojiDisplay').innerText = matchedStyle.emojiPrint;
     document.getElementById('workprintRoleDisplay').innerText = matchedTrack.role;
-    document.getElementById('workprintRateDisplay').innerText = `Estimated Rate Index: ${matchedTrack.rateIndex} / hr`;
+    document.getElementById('workprintRateDisplay').innerText = `Estimated Pay: ${matchedTrack.rateIndex} per hour`;
     document.getElementById('labPartnerName').innerText = matchedTrack.referralName;
     document.getElementById('directLabUrl').setAttribute('href', matchedTrack.referralUrl);
 
-    this.compileShareString(matchedTrack, matchedPsy);
+    // Build the share text
+    this.compileShareString(matchedTrack, matchedStyle);
+
+    // Save data and open results
     this.dispatchTelemetryLog('STANDARD');
-    this.goToSlide(5);
+    this.goToSlide(8);
   }
 
   handleFastPass() {
     const matchedTrack = this.getMatchedTrack();
+    const matchedStyle = this.getMatchedWorkStyle();
 
-    document.getElementById('fastPassLabName').innerText = matchedTrack.referralName;
-    document.getElementById('fastPassRole').innerText = `Target Track: ${matchedTrack.role}`;
-    document.getElementById('fastPassRate').innerText = `Rate Band: ${matchedTrack.rateIndex} / hr`;
-    document.getElementById('fastPassLink').setAttribute('href', matchedTrack.referralUrl);
+    document.getElementById('workprintEmojiDisplay').innerText = matchedStyle.emojiPrint;
+    document.getElementById('workprintRoleDisplay').innerText = matchedTrack.role;
+    document.getElementById('workprintRateDisplay').innerText = `Estimated Pay: ${matchedTrack.rateIndex} per hour`;
+    document.getElementById('labPartnerName').innerText = matchedTrack.referralName;
+    document.getElementById('directLabUrl').setAttribute('href', matchedTrack.referralUrl);
 
+    this.compileShareString(matchedTrack, matchedStyle);
     this.dispatchTelemetryLog('FAST_PASS');
-    this.goToSlide(6);
+    this.goToSlide(8);
   }
 
-  compileShareString(track, psy) {
+  compileShareString(track, style) {
     const tpl = this.quizData.sharing.templateText;
     this.generatedShareString = tpl
-      .replace('VAR_EMOJIS', psy.emojiPrint)
+      .replace('VAR_EMOJIS', style.emojiPrint)
       .replace('VAR_SEGMENT', track.segment)
-      .replace('VAR_WORK_STYLE', this.state.cognitiveStyle)
+      .replace('VAR_WORK_STYLE', this.state.workStyle)
       .replace('VAR_ROLE1', track.role)
       .replace('VAR_RATE', track.rateIndex);
   }
 
-  async shareWorkprint() {
+  triggerLinkedInWindow() {
     if (!this.generatedShareString) return;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'My SonicBloom AI Workprint',
-          text: this.generatedShareString,
-          url: this.quizData.branding.platformUrl
-        });
-        return;
-      } catch (err) {
-        console.warn('Native share dismissed, copying to clipboard instead:', err);
-      }
-    }
-
-    try {
-      await navigator.clipboard.writeText(this.generatedShareString);
-      alert('AI Workprint copied to clipboard! Share it anywhere.');
-    } catch (e) {
-      prompt('Copy your AI Workprint below:', this.generatedShareString);
-    }
+    const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(this.quizData.branding.platformUrl)}&text=${encodeURIComponent(this.generatedShareString)}`;
+    window.open(shareUrl, '_blank', 'width=600,height=600,noopener,noreferrer');
   }
 
   async dispatchTelemetryLog(mode = 'STANDARD') {
@@ -144,24 +168,13 @@ class LabMatchRouter {
       state: this.state
     };
 
-    // 1. Local Browser Storage Queue
+    // Save to local storage queue
     try {
       const existingQueue = JSON.parse(localStorage.getItem('labmatch_telemetry_queue') || '[]');
       existingQueue.push(payload);
       localStorage.setItem('labmatch_telemetry_queue', JSON.stringify(existingQueue));
-    } catch (storageErr) {
-      console.warn("[TELEMETRY] Local storage backup failed:", storageErr);
-    }
-
-    // 2. Vercel Serverless Endpoint
-    try {
-      await fetch('/api/capture', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    } catch (e) {
-      console.warn("[TELEMETRY] API capture unreachable, data saved locally.", e);
+    } catch (err) {
+      console.warn("[TELEMETRY] Local storage write failed:", err);
     }
   }
 }
