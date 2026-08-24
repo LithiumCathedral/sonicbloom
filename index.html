@@ -1,562 +1,568 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SonicBloom | Systems Dashboard</title>
-    <style>
-        :root {
-            --bg-canvas: #fafafa;
-            --bg-panel: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #4b5563;
-            --sonic-orange: #ff6a00;
-            --sonic-orange-light: #fff0e6;
-            --border-clean: #e5e7eb;
-            --terminal-bg: #111827;
-            --terminal-border: #1f2937;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SonicBloom | Technical Architecture & RLHF Lab Routing</title>
+  <meta name="description" content="Discover your AI Workprint signature, evaluate logic density, and route directly into verified AI research lab compensation tiers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --bg-card: #111827;
+      --bg-terminal: #0d1117;
+      --border: #1e293b;
+      --border-accent: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --orange: #ff6a00;
+      --orange-hover: #e05d00;
+      --orange-dim: rgba(255, 106, 0, 0.12);
+      --cyan: #38bdf8;
+      --green: #4ade80;
+    }
 
-        body {
-            background-color: var(--bg-canvas);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.5;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Clean Minimal Navbar */
-        header {
-            border-bottom: 1px solid var(--border-clean);
-            background: var(--bg-panel);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    /* Pixel Ticker Banner */
+    .pixel-ticker-wrap {
+      width: 100%;
+      background: #000000;
+      border-bottom: 2px solid var(--orange);
+      padding: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--text-main);
-            text-decoration: none;
-        }
+    .pixel-ticker {
+      display: inline-block;
+      animation: ticker-slide 28s linear infinite;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      color: var(--orange);
+    }
 
-        .logo span { color: var(--sonic-orange); }
+    .pixel-ticker span {
+      margin: 0 24px;
+    }
 
-        .domain-tag {
-            font-family: monospace;
-            font-size: 0.85rem;
-            background: var(--bg-canvas);
-            padding: 4px 10px;
-            border-radius: 4px;
-            color: var(--text-muted);
-            border: 1px solid var(--border-clean);
-        }
+    .pixel-ticker .rate {
+      color: #ffffff;
+      background: var(--orange);
+      color: #000;
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
 
-        /* Responsive Layout Grid */
-        .workspace-layout {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 24px 100px 24px;
-            display: grid;
-            grid-template-columns: 340px 1fr;
-            gap: 40px;
-            box-sizing: border-box;
-            height: calc(100vh - 80px);
-        }
+    @keyframes ticker-slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
-        /* ==========================================
-           TERMINAL-STYLED SIDEBAR TREE 
-           ========================================== */
-        .sidebar-terminal {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            height: 100%;
-        }
+    /* Main Hub Layout */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
 
-        .terminal-header {
-            background: #21262d;
-            border-bottom: 1px solid #30363d;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    @media (max-width: 900px) {
+      .workspace-grid { grid-template-columns: 1fr; }
+    }
 
-        .terminal-dots {
-            display: flex;
-            gap: 6px;
-        }
-        .dot { width: 10px; height: 10px; border-radius: 50%; background: #444; }
-        .dot.orange { background: var(--sonic-orange); }
+    /* Branched Discovery Sidebar */
+    .sidebar {
+      background: var(--bg-terminal);
+      border-right: 1px solid var(--border);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
 
-        .terminal-title {
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: #8b949e;
-            font-weight: bold;
-        }
+    .brand-header h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .terminal-tree-area {
-            padding: 15px;
-            overflow-y: auto;
-            flex-grow: 1;
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: #c9d1d9;
-        }
+    .brand-header .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: inline-block;
+      box-shadow: 0 0 8px var(--orange);
+    }
 
-        .tree-title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #8b949e;
-            margin: 15px 0 8px 0;
-            display: block;
-            border-bottom: 1px dashed #30363d;
-            padding-bottom: 4px;
-        }
-        .tree-title:first-child { margin-top: 0; }
+    .discovery-tree {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
 
-        .folder-header {
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 6px;
-            color: #f0f6fc;
-            border-radius: 4px;
-        }
-        .folder-header:hover { background: rgba(255, 106, 0, 0.1); color: var(--sonic-orange); }
+    .tree-group-title {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-        .folder-content {
-            margin-left: 10px;
-            border-left: 1px dashed #30363d;
-            padding-left: 10px;
-            display: none;
-        }
-        .folder-content.expanded { display: block; }
+    .tree-branch {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-left: 1px dashed var(--border-accent);
+      padding-left: 12px;
+      margin-left: 4px;
+    }
 
-        .tree-item {
-            cursor: pointer;
-            padding: 3px 6px;
-            color: #8b949e;
-            display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-        .tree-item:hover { color: var(--sonic-orange); background: rgba(255, 106, 0, 0.05); }
+    .tree-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
 
-        /* ==========================================
-           MAIN CONTENT SYSTEM STAGE
-           ========================================== */
-        main {
-            overflow-y: auto;
-            padding-right: 10px;
-        }
+    .tree-link:hover, .tree-link.active {
+      color: var(--text);
+      background: var(--orange-dim);
+      color: var(--orange);
+    }
 
-        .stage-card {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-clean);
-            border-radius: 16px;
-            padding: 40px;
-            min-height: 100%;
-            box-sizing: border-box;
-        }
+    .sidebar-stats {
+      margin-top: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+    }
 
-        h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; margin: 0 0 15px 0; line-height: 1.1; }
-        h1 em { font-style: normal; color: var(--sonic-orange); }
-        h2 { font-size: 1.3rem; font-weight: 700; margin-top: 30px; margin-bottom: 10px; }
-        p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; max-width: 720px; margin-bottom: 16px; }
+    .sidebar-stats .status-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      color: var(--text-muted);
+    }
 
-        /* Unified Grid Framework */
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
+    .sidebar-stats .status-item span:last-child {
+      color: var(--green);
+    }
 
-        .card {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-clean);
-            border-radius: 12px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: border-color 0.2s;
-        }
-        .card:hover { border-color: var(--text-main); }
-        .card.featured { border-color: var(--sonic-orange); background: linear-gradient(180deg, #ffffff 0%, var(--sonic-orange-light) 100%); }
+    /* Workspace Content & Embedded Diagnostic */
+    .content-viewport {
+      padding: 36px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
 
-        .status {
-            font-family: monospace;
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 4px 8px;
-            border-radius: 6px;
-            align-self: flex-start;
-            margin-bottom: 15px;
-        }
-        .status.live { background: var(--sonic-orange-light); color: var(--sonic-orange); }
-        .status.upcoming { background: var(--bg-canvas); color: var(--text-muted); border: 1px dashed var(--border-clean); }
+    .hero-banner {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-        .card-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 10px 0; }
-        .card-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin: 0 0 20px 0; }
-        .card-link { font-weight: 700; text-decoration: none; color: var(--text-main); font-size: 0.88rem; }
-        .card.featured .card-link { color: var(--sonic-orange); }
+    .hero-banner h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
 
-        /* Waitlist Container Form Components */
-        .waitlist-box {
-            border: 1px dashed var(--sonic-orange);
-            background: var(--sonic-orange-light);
-            border-radius: 12px;
-            padding: 24px;
-            max-width: 480px;
-            margin-top: 20px;
-        }
-        .waitlist-box h3 { margin: 0 0 8px 0; font-size: 1.1rem; color: var(--text-main); }
-        .waitlist-box p { font-size: 0.88rem; margin-bottom: 16px; }
+    .hero-banner p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 780px;
+    }
 
-        .waitlist-form { display: flex; gap: 10px; }
-        .waitlist-input {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-clean);
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            flex-grow: 1;
-        }
-        .waitlist-input:focus { outline: none; border-color: var(--sonic-orange); }
-        
-        .waitlist-btn {
-            background: var(--sonic-orange);
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .waitlist-btn:hover { background-color: #e55f00; }
+    /* Embedded Terminal Diagnostic Frame */
+    .terminal-container {
+      background: var(--bg-terminal);
+      border: 1px solid var(--border-accent);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
 
-        /* Live Terminal System Message Banner Footer */
-        .terminal-banner {
-            background: #21262d;
-            border-top: 1px solid #30363d;
-            padding: 8px 15px;
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: #8b949e;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .banner-indicator { color: var(--sonic-orange); animation: pulse 1.5s infinite; }
+    .terminal-topbar {
+      background: #090d16;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-        @media (max-width: 1024px) {
-            .workspace-layout { grid-template-columns: 1fr; height: auto; }
-            .sidebar-terminal { height: 400px; }
-        }
-    </style>
-    <meta name="google-site-verification" content="0yuiFZyxJcwPmH8vH5E3J_dOHubvxXvzIz9ZgDXqXfA" />
+    .terminal-signals {
+      display: flex;
+      gap: 6px;
+    }
+
+    .signal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #27272a;
+    }
+    .signal-dot.red { background: #ef4444; }
+    .signal-dot.yellow { background: #f59e0b; }
+    .signal-dot.green { background: #10b981; }
+
+    .terminal-title {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      padding: 32px;
+    }
+
+    /* Embedded Quiz Slides */
+    .quiz-slide { display: none; flex-direction: column; gap: 20px; }
+    .quiz-slide.active { display: flex; }
+
+    .quiz-slide h3 {
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+
+    .quiz-slide p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 650px) {
+      .option-grid { grid-template-columns: 1fr; }
+    }
+
+    .btn-matrix {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-matrix:hover {
+      border-color: var(--orange);
+      background: var(--orange-dim);
+      color: var(--orange);
+    }
+
+    .btn-matrix .rate-badge {
+      font-size: 0.75rem;
+      color: var(--green);
+    }
+
+    .action-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-back:hover { color: var(--text); border-color: var(--border-accent); }
+    .btn-action { background: var(--orange); color: #000000; }
+    .btn-action:hover { background: var(--orange-hover); }
+    .btn-fastpass { background: transparent; color: var(--orange); border: 1px dashed var(--orange); }
+    .btn-fastpass:hover { background: var(--orange-dim); }
+
+    /* Results Card */
+    .result-summary-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .result-emojis {
+      font-size: 2.4rem;
+      letter-spacing: 12px;
+      margin-bottom: 12px;
+    }
+
+    .result-card-link {
+      display: inline-block;
+      margin-top: 16px;
+      background: var(--orange);
+      color: #000;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo" onclick="loadDashboard()">Sonic<span>Bloom</span></a>
-            <div class="domain-tag">sonicbloom.dev</div>
-        </div>
-    </header>
-
-    <div class="workspace-layout">
-        
-        <aside class="sidebar-terminal">
-            <div class="terminal-header">
-                <div class="terminal-dots"><div class="dot orange"></div><div class="dot"></div><div class="dot"></div></div>
-                <div class="terminal-title">bash // node_tree.sh</div>
-            </div>
-            
-            <div class="terminal-tree-area">
-                <span class="tree-title">System Pipelines</span>
-                <div id="dynamic-tree-mount"></div>
-            </div>
-
-            <div class="terminal-banner">
-                <span class="banner-indicator">●</span>
-                <span id="console-stream">STDOUT: System active. Awaiting route selection...</span>
-            </div>
-        </aside>
-
-        <main id="stage">
-        </main>
-
+  <!-- Scrolling Block-Pixel Rate Ticker -->
+  <div class="pixel-ticker-wrap">
+    <div class="pixel-ticker">
+      <span>MEDICINE / CLINICAL VALIDATION <span class="rate">$60 - $85/HR</span></span>
+      <span>LAW / COMPLIANCE COMMAND <span class="rate">$50 - $75/HR</span></span>
+      <span>SOFTWARE / CODE EVALUATION <span class="rate">$45 - $65/HR</span></span>
+      <span>DATA OPS & CRITIQUE <span class="rate">$40 - $55/HR</span></span>
+      <span>HUMANITIES / REASONING SPECIALIST <span class="rate">$35 - $50/HR</span></span>
+      <span>MEDICINE / CLINICAL VALIDATION <span class="rate">$60 - $85/HR</span></span>
+      <span>LAW / COMPLIANCE COMMAND <span class="rate">$50 - $75/HR</span></span>
+      <span>SOFTWARE / CODE EVALUATION <span class="rate">$45 - $65/HR</span></span>
+      <span>DATA OPS & CRITIQUE <span class="rate">$40 - $55/HR</span></span>
+      <span>HUMANITIES / REASONING SPECIALIST <span class="rate">$35 - $50/HR</span></span>
     </div>
+  </div>
 
-    <script>
-        // DATA MATRIX ARCHITECTURE
-        const structuralSitemap = [
-            { id: "n1", category: "nodes", file: "parsing_logic.md", title: "Parsing Logic", summary: "How engineering platforms programmatically break down unstructured resume data strings into structured operational tokens." },
-            { id: "n2", category: "nodes", file: "rate_architecture.md", title: "Rate Architecture", summary: "Tracking hourly project scaling configurations across highly technical, domain-dense data validation segments." },
-            { id: "n3", category: "nodes", file: "adversarial_mitigation.md", title: "Adversarial Mitigation", summary: "An inspection of the human feedback loop structures required to stress-test logical variations and block model hallucination states." },
-            { id: "n4", category: "nodes", file: "validator_onboarding.md", title: "Validator Onboarding", summary: "The step-by-step protocol sequence for independent validators syncing with model calibration pipelines to establish human-in-the-loop synchronization parameters." },
-            { id: "n5", category: "nodes", file: "injection_mapping.md", title: "Node-to-Edge Profiling", summary: "Details the algorithmic pipeline utilized by LabMatch to transform messy, non-linear structural backgrounds into clean database system variables without human recruitment intervention." },
-            
-            { id: "e1", category: "knowledge", file: "algorithmic_shift.txt", title: "The Algorithmic Shift", summary: "An analysis tracking deep infrastructure adaptations within specialized modern expert talent matching networks." },
-            { id: "e2", category: "knowledge", file: "logic_density_matrix.txt", title: "Calibrating Compensation Against Domain Depth", summary: "An analysis of the fixed-tier mathematical grid correlating domain logic depth to live hourly compensation metrics, mapping out rates for Compliance Engineers ($40-$55/hr), Code Evaluators ($55-$70/hr), and Data Critics ($70-$85+/hr)." },
-            
-            { id: "p1", category: "projects", file: "labmatch.sys", title: "LabMatch Engine", summary: "A diagnostic application parsing structured user tracks and matching operational credentials directly with technical AI data labs.", isLive: true, url: "/labmatch" },
-            { id: "p2", category: "projects", file: "godot_sandbox.sys", title: "Godot Strategy Sandbox", summary: "An architectural simulation matrix focused on spatial data arrays, grid logic pathways, and automated sandbox strategy maps.", isLive: false },
-            { id: "p3", category: "projects", file: "plath_matrix.sys", title: "Plath Framework", summary: "A specialized forecasting framework structuring calculations for personal forecasts and predictive analysis architectures.", isLive: false },
-            { id: "f1", category: "faq", file: "global_faq_v1.cfg", title: "Global Core FAQ Engine", isFaq: true }
-        ];
+  <div class="workspace-grid">
+    <!-- Branched Discovery Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <span class="dot"></span>
+        <h1>SonicBloom</h1>
+      </div>
 
-        // Renders Core Platform Frame Layout
-        function loadDashboard() {
-            document.getElementById('console-stream').innerText = "STDOUT: Core Workspace Active // Operational clusters initialized.";
-            document.getElementById('stage').innerHTML = `
-                <div class="stage-card">
-                    <h1><em>Simple tools</em> have the best effect.</h1>
-                    <p>SonicBloom is a creative playground where we build clean web apps, helpful content engines, and structured data-driven pipelines.</p>
-                    
-                    <h2 style="margin-top: 40px;">Active Deployments</h2>
-                    <div class="apps-grid">
-                        <div class="card featured">
-                            <div>
-                                <div class="status live">Live Engine</div>
-                                <h3 class="card-title">LabMatch</h3>
-                                <p class="card-desc">A diagnostic application parsing structured user tracks and matching operational credentials directly with technical AI data labs.</p>
-                            </div>
-                            <a href="/labmatch" class="card-link">Take Diagnostic →</a>
-                        </div>
-                        <div class="card" onclick="routeSystemPage('p2')" style="cursor:pointer;">
-                            <div>
-                                <div class="status upcoming">Staged Sandbox</div>
-                                <h3 class="card-title">Godot</h3>
-                                <p class="card-desc">An architectural matrix focused on spatial data arrays and grid logic sandbox strategy pathways.</p>
-                            </div>
-                            <span class="card-link" style="color: var(--sonic-orange);">Learn More & Join Waitlist →</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
+      <nav class="discovery-tree">
+        <div>
+          <div class="tree-group-title">01 / Engine Core</div>
+          <ul class="tree-branch">
+            <li><a href="#diagnostic" class="tree-link active">⚡ LabMatch Diagnostic</a></li>
+            <li><a href="/content/" class="tree-link">📁 Knowledge Hub</a></li>
+          </ul>
+        </div>
 
-        function toggleFolder(id) {
-            document.getElementById(id).classList.toggle('expanded');
-        }
+        <div>
+          <div class="tree-group-title">02 / Technical Nodes</div>
+          <ul class="tree-branch">
+            <li><a href="/content/nodes/n1-parsing-logic.html" class="tree-link">01 Parsing Logic</a></li>
+            <li><a href="/content/nodes/n2-rate-architecture.html" class="tree-link">02 Rate Matrix</a></li>
+            <li><a href="/content/nodes/n3-adversarial-mitigation.html" class="tree-link">03 Adversarial Loops</a></li>
+          </ul>
+        </div>
 
-        // Programmatic Terminal Tree Compiler Loop
-        function compileTerminalTree() {
-            const mount = document.getElementById('dynamic-tree-mount');
-            const directories = {
-                nodes: { label: "nodes/ (200w)", items: [] },
-                knowledge: { label: "knowledge/ (>700w)", items: [] },
-                projects: { label: "projects/ (apps)", items: [] },
-                faq: { label: "global_faq/ (400w)", items: [] }
-            };
+        <div>
+          <div class="tree-group-title">03 / Strategic Pillars</div>
+          <ul class="tree-branch">
+            <li><a href="/content/articles/calculating-logic-density.html" class="tree-link">Logic Density Scale</a></li>
+            <li><a href="/content/articles/semantic-pruning-mechanics.html" class="tree-link">Semantic Pruning</a></li>
+          </ul>
+        </div>
+      </nav>
 
-            structuralSitemap.forEach(node => {
-                if(directories[node.category]) directories[node.category].items.push(node);
-            });
+      <div class="sidebar-stats">
+        <div class="status-item">
+          <span>PIPELINE</span>
+          <span>ONLINE</span>
+        </div>
+        <div class="status-item">
+          <span>TAXONOMY</span>
+          <span>v2.5.0</span>
+        </div>
+      </div>
+    </aside>
 
-            let treeHtml = "";
-            for (const [key, dir] of Object.entries(directories)) {
-                const isExpanded = key === "projects" ? "expanded" : "";
-                treeHtml += `
-                    <div style="margin-bottom: 4px;">
-                        <div class="folder-header" onclick="toggleFolder('${key}-folder')">
-                            📁 ${dir.label} <span>[${dir.items.length}]</span>
-                        </div>
-                        <div class="folder-content ${isExpanded}" id="${key}-folder">
-                            ${dir.items.map(item => `
-                                <div class="tree-item" onclick="routeSystemPage('${item.id}')">↳ ${item.file}</div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-            mount.innerHTML = treeHtml;
-        }
+    <!-- Main Content & Embedded Diagnostic -->
+    <main class="content-viewport">
+      <section class="hero-banner">
+        <h2>Deterministic Intake & Lab Calibration</h2>
+        <p>Calibrate your technical signature across active RLHF lines and domain-specific verification pipelines. Evaluate compensation scaling against verified cognitive depth.</p>
+      </section>
 
-        // Intelligent Asynchronous Page Routing Router Content Handler
-        async function routeSystemPage(id) {
-            const asset = structuralSitemap.find(x => x.id === id);
-            if (!asset) return;
+      <section class="terminal-container" id="diagnostic">
+        <div class="terminal-topbar">
+          <div class="terminal-signals">
+            <span class="signal-dot red"></span>
+            <span class="signal-dot yellow"></span>
+            <span class="signal-dot green"></span>
+          </div>
+          <div class="terminal-title">labmatch-diagnostic.sh — v2.5.0</div>
+          <div style="font-size: 0.7rem; color: var(--green);">READY</div>
+        </div>
 
-            document.getElementById('console-stream').innerText = `STDOUT: Print sequence executing for node asset [${asset.file}]`;
+        <div class="terminal-body">
+          <!-- Slide 1: Welcome / Gate -->
+          <div class="quiz-slide active" id="slide-1">
+            <h3>Initialize Cognitive Benchmark</h3>
+            <p>Select your primary operational strength to index your compensation baseline.</p>
+            <div class="action-row">
+              <div></div>
+              <button class="btn btn-action" onclick="nextSlide(2)">Begin Assessment &rarr;</button>
+            </div>
+          </div>
 
-            // Project Branch Redirection Logic
-            if (asset.category === "projects") {
-                if (asset.isLive) {
-                    document.getElementById('stage').innerHTML = `
-                        <div class="stage-card">
-                            <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">⚙️ LIVE PIPELINE // INTERACTIVE APPLICATION</span>
-                            <h1 style="margin-top:10px;">${asset.title}</h1>
-                            <p style="font-size:1.1rem; max-width:720px; margin-bottom:30px;">${asset.summary}</p>
-                            <a href="${asset.url}" class="waitlist-btn" style="text-decoration:none; display:inline-block; text-align:center;">Launch Engine Dashboard</a>
-                        </div>
-                    `;
-                } else {
-                    loadWaitlist(asset.title, asset.summary);
-                }
-                return;
-            }
+          <!-- Slide 2: Domain -->
+          <div class="quiz-slide" id="slide-2">
+            <h3>01 / Select Primary Domain</h3>
+            <div class="option-grid">
+              <button class="btn-matrix" onclick="selectDomain('Software Engineering')">
+                <span>💻 Software Engineering</span>
+                <span class="rate-badge">$45 - $65/hr</span>
+              </button>
+              <button class="btn-matrix" onclick="selectDomain('Medicine')">
+                <span>🩺 Medicine & Health</span>
+                <span class="rate-badge">$60 - $85/hr</span>
+              </button>
+              <button class="btn-matrix" onclick="selectDomain('Humanities')">
+                <span>📚 Humanities & Writing</span>
+                <span class="rate-badge">$35 - $50/hr</span>
+              </button>
+              <button class="btn-matrix" onclick="selectDomain('Data Analysis')">
+                <span>📊 Data Ops & Analysis</span>
+                <span class="rate-badge">$40 - $55/hr</span>
+              </button>
+              <button class="btn-matrix" onclick="selectDomain('Law')">
+                <span>⚖️ Legal & Compliance</span>
+                <span class="rate-badge">$50 - $75/hr</span>
+              </button>
+              <button class="btn-matrix" onclick="selectDomain('Finance')">
+                <span>📈 Quantitative Finance</span>
+                <span class="rate-badge">$45 - $60/hr</span>
+              </button>
+            </div>
+            <div class="action-row">
+              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+              <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
+            </div>
+          </div>
 
-            if (asset.isFaq) {
-                renderFaqPage(asset);
-                return;
-            }
+          <!-- Slide 3: Experience -->
+          <div class="quiz-slide" id="slide-3">
+            <h3>02 / Experience Calibration</h3>
+            <p>How do you navigate complex problem spaces?</p>
+            <div class="option-grid">
+              <button class="btn-matrix" onclick="selectExperience('Senior Principal / Edge Architect')">
+                <span>Senior Principal / Edge Architect</span>
+              </button>
+              <button class="btn-matrix" onclick="selectExperience('Domain Evaluator / Applied Practitioner')">
+                <span>Domain Evaluator / Practitioner</span>
+              </button>
+            </div>
+            <div class="action-row">
+              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+              <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
+            </div>
+          </div>
 
-            // Target Pathing Configuration Mapping
-            const targetUrl = `/${asset.category}/${asset.file}`;
+          <!-- Slide 4: Cognitive Style -->
+          <div class="quiz-slide" id="slide-4">
+            <h3>03 / Cognitive Signature</h3>
+            <p>Select your dominant evaluation rhythm:</p>
+            <div class="option-grid">
+              <button class="btn-matrix" onclick="selectPsychometric('Granular Adversarial')">
+                <span>Granular Adversarial (Finding Edge Bugs)</span>
+              </button>
+              <button class="btn-matrix" onclick="selectPsychometric('Synthetic Structural')">
+                <span>Synthetic Structural (Architecture & Schema)</span>
+              </button>
+              <button class="btn-matrix" onclick="selectPsychometric('Heuristic Creative')">
+                <span>Heuristic Creative (Lateral Semantics)</span>
+              </button>
+            </div>
+            <div class="action-row">
+              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+              <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
+            </div>
+          </div>
 
-            // Initialize Loading Matrix Viewport Stage
-            document.getElementById('stage').innerHTML = `
-                <div class="stage-card">
-                    <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">📄 SYSTEM_PATH // ${asset.category}/${asset.file}</span>
-                    <h1 style="margin-top:10px;">${asset.title}</h1>
-                    <p style="font-family:monospace; font-size:0.9rem; color:var(--text-muted); margin-top:20px;">
-                        [CONNECTING TO TERMINAL ENDPOINT STREAM...]
-                    </p>
-                </div>
-            `;
+          <!-- Slide 5: Standard Assessment Results -->
+          <div class="quiz-slide" id="slide-5">
+            <h3>Calibration Verified</h3>
+            <div class="result-summary-box">
+              <div class="result-emojis" id="workprintEmojiDisplay">⚡️ 🧠 🔬 🛡️</div>
+              <h4 id="workprintRoleDisplay" style="color: var(--orange); font-size: 1.1rem;">Code Evaluator</h4>
+              <p id="workprintRateDisplay" style="margin-top: 6px; color: var(--text-muted);">Estimated Index: $45 - $65 / hr</p>
+              <a href="#" id="directLabUrl" class="result-card-link" target="_blank" rel="noopener">Enter Lab Pipeline &rarr;</a>
+            </div>
+            <div class="action-row">
+              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+              <button class="btn btn-action" onclick="shareWorkprint()">🚀 Share AI Workprint</button>
+            </div>
+          </div>
 
-            // Async Fetch Lifecycle Execution Loop
-            try {
-                const response = await fetch(targetUrl);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP network fault status profile: ${response.status}`);
-                }
+          <!-- Slide 6: FAST PASS Expedited Slide -->
+          <div class="quiz-slide" id="slide-6">
+            <h3>⚡ Fast Pass Expedited Routing</h3>
+            <div class="result-summary-box">
+              <h4 id="fastPassLabName" style="color: var(--orange); font-size: 1.1rem;">Matched Research Lab</h4>
+              <p id="fastPassRole" style="margin-top: 6px;">Target Track: Evaluator</p>
+              <p id="fastPassRate" style="color: var(--green); margin-top: 4px;">Rate Band: Dynamic</p>
+              <a href="#" id="fastPassLink" class="result-card-link" target="_blank" rel="noopener">Access Expedited Pipeline &rarr;</a>
+            </div>
+            <div class="action-row">
+              <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+            </div>
+          </div>
 
-                const payloadText = await response.text();
+        </div>
+      </section>
+    </main>
+  </div>
 
-                // Render content payload securely with layout break preservation rules
-                document.getElementById('stage').innerHTML = `
-                    <div class="stage-card">
-                        <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">📄 SYSTEM_PATH // ${asset.category}/${asset.file}</span>
-                        <h1 style="margin-top:10px;">${asset.title}</h1>
-                        <p style="font-size:1.1rem; color: var(--text-main); margin-bottom:20px; font-weight:500;">${asset.summary}</p>
-                        <hr style="border:0; border-top:1px dashed var(--border-clean); margin-bottom:30px;">
-                        
-                        <div style="white-space: pre-wrap; font-family: inherit; color: var(--text-main); line-height: 1.6;">${escapeHtml(payloadText)}</div>
-                    </div>
-                `;
-
-            } catch (error) {
-                // Error Interception Terminal Fallback Engine
-                document.getElementById('console-stream').innerText = `ERRLOG: Resolution abort for route payload vector [${asset.file}]`;
-                
-                document.getElementById('stage').innerHTML = `
-                    <div class="stage-card" style="border-color: var(--sonic-orange);">
-                        <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">⚠️ SYSTEM CRITICAL OUTCOME // ROUTE EXCEPTION</span>
-                        <h1 style="margin-top:10px; color: var(--text-main);">[ERRLOG: DIRECTORY ROUTING RESOLUTION FAULT]</h1>
-                        <p style="font-family:monospace; font-size:0.95rem; background: #fff0e6; padding: 15px; border-radius: 8px; color: var(--text-main); border: 1px solid rgba(255,106,0,0.25);">
-                            <strong>Failed Target Path:</strong> ${targetUrl}<br>
-                            <strong>Exception Trace:</strong> ${error.message}<br><br>
-                            Verify that the corresponding component asset physically populates the file paths inside your Git repository context.
-                        </p>
-                    </div>
-                `;
-            }
-        }
-
-        // Render Global Interactive FAQ Template Engine Block
-        function renderFaqPage(asset) {
-            let faqHtml = `
-                <div class="stage-card">
-                    <span style="font-family:monospace; color:var(--sonic-orange); font-size:0.85rem; font-weight:bold;">📁 SYSTEM_PATH // ${asset.category}/${asset.file}</span>
-                    <h1 style="margin-top:10px;">Global FAQ Core</h1>
-                    <p>Compiled runtime answers routing query mechanics directly to recommended informational system parameters.</p>
-            `;
-
-            for(let i=1; i<=10; i++) {
-                faqHtml += `
-                    <div style="margin-top:24px; border-bottom:1px dashed var(--border-clean); padding-bottom:16px;">
-                        <h3 style="font-size:1.05rem; margin-bottom:6px; color:var(--text-main);">Module Theme Cluster ${i} // System Integrity Matrix</h3>
-                        <p style="font-size:0.9rem; font-weight:bold; color:var(--text-main); margin-bottom:4px;">Q: How does algorithmic mapping isolate specialized validation tasks?</p>
-                        <p style="font-size:0.9rem; margin-bottom:8px;">A: By treating engineering variables as isolated query units directly inside verified data arrays. Relational structural nodes protect baseline integrity values.</p>
-                        <span style="font-family:monospace; font-size:0.78rem; color:var(--sonic-orange);">Suggested Content Path: <span style="cursor:pointer; text-decoration:underline;" onclick="routeSystemPage('n1')">parsing_logic.md</span></span>
-                    </div>
-                `;
-            }
-
-            faqHtml += `</div>`;
-            document.getElementById('stage').innerHTML = faqHtml;
-        }
-
-        // Unified Maintenance-Free Waitlist Handler
-        function loadWaitlist(name, desc) {
-            document.getElementById('console-stream').innerText = `WARNTYPE: Requesting unlaunched system pipeline variable [${name}].`;
-            document.getElementById('stage').innerHTML = `
-                <div class="stage-card">
-                    <span style="font-family:monospace; color:var(--text-muted); font-size:0.85rem; font-weight:bold;">⚙ STAGED PIPELINE // ARCHITECTURE DIRECT</span>
-                    <h1 style="margin-top:10px;">${name}</h1>
-                    <p style="font-size:1.1rem; max-width:600px; margin-bottom:24px;">${desc}</p>
-                    
-                    <div class="waitlist-box">
-                        <h3>Join Project Pipeline</h3>
-                        <p>This entry point is staged for development rollout. Enter your parameters below to flag early-access inclusion vectors.</p>
-                        
-                        <form class="waitlist-form" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST" onsubmit="handleWaitlistSubmit(event, '${name}')">
-                            <input type="hidden" name="project_origin" value="${name}">
-                            <input type="hidden" name="submission_timestamp" value="${new Date().toISOString()}">
-                            
-                            <input type="email" name="email" required placeholder="operator_email@domain.com" class="waitlist-input" id="waitlist-field">
-                            <button type="submit" class="waitlist-btn">Join Waitlist</button>
-                        </form>
-                    </div>
-                </div>
-            `;
-        }
-
-        function handleWaitlistSubmit(e, projectName) {
-            // Note: Remove e.preventDefault() if utilizing a standard non-AJAX Formspree post response configuration layout.
-            e.preventDefault();
-            const email = document.getElementById('waitlist-field').value;
-            document.getElementById('console-stream').innerText = `SUCCESS: Appended address [${email}] directly to project [${projectName}] allocation map vector.`;
-            alert(`Authorized. Communication channel mapped to the ${projectName} queue pipeline.`);
-        }
-
-        // XSS Mitigation Sanitization Helper Utility
-        function escapeHtml(text) {
-            return text
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-
-        // Core Init Lifecycle
-        document.addEventListener("DOMContentLoaded", () => {
-            compileTerminalTree();
-            loadDashboard();
-        });
-    </script>
+  <script src="/labmatch/labmatch-router.js"></script>
 </body>
 </html>
