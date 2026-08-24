@@ -1,74 +1,81 @@
 {
   "branding": {
     "engineName": "LabMatch",
-    "version": "2.6.0",
+    "version": "2.7.0",
     "studioSignature": "SonicBloom",
     "platformUrl": "https://sonicbloom.dev/labmatch"
   },
   "matrices": {
     "tracks": [
       {
-        "segment": "Coding & Tech",
-        "role": "Code Helper",
+        "segment": "Software Engineering",
+        "role": "Code Evaluator",
         "rateIndex": "$45 - $65",
-        "referralName": "Turing AI Lab",
-        "referralUrl": "https://work.turing.com/r/lZvCS-A7-T"
+        "referralName": "Mercor Code Lab",
+        "referralUrl": "https://t.mercor.com/rrVyb"
       },
       {
-        "segment": "Data & Numbers",
-        "role": "Data Checker",
+        "segment": "Data Analysis",
+        "role": "Data Critic",
         "rateIndex": "$40 - $55",
-        "referralName": "Turing Data Ops",
-        "referralUrl": "https://work.turing.com/r/lZvCS-A7-T"
+        "referralName": "Mercor Data Ops",
+        "referralUrl": "https://t.mercor.com/K13Z9"
       },
       {
-        "segment": "Healthcare & Medicine",
-        "role": "Health Expert",
-        "rateIndex": "$60 - $85",
-        "referralName": "Handshake Health Labs",
-        "referralUrl": "https://joinhandshake.com"
+        "segment": "Finance",
+        "role": "Quantitative Reviewer",
+        "rateIndex": "$45 - $60",
+        "referralName": "Mercor Finance Desk",
+        "referralUrl": "https://t.mercor.com/po98d"
       },
       {
-        "segment": "Science & Nature",
-        "role": "Science Helper",
-        "rateIndex": "$45 - $65",
-        "referralName": "Handshake Clinical Network",
-        "referralUrl": "https://joinhandshake.com"
-      },
-      {
-        "segment": "Writing & Reading",
-        "role": "Writing Specialist",
-        "rateIndex": "$35 - $50",
-        "referralName": "Mercor Expert Exchange",
-        "referralUrl": "https://t.mercor.com/ti1xQ"
-      },
-      {
-        "segment": "Languages & Audio",
-        "role": "Language Expert",
-        "rateIndex": "$35 - $50",
-        "referralName": "Mercor Language Tier",
-        "referralUrl": "https://t.mercor.com/ti1xQ"
-      },
-      {
-        "segment": "Art & Design",
-        "role": "Creative Designer",
+        "segment": "Arts",
+        "role": "Generative Designer",
         "rateIndex": "$35 - $50",
         "referralName": "Mercor Creative Hub",
-        "referralUrl": "https://t.mercor.com/ti1xQ"
+        "referralUrl": "https://t.mercor.com/P5jqE"
       },
       {
-        "segment": "Money & Business",
-        "role": "Business Guide",
-        "rateIndex": "$45 - $60",
-        "referralName": "Mercor Quantitative",
-        "referralUrl": "https://t.mercor.com/ti1xQ"
+        "segment": "Language/Audio",
+        "role": "Linguistics Expert",
+        "rateIndex": "$35 - $50",
+        "referralName": "Mercor Language Tier",
+        "referralUrl": "https://t.mercor.com/dWbN8"
       },
       {
-        "segment": "Law & Rules",
-        "role": "Rules Specialist",
+        "segment": "Humanities",
+        "role": "Reasoning Specialist",
+        "rateIndex": "$35 - $50",
+        "referralName": "Mercor Expert Exchange",
+        "referralUrl": "https://t.mercor.com/uP10o"
+      },
+      {
+        "segment": "Medicine",
+        "role": "Clinical Validator",
+        "rateIndex": "$60 - $85",
+        "referralName": "Mercor Health Labs",
+        "referralUrl": "https://t.mercor.com/1Sxsx"
+      },
+      {
+        "segment": "Law",
+        "role": "Compliance Commander",
         "rateIndex": "$50 - $75",
         "referralName": "Mercor Governance Desk",
-        "referralUrl": "https://t.mercor.com/ti1xQ"
+        "referralUrl": "https://t.mercor.com/j41qe"
+      },
+      {
+        "segment": "Life Sciences",
+        "role": "Research Accelerator",
+        "rateIndex": "$45 - $65",
+        "referralName": "Mercor Clinical Network",
+        "referralUrl": "https://t.mercor.com/PEfVh"
+      },
+      {
+        "segment": "Business Operations",
+        "role": "Operations Specialist",
+        "rateIndex": "$35 - $50",
+        "referralName": "Mercor Enterprise",
+        "referralUrl": "https://t.mercor.com/YCgs8"
       }
     ],
     "workStyles": [
