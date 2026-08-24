@@ -152,7 +152,7 @@ class LabMatchRouter {
     window.open(shareUrl, '_blank', 'width=600,height=600,noopener,noreferrer');
   }
 
-  async dispatchTelemetryLog(mode = 'STANDARD') {
+async dispatchTelemetryLog(mode = 'STANDARD') {
     const payload = {
       timestamp: new Date().toISOString(),
       routingMode: mode,
@@ -160,15 +160,38 @@ class LabMatchRouter {
       state: this.state
     };
 
-    // Write to local cache to ensure data preservation
+    console.log("[LABMATCH TELEMETRY] Preparing to log payload:", payload);
+
+    // 1. Write to local browser cache (Fail-safe backup)
     try {
       const existingQueue = JSON.parse(localStorage.getItem('labmatch_telemetry_queue') || '[]');
       existingQueue.push(payload);
       localStorage.setItem('labmatch_telemetry_queue', JSON.stringify(existingQueue));
     } catch (err) {
-      console.warn("[TELEMETRY] Local storage write failed:", err);
+      console.warn("[TELEMETRY] Local storage backup failed:", err);
     }
-    
+
+    // 2. Transmit to Google Sheets Webhook
+    const GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwC_oRSh_cUenl8DdVFDPRiIql0rN70fjMjGICg77FhMQxXjPUlRVX6b7UcssKnM10wJw/exec";
+
+    if (GOOGLE_WEBHOOK_URL && !GOOGLE_WEBHOOK_URL.includes("AKfycbwC_oRSh_cUenl8DdVFDPRiIql0rN70fjMjGICg77FhMQxXjPUlRVX6b7UcssKnM10wJw")) {
+      try {
+        await fetch(GOOGLE_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Required to bypass strict CORS blocking on Google Apps Script
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        console.log("[LABMATCH TELEMETRY] Data successfully dispatched to Google Sheets.");
+      } catch (e) {
+        console.error("[LABMATCH TELEMETRY] Transmission to Google Sheets failed. Data safely preserved in local storage.", e);
+      }
+    } else {
+      console.warn("[LABMATCH TELEMETRY] Webhook URL not configured. Data only saved to local storage.");
+    }
+  }
     // Remote webhook POST would go here
   }
 }
