@@ -17,7 +17,7 @@ class LabMatchRouter {
 
   async init() {
     try {
-      const resp = await fetch('labmatch-quiz.json');
+      const resp = await fetch('quiz.json');
       this.quizData = await resp.json();
       this.bindEvents();
       this.updateProgressBar();
