@@ -1,717 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SonicBloom // LabMatch Diagnostic </title>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #050505;
-            --surface-color: #0c0c0d;
-            --surface-card: #121214;
-            --text-color: #eaeaea;
-            --text-secondary: #8c8c94;
-            --brand-color: #ff6a00;
-            --brand-glow: rgba(255, 106, 0, 0.15);
-            --border-color: #222226;
-            --success-color: #10b981;
-            --font-terminal: "Share Tech Mono", "Courier New", monospace;
-            --font-body: "Courier Prime", monospace;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-
-        .terminal-container {
-            max-width: 680px;
-            width: 100%;
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 1px var(--brand-color);
-        }
-
-        .terminal-header {
-            background-color: #121214;
-            border-bottom: 1px solid var(--border-color);
-            padding: 12px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--font-terminal);
-            font-size: 11px;
-            color: var(--brand-color);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .terminal-dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #222;
-        }
-
-        .dot.active-glow {
-            background-color: var(--brand-color);
-            box-shadow: 0 0 4px var(--brand-color);
-        }
-
-        .progress-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            border-bottom: 1px solid var(--border-color);
-            background-color: #08080a;
-        }
-
-        .progress-step {
-            padding: 10px 6px;
-            text-align: center;
-            font-family: var(--font-terminal);
-            font-size: 10px;
-            color: var(--text-secondary);
-            border-right: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .progress-step:last-child {
-            border-right: none;
-        }
-
-        .progress-step.active {
-            color: var(--brand-color);
-            background-color: rgba(255, 106, 0, 0.05);
-            font-weight: bold;
-        }
-
-        .progress-step.completed {
-            color: var(--success-color);
-            background-color: rgba(16, 185, 129, 0.02);
-        }
-
-        .webstory-content {
-            padding: 30px 40px;
-            min-height: 420px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .webstory-slide {
-            display: none;
-            flex-direction: column;
-            gap: 20px;
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-
-        .webstory-slide.active {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h2 {
-            font-family: var(--font-terminal);
-            font-size: 1.5rem;
-            color: var(--brand-color);
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 10px;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-        }
-
-        p.slide-description {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        label.input-label {
-            font-family: var(--font-terminal);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-        }
-
-        input[type="email"], select {
-            background-color: var(--surface-card);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 12px 16px;
-            font-family: var(--font-body);
-            color: var(--text-color);
-            font-size: 14px;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        input[type="email"]:focus, select:focus {
-            border-color: var(--brand-color);
-            box-shadow: 0 0 8px var(--brand-glow);
-        }
-
-        .track-cards-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .track-card {
-            background-color: var(--surface-card);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-        }
-
-        .track-card:hover {
-            border-color: #444;
-            background-color: rgba(255, 255, 255, 0.01);
-        }
-
-        .track-card.selected {
-            border-color: var(--brand-color);
-            background-color: rgba(255, 106, 0, 0.04);
-            box-shadow: 0 0 8px var(--brand-glow);
-        }
-
-        .track-graphic {
-            font-size: 2rem;
-            width: 50px;
-            height: 50px;
-            background-color: #08080a;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .track-card.selected .track-graphic {
-            border-color: var(--brand-color);
-            color: #fff;
-        }
-
-        .track-info {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .track-title {
-            font-family: var(--font-terminal);
-            font-size: 14px;
-            font-weight: bold;
-            color: var(--text-color);
-        }
-
-        .track-card.selected .track-title {
-            color: var(--brand-color);
-        }
-
-        .track-desc {
-            font-size: 11px;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-
-        .checkbox-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            background-color: var(--surface-card);
-            border: 1px solid var(--border-color);
-            padding: 12px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .checkbox-wrapper:hover {
-            background-color: rgba(255, 106, 0, 0.02);
-            border-color: #333;
-        }
-
-        .checkbox-wrapper input[type="checkbox"] {
-            margin-top: 3px;
-            accent-color: var(--brand-color);
-        }
-
-        .checkbox-wrapper label {
-            font-size: 13px;
-            color: #d1d1d1;
-            cursor: pointer;
-            line-height: 1.4;
-        }
-
-        .slider-container {
-            background-color: var(--surface-card);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 4px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .slider-header {
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-terminal);
-            font-size: 12px;
-            color: var(--text-color);
-        }
-
-        .slider-header span strong {
-            color: var(--brand-color);
-        }
-
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 6px;
-            background: #1a1a1f;
-            outline: none;
-            border-radius: 3px;
-            accent-color: var(--brand-color);
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--brand-color);
-            cursor: pointer;
-            box-shadow: 0 0 6px var(--brand-color);
-        }
-
-        .sjt-scenario-card {
-            background-color: #0b0b0d;
-            border-left: 2px solid var(--brand-color);
-            padding: 16px 20px;
-            font-size: 13px;
-            line-height: 1.6;
-            color: #d1d1d1;
-            border-radius: 0 4px 4px 0;
-            margin-bottom: 15px;
-        }
-
-        .sjt-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            margin-top: 10px;
-        }
-
-        .sjt-table th {
-            font-family: var(--font-terminal);
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            font-weight: normal;
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .sjt-table th.sjt-col-text {
-            text-align: left;
-            width: 70%;
-        }
-
-        .sjt-table td {
-            padding: 12px 10px;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
-        }
-
-        .sjt-table td.col-radio {
-            text-align: center;
-        }
-
-        .sjt-table input[type="radio"] {
-            cursor: pointer;
-            accent-color: var(--brand-color);
-            transform: scale(1.1);
-        }
-
-        .sjt-table p {
-            line-height: 1.4;
-            color: #eaeaea;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 5px;
-        }
-
-        .result-block {
-            background-color: var(--surface-card);
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            border-radius: 4px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .result-block.full-row {
-            grid-column: span 2;
-        }
-
-        .result-label {
-            font-family: var(--font-terminal);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-secondary);
-        }
-
-        .result-val {
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--brand-color);
-        }
-
-        .result-val.highlight {
-            color: var(--success-color);
-        }
-
-        .result-desc {
-            font-size: 11px;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-
-        .button-bar {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .btn {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            font-family: var(--font-terminal);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 12px 24px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn:hover {
-            border-color: #444;
-            background-color: rgba(255, 255, 255, 0.01);
-        }
-
-        .btn.btn-primary {
-            background-color: var(--brand-color);
-            border-color: var(--brand-color);
-            color: #fff;
-            font-weight: bold;
-            box-shadow: 0 0 10px var(--brand-glow);
-        }
-
-        .btn.btn-primary:hover {
-            background-color: #e05e00;
-            border-color: #e05e00;
-            box-shadow: 0 0 15px rgba(255, 106, 0, 0.3);
-        }
-
-        .btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            border-color: var(--border-color) !important;
-            background: transparent !important;
-        }
-
-        .emoji-fingerprint-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle, rgba(255,106,0,0.06) 0%, rgba(0,0,0,0) 70%);
-            border: 1px dashed var(--border-color);
-            border-radius: 4px;
-            padding: 20px;
-            font-size: 2.2rem;
-            letter-spacing: 12px;
-            margin-top: 5px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SonicBloom LabMatch | Unified Routing Engine</title>
+  <style>
+    :root {
+      --bg-canvas: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-subtle: #cbd5e1;
+      --brand-primary: #4f46e5;
+      --brand-primary-hover: #4338ca;
+      --accent-fastpass: #d97706;
+      --accent-fastpass-hover: #b45309;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+    body {
+      background: var(--bg-canvas);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: #e2e8f0;
+    }
+    .progress-bar {
+      width: 14%;
+      height: 100%;
+      background: var(--brand-primary);
+      transition: width 0.3s ease;
+    }
+
+    .slide { display: none; padding: 40px 32px; }
+    .slide.active { display: flex; flex-direction: column; gap: 20px; }
+
+    h1, h2 { font-weight: 800; color: var(--text-main); line-height: 1.2; }
+    p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.5; }
+
+    .option-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px; }
+
+    .btn-option {
+      background: #f1f5f9;
+      border: 2px solid #e2e8f0;
+      color: var(--text-main);
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .btn-option:hover, .btn-option.selected {
+      border-color: var(--brand-primary);
+      background: #eef2ff;
+      color: var(--brand-primary);
+    }
+
+    .action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+    .btn-back { background: #e2e8f0; color: var(--text-main); }
+    .btn-back:hover { background: #cbd5e1; }
+    .btn-next { background: var(--brand-primary); color: #fff; margin-left: auto; }
+    .btn-next:hover { background: var(--brand-primary-hover); }
+
+    .btn-fastpass {
+      background: var(--accent-fastpass);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .btn-fastpass:hover { background: var(--accent-fastpass-hover); }
+
+    .workprint-box {
+      background: #f8fafc;
+      border: 2px dashed var(--brand-primary);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+    .workprint-emojis { font-size: 2.2rem; letter-spacing: 8px; margin: 12px 0; }
+
+    .referral-card {
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 12px;
+    }
+    .referral-card a {
+      display: inline-block;
+      margin-top: 12px;
+      background: var(--brand-primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body>
 
-<div class="terminal-container">
-    <header class="terminal-header">
-        <div class="terminal-dots">
-            <span class="dot active-glow"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-        <div>labmatch_onboarding_terminal.exe // supabase_ok</div>
-    </header>
+<div class="container">
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
 
-    <nav class="progress-grid">
-        <div class="progress-step active" id="prog-1">01 / ID</div>
-        <div class="progress-step" id="prog-2">02 / LOGIC</div>
-        <div class="progress-step" id="prog-3">03 / CAP</div>
-        <div class="progress-step" id="prog-4">04 / SJT</div>
-        <div class="progress-step" id="prog-5">05 / RESULT</div>
-    </nav>
+  <div class="slide active" id="slide-1">
+    <h1>Welcome to LabMatch</h1>
+    <p>Calibrate your technical and cognitive signature to match top AI research labs and production pipelines.</p>
+    <div class="action-bar">
+      <button class="btn btn-next" onclick="nextSlide(2)">Begin Assessment &rarr;</button>
+    </div>
+  </div>
 
-    <main class="webstory-content">
-        
-        <section class="webstory-slide active" id="slide-1">
-            <div>
-                <h2>01 / Who Are You?</h2>
-                <p class="slide-description">We need to check your info before matching you to open work. Give us your email and choose a career track to start.</p>
-            </div>
-            
-            <div class="input-group" style="margin-bottom: 10px;">
-                <label class="input-label" for="email-input">Email Address</label>
-                <input type="email" id="email-input" placeholder="e.g. engineer@sonicbloom.dev" required>
-            </div>
+  <div class="slide" id="slide-2">
+    <h2>Primary Knowledge Domain</h2>
+    <p>Select your primary operational strength:</p>
+    <div class="option-grid">
+      <button class="btn-option" onclick="selectDomain('Software Engineering')">💻 Software Engineering</button>
+      <button class="btn-option" onclick="selectDomain('Medicine')">🩺 Medicine & Healthcare</button>
+      <button class="btn-option" onclick="selectDomain('Humanities')">📚 Humanities & Content Writing</button>
+      <button class="btn-option" onclick="selectDomain('Data Analysis')">📊 Data Analysis & Ops</button>
+      <button class="btn-option" onclick="selectDomain('Law')">⚖️ Legal & Compliance</button>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
+    </div>
+  </div>
 
-            <div class="input-group">
-                <label class="input-label">Choose Your Career Track</label>
-                
-                <input type="hidden" id="domain-select" value="">
+  <div class="slide" id="slide-3">
+    <h2>Experience Calibration</h2>
+    <p>How do you navigate problem spaces?</p>
+    <div class="option-grid">
+      <button class="btn-option" onclick="selectExperience('Senior Principal / Edge Architect')">Senior Principal / Edge Architect</button>
+      <button class="btn-option" onclick="selectExperience('Domain Evaluator / Applied Practitioner')">Domain Evaluator / Applied Practitioner</button>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
+    </div>
+  </div>
 
-                <div class="track-cards-grid">
-                    <div class="track-card" data-value="Software Engineering" onclick="selectTrackCard(this)">
-                        <div class="track-graphic">💻</div>
-                        <div class="track-info">
-                            <span class="track-title">Software Engineering Track</span>
-                            <span class="track-desc">Test code limits, make algorithms run faster, and improve routing systems.</span>
-                        </div>
-                    </div>
-                    <div class="track-card" data-value="Compliance Architecture" onclick="selectTrackCard(this)">
-                        <div class="track-graphic">🛡️</div>
-                        <div class="track-info">
-                            <span class="track-title">Compliance Architecture Track</span>
-                            <span class="track-desc">Set up user verification, keep data safe, and check database security rules.</span>
-                        </div>
-                    </div>
-                    <div class="track-card" data-value="Linguistics" onclick="selectTrackCard(this)">
-                        <div class="track-graphic">🗣️</div>
-                        <div class="track-info">
-                            <span class="track-title">Linguistics Track</span>
-                            <span class="track-desc">Build language parsing tools, lower token costs, and study semantic patterns.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="slide" id="slide-4">
+    <h2>Cognitive Style</h2>
+    <p>Select your dominant evaluation rhythm:</p>
+    <div class="option-grid">
+      <button class="btn-option" onclick="selectPsychometric('Granular Adversarial')">Granular Adversarial (Finding edge bugs & logical failure modes)</button>
+      <button class="btn-option" onclick="selectPsychometric('Synthetic Structural')">Synthetic Structural (System architecture & schema alignment)</button>
+      <button class="btn-option" onclick="selectPsychometric('Heuristic Creative')">Heuristic Creative (Generative lateral boundary traversal)</button>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
+    </div>
+  </div>
 
-        <section class="webstory-slide" id="slide-2">
-            <div>
-                <h2>02 / Skill Assessment</h2>
-                <p class="slide-description">Our database matches jobs using your skills. Check every box where you have built and deployed real code.</p>
-            </div>
+  <div class="slide" id="slide-5">
+    <h2>Your AI Workprint Results</h2>
+    <div class="workprint-box">
+      <div class="workprint-emojis" id="workprintEmojiDisplay">⚡️ 🧠 🔬 🛡️</div>
+      <h3 id="workprintRoleDisplay">Code Evaluator</h3>
+      <p id="workprintRateDisplay">Estimated Rate Index: $45 - $65 / hr</p>
+    </div>
+    <div class="referral-card" id="standardReferralCard">
+      <h4>Direct Matched Lab Pipeline</h4>
+      <p id="labPartnerName">Turing AI Lab</p>
+      <a href="#" id="directLabUrl" target="_blank" rel="noopener">Enter Lab Evaluation Deck &rarr;</a>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+      <button class="btn btn-next" onclick="shareWorkprint()">🚀 Share AI Workprint</button>
+    </div>
+  </div>
 
-            <div class="checkbox-grid" id="competency-checkbox-container"></div>
-        </section>
-
-        <section class="webstory-slide" id="slide-3">
-            <div>
-                <h2>03 / Work Preferences</h2>
-                <p class="slide-description">Tell us how many hours you can work each week and choose your pace. Your hours will directly affect your pay rate.</p>
-            </div>
-
-            <div class="slider-container">
-                <div class="slider-header">
-                    <span>Weekly Availability</span>
-                    <span><strong id="hours-val">20</strong> hrs/week</span>
-                </div>
-                <input type="range" id="hours-slider" min="5" max="80" value="20" oninput="document.getElementById('hours-val').innerText = this.value">
-            </div>
-
-            <div class="input-group">
-                <label class="input-label" for="throughput-select">Expected Work Pace</label>
-                <select id="throughput-select">
-                    <option value="Standard">Standard Pace (Steady and relaxed)</option>
-                    <option value="Optimized" selected>Optimized Pace (Fast and steady)</option>
-                    <option value="High Velocity">High Velocity (Intense stress-testing)</option>
-                </select>
-            </div>
-        </section>
-
-        <section class="webstory-slide" id="slide-4">
-            <div>
-                <h2>04 / Scenario Test</h2>
-                <p class="slide-description">Read the real-world problem below. Pick exactly ONE action as your Most Likely (ML) choice and ONE action as your Least Likely (LL) choice.</p>
-            </div>
-
-            <div class="sjt-scenario-card">
-                "A data validation error hits your pipeline. It causes 15% of your tokens to fail right during peak hours. What do you do?"
-            </div>
-
-            <table class="sjt-table">
-                <thead>
-                    <tr>
-                        <th class="sjt-col-text">Your Action Options</th>
-                        <th>ML</th>
-                        <th>LL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><p><strong>Option A:</strong> Stop the whole incoming queue right away to run an audit. This protects your data but creates a delay for users.</p></td>
-                        <td class="col-radio"><input type="radio" name="sjt-ml" value="A"></td>
-                        <td class="col-radio"><input type="radio" name="sjt-ll" value="A"></td>
-                    </tr>
-                    <tr>
-                        <td><p><strong>Option B:</strong> Deploy a quick script to send failing tokens to a temporary waitlist. Keep everything else running and patch the system later.</p></td>
-                        <td class="col-radio"><input type="radio" name="sjt-ml" value="B"></td>
-                        <td class="col-radio"><input type="radio" name="sjt-ll" value="B"></td>
-                    </tr>
-                    <tr>
-                        <td><p><strong>Option C:</strong> Report the schema issue to the lead architects immediately. Keep logging the broken data streams in the background.</p></td>
-                        <td class="col-radio"><input type="radio" name="sjt-ml" value="C"></td>
-                        <td class="col-radio"><input type="radio" name="sjt-ll" value="C"></td>
-                    </tr>
-                    <tr>
-                        <td><p><strong>Option D:</strong> Run a cleanup routine to drop the bad pathways automatically and adjust your model values on the fly.</p></td>
-                        <td class="col-radio"><input type="radio" name="sjt-ml" value="D"></td>
-                        <td class="col-radio"><input type="radio" name="sjt-ll" value="D"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="webstory-slide" id="slide-5">
-            <div>
-                <h2>05 / Your Diagnostic Profile</h2>
-                <p class="slide-description">We finished processing your information! Review your career level, estimated hourly pay, and work style below.</p>
-            </div>
-
-            <div class="results-grid">
-                <div class="result-block">
-                    <span class="result-label">Assigned Work Level</span>
-                    <span class="result-val" id="display-tier">...</span>
-                </div>
-                <div class="result-block">
-                    <span class="result-label">Hourly Pay Range</span>
-                    <span class="result-val highlight" id="display-rate">...</span>
-                </div>
-                <div class="result-block">
-                    <span class="result-label">Thinking Style</span>
-                    <span class="result-val" id="display-style">...</span>
-                </div>
-                <div class="result-block">
-                    <span class="result-label">Accuracy Score</span>
-                    <span class="result-val" id="display-precision">...</span>
-                </div>
-                <div class="result-block full-row">
-                    <span class="result-label">Your Core Work Focus</span>
-                    <p class="result-desc" id="display-focus">...</p>
-                </div>
-            </div>
-
-            <div class="result-label" style="text-align: center; margin-top: 10px;">Your Security Fingerprint</div>
-            <div class="emoji-fingerprint-box" id="display-emoji-mark">🛡️ 💻 🧠</div>
-        </section>
-
-        <footer class="button-bar">
-            <button class="btn" id="prev-btn" onclick="labmatchRouter.goToSlide(labmatchRouter.currentSlide - 1)">Back</button>
-            <button class="btn btn-primary" id="next-btn" onclick="if(labmatchRouter.currentSlide === 5) { labmatchRouter.triggerLinkedInWindow() } else { labmatchRouter.goToSlide(labmatchRouter.currentSlide + 1) }">Next</button>
-        </footer>
-    </main>
+  <div class="slide" id="slide-6">
+    <h2>⚡ Fast Pass Direct Lab Routing</h2>
+    <p>Skipped deep psychometrics. Based on your active selections, here is your direct expedited routing:</p>
+    <div class="referral-card">
+      <h3 id="fastPassLabName">Turing</h3>
+      <p id="fastPassRole">Target Track: Code Evaluator</p>
+      <p id="fastPassRate">Rate Band: $45 - $65/hr</p>
+      <a href="#" id="fastPassLink" target="_blank" rel="noopener">Access Expedited Pipeline &rarr;</a>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
+    </div>
+  </div>
 </div>
 
-<script src="./labmatch-routing.js"></script>
-<script>
-    function selectTrackCard(cardElement) {
-        document.querySelectorAll('.track-card').forEach(card => card.classList.remove('selected'));
-        cardElement.classList.add('selected');
-        
-        const chosenVal = cardElement.getAttribute('data-value');
-        document.getElementById('domain-select').value = chosenVal;
-        
-        // Push choices immediately to the engine states to sync the array layer early
-        if (typeof labmatchRouter !== 'undefined') {
-            labmatchRouter.state.selectedDomain = chosenVal;
-            labmatchRouter.state.selectedDomains = [chosenVal];
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const checkButtons = () => {
-            const current = labmatchRouter.currentSlide;
-            document.getElementById('prev-btn').disabled = (current === 1);
-            
-            const nextBtn = document.getElementById('next-btn');
-            if (current === 5) {
-                nextBtn.innerText = "Share Profile to LinkedIn";
-            } else {
-                nextBtn.innerText = "Next >>";
-            }
-        };
-
-        const originGoToSlide = labmatchRouter.goToSlide;
-        labmatchRouter.goToSlide = function(id) {
-            originGoToSlide.call(this, id);
-            checkButtons();
-        };
-
-        checkButtons();
-    });
-</script>
+<script src="labmatch-router.js"></script>
 </body>
 </html>
