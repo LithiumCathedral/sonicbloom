@@ -5,7 +5,7 @@ class LabMatchRouter {
     this.quizData = null;
     this.state = {
       email: '',
-      selectedDomain: 'Software Engineering',
+      selectedDomain: 'Coding & Tech',
       yearsExperience: '1 to 3 years',
       workStyle: 'Bug Finder',
       learningStyle: 'Visual',
@@ -27,39 +27,37 @@ class LabMatchRouter {
   }
 
   bindEvents() {
+    // Navigation
     window.nextSlide = (id) => this.goToSlide(id);
     window.prevSlide = () => this.goToSlide(this.currentSlide - 1);
 
-    // Q1: Segment
+    // Quiz Selection Handlers
     window.selectDomain = (domain) => {
       this.state.selectedDomain = domain;
       this.goToSlide(3);
     };
 
-    // Q2: Experience in Years
     window.selectYears = (years) => {
       this.state.yearsExperience = years;
       this.goToSlide(4);
     };
 
-    // Q3: Work Style
     window.selectWorkStyle = (style) => {
       this.state.workStyle = style;
       this.goToSlide(5);
     };
 
-    // Q4: Learning Style
     window.selectLearningStyle = (style) => {
       this.state.learningStyle = style;
       this.goToSlide(6);
     };
 
-    // Q5: Commitment Level
     window.selectCommitment = (level) => {
       this.state.commitmentLevel = level;
-      this.goToSlide(7); // Routes to Penultimate Slide (Email)
+      this.goToSlide(7); // Routes to Email
     };
 
+    // Actions
     window.submitEmailAndFinish = () => this.handleEmailSubmission();
     window.triggerFastPass = () => this.handleFastPass();
     window.shareToLinkedIn = () => this.triggerLinkedInWindow();
@@ -87,7 +85,6 @@ class LabMatchRouter {
   getMatchedTrack() {
     const tracks = this.quizData?.matrices?.tracks || [];
     const current = (this.state.selectedDomain || '').toLowerCase().trim();
-    // String matching to ensure proper lookup
     return tracks.find(t => t.segment.toLowerCase().trim() === current) || tracks[0];
   }
 
@@ -120,7 +117,7 @@ class LabMatchRouter {
 
   handleFastPass() {
     const matchedTrack = this.getMatchedTrack();
-    const matchedStyle = this.getMatchedWorkStyle(); // Uses defaults if skipped
+    const matchedStyle = this.getMatchedWorkStyle();
 
     this.populateResultsUI(matchedTrack, matchedStyle);
     this.dispatchTelemetryLog('FAST_PASS');
@@ -152,7 +149,7 @@ class LabMatchRouter {
     window.open(shareUrl, '_blank', 'width=600,height=600,noopener,noreferrer');
   }
 
-async dispatchTelemetryLog(mode = 'STANDARD') {
+  async dispatchTelemetryLog(mode = 'STANDARD') {
     const payload = {
       timestamp: new Date().toISOString(),
       routingMode: mode,
@@ -191,8 +188,6 @@ async dispatchTelemetryLog(mode = 'STANDARD') {
     } else {
       console.warn("[LABMATCH TELEMETRY] Webhook URL not configured. Data only saved to local storage.");
     }
-  }
-    // Remote webhook POST would go here
   }
 }
 
