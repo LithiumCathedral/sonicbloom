@@ -9,10 +9,14 @@ class ContentEngine {
 
   init() {
     if (!this.viewport) return;
-    this.defaultDeckHTML = this.viewport.innerHTML; // Cache default project cards
+    this.defaultDeckHTML = this.viewport.innerHTML; 
+    
+    // Load dynamic sidebar content first
+    this.loadManifest();
+    
+    // Bind existing hardcoded links (like LabMatch and Workspace Deck)
     this.bindLinks();
     
-    // Handle browser back/forward buttons
     window.addEventListener('popstate', (e) => {
       if (e.state && e.state.path) {
         this.loadContent(e.state.path, e.state.title, false);
@@ -20,6 +24,51 @@ class ContentEngine {
         this.restoreProjectDeck(false);
       }
     });
+  }
+
+  async loadManifest() {
+    try {
+      // Add cache-busting query to ensure fresh manifest pull
+      const resp = await fetch(`/content/manifest.json?v=${new Date().getTime()}`);
+      if (!resp.ok) throw new Error("Manifest not found");
+      const manifest = await resp.json();
+      this.renderSidebar(manifest);
+    } catch (err) {
+      console.warn("[CONTENT-ENGINE] Failed to load manifest:", err);
+      const list = document.getElementById('dynamic-content-list');
+      if (list) list.innerHTML = `<li><span class="tree-link" style="color:#ef4444;">Manifest offline</span></li>`;
+    }
+  }
+
+  renderSidebar(manifest) {
+    const list = document.getElementById('dynamic-content-list');
+    if (!list) return;
+
+    // Combine Articles and Nodes arrays
+    const allContent = [...(manifest.articles || []), ...(manifest.nodes || [])];
+    
+    if (allContent.length === 0) {
+      list.innerHTML = `<li><span class="tree-link" style="color:var(--terminal-text-muted);">Awaiting sync...</span></li>`;
+      return;
+    }
+
+    let html = '';
+    allContent.forEach(item => {
+      // Keep titles short for the sidebar
+      const shortTitle = item.title.length > 28 ? item.title.substring(0, 28) + '...' : item.title;
+      html += `
+        <li>
+          <a class="tree-link" data-content-path="${item.path}" data-content-title="${item.title}">
+            ${shortTitle}
+          </a>
+        </li>
+      `;
+    });
+
+    list.innerHTML = html;
+    
+    // Re-bind the click event listeners now that new DOM elements exist
+    this.bindLinks();
   }
 
   bindLinks() {
