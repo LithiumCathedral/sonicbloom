@@ -26,7 +26,7 @@ class ContentEngine {
     });
   }
 
-async loadManifest() {
+  async loadManifest() {
     try {
       const resp = await fetch(`/content/manifest.json?v=${new Date().getTime()}`);
       if (!resp.ok) throw new Error("Manifest not found");
@@ -34,12 +34,26 @@ async loadManifest() {
       this.renderSidebar(manifest); // Overwrites staged links with live ones
     } catch (err) {
       console.warn("[CONTENT-ENGINE] Manifest offline. Retaining staged outline.");
+      
+      // FIX: Replace "Awaiting sync..." so the UI doesn't look infinitely stuck
+      const list = document.getElementById('dynamic-content-list');
+      if (list && list.innerHTML.includes('Awaiting sync')) {
+         list.innerHTML = `<li><span class="tree-link" style="color:#ef4444;">[Sync Failed: Offline Mode]</span></li>`;
+      }
+
       // Visually indicate to the user that the backend is currently failing
-      document.querySelectorAll('#dynamic-content-list .status-badge').forEach(badge => {
+      document.querySelectorAll('.status-badge').forEach(badge => {
         badge.innerText = "OFFLINE";
         badge.style.color = "#ef4444";
         badge.style.background = "rgba(239, 68, 68, 0.1)";
       });
+    } finally {
+      // CRITICAL FIX: Always drop the loading overlay so the page becomes clickable,
+      // even if the manifest fetch completely failed.
+      const syncOverlay = document.getElementById('sync-overlay');
+      if (syncOverlay) {
+        syncOverlay.style.display = 'none';
+      }
     }
   }
 
@@ -51,7 +65,7 @@ async loadManifest() {
     const allContent = [...(manifest.articles || []), ...(manifest.nodes || [])];
     
     if (allContent.length === 0) {
-      list.innerHTML = `<li><span class="tree-link" style="color:var(--terminal-text-muted);">Awaiting sync...</span></li>`;
+      list.innerHTML = `<li><span class="tree-link" style="color:var(--terminal-text-muted);">No entries found.</span></li>`;
       return;
     }
 
