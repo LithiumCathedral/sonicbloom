@@ -5,6 +5,12 @@
       "slug": "logic-density-matrix",
       "path": "/content/articles/logic-density-matrix.html",
       "publishedAt": "2026-08-26T18:12:05.211Z"
+    },
+    {
+      "title": "Optimizing High-Volume Human-in-the-Loop Validation Pipelines",
+      "slug": "optimizing-hitl-pipelines",
+      "path": "/content/articles/optimizing-hitl-pipelines.html",
+      "publishedAt": "2026-08-26T18:12:07.806Z"
     }
   ],
   "nodes": [],
