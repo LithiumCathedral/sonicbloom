@@ -26,17 +26,20 @@ class ContentEngine {
     });
   }
 
-  async loadManifest() {
+async loadManifest() {
     try {
-      // Add cache-busting query to ensure fresh manifest pull
       const resp = await fetch(`/content/manifest.json?v=${new Date().getTime()}`);
       if (!resp.ok) throw new Error("Manifest not found");
       const manifest = await resp.json();
-      this.renderSidebar(manifest);
+      this.renderSidebar(manifest); // Overwrites staged links with live ones
     } catch (err) {
-      console.warn("[CONTENT-ENGINE] Failed to load manifest:", err);
-      const list = document.getElementById('dynamic-content-list');
-      if (list) list.innerHTML = `<li><span class="tree-link" style="color:#ef4444;">Manifest offline</span></li>`;
+      console.warn("[CONTENT-ENGINE] Manifest offline. Retaining staged outline.");
+      // Visually indicate to the user that the backend is currently failing
+      document.querySelectorAll('#dynamic-content-list .status-badge').forEach(badge => {
+        badge.innerText = "OFFLINE";
+        badge.style.color = "#ef4444";
+        badge.style.background = "rgba(239, 68, 68, 0.1)";
+      });
     }
   }
 
