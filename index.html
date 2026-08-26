@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SonicBloom | AI Talent Routing & Indie Development </title>
+  <title>SonicBloom | App Development & AI Talent Routing </title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -155,7 +155,7 @@
       flex-direction: column;
       gap: 20px;
       overflow-y: auto;
-      max-height: 700px;
+      max-height: 750px;
     }
 
     .terminal-topbar {
@@ -197,7 +197,7 @@
     .project-tile.disabled { opacity: 0.55; cursor: not-allowed; }
 
     /* In-Terminal Rendered Markdown Styling */
-    .rendered-article-container { display: flex; flex-direction: column; gap: 20px; }
+    .rendered-article-container { display: flex; flex-direction: column; gap: 20px; height: 100%; min-height: 550px;}
     .terminal-article-nav { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--terminal-border); padding-bottom: 12px; }
     .btn-terminal-back { background: transparent; border: 1px solid var(--terminal-border); color: var(--terminal-text-muted); padding: 6px 12px; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.75rem; cursor: pointer; }
     .btn-terminal-back:hover { color: var(--brand-orange); border-color: var(--brand-orange); }
@@ -224,20 +224,18 @@
 
   <main class="main-wrapper">
     <div class="hero-intro">
-      <h1><b>Build</b>, build & become you.</h1>
-      <p>Direct your growth with LabMatch, personal diagnostics designed to breakdown uncertainty and increase relevance in the emergent AI workplace</p>
+      <h1><b>Build up, build out, & become you.</h1>
+      <p>Focus your growth, clear professional blockages, and try LabMatch—the diagnostic fast-track to AI gigs looking for your skillset right now.</p>
     </div>
 
-    <!-- Dark Terminal System -->
     <div class="terminal-window">
-      <!-- 2 Content Divisions in Terminal Tree -->
       <aside class="terminal-sidebar">
         
         <div>
           <div class="tree-title">01 / Active Projects</div>
           <ul class="tree-list">
             <li><a class="tree-link active" data-content-path="PROJECT_DECK">Workspace Deck</a></li>
-            <li><a href="/labmatch/" class="tree-link">LabMatch <span>v2.7</span></a></li>
+            <li><a class="tree-link app-link" data-app-src="/labmatch/" data-app-title="labmatch_v2.7.exe">LabMatch <span class="status-badge live">v2.7</span></a></li>
             <li><a class="tree-link">Plath Matrix <span class="status-badge staged">STAGED</span></a></li>
             <li><a class="tree-link">Go Grid Engine <span class="status-badge staged">STAGED</span></a></li>
           </ul>
@@ -254,7 +252,7 @@
           <div class="tree-title">03 / Platform Ops</div>
           <ul class="tree-list">
             <li>
-              <a class="tree-link" data-content-path="/contact.html" data-content-title="contact.sys">
+              <a class="tree-link app-link" data-app-src="/contact.html" data-app-title="contact.sys">
                 Contact
               </a>
             </li>
@@ -263,7 +261,6 @@
 
       </aside>
 
-      <!-- Dynamic Content Viewport -->
       <section class="terminal-content" id="terminal-viewport">
         <div class="terminal-topbar">
           <div class="terminal-signals">
@@ -285,8 +282,7 @@
         </div>
 
         <div class="project-grid">
-          <!-- Active Project: LabMatch -->
-          <a href="/labmatch/" class="project-tile active-link">
+          <a class="project-tile active-link app-link" data-app-src="/labmatch/" data-app-title="labmatch_v2.7.exe">
             <div style="display: flex; justify-content: space-between;">
               <span style="font-family: 'Space Mono', monospace; font-weight: 700;">LabMatch</span>
               <span class="status-badge live">ACTIVE</span>
@@ -295,7 +291,6 @@
             <div style="color: var(--brand-orange); font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; margin-top: auto;">Launch Diagnostic &rarr;</div>
           </a>
 
-          <!-- Locked Staging: Plath Framework -->
           <div class="project-tile disabled">
             <div style="display: flex; justify-content: space-between;">
               <span style="font-family: 'Space Mono', monospace; font-weight: 700;">Plath Matrix</span>
@@ -305,7 +300,6 @@
             <div style="color: var(--terminal-text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: auto;">Pipeline Locked</div>
           </div>
 
-          <!-- Locked Staging: Go Grid Engine -->
           <div class="project-tile disabled">
             <div style="display: flex; justify-content: space-between;">
               <span style="font-family: 'Space Mono', monospace; font-weight: 700;">Go Grid Engine</span>
@@ -320,5 +314,48 @@
   </main>
 
   <script src="/content/content-engine.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Intercepts clicks for isolated apps to run their JavaScript via an iFrame wrapper
+      document.querySelectorAll('.app-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Style active links in sidebar
+          document.querySelectorAll('.tree-link').forEach(l => l.classList.remove('active'));
+          if (link.classList.contains('tree-link')) {
+            link.classList.add('active');
+          }
+
+          // Pull routing configurations
+          const src = link.getAttribute('data-app-src');
+          const title = link.getAttribute('data-app-title');
+
+          const viewport = document.getElementById('terminal-viewport');
+          const titleEl = document.getElementById('terminal-file-title');
+          const statusEl = document.getElementById('terminal-status-tag');
+
+          // Update Topbar
+          if (titleEl) titleEl.innerText = title;
+          if (statusEl) { 
+            statusEl.innerText = "RUNNING"; 
+            statusEl.style.color = "var(--rate-green)"; 
+          }
+
+          // Inject iFrame to safely execute the isolated JS, CSS, and form actions
+          viewport.innerHTML = `
+            <div class="rendered-article-container">
+              <div class="terminal-article-nav">
+                <button class="btn-terminal-back" onclick="if(window.contentEngine) { window.contentEngine.restoreProjectDeck(true); } else { window.location.reload(); }">&larr; Return to Workspace Deck</button>
+                <span class="badge-source">SOURCE: ${src}</span>
+              </div>
+              <iframe src="${src}" style="width: 100%; height: 100%; min-height: 600px; border: none; border-radius: 8px; background: var(--terminal-sidebar);"></iframe>
+            </div>
+          `;
+        });
+      });
+    });
+  </script>
 </body>
 </html>
