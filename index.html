@@ -232,6 +232,7 @@
     <div class="terminal-window">
       <!-- 2 Content Divisions in Terminal Tree -->
       <aside class="terminal-sidebar">
+        
         <div>
           <div class="tree-title">01 / Active Projects</div>
           <ul class="tree-list">
@@ -242,21 +243,24 @@
           </ul>
         </div>
 
-<div>
+        <div>
           <div class="tree-title">02 / Content System</div>
           <ul class="tree-list" id="dynamic-content-list">
+            <li><span class="tree-link" style="color:var(--terminal-text-muted);">Awaiting sync...</span></li>
           </ul>
-</div>
+        </div>
+
         <div style="margin-top: auto;">
           <div class="tree-title">03 / Platform Ops</div>
           <ul class="tree-list">
             <li>
-              <a href="/contact.html" class="tree-link">
+              <a class="tree-link" data-content-path="/contact.html" data-content-title="contact.sys">
                 Contact
               </a>
             </li>
           </ul>
         </div>
+
       </aside>
 
       <!-- Dynamic Content Viewport -->
@@ -315,6 +319,6 @@
     </div>
   </main>
 
-  <script src="sonicbloom/content/content-engine.js"></script>
+  <script src="/content/content-engine.js"></script>
 </body>
 </html>
