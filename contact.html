@@ -3,22 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Platform Ops & Contact | SonicBloom.dev</title>
+  <title>About & Contact | SonicBloom.dev</title>
+  <style>
+    /* Explicitly force terminal styling inside the isolated iframe */
+    body {
+      background: transparent;
+      color: #cbd5e1; 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 10px 20px;
+    }
+    .content-frame {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
   <div class="content-frame">
-    <h1 class="content-h1">Platform Ops & Inquiries</h1>
     
-    <h2 class="content-h2">About SonicBloom</h2>
-    <p class="content-p">SonicBloom is a digital sandbox and production hub focused on building minimalist web applications, structured data pipelines, and programmatic content hubs like LabMatch. We benchmark specialized human labor against mathematical logic density metrics.</p>
-    
-    <h2 class="content-h2">Privacy Guarantee</h2>
-    <p class="content-p">All evaluation data is tokenized and decoupled from identifying variables. We employ absolute cryptographic isolation—personal identifiers are never sold to external advertising networks.</p>
-    
-    <h2 class="content-h2">Operator Dispatch</h2>
-    <p class="content-p">For technical infrastructure auditing, enterprise intelligence feeds, or research lab partnerships, initiate contact below.</p>
-    
-    <form class="contact-form" onsubmit="event.preventDefault(); this.style.display='none'; document.getElementById('contactSuccess').style.display='block';" style="background: #0d121f; padding: 24px; border: 1px solid #1e293b; border-radius: 8px; margin-top: 20px;">
+    <form class="contact-form" onsubmit="event.preventDefault(); this.style.display='none'; document.getElementById('contactSuccess').style.display='block';" style="background: #0d121f; padding: 24px; border: 1px solid #1e293b; border-radius: 8px;">
       
       <div style="margin-bottom: 16px;">
         <label style="display:block; font-size:0.8rem; color:#94a3b8; font-family:'Space Mono', monospace; margin-bottom:6px;">OPERATOR NAME</label>
@@ -39,11 +43,11 @@
         <label style="display:block; font-size:0.8rem; color:#94a3b8; font-family:'Space Mono', monospace; margin-bottom:6px;">PRIMARY INTENT</label>
         <select required style="width:100%; padding:12px; background:#05070c; border:1px solid #1e293b; color:#f8fafc; border-radius:6px; font-family:'Inter', sans-serif;">
           <option value="">Select Vector...</option>
-          <option value="Enterprise Feed">Enterprise Intelligence Feed</option>
-          <option value="Partnership">LabMatch Partnership</option>
-          <option value="Auditing">Infrastructure Auditing</option>
-          <option value="Data & Privacy">Data & Privacy Inquiry</option>
-          <option value="Other">Other Routing</option>
+          <option value="Enterprise Feed">Content Feed</option>
+          <option value="Partnership">Active Projects</option>
+          <option value="Auditing">Bug Reporting</option>
+          <option value="Data & Privacy">Data & Privacy</option>
+          <option value="Other">Other</option>
         </select>
       </div>
 
