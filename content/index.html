@@ -20,9 +20,9 @@
     .hub-container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
     header h1 { font-size: 2.4rem; font-weight: 800; }
     .section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
-    .hub-card { background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; }
+    .hub-card { background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;}
     .hub-card h3 { color: var(--brand-primary); margin-bottom: 8px; }
-    .hub-card a { color: var(--brand-primary); text-decoration: none; font-weight: 700; }
+    .hub-card a { color: var(--brand-primary); text-decoration: none; font-weight: 700; display: inline-block; margin-top: 12px; }
     .funnel-banner { background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 12px; padding: 24px; text-align: center; }
     .funnel-banner a { display: inline-block; margin-top: 12px; background: var(--brand-primary); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; }
   </style>
@@ -39,26 +39,39 @@
     <h2>Core Directories</h2>
     <div class="section-grid">
       <div class="hub-card">
-        <h3>Strategic Pillars</h3>
-        <p>In-depth breakdowns of evaluation models, compensation scaling, and labor shifts.</p>
-        <p style="margin-top: 10px;"><a href="/content/articles/calculating-logic-density.html">Browse Articles &rarr;</a></p>
+        <div>
+          <h3>Strategic Pillars</h3>
+          <p>In-depth breakdowns of evaluation models, compensation scaling, and labor shifts.</p>
+        </div>
+        <a href="/content/articles/calculating-logic-density.html">Browse Articles &rarr;</a>
       </div>
       <div class="hub-card">
-        <h3>Technical Nodes</h3>
-        <p>Granular semantic definitions (~200w) mapping technical talent taxonomies.</p>
-        <p style="margin-top: 10px;"><a href="/content/nodes/n1-parsing-logic.html">Explore Nodes &rarr;</a></p>
+        <div>
+          <h3>Technical Nodes</h3>
+          <p>Granular semantic definitions (~200w) mapping technical talent taxonomies.</p>
+        </div>
+        <a href="/content/nodes/n1-parsing-logic.html">Explore Nodes &rarr;</a>
       </div>
       <div class="hub-card">
-        <h3>Architecture FAQ</h3>
-        <p>Direct answers regarding evaluation tiers, security compliance, and indexing.</p>
-        <p style="margin-top: 10px;"><a href="/content/faqs/">View FAQ Index &rarr;</a></p>
+        <div>
+          <h3>Enterprise Insights</h3>
+          <p>Macro intelligence streams and infrastructure comparison matrices for AI labs.</p>
+        </div>
+        <a href="/content/enterprise/infrastructure-comparison.html">View Reports &rarr;</a>
+      </div>
+      <div class="hub-card">
+        <div>
+          <h3>Architecture FAQ</h3>
+          <p>Direct answers regarding evaluation tiers, security compliance, and indexing.</p>
+        </div>
+        <a href="/content/faqs/">View FAQ Index &rarr;</a>
       </div>
     </div>
   </section>
 
   <div class="funnel-banner">
     <h3>Benchmark Your Cognitive Signature</h3>
-    <p>Calibrate your technical profile across top AI research labs and production pipelines.</p>
+    <p>Calibrate your technical profile across top AI research labs and production pipelines to unlock your personalized operational metrics.</p>
     <a href="/labmatch/">Launch Free LabMatch Diagnostic &rarr;</a>
   </div>
 </div>
