@@ -42,17 +42,37 @@ class ContentEngine {
     }
   }
 
-  renderSidebar(manifest) {
+renderSidebar(manifest) {
     const list = document.getElementById('dynamic-content-list');
     if (!list) return;
     list.innerHTML = ''; // Clear default state
 
-    // Combine all manifest categories for the sidebar
-    const allContent = [
-      ...(manifest.articles || []),
-      ...(manifest.nodes || []),
-      ...(manifest.faqs || [])
-    ];
+    // Helper to create category sub-headers in the tree
+    const createCategoryFolder = (title, items) => {
+      if (!items || items.length === 0) return;
+      
+      const folderHeader = document.createElement('div');
+      folderHeader.className = 'tree-folder-title';
+      folderHeader.style.cssText = "font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--brand-orange); text-transform: uppercase; margin: 10px 0 4px 4px; letter-spacing: 0.5px;";
+      folderHeader.innerText = `// ${title}`;
+      list.appendChild(folderHeader);
+
+      items.forEach(item => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.className = 'tree-link';
+        a.innerText = item.title;
+        a.onclick = () => this.loadContent(item.path, item.title, true);
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    };
+
+    // Render categorized groups under the Content System section
+    createCategoryFolder("Reports", manifest.articles);
+    createCategoryFolder("Concepts", manifest.nodes);
+    createCategoryFolder("FAQs", manifest.faqs);
+  }
 
     allContent.forEach(item => {
       const li = document.createElement('li');
@@ -63,6 +83,55 @@ class ContentEngine {
       li.appendChild(a);
       list.appendChild(li);
     });
+  }
+
+toggleKnowledgeMap() {
+    let modal = document.getElementById('knowledge-map-modal');
+    if (modal) {
+      modal.remove(); // Toggle off if already open
+      return;
+    }
+
+    // Build the Overlay Modal
+    modal = document.createElement('div');
+    modal.id = 'knowledge-map-modal';
+    modal.style.cssText = "position: absolute; top: 50px; left: 20px; right: 20px; bottom: 20px; background: rgba(9, 13, 22, 0.95); border: 1px solid var(--brand-orange); border-radius: 8px; z-index: 1000; padding: 24px; display: flex; flex-direction: column; backdrop-filter: blur(8px); box-shadow: 0 25px 50px rgba(0,0,0,0.8);";
+
+    let htmlContent = `
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--terminal-border); padding-bottom: 12px; margin-bottom: 16px;">
+        <h3 style="font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--brand-orange);">&gt; REPOSITORY_TOPOLOGY_MAP</h3>
+        <button onclick="document.getElementById('knowledge-map-modal').remove()" style="background: transparent; border: 1px solid var(--terminal-border); color: #fff; padding: 4px 8px; cursor: pointer; border-radius: 4px;">[ CLOSE ]</button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; overflow-y: auto; flex-grow: 1; padding-right: 8px;">
+    `;
+
+    // Map articles/nodes and their connected relationships
+    const articles = this.manifestData.articles || [];
+    const nodes = this.manifestData.nodes || [];
+    const faqs = this.manifestData.faqs || [];
+
+    articles.forEach(art => {
+      const relatedFaqs = faqs.filter(f => f.path.includes(art.slug) || (f.targetSlug && f.targetSlug === art.slug));
+      htmlContent += `
+        <div style="background: var(--terminal-card); border: 1px solid var(--terminal-border); border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 0.65rem; color: var(--brand-orange); font-family: 'Space Mono', monospace;">[CORE ARTICLE]</div>
+          <a href="#" onclick="window.contentEngine.loadContent('${art.path}', '${art.title}', true); document.getElementById('knowledge-map-modal').remove(); return false;" style="color: #f8fafc; font-weight: 600; text-decoration: none; font-size: 0.95rem;">${art.title}</a>
+          <div style="font-size: 0.75rem; color: var(--terminal-text-muted); margin-top: auto; border-top: 1px dashed var(--terminal-border); pt: 8px;">
+            Linked FAQs: ${relatedFaqs.length > 0 ? relatedFaqs.map(f => f.title).join(', ') : 'None mapped'}
+          </div>
+        </div>
+      `;
+    });
+
+    htmlContent += `</div>`;
+    modal.innerHTML = htmlContent;
+    
+    // Append modal inside the terminal window container
+    const terminalWindow = document.querySelector('.terminal-window');
+    if (terminalWindow) {
+      terminalWindow.style.position = 'relative';
+      terminalWindow.appendChild(modal);
+    }
   }
 
   // >>> NEW ROUTING LOGIC FOR RELATED CONTENT BLOCKS <<<
