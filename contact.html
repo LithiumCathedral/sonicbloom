@@ -17,12 +17,34 @@
       max-width: 600px;
       margin: 0 auto;
     }
+    .intent-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .intent-card {
+      background: #05070c;
+      border: 1px solid #1e293b;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .intent-card input {
+      accent-color: #ff6a00;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div class="content-frame">
     
-    <form class="contact-form" onsubmit="event.preventDefault(); this.style.display='none'; document.getElementById('contactSuccess').style.display='block';" style="background: #0d121f; padding: 24px; border: 1px solid #1e293b; border-radius: 8px;">
+    <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)" style="background: #0d121f; padding: 24px; border: 1px solid #1e293b; border-radius: 8px;">
       
       <div style="margin-bottom: 16px;">
         <label style="display:block; font-size:0.8rem; color:#94a3b8; font-family:'Space Mono', monospace; margin-bottom:6px;">OPERATOR NAME</label>
@@ -39,16 +61,34 @@
         <input type="tel" placeholder="1+(888)-888-8888" oninput="let v=this.value.replace(/\D/g,''); if(v.startsWith('1')) v=v.substring(1); let r=''; if(v.length>0){r='1+('+v.substring(0,3); if(v.length>=3)r+=')-'+v.substring(3,6); if(v.length>=6)r+='-'+v.substring(6,10);} this.value=r;" pattern="1\+\([0-9]{3}\)-[0-9]{3}-[0-9]{4}" title="Format required: 1+(888)-888-8888" required style="width:100%; padding:12px; background:#05070c; border:1px solid #1e293b; color:#f8fafc; border-radius:6px; font-family:'Inter', sans-serif;">
       </div>
 
-      <div style="margin-bottom: 24px;">
-        <label style="display:block; font-size:0.8rem; color:#94a3b8; font-family:'Space Mono', monospace; margin-bottom:6px;">PRIMARY INTENT</label>
-        <select required style="width:100%; padding:12px; background:#05070c; border:1px solid #1e293b; color:#f8fafc; border-radius:6px; font-family:'Inter', sans-serif;">
-          <option value="">Select Vector...</option>
-          <option value="Enterprise Feed">Content Feed</option>
-          <option value="Partnership">Active Projects</option>
-          <option value="Auditing">Bug Reporting</option>
-          <option value="Data & Privacy">Data & Privacy</option>
-          <option value="Other">Other</option>
-        </select>
+      <div style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+        <input type="checkbox" id="needsResponse" name="needsResponse" style="accent-color: #ff6a00; cursor: pointer; width: 16px; height: 16px;">
+        <label for="needsResponse" style="font-size: 0.85rem; color: #cbd5e1; cursor: pointer;">Require direct operator response</label>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label style="display:block; font-size:0.8rem; color:#94a3b8; font-family:'Space Mono', monospace; margin-bottom:6px;">PRIMARY INTENT (Choose up to 2)</label>
+        <div class="intent-grid">
+          <label class="intent-card"><input type="checkbox" name="intent" value="News" onclick="validateIntentCount(this)"> News</label>
+          <label class="intent-card"><input type="checkbox" name="intent" value="Build" onclick="validateIntentCount(this)"> Build</label>
+          <label class="intent-card"><input type="checkbox" name="intent" value="Fix Bug" onclick="validateIntentCount(this)"> Fix Bug</label>
+          <label class="intent-card"><input type="checkbox" name="intent" value="Privacy" onclick="validateIntentCount(this)"> Privacy</label>
+          <label class="intent-card"><input type="checkbox" name="intent" value="Help" onclick="validateIntentCount(this)"> Help</label>
+          <label class="intent-card"><input type="checkbox" name="intent" value="Other" onclick="validateIntentCount(this)"> Other</label>
+        </div>
+        <div id="intentError" style="font-size:0.75rem; color:#ef4444; margin-top:4px; display:none;">Select up to 2 options only.</div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <input type="radio" id="enableMessage" name="msgToggle" onclick="toggleMessageInput(true)" style="accent-color: #ff6a00; cursor: pointer;">
+          <label for="enableMessage" style="font-size: 0.85rem; color: #cbd5e1; cursor: pointer;">Add a revision message</label>
+        </div>
+        
+        <div id="messageWrapper" style="display: none; margin-top: 6px;">
+          <textarea id="revMessage" maxlength="250" placeholder="Type message (max 250 characters)..." oninput="updateCharCount(this)" style="width:100%; height:70px; padding:10px; background:#05070c; border:1px solid #1e293b; color:#f8fafc; border-radius:6px; font-family:'Inter', sans-serif; resize:none;"></textarea>
+          <div style="font-size:0.75rem; color:#64748b; text-align: right;"><span id="charCount">0</span>/250</div>
+        </div>
       </div>
 
       <button type="submit" style="background:#ff6a00; color:#000; font-weight:700; border:none; padding:12px 24px; border-radius:6px; cursor:pointer; font-family:'Space Mono', monospace; font-size:0.85rem; width: 100%;">Deploy</button>
@@ -59,5 +99,42 @@
     </div>
 
   </div>
+
+  <script>
+    function validateIntentCount(checkbox) {
+      const checked = document.querySelectorAll('input[name="intent"]:checked');
+      const errorDiv = document.getElementById('intentError');
+      if (checked.length > 2) {
+        checkbox.checked = false;
+        errorDiv.style.display = 'block';
+      } else {
+        errorDiv.style.display = 'none';
+      }
+    }
+
+    function toggleMessageInput(show) {
+      const wrapper = document.getElementById('messageWrapper');
+      wrapper.style.display = show ? 'block' : 'none';
+      if (!show) {
+        document.getElementById('revMessage').value = '';
+        document.getElementById('charCount').innerText = '0';
+      }
+    }
+
+    function updateCharCount(textarea) {
+      document.getElementById('charCount').innerText = textarea.value.length;
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const checked = document.querySelectorAll('input[name="intent"]:checked');
+      if (checked.length === 0) {
+        alert('Please select at least one intent.');
+        return;
+      }
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('contactSuccess').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
