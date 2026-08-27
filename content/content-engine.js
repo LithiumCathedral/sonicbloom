@@ -218,6 +218,7 @@ class ContentEngine {
     `;
   }
 
+  // Upgraded content loader that extracts metadata and relations
   async loadContent(path, title, pushState = true) {
     this.setLoadingState();
     document.querySelectorAll('.tree-link').forEach(l => l.classList.remove('active'));
@@ -226,6 +227,55 @@ class ContentEngine {
       const response = await fetch(path);
       if (!response.ok) throw new Error("Network response was not ok");
       const htmlContent = await response.text();
+
+      // Find metadata from manifest matching this path
+      let currentItem = null;
+      ['articles', 'nodes', 'faqs', 'reports', 'concepts'].forEach(cat => {
+        if (!currentItem && this.manifestData[cat]) {
+          currentItem = this.manifestData[cat].find(i => i.path === path);
+        }
+      });
+
+      let metaBadgeHTML = '';
+      let relationalSuggestionsHTML = '';
+
+      if (currentItem) {
+        // Build metadata pills for Funnel and Domain
+        metaBadgeHTML = `
+          <div style="display: flex; gap: 8px; margin-bottom: 16px; font-family: 'Space Mono', monospace; font-size: 0.65rem;">
+            <span style="background: rgba(79, 70, 229, 0.15); color: #818cf8; padding: 3px 8px; border-radius: 4px;">FUNNEL: ${currentItem.funnel || 'General'}</span>
+            <span style="background: rgba(255, 106, 0, 0.15); color: var(--brand-orange); padding: 3px 8px; border-radius: 4px;">DOMAIN: ${currentItem.domain || 'Multi-Industry'}</span>
+          </div>
+        `;
+
+        // Build array-driven relationship suggestions if a 'relations' array exists
+        if (currentItem.relations && currentItem.relations.length > 0) {
+          let relatedItems = [];
+          currentItem.relations.forEach(relSlug => {
+            ['articles', 'nodes', 'faqs', 'reports', 'concepts'].forEach(cat => {
+              if (this.manifestData[cat]) {
+                const found = this.manifestData[cat].find(i => i.slug === relSlug);
+                if (found) relatedItems.push(found);
+              }
+            });
+          });
+
+          if (relatedItems.length > 0) {
+            relationalSuggestionsHTML = `
+              <div style="margin-top: 32px; border-top: 1px dashed var(--terminal-border); padding-top: 16px;">
+                <div style="font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--terminal-text-muted); margin-bottom: 12px;">// CONNECTED_NODES_IN_ARRAY</div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  ${relatedItems.map(r => `
+                    <a href="#" onclick="window.contentEngine.loadContent('${r.path}', '${r.title}', true); return false;" style="color: var(--brand-orange); text-decoration: none; font-size: 0.9rem; font-weight: 500;">
+                      &rarr; ${r.title} <span style="color: var(--terminal-text-muted); font-size: 0.75rem;">(${r.domain || 'Core'})</span>
+                    </a>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          }
+        }
+      }
 
       if (this.terminalTitle) this.terminalTitle.innerText = title || path.split('/').pop();
       if (this.terminalStatus) {
@@ -239,7 +289,9 @@ class ContentEngine {
             <button class="btn-terminal-back" onclick="window.contentEngine.restoreProjectDeck(true)">&larr; Return to Workspace Deck</button>
             <span class="badge-source">SOURCE: ${path.split('/').pop()}</span>
           </div>
+          ${metaBadgeHTML}
           ${htmlContent}
+          ${relationalSuggestionsHTML}
         </div>
       `;
 
