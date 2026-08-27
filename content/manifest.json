@@ -11,8 +11,70 @@
       "slug": "optimizing-hitl-pipelines",
       "path": "/content/articles/optimizing-hitl-pipelines.html",
       "publishedAt": "2026-08-26T18:12:07.806Z"
+    },
+    {
+      "title": "The AI Labor Shift: Navigating the New Landscape",
+      "slug": "ai-labor-shift",
+      "path": "/content/articles/ai-labor-shift.html"
+    },
+    {
+      "title": "The AI Gig Economy: From Microtasks to Institutional Infrastructure",
+      "slug": "ai-gig-economy-evolution",
+      "path": "/content/articles/ai-gig-economy-evolution.html"
+    },
+    {
+      "title": "Emerging Trends in AI-Accelerated Contract Work (2025–2026)",
+      "slug": "ai-contract-work-trends",
+      "path": "/content/articles/ai-contract-work-trends.html"
     }
   ],
-  "nodes": [],
-  "faqs": []
+  "nodes": [
+    {
+      "title": "Understanding the AI Training Pay Scale",
+      "slug": "ai-training-pay-scale",
+      "path": "/content/nodes/ai-training-pay-scale.html"
+    },
+    {
+      "title": "The Domain Expert's Pivot",
+      "slug": "domain-expert-pivot",
+      "path": "/content/nodes/domain-expert-pivot.html"
+    },
+    {
+      "title": "The Two Archetypes of AI Training Labor",
+      "slug": "ai-labor-archetypes",
+      "path": "/content/nodes/ai-labor-archetypes.html"
+    },
+    {
+      "title": "High-Skill Opportunities: SMEs and Red-Teaming",
+      "slug": "sme-red-teaming-opportunities",
+      "path": "/content/nodes/sme-red-teaming-opportunities.html"
+    },
+    {
+      "title": "Prompt Engineering & Fractional Squads",
+      "slug": "prompt-engineering-fractional-squads",
+      "path": "/content/nodes/prompt-engineering-fractional-squads.html"
+    },
+    {
+      "title": "AI Literacy as a Core Professional Competency",
+      "slug": "ai-literacy-core-competency",
+      "path": "/content/nodes/ai-literacy-core-competency.html"
+    }
+  ],
+  "faqs": [
+    {
+      "title": "FAQ: AI Labor Shift",
+      "slug": "faq-ai-labor-shift",
+      "path": "/content/faq/faq-ai-labor-shift.html"
+    },
+    {
+      "title": "FAQ: AI Work Expansion",
+      "slug": "faq-ai-work-expansion",
+      "path": "/content/faq/faq-ai-work-expansion.html"
+    },
+    {
+      "title": "FAQ: Emerging Contract Trends",
+      "slug": "faq-emerging-contract-trends",
+      "path": "/content/faq/faq-emerging-contract-trends.html"
+    }
+  ]
 }
