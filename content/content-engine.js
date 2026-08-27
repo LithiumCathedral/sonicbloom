@@ -45,9 +45,9 @@ class ContentEngine {
 renderSidebar(manifest) {
     const list = document.getElementById('dynamic-content-list');
     if (!list) return;
-    list.innerHTML = ''; // Clear default state
+    list.innerHTML = ''; 
 
-    // Helper to create category sub-headers in the tree
+    // Helper to create category sub-folders using user-facing terms
     const createCategoryFolder = (title, items) => {
       if (!items || items.length === 0) return;
       
@@ -68,10 +68,50 @@ renderSidebar(manifest) {
       });
     };
 
-    // Render categorized groups under the Content System section
+    // Render categorized groups with user-facing nomenclature mapped to legacy manifest arrays
     createCategoryFolder("Reports", manifest.articles);
     createCategoryFolder("Concepts", manifest.nodes);
     createCategoryFolder("FAQs", manifest.faqs);
+  }
+
+  renderCardGrid(manifest) {
+    if (!this.cardGrid) return;
+    this.cardGrid.innerHTML = ''; 
+
+    const buildGalleryCard = (item, tag, tagColor) => `
+      <div class="hub-gallery-card" style="display: flex; flex-direction: column; background: #0d121f; border: 1px solid var(--terminal-border, #1e293b); border-radius: 8px; padding: 24px; transition: all 0.2s ease; cursor: pointer; text-decoration: none;" 
+           onclick="window.location.href='${item.path}'" 
+           onmouseover="this.style.borderColor='${tagColor}'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.2)';" 
+           onmouseout="this.style.borderColor='var(--terminal-border, #1e293b)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+        
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; color: ${tagColor}; margin-bottom: 12px; letter-spacing: 1px;">
+          [ ${tag} ]
+        </div>
+        
+        <h3 style="font-size: 1.25rem; font-weight: 600; color: #f8fafc; margin-bottom: 12px; line-height: 1.3;">
+          ${item.title}
+        </h3>
+        
+        <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 24px; flex-grow: 1;">
+          ${item.description || 'Access full technical specifications and operational data metrics inside this module.'}
+        </p>
+        
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; color: ${tagColor}; display: flex; align-items: center; gap: 8px; margin-top: auto;">
+          INITIALIZE STREAM <span style="font-size: 1.2rem;">&rarr;</span>
+        </div>
+      </div>
+    `;
+
+    // Draw using user-facing tags
+    if (manifest.articles) {
+      manifest.articles.forEach(i => this.cardGrid.innerHTML += buildGalleryCard(i, 'REPORT', 'var(--brand-accent, #ff6a00)'));
+    }
+    if (manifest.nodes) {
+      manifest.nodes.forEach(i => this.cardGrid.innerHTML += buildGalleryCard(i, 'CONCEPT', '#3b82f6'));
+    }
+    if (manifest.faqs) {
+      manifest.faqs.forEach(i => this.cardGrid.innerHTML += buildGalleryCard(i, 'FAQ', '#10b981'));
+    }
   }
 
     allContent.forEach(item => {
