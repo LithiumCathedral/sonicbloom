@@ -1,21 +1,23 @@
-// SonicBloom Seamless Terminal Content Engine
+// SonicBloom Seamless Terminal & Hub Content Engine
 class ContentEngine {
   constructor() {
     this.viewport = document.getElementById('terminal-viewport');
     this.terminalStatus = document.getElementById('terminal-status-tag');
     this.terminalTitle = document.getElementById('terminal-file-title');
+    this.cardGrid = document.getElementById('dynamic-hub-grid'); 
     this.defaultDeckHTML = '';
     this.manifestData = { articles: [], nodes: [], faqs: [] };
   }
 
   init() {
-    if (!this.viewport) return;
+    if (this.cardGrid) {
+      this.loadGridManifest();
+    }
+
+    if (!this.viewport) return; 
+
     this.defaultDeckHTML = this.viewport.innerHTML; 
-    
-    // Load dynamic sidebar content
     this.loadManifest();
-    
-    // Bind internal viewport links (Intercepts clicks on related nodes/FAQs)
     this.bindViewportInterception();
     
     window.addEventListener('popstate', (e) => {
@@ -27,51 +29,18 @@ class ContentEngine {
     });
   }
 
-  async loadManifest() {
+  async loadGridManifest() {
     try {
       const resp = await fetch(`/content/manifest.json?v=${new Date().getTime()}`);
       if (!resp.ok) throw new Error("Manifest not found");
       this.manifestData = await resp.json();
-      this.renderSidebar(this.manifestData);
+      this.renderCardGrid(this.manifestData);
     } catch (err) {
-      console.warn("[CONTENT-ENGINE] Manifest offline. Retaining staged outline.");
-      const list = document.getElementById('dynamic-content-list');
-      if (list && list.innerHTML.includes('Awaiting sync')) {
-        list.innerHTML = `<li><span class="tree-link" style="color:var(--terminal-text-muted);">Sync Failed. Running Local.</span></li>`;
+      console.error("[CONTENT-ENGINE] Grid generation failed:", err);
+      if (this.cardGrid) {
+        this.cardGrid.innerHTML = `<div style="color: #ef4444; font-family: 'Space Mono', monospace; grid-column: 1/-1;">[ERROR] System manifest offline.</div>`;
       }
     }
-  }
-
-renderSidebar(manifest) {
-    const list = document.getElementById('dynamic-content-list');
-    if (!list) return;
-    list.innerHTML = ''; 
-
-    // Helper to create category sub-folders using user-facing terms
-    const createCategoryFolder = (title, items) => {
-      if (!items || items.length === 0) return;
-      
-      const folderHeader = document.createElement('div');
-      folderHeader.className = 'tree-folder-title';
-      folderHeader.style.cssText = "font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--brand-orange); text-transform: uppercase; margin: 10px 0 4px 4px; letter-spacing: 0.5px;";
-      folderHeader.innerText = `// ${title}`;
-      list.appendChild(folderHeader);
-
-      items.forEach(item => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.className = 'tree-link';
-        a.innerText = item.title;
-        a.onclick = () => this.loadContent(item.path, item.title, true);
-        li.appendChild(a);
-        list.appendChild(li);
-      });
-    };
-
-    // Render categorized groups with user-facing nomenclature mapped to legacy manifest arrays
-    createCategoryFolder("Reports", manifest.articles);
-    createCategoryFolder("Concepts", manifest.nodes);
-    createCategoryFolder("FAQs", manifest.faqs);
   }
 
   renderCardGrid(manifest) {
@@ -102,7 +71,7 @@ renderSidebar(manifest) {
       </div>
     `;
 
-    // Draw using user-facing tags
+    // Render using user-facing taxonomy titles
     if (manifest.articles) {
       manifest.articles.forEach(i => this.cardGrid.innerHTML += buildGalleryCard(i, 'REPORT', 'var(--brand-accent, #ff6a00)'));
     }
@@ -114,25 +83,90 @@ renderSidebar(manifest) {
     }
   }
 
-    allContent.forEach(item => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.className = 'tree-link';
-      a.innerText = item.title;
-      a.onclick = () => this.loadContent(item.path, item.title, true);
-      li.appendChild(a);
-      list.appendChild(li);
+  async loadManifest() {
+    try {
+      const resp = await fetch(`/content/manifest.json?v=${new Date().getTime()}`);
+      if (!resp.ok) throw new Error("Manifest not found");
+      this.manifestData = await resp.json();
+      this.renderSidebar(this.manifestData);
+    } catch (err) {
+      console.warn("[CONTENT-ENGINE] Manifest offline.");
+      const list = document.getElementById('dynamic-content-list');
+      if (list && list.innerHTML.includes('Awaiting sync')) {
+        list.innerHTML = `<li><span class="tree-link" style="color:var(--terminal-text-muted);">Sync Failed. Running Local.</span></li>`;
+      }
+    }
+  }
+
+  renderSidebar(manifest) {
+    const list = document.getElementById('dynamic-content-list');
+    if (!list) return;
+    list.innerHTML = ''; 
+
+    const createCategoryFolder = (title, items) => {
+      if (!items || items.length === 0) return;
+      
+      const folderHeader = document.createElement('div');
+      folderHeader.className = 'tree-folder-title';
+      folderHeader.style.cssText = "font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--brand-orange); text-transform: uppercase; margin: 12px 0 4px 4px; letter-spacing: 0.5px;";
+      folderHeader.innerText = `// ${title}`;
+      list.appendChild(folderHeader);
+
+      items.forEach(item => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.className = 'tree-link';
+        a.innerText = item.title;
+        a.onclick = () => this.loadContent(item.path, item.title, true);
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    };
+
+    // User-facing menu names mapping to backend arrays
+    createCategoryFolder("Reports", manifest.articles);
+    createCategoryFolder("Concepts", manifest.nodes);
+    createCategoryFolder("FAQs", manifest.faqs);
+  }
+
+  bindViewportInterception() {
+    this.viewport.addEventListener('click', (e) => {
+      const target = e.target.closest('a');
+      if (!target) return;
+
+      const href = target.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const slug = href.substring(1);
+        this.navigateBySlug(slug);
+      }
     });
   }
 
-toggleKnowledgeMap() {
+  navigateBySlug(slug) {
+    let targetItem = null;
+    ['articles', 'nodes', 'faqs'].forEach(category => {
+      if (!targetItem && this.manifestData[category]) {
+        targetItem = this.manifestData[category].find(item => item.slug === slug);
+      }
+    });
+
+    if (targetItem) {
+      this.loadContent(targetItem.path, targetItem.title, true);
+    } else {
+      console.error(`[CONTENT-ENGINE] Slug '${slug}' not resolved.`);
+      this.setLoadingState("ERROR_404: Node Unresolved");
+      setTimeout(() => this.restoreProjectDeck(false), 2000);
+    }
+  }
+
+  toggleKnowledgeMap() {
     let modal = document.getElementById('knowledge-map-modal');
     if (modal) {
-      modal.remove(); // Toggle off if already open
+      modal.remove();
       return;
     }
 
-    // Build the Overlay Modal
     modal = document.createElement('div');
     modal.id = 'knowledge-map-modal';
     modal.style.cssText = "position: absolute; top: 50px; left: 20px; right: 20px; bottom: 20px; background: rgba(9, 13, 22, 0.95); border: 1px solid var(--brand-orange); border-radius: 8px; z-index: 1000; padding: 24px; display: flex; flex-direction: column; backdrop-filter: blur(8px); box-shadow: 0 25px 50px rgba(0,0,0,0.8);";
@@ -145,18 +179,16 @@ toggleKnowledgeMap() {
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; overflow-y: auto; flex-grow: 1; padding-right: 8px;">
     `;
 
-    // Map articles/nodes and their connected relationships
     const articles = this.manifestData.articles || [];
-    const nodes = this.manifestData.nodes || [];
     const faqs = this.manifestData.faqs || [];
 
     articles.forEach(art => {
       const relatedFaqs = faqs.filter(f => f.path.includes(art.slug) || (f.targetSlug && f.targetSlug === art.slug));
       htmlContent += `
         <div style="background: var(--terminal-card); border: 1px solid var(--terminal-border); border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
-          <div style="font-size: 0.65rem; color: var(--brand-orange); font-family: 'Space Mono', monospace;">[CORE ARTICLE]</div>
+          <div style="font-size: 0.65rem; color: var(--brand-orange); font-family: 'Space Mono', monospace;">[REPORT NODE]</div>
           <a href="#" onclick="window.contentEngine.loadContent('${art.path}', '${art.title}', true); document.getElementById('knowledge-map-modal').remove(); return false;" style="color: #f8fafc; font-weight: 600; text-decoration: none; font-size: 0.95rem;">${art.title}</a>
-          <div style="font-size: 0.75rem; color: var(--terminal-text-muted); margin-top: auto; border-top: 1px dashed var(--terminal-border); pt: 8px;">
+          <div style="font-size: 0.75rem; color: var(--terminal-text-muted); margin-top: auto; border-top: 1px dashed var(--terminal-border); padding-top: 8px;">
             Linked FAQs: ${relatedFaqs.length > 0 ? relatedFaqs.map(f => f.title).join(', ') : 'None mapped'}
           </div>
         </div>
@@ -166,50 +198,12 @@ toggleKnowledgeMap() {
     htmlContent += `</div>`;
     modal.innerHTML = htmlContent;
     
-    // Append modal inside the terminal window container
     const terminalWindow = document.querySelector('.terminal-window');
     if (terminalWindow) {
       terminalWindow.style.position = 'relative';
       terminalWindow.appendChild(modal);
     }
   }
-
-  // >>> NEW ROUTING LOGIC FOR RELATED CONTENT BLOCKS <<<
-  bindViewportInterception() {
-    this.viewport.addEventListener('click', (e) => {
-      // Find the closest anchor tag click
-      const target = e.target.closest('a');
-      if (!target) return;
-
-      const href = target.getAttribute('href');
-
-      // If it's an internal hash link (e.g., #ai-training-pay-scale)
-      if (href && href.startsWith('#')) {
-        e.preventDefault();
-        const slug = href.substring(1);
-        this.navigateBySlug(slug);
-      }
-    });
-  }
-
-  navigateBySlug(slug) {
-    // Search through the saved manifest data to find the matching path
-    let targetItem = null;
-    ['articles', 'nodes', 'faqs'].forEach(category => {
-      if (!targetItem && this.manifestData[category]) {
-        targetItem = this.manifestData[category].find(item => item.slug === slug);
-      }
-    });
-
-    if (targetItem) {
-      this.loadContent(targetItem.path, targetItem.title, true);
-    } else {
-      console.error(`[CONTENT-ENGINE] Slug '${slug}' not found in manifest.`);
-      this.setLoadingState("ERROR_404: Node Unresolved");
-      setTimeout(() => this.restoreProjectDeck(false), 2000);
-    }
-  }
-  // >>> END NEW ROUTING LOGIC <<<
 
   setLoadingState(title) {
     if (this.terminalStatus) {
@@ -226,8 +220,6 @@ toggleKnowledgeMap() {
 
   async loadContent(path, title, pushState = true) {
     this.setLoadingState();
-    
-    // Remove active state from sidebar links
     document.querySelectorAll('.tree-link').forEach(l => l.classList.remove('active'));
 
     try {
@@ -283,7 +275,6 @@ toggleKnowledgeMap() {
   }
 }
 
-// Initialize the engine
 document.addEventListener('DOMContentLoaded', () => {
   window.contentEngine = new ContentEngine();
   window.contentEngine.init();
