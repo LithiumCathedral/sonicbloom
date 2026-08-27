@@ -29,22 +29,28 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
+    /* Enforce full-screen single-viewport layout to remove dead page space */
+    html, body {
       background-color: var(--bg-page);
       color: var(--text-dark);
       font-family: 'Inter', sans-serif;
-      min-height: 100vh;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
 
+    /* Fixed Top Header (Logo and Site Name untouched) */
     .top-header {
       background: var(--card-white);
       border-bottom: 1px solid var(--border-light);
-      padding: 16px 32px;
+      padding: 12px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-shrink: 0;
+      height: 60px;
     }
 
     .brand-logo {
@@ -63,43 +69,48 @@
       box-shadow: 0 0 8px var(--brand-orange);
     }
 
+    /* 95% Viewport Container Scaling */
     .main-wrapper {
-      max-width: 1300px;
-      width: 100%;
-      margin: 40px auto;
-      padding: 0 24px;
+      width: 95vw;
+      height: calc(100vh - 60px);
+      margin: 0 auto;
+      padding: 16px 0;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 16px;
     }
 
-    .hero-intro h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; }
-    .hero-intro p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; max-width: 800px; }
+    .hero-intro h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+    .hero-intro p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.4; max-width: 900px; }
 
-    /* Unified Dark Terminal Shell */
+    /* Unified Dark Terminal Shell taking up remaining 95% space */
     .terminal-window {
       background: var(--terminal-bg);
       border: 1px solid var(--terminal-border);
       border-radius: 12px;
       overflow: hidden;
       display: grid;
-      grid-template-columns: 290px 1fr;
-      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+      grid-template-columns: 280px 1fr;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
       color: var(--terminal-text);
-      min-height: 600px;
+      flex: 1;
+      height: 100%;
     }
 
     @media (max-width: 900px) {
-      .terminal-window { grid-template-columns: 1fr; }
+      .terminal-window { grid-template-columns: 1fr; overflow-y: auto; }
+      html, body { overflow: auto; height: auto; }
+      .main-wrapper { height: auto; width: 98vw; }
     }
 
     .terminal-sidebar {
       background: var(--terminal-sidebar);
       border-right: 1px solid var(--terminal-border);
-      padding: 24px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 20px;
+      overflow-y: auto;
     }
 
     .tree-title {
@@ -108,24 +119,24 @@
       color: var(--terminal-text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .tree-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
       border-left: 1px solid var(--terminal-border);
-      padding-left: 12px;
+      padding-left: 10px;
       margin-left: 4px;
     }
 
     .tree-link {
       color: var(--terminal-text-muted);
       text-decoration: none;
-      font-size: 0.82rem;
-      padding: 6px 8px;
+      font-size: 0.8rem;
+      padding: 5px 8px;
       border-radius: 4px;
       transition: all 0.15s ease;
       display: flex;
@@ -141,8 +152,8 @@
 
     .status-badge {
       font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      padding: 2px 6px;
+      font-size: 0.6rem;
+      padding: 2px 5px;
       border-radius: 4px;
     }
     .status-badge.live { background: rgba(52, 211, 153, 0.15); color: var(--rate-green); }
@@ -150,12 +161,12 @@
 
     /* Terminal Viewport Content */
     .terminal-content {
-      padding: 32px 36px;
+      padding: 24px 32px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
       overflow-y: auto;
-      max-height: 750px;
+      height: 100%;
     }
 
     .terminal-topbar {
@@ -163,11 +174,12 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--terminal-border);
-      padding-bottom: 14px;
+      padding-bottom: 10px;
+      flex-shrink: 0;
     }
 
     .terminal-signals { display: flex; gap: 6px; }
-    .dot-signal { width: 10px; height: 10px; border-radius: 50%; background: #1e293b; }
+    .dot-signal { width: 9px; height: 9px; border-radius: 50%; background: #1e293b; }
     .dot-signal.red { background: #ef4444; }
     .dot-signal.yellow { background: #f59e0b; }
     .dot-signal.green { background: #10b981; }
@@ -175,19 +187,19 @@
     /* Project Tiles Grid */
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-      margin-top: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 6px;
     }
 
     .project-tile {
       background: var(--terminal-card);
       border: 1px solid var(--terminal-border);
-      border-radius: 10px;
-      padding: 22px;
+      border-radius: 8px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       text-decoration: none;
       color: inherit;
       transition: all 0.2s ease;
@@ -197,20 +209,15 @@
     .project-tile.disabled { opacity: 0.55; cursor: not-allowed; }
 
     /* In-Terminal Rendered Markdown Styling */
-    .rendered-article-container { display: flex; flex-direction: column; gap: 20px; height: 100%; min-height: 550px;}
-    .terminal-article-nav { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--terminal-border); padding-bottom: 12px; }
-    .btn-terminal-back { background: transparent; border: 1px solid var(--terminal-border); color: var(--terminal-text-muted); padding: 6px 12px; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.75rem; cursor: pointer; }
+    .rendered-article-container { display: flex; flex-direction: column; gap: 16px; height: 100%; }
+    .terminal-article-nav { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--terminal-border); padding-bottom: 10px; flex-shrink: 0; }
+    .btn-terminal-back { background: transparent; border: 1px solid var(--terminal-border); color: var(--terminal-text-muted); padding: 5px 10px; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.75rem; cursor: pointer; }
     .btn-terminal-back:hover { color: var(--brand-orange); border-color: var(--brand-orange); }
     .badge-source { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--terminal-text-muted); }
 
-    .article-markdown-body h1 { font-family: 'Space Mono', monospace; font-size: 1.6rem; color: var(--brand-orange); margin-bottom: 16px; }
-    .article-markdown-body h2 { font-size: 1.25rem; color: #ffffff; margin: 24px 0 10px 0; border-bottom: 1px solid var(--terminal-border); padding-bottom: 6px; }
-    .article-markdown-body h3 { font-size: 1.05rem; color: var(--terminal-text-muted); margin: 18px 0 8px 0; }
-    .article-markdown-body p { color: #cbd5e1; font-size: 0.92rem; line-height: 1.65; margin-bottom: 14px; }
-    .article-markdown-body blockquote { border-left: 3px solid var(--brand-orange); padding: 10px 16px; background: var(--brand-orange-dim); margin: 18px 0; border-radius: 4px; }
-    .article-markdown-body pre { background: #05070c; border: 1px solid var(--terminal-border); padding: 14px; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: #38bdf8; overflow-x: auto; margin: 16px 0; }
-    .article-markdown-body code.inline-code { font-family: 'Space Mono', monospace; background: #1e293b; color: var(--brand-orange); padding: 2px 5px; border-radius: 4px; font-size: 0.8rem; }
-    .article-markdown-body a { color: var(--brand-orange); text-decoration: none; font-weight: 600; }
+    .article-markdown-body h1 { font-family: 'Space Mono', monospace; font-size: 1.5rem; color: var(--brand-orange); margin-bottom: 12px; }
+    .article-markdown-body h2 { font-size: 1.2rem; color: #ffffff; margin: 20px 0 8px 0; border-bottom: 1px solid var(--terminal-border); padding-bottom: 4px; }
+    .article-markdown-body p { color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px; }
   </style>
 </head>
 <body>
@@ -224,11 +231,12 @@
 
   <main class="main-wrapper">
     <div class="hero-intro">
+      <h1><b>Build</b>, build & become you.</h1>
+      <p>Try LabMatch: the fast-track diagnostic to AI gigs that fit your exact skillset.</p>
     </div>
 
     <div class="terminal-window">
       <aside class="terminal-sidebar">
-        
         <div>
           <div class="tree-title">01 / Active Projects</div>
           <ul class="tree-list">
@@ -256,7 +264,6 @@
             </li>
           </ul>
         </div>
-
       </aside>
 
       <section class="terminal-content" id="terminal-viewport">
@@ -275,8 +282,8 @@
         </div>
 
         <div>
-          <h2 style="font-size: 1.3rem; margin-bottom: 6px;">Ecosystem Project Pipelines</h2>
-          <p style="color: var(--terminal-text-muted); font-size: 0.85rem;">Select an active project or click any knowledge node from the sidebar to inspect technical parameters.</p>
+          <h2 style="font-size: 1.2rem; margin-bottom: 4px;">Ecosystem Project Pipelines</h2>
+          <p style="color: var(--terminal-text-muted); font-size: 0.8rem;">Select an active project or click any knowledge node from the sidebar to inspect technical parameters.</p>
         </div>
 
         <div class="project-grid">
@@ -285,8 +292,8 @@
               <span style="font-family: 'Space Mono', monospace; font-weight: 700;">LabMatch</span>
               <span class="status-badge live">ACTIVE</span>
             </div>
-            <p style="color: var(--terminal-text-muted); font-size: 0.85rem; line-height: 1.5;">Algorithmic intake engine mapping talent cognitive styles, logic density benchmarks, and direct referral decks across verified research labs.</p>
-            <div style="color: var(--brand-orange); font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; margin-top: auto;">Launch Diagnostic &rarr;</div>
+            <p style="color: var(--terminal-text-muted); font-size: 0.8rem; line-height: 1.4;">Algorithmic intake engine mapping talent cognitive styles, logic density benchmarks, and direct referral decks across verified research labs.</p>
+            <div style="color: var(--brand-orange); font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; margin-top: auto;">Launch Diagnostic &rarr;</div>
           </a>
 
           <div class="project-tile disabled">
@@ -294,8 +301,8 @@
               <span style="font-family: 'Space Mono', monospace; font-weight: 700;">Plath Matrix</span>
               <span class="status-badge staged">STAGING</span>
             </div>
-            <p style="color: var(--terminal-text-muted); font-size: 0.85rem; line-height: 1.5;">Deterministic framework mapping personal numerology architectures, lifecycle forecasting, and transition layers.</p>
-            <div style="color: var(--terminal-text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: auto;">Pipeline Locked</div>
+            <p style="color: var(--terminal-text-muted); font-size: 0.8rem; line-height: 1.4;">Deterministic framework mapping personal numerology architectures, lifecycle forecasting, and transition layers.</p>
+            <div style="color: var(--terminal-text-muted); font-family: 'Space Mono', monospace; font-size: 0.75rem; margin-top: auto;">Pipeline Locked</div>
           </div>
 
           <div class="project-tile disabled">
@@ -303,8 +310,8 @@
               <span style="font-family: 'Space Mono', monospace; font-weight: 700;">Go Grid Engine</span>
               <span class="status-badge staged">STAGING</span>
             </div>
-            <p style="color: var(--terminal-text-muted); font-size: 0.85rem; line-height: 1.5;">Spatial data arrays, token routing paths, and architectural grid logic built for structured dataset ingestion.</p>
-            <div style="color: var(--terminal-text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: auto;">Pipeline Locked</div>
+            <p style="color: var(--terminal-text-muted); font-size: 0.8rem; line-height: 1.4;">Spatial data arrays, token routing paths, and architectural grid logic built for structured dataset ingestion.</p>
+            <div style="color: var(--terminal-text-muted); font-family: 'Space Mono', monospace; font-size: 0.75rem; margin-top: auto;">Pipeline Locked</div>
           </div>
         </div>
       </section>
@@ -315,18 +322,15 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Intercepts clicks for isolated apps to run their JavaScript via an iFrame wrapper
       document.querySelectorAll('.app-link').forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
-          
-          // Style active links in sidebar
           document.querySelectorAll('.tree-link').forEach(l => l.classList.remove('active'));
+         
           if (link.classList.contains('tree-link')) {
             link.classList.add('active');
           }
 
-          // Pull routing configurations
           const src = link.getAttribute('data-app-src');
           const title = link.getAttribute('data-app-title');
 
@@ -334,21 +338,20 @@
           const titleEl = document.getElementById('terminal-file-title');
           const statusEl = document.getElementById('terminal-status-tag');
 
-          // Update Topbar
           if (titleEl) titleEl.innerText = title;
           if (statusEl) { 
-            statusEl.innerText = "RUNNING"; 
+            statusEl.innerText = "RUNNING";
             statusEl.style.color = "var(--rate-green)"; 
           }
 
-          // Inject iFrame to safely execute the isolated JS, CSS, and form actions
           viewport.innerHTML = `
             <div class="rendered-article-container">
               <div class="terminal-article-nav">
-                <button class="btn-terminal-back" onclick="if(window.contentEngine) { window.contentEngine.restoreProjectDeck(true); } else { window.location.reload(); }">&larr; Return to Workspace Deck</button>
+                <button class="btn-terminal-back" onclick="if(window.contentEngine) { window.contentEngine.restoreProjectDeck(true); } else { window.location.reload(); }">&larr;
+                Return to Workspace Deck</button>
                 <span class="badge-source">SOURCE: ${src}</span>
               </div>
-              <iframe src="${src}" style="width: 100%; height: 100%; min-height: 600px; border: none; border-radius: 8px; background: var(--terminal-sidebar);"></iframe>
+              <iframe src="${src}" style="width: 100%; height: 100%; border: none; border-radius: 8px; background: var(--terminal-sidebar);"></iframe>
             </div>
           `;
         });
