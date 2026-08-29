@@ -3,7 +3,7 @@
     {
       "title": "Skill vs. Pay Matrix: 2026 AI Labor Demands",
       "slug": "ai-skill-pay-matrix",
-      "path": "/content/reports/ai-skill-pay-matrix.html",
+      "path": "/content/articles/ai-skill-pay-matrix.html",
       "description": "Mathematical breakdown validating direct compensation scaling for verified work outputs against domain depth.",
       "funnel": "Consideration",
       "domain": "Technology & Data",
@@ -16,7 +16,7 @@
     {
       "title": "Optimizing High-Volume Human-in-the-Loop Validation Pipelines",
       "slug": "optimizing-hitl-pipelines",
-      "path": "/content/reports/optimizing-hitl-pipelines.html",
+      "path": "/content/articles/optimizing-hitl-pipelines.html",
       "description": "Strategies for structuring distributed human feedback networks to maximize token parsing quality and reduce model hallucination states.",
       "funnel": "Conversion",
       "domain": "Engineering",
@@ -29,7 +29,7 @@
     {
       "title": "Labor Shifts: Navigating AI Work Landscapes",
       "slug": "ai-labor-shift",
-      "path": "/content/reports/ai-labor-shift.html",
+      "path": "/content/articles/ai-labor-shift.html",
       "description": "An analysis of how generative AI is shifting contract work, creating new expert roles, and squeezing traditional commodity freelancers.",
       "funnel": "Awareness",
       "domain": "General Career",
@@ -41,7 +41,7 @@
     {
       "title": "AI Gig Economy: From Microtasks to Infrastructure",
       "slug": "ai-gig-economy-evolution",
-      "path": "/content/reports/ai-gig-economy-evolution.html",
+      "path": "/content/articles/ai-gig-economy-evolution.html",
       "description": "Explore how data labeling evolved from simple microtasks into institutionalized infrastructure across global research labs.",
       "funnel": "Awareness",
       "domain": "Cross-Disciplinary",
@@ -53,7 +53,7 @@
     {
       "title": "Emerging Trends in AI Contract Work (2025–2026)",
       "slug": "ai-contract-work-trends",
-      "path": "/content/reports/ai-contract-work-trends.html",
+      "path": "/content/articles/ai-contract-work-trends.html",
       "description": "Discover how professionals in Law, Medicine, and Finance are escaping industry burnout by pivoting into highly-paid, fractional AI training squads.",
       "funnel": "Consideration",
       "domain": "Professional Services",
@@ -67,7 +67,7 @@
     {
       "title": "AI Trainer Pay Scale",
       "slug": "ai-training-pay-scale",
-      "path": "/content/concepts/ai-training-pay-scale.html",
+      "path": "/content/nodes/ai-training-pay-scale.html",
       "description": "A structural mapping of entry barriers, platform criteria, and hourly rate indexes across global AI evaluation networks.",
       "funnel": "Consideration",
       "domain": "Market Metrics",
@@ -78,7 +78,7 @@
     {
       "title": "Domain Expert's Pivot into AI",
       "slug": "domain-expert-pivot",
-      "path": "/content/concepts/domain-expert-pivot.html",
+      "path": "/content/nodes/domain-expert-pivot.html",
       "description": "How non-technical domain specialists leverage nuance, linguistic sensitivity, and ethical judgment as key AI validation assets.",
       "funnel": "Consideration",
       "domain": "Cross-Disciplinary",
@@ -90,7 +90,7 @@
     {
       "title": "Core Types of AI Training Jobs",
       "slug": "ai-labor-archetypes",
-      "path": "/content/concepts/ai-labor-archetypes.html",
+      "path": "/content/nodes/ai-labor-archetypes.html",
       "description": "An analytical comparison contrasting high-skill domain evaluators against global data moderation workflows.",
       "funnel": "Awareness",
       "domain": "Labor Dynamics",
@@ -112,7 +112,7 @@
     {
       "title": "Prompt Engineering & Fractional Squads",
       "slug": "prompt-engineering-fractional-squads",
-      "path": "/content/concepts/prompt-engineering-fractional-squads.html",
+      "path": "/content/nodes/prompt-engineering-fractional-squads.html",
       "description": "Examine how enterprises deploy multi-disciplinary contractor squads to rapidly prototype and integrate generative workflows.",
       "funnel": "Conversion",
       "domain": "Enterprise Tech",
@@ -123,7 +123,7 @@
     {
       "title": "AI Literacy as Professional Competency",
       "slug": "ai-literacy-core-competency",
-      "path": "/content/concepts/ai-literacy-core-competency.html",
+      "path": "/content/nodes/ai-literacy-core-competency.html",
       "description": "Why algorithmic interpretation and data stewardship are mandatory baseline requirements across legal and medical practices.",
       "funnel": "Consideration",
       "domain": "Law & Medicine",
