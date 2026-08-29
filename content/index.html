@@ -4,54 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SonicBloom Content Hub</title>
-  <meta name="description" content="Technical nodes, rate value estimation, logic density benchmarks, and AI validation guides.">
+  <meta name="description" content="Technical concepts, rate value estimation, logic density benchmarks, and AI validation guides.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-canvas: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #475569;
-      --brand-primary: #4f46e5;
-      --brand-accent: #ff6a00;
-      --border-subtle: #cbd5e1;
+      --bg-canvas: #090d16;
+      --card-bg: #111827;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --brand-primary: #ff6a00;
+      --brand-accent: #34d399;
+      --border-subtle: #1e293b;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg-canvas); color: var(--text-main); padding: 40px 20px; line-height: 1.6; }
-    .hub-container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
-    header h1 { font-size: 2.4rem; font-weight: 800; }
-    .section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
-    .hub-card { background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;}
-    .hub-card h3 { color: var(--brand-primary); margin-bottom: 8px; }
-    .hub-card a { color: var(--brand-primary); text-decoration: none; font-weight: 700; display: inline-block; margin-top: 12px; }
-    .funnel-banner { background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 12px; padding: 24px; text-align: center; }
-    .funnel-banner a { display: inline-block; margin-top: 12px; background: var(--brand-primary); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg-canvas); color: var(--text-main); padding: 40px 20px; line-height: 1.6; font-family: 'Inter', sans-serif; }
+    .hub-container { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+    
+    /* Standardized Brand Headings */
+    header h1, section h2 {
+      font-family: 'Space Mono', monospace;
+      color: var(--brand-primary);
+      letter-spacing: -0.5px;
+    }
+    header h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 12px; }
+    section h2 { font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; font-size: 1.1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px; }
+
+    .section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    
+    .hub-gallery-card {
+      display: flex; flex-direction: column; background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 24px; transition: all 0.2s ease; cursor: pointer; text-decoration: none;
+    }
+    .hub-gallery-card:hover {
+      border-color: var(--brand-primary); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255, 106, 0, 0.15);
+    }
+    
+    .funnel-banner { background: rgba(255, 106, 0, 0.05); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 32px; text-align: center; }
+    .funnel-banner h3 { font-family: 'Space Mono', monospace; color: var(--brand-primary); font-size: 1.4rem; margin-bottom: 8px; }
+    .funnel-banner p { color: var(--text-muted); max-width: 600px; margin: 0 auto 20px auto; }
+    .funnel-banner a { display: inline-block; background: var(--brand-primary); color: #000; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-weight: 700; font-family: 'Space Mono', monospace; font-size: 0.85rem; }
   </style>
 </head>
 <body>
 
 <div class="hub-container">
   <header>
-    <h1 class="content-h1" style="font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px;">
-      Architect the Future of Machine Reasoning
-    </h1>
-    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 32px; max-width: 800px;">
+    <h1>Architect the Future of Machine Reasoning</h1>
+    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; max-width: 850px;">
       Access the foundational blueprints of AI optimization. Master programmatic references, calibrate your expertise against logic density frameworks, and command the mechanics of RLHF evaluation to secure your position at the frontier of the new labor economy.
     </p>
   </header>
 
   <section>
-    <h2 style="font-size: 1.8rem; margin-bottom: 24px;">Knowledge Directory</h2>
-    
-    <div class="educational-intro" style="max-width: 850px; margin: 0 auto 40px auto; padding: 20px; background: rgba(255, 106, 0, 0.05); border-left: 4px solid var(--brand-orange); border-radius: 0 8px 8px 0;">
-      <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">
-        New to the AI Labor Economy?
-      </h3>
-      <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6;">
-        If you think AI is only for software engineers, you are missing the largest labor shift of the decade. The next generation of artificial intelligence requires <strong>human judgment</strong>. From lawyers auditing legal bots for compliance, to creatives establishing visual boundaries for image generators, your deep domain expertise is now a highly-paid, queryable asset. <br><br>Explore the intelligence streams below to discover how your background translates into the new AI gig economy.
+    <h2>New to the AI Labor Economy?</h2>
+    <div class="educational-intro" style="margin-bottom: 32px; padding: 20px; background: rgba(255, 106, 0, 0.05); border-left: 4px solid var(--brand-primary); border-radius: 0 8px 8px 0;">
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+        If you think AI is only for software engineers, you are missing the largest labor shift of the decade. The next generation of artificial intelligence requires <strong>human judgment</strong>. From lawyers auditing legal bots for compliance, to creatives establishing visual boundaries for image generators, your deep domain expertise is now a highly-paid, queryable asset.
       </p>
     </div>
 
-    <div class="section-grid" id="dynamic-hub-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+    <h2>Knowledge Directory & Intelligence Streams</h2>
+    <div class="section-grid" id="dynamic-hub-grid">
       <div style="padding: 40px; color: var(--text-muted); font-family: 'Space Mono', monospace; text-align: center; grid-column: 1 / -1;">
         <span style="animation: pulse 1s infinite;">⚡️</span> SYNCING_INTELLIGENCE_STREAMS...
       </div>
@@ -61,7 +75,7 @@
   <div class="funnel-banner">
     <h3>Benchmark Your Cognitive Signature</h3>
     <p>Calibrate your technical profile across top AI research labs and production pipelines to unlock your personalized operational metrics.</p>
-    <a href="/labmatch/">Try LabMatch</a>
+    <a href="/labmatch/">Try LabMatch &rarr;</a>
   </div>
 </div>
 
