@@ -4,25 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SonicBloom LabMatch | Quick Work Check</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-canvas: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #475569;
-      --border-subtle: #cbd5e1;
-      --brand-primary: #4f46e5;
-      --brand-primary-hover: #4338ca;
-      --accent-fastpass: #d97706;
-      --accent-fastpass-hover: #b45309;
-      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
+      /* Dark Terminal Theme Variables */
+      --bg-canvas: transparent; /* Allows iframe integration to blend with parent */
+      --card-bg: #090d16;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-subtle: #1e293b;
+      --border-focus: #334155;
+      
+      --brand-primary: #ff6a00;
+      --brand-primary-hover: #e05d00;
+      --brand-primary-dim: rgba(255, 106, 0, 0.12);
+      
+      --accent-fastpass: transparent;
+      --accent-fastpass-hover: rgba(255, 106, 0, 0.1);
+      
+      --rate-green: #34d399;
+      --card-shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--bg-canvas);
       color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -35,7 +46,7 @@
       width: 100%;
       max-width: 680px;
       background: var(--card-bg);
-      border-radius: 20px;
+      border-radius: 12px;
       border: 1px solid var(--border-subtle);
       box-shadow: var(--card-shadow);
       overflow: hidden;
@@ -43,32 +54,48 @@
       flex-direction: column;
     }
 
-    .progress-bar-container { width: 100%; height: 6px; background: #e2e8f0; }
+    .progress-bar-container { width: 100%; height: 6px; background: #05070c; }
     .progress-bar { width: 14%; height: 100%; background: var(--brand-primary); transition: width 0.3s ease; }
 
     .slide { display: none; padding: 40px 32px; }
-    .slide.active { display: flex; flex-direction: column; gap: 20px; }
+    .slide.active { display: flex; flex-direction: column; gap: 20px; animation: fadeIn 0.3s ease; }
 
-    h1, h2, h3 { font-weight: 800; color: var(--text-main); line-height: 1.2; }
-    p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.5; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2, h3 { 
+      font-family: 'Space Mono', monospace; 
+      font-weight: 700; 
+      color: var(--brand-primary); 
+      line-height: 1.3; 
+    }
+    
+    p { 
+      color: var(--text-muted); 
+      font-size: 0.95rem; 
+      line-height: 1.6; 
+    }
 
     .option-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px; }
 
     .btn-option {
-      background: #f1f5f9;
-      border: 2px solid #e2e8f0;
+      background: #0d121f;
+      border: 1px solid var(--border-subtle);
       color: var(--text-main);
       padding: 16px 20px;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 600;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
       cursor: pointer;
       text-align: left;
       transition: all 0.2s ease;
     }
     .btn-option:hover {
       border-color: var(--brand-primary);
-      background: #eef2ff;
+      background: var(--brand-primary-dim);
       color: var(--brand-primary);
     }
 
@@ -78,26 +105,30 @@
       align-items: center;
       margin-top: 24px;
       padding-top: 20px;
-      border-top: 1px solid var(--border-subtle);
+      border-top: 1px dashed var(--border-subtle);
     }
 
     .btn {
       padding: 12px 24px;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
       cursor: pointer;
       border: none;
       transition: all 0.2s ease;
     }
-    .btn-back { background: #e2e8f0; color: var(--text-main); }
-    .btn-back:hover { background: #cbd5e1; }
+    
+    .btn-back { background: transparent; color: var(--text-muted); border: 1px solid var(--border-subtle); }
+    .btn-back:hover { color: var(--text-main); border-color: var(--border-focus); }
+    
     .btn-next { background: var(--brand-primary); color: #fff; margin-left: auto; }
     .btn-next:hover { background: var(--brand-primary-hover); }
 
     .btn-fastpass {
       background: var(--accent-fastpass);
-      color: #fff;
+      border: 1px dashed var(--brand-primary);
+      color: var(--brand-primary);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -112,47 +143,56 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      font-family: 'Inter', sans-serif;
     }
     .btn-linkedin:hover { background: #084e96; }
 
     .input-field {
       width: 100%;
       padding: 14px 18px;
-      border: 2px solid var(--border-subtle);
-      border-radius: 10px;
-      font-size: 1rem;
+      background: #05070c;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
       color: var(--text-main);
       outline: none;
       margin-top: 8px;
+      transition: border-color 0.2s;
     }
     .input-field:focus { border-color: var(--brand-primary); }
 
     .workprint-box {
-      background: #f8fafc;
-      border: 2px dashed var(--brand-primary);
-      border-radius: 14px;
-      padding: 24px;
+      background: #05070c;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 28px;
       text-align: center;
     }
     .workprint-emojis { font-size: 2.2rem; letter-spacing: 8px; margin: 12px 0; }
 
     .referral-card {
-      background: #eef2ff;
-      border: 1px solid #c7d2fe;
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 12px;
+      background: #0d121f;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 24px;
+      margin-top: 16px;
     }
+    
     .referral-card a {
       display: inline-block;
-      margin-top: 12px;
+      margin-top: 16px;
       background: var(--brand-primary);
       color: #fff;
       text-decoration: none;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border-radius: 8px;
       font-weight: 700;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      transition: background 0.2s;
     }
+    .referral-card a:hover { background: var(--brand-primary-hover); }
   </style>
 </head>
 <body>
@@ -163,9 +203,9 @@
   </div>
 
   <!-- Slide 1: Welcome -->
-<div class="slide active" id="slide-1">
-    <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; color: var(--text-main); letter-spacing: -0.5px;">Find out, break in, & join labs.</h1>
-    <p style="margin-bottom: 32px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.6;">
+  <div class="slide active" id="slide-1">
+    <h1 style="font-size: 2.2rem; margin-bottom: 8px; letter-spacing: -0.5px;">Find out, break in, & become you.</h1>
+    <p style="margin-bottom: 24px;">
       Focus your growth, clear work blockades, and get invited to leading AI labs. Labmatch is a custom diagnostic designed to fast-track your path to well-paid AI consulting.
     </p>
     
@@ -179,7 +219,7 @@
     <h2>1. What is your favorite topic to work on?</h2>
     <p>Pick the field you know best:</p>
     <div class="option-grid">
-      <!-- Strings map precisely to the quiz.json file[cite: 2] -->
+      <!-- Strings map precisely to the quiz.json file -->
       <button class="btn-option" onclick="selectDomain('Software Engineering')">💻 Coding & Tech</button>
       <button class="btn-option" onclick="selectDomain('Medicine')">🩺 Healthcare & Medicine</button>
       <button class="btn-option" onclick="selectDomain('Humanities')">📚 Writing & Reading</button>
@@ -259,8 +299,8 @@
     <h2>Where should we send your results?</h2>
     <p>Type your email address below to unlock your custom AI Work match and pay rate.</p>
     <div style="margin-top: 12px;">
-      <label for="userEmailInput" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">YOUR EMAIL ADDRESS</label>
-      <input type="email" id="userEmailInput" class="input-field" placeholder="name@example.com" required />
+      <label for="userEmailInput" style="font-size: 0.75rem; font-family: 'Space Mono', monospace; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.5px;">YOUR EMAIL ADDRESS</label>
+      <input type="email" id="userEmailInput" class="input-field" placeholder="operator@domain.com" required />
     </div>
     <div class="action-bar">
       <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
@@ -273,11 +313,11 @@
     <h2>Your AI Workprint is Ready!</h2>
     <div class="workprint-box">
       <div class="workprint-emojis" id="workprintEmojiDisplay">⚡️ 🔍 🛠️ 🛡️</div>
-      <h3 id="workprintRoleDisplay">Code Helper</h3>
-      <p id="workprintRateDisplay">Estimated Pay: $45 - $65 per hour</p>
+      <h3 id="workprintRoleDisplay" style="font-size: 1.3rem; margin-bottom: 6px;">Code Helper</h3>
+      <p id="workprintRateDisplay" style="font-family: 'Space Mono', monospace; color: var(--rate-green); font-size: 0.85rem;">Estimated Pay: $45 - $65 per hour</p>
     </div>
     <div class="referral-card" id="standardReferralCard">
-      <h4>Your Matched AI Lab</h4>
+      <h4 style="font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--text-main); margin-bottom: 4px;">Your Matched AI Lab</h4>
       <p id="labPartnerName">Mercor Code Lab</p>
       <a href="https://t.mercor.com/rrVyb" id="directLabUrl" target="_blank" rel="noopener">Open Lab Invite &rarr;</a>
     </div>
