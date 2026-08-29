@@ -1,135 +1,115 @@
 {
   "articles": [
     {
-      "title": "The Logic Density Scale: 2026 AI Labor Demands",
-      "slug": "logic-density-matrix",
-      "path": "/content/reports/logic-density-matrix.html",
+      "title": "Skill vs. Pay Matrix: 2026 AI Labor Demands",
+      "slug": "ai-skill-pay-matrix",
+      "path": "/content/reports/ai-skill-pay-matrix.html",
       "description": "Mathematical breakdown validating direct compensation scaling for verified work outputs against domain depth.",
       "funnel": "Consideration",
       "domain": "Technology & Data",
-      "relations": ["ai-training-pay-scale", "optimizing-hitl-pipelines"],
+      "relations": [
+        "ai-training-pay-scale",
+        "optimizing-hitl-pipelines"
+      ],
       "publishedAt": "2026-08-26T18:12:05.211Z"
     },
     {
-      "title": "Optimizing High-Volume Human-in-the-Loop Validation Pipelines",
+      "title": "Optimizing Human-in-the-Loop Validation Pipelines",
       "slug": "optimizing-hitl-pipelines",
       "path": "/content/reports/optimizing-hitl-pipelines.html",
       "description": "Strategies for structuring distributed human feedback networks to maximize token parsing quality and reduce model hallucination states.",
       "funnel": "Conversion",
       "domain": "Engineering",
-      "relations": ["logic-density-matrix", "sme-red-teaming-opportunities"],
+      "relations": [
+        "logic-density-matrix",
+        "sme-red-teaming-opportunities"
+      ],
       "publishedAt": "2026-08-26T18:12:07.806Z"
     },
     {
-      "title": "The AI Labor Shift: Navigating the New Landscape",
+      "title": "Labor Shifts: Navigating AI Work Landscapes",
       "slug": "ai-labor-shift",
       "path": "/content/reports/ai-labor-shift.html",
-      "description": "An analysis of how generative AI is shifting contract work, creating new expert roles, and squeezing traditional commodity freelancers.",
-      "funnel": "Awareness",
-      "domain": "General Career",
-      "relations": ["ai-training-pay-scale", "domain-expert-pivot"]
+      "description": "An analysis of how generative AI is shifting contract work, creating new expert roles, and squeezing traditional commodity freelancers."
     },
     {
-      "title": "The AI Gig Economy: From Microtasks to Institutional Infrastructure",
+      "title": "AI Gig Economy: From Microtasks to Infrastructure",
       "slug": "ai-gig-economy-evolution",
       "path": "/content/reports/ai-gig-economy-evolution.html",
-      "description": "Explore how data labeling evolved from simple microtasks into institutionalized infrastructure across global research labs.",
-      "funnel": "Awareness",
-      "domain": "Cross-Disciplinary",
-      "relations": ["ai-labor-archetypes", "sme-red-teaming-opportunities"]
+      "description": "Explore how data labeling evolved from simple microtasks into institutionalized infrastructure across global research labs."
     },
     {
-      "title": "Emerging Trends in AI-Accelerated Contract Work (2025–2026)",
+      "title": "Emerging Trends in AI Contract Work (2025–2026)",
       "slug": "ai-contract-work-trends",
       "path": "/content/reports/ai-contract-work-trends.html",
-      "description": "Discover how professionals in Law, Medicine, and Finance are escaping industry burnout by pivoting into highly-paid, fractional AI training squads.",
-      "funnel": "Consideration",
-      "domain": "Professional Services",
-      "relations": ["domain-expert-pivot", "prompt-engineering-fractional-squads"]
+      "description": "Discover how professionals in Law, Medicine, and Finance are escaping industry burnout by pivoting into highly-paid, fractional AI training squads."
     }
   ],
   "nodes": [
     {
-      "title": "Understanding the AI Training Pay Scale",
+      "title": "AI Trainer Pay Scale",
       "slug": "ai-training-pay-scale",
-      "path": "/content/nodes/ai-training-pay-scale.html",
-      "description": "A structural mapping of entry barriers, platform criteria, and hourly rate indexes across global AI evaluation networks.",
-      "funnel": "Consideration",
-      "domain": "Market Metrics",
-      "relations": ["ai-labor-shift"]
+      "path": "/content/concepts/ai-training-pay-scale.html",
+      "description": "A structural mapping of entry barriers, platform criteria, and hourly rate indexes across global AI evaluation networks."
     },
     {
-      "title": "The Domain Expert's Pivot",
+      "title": "Domain Expert's Pivot into AI",
       "slug": "domain-expert-pivot",
-      "path": "/content/nodes/domain-expert-pivot.html",
-      "description": "How non-technical domain specialists leverage nuance, linguistic sensitivity, and ethical judgment as key AI validation assets.",
-      "funnel": "Consideration",
-      "domain": "Cross-Disciplinary",
-      "relations": ["ai-contract-work-trends", "ai-literacy-core-competency"]
+      "path": "/content/concepts/domain-expert-pivot.html",
+      "description": "How non-technical domain specialists leverage nuance, linguistic sensitivity, and ethical judgment as key AI validation assets."
     },
     {
-      "title": "The Two Archetypes of AI Training Labor",
+      "title": "Core Types of AI Training Jobs",
       "slug": "ai-labor-archetypes",
-      "path": "/content/nodes/ai-labor-archetypes.html",
-      "description": "An analytical comparison contrasting high-skill domain evaluators against global data moderation workflows.",
-      "funnel": "Awareness",
-      "domain": "Labor Dynamics",
-      "relations": ["ai-gig-economy-evolution"]
+      "path": "/content/concepts/ai-labor-archetypes.html",
+      "description": "An analytical comparison contrasting high-skill domain evaluators against global data moderation workflows."
     },
     {
-      "title": "High-Skill Opportunities: SMEs and Red-Teaming",
+      "title": "High-Skill SMEs and Red-Teaming",
       "slug": "sme-red-teaming-opportunities",
-      "path": "/content/nodes/sme-red-teaming-opportunities.html",
-      "description": "Unlocking adversarial testing and rubric design roles for advanced specialists in STEM, security, and regulated sectors.",
-      "funnel": "Conversion",
-      "domain": "Security & STEM",
-      "relations": ["optimizing-hitl-pipelines"]
+      "path": "/content/concepts/sme-red-teaming-opportunities.html",
+      "description": "Unlocking adversarial testing and rubric design roles for advanced specialists in STEM, security, and regulated sectors."
     },
     {
       "title": "Prompt Engineering & Fractional Squads",
       "slug": "prompt-engineering-fractional-squads",
-      "path": "/content/nodes/prompt-engineering-fractional-squads.html",
-      "description": "Examine how enterprises deploy multi-disciplinary contractor squads to rapidly prototype and integrate generative workflows.",
-      "funnel": "Conversion",
-      "domain": "Enterprise Tech",
-      "relations": ["ai-contract-work-trends"]
+      "path": "/content/concepts/prompt-engineering-fractional-squads.html",
+      "description": "Examine how enterprises deploy multi-disciplinary contractor squads to rapidly prototype and integrate generative workflows."
     },
     {
-      "title": "AI Literacy as a Core Professional Competency",
+      "title": "AI Literacy as Professional Competency",
       "slug": "ai-literacy-core-competency",
-      "path": "/content/nodes/ai-literacy-core-competency.html",
-      "description": "Why algorithmic interpretation and data stewardship are mandatory baseline requirements across legal and medical practices.",
-      "funnel": "Consideration",
-      "domain": "Law & Medicine",
-      "relations": ["domain-expert-pivot"]
+      "path": "/content/concepts/ai-literacy-core-competency.html",
+      "description": "Why algorithmic interpretation and data stewardship are mandatory baseline requirements across legal and medical practices."
     }
   ],
   "faqs": [
     {
-      "title": "FAQ: AI Labor Shift & Freelancer Impact",
+      "title": "Skill vs. Pay Comparisons",
+      "slug": "ai-skill-pay-matrix",
+      "path": "/content/faq/ai-skill-pay-matrix.html",
+      "description": "Direct answers addressing logic density valuation, compensation scaling, and security pipeline isolation.",
+      "targetSlug": "ai-skill-pay-matrix"
+    },
+    {
+      "title": "AI Impact on Freelancers",
       "slug": "faq-ai-labor-shift",
       "path": "/content/faq/ai-labor-shift.html",
       "description": "Direct answers addressing income shifts, creative industry disruption, and technical entry barriers.",
-      "funnel": "Conversion",
-      "domain": "General Career",
       "targetSlug": "ai-labor-shift"
     },
     {
-      "title": "FAQ: AI Work Expansion & Labeler Conditions",
+      "title": "Work & Labeling Conditions",
       "slug": "faq-ai-work-expansion",
       "path": "/content/faq/ai-work-expansion.html",
       "description": "Clarifying global data labeling scales, red-teaming functions, and independent contractor working conditions.",
-      "funnel": "Conversion",
-      "domain": "Labor Dynamics",
       "targetSlug": "ai-gig-economy-evolution"
     },
     {
-      "title": "FAQ: Emerging Contract Trends & Squads",
+      "title": "Emerging Contract Trends",
       "slug": "faq-emerging-contract-trends",
       "path": "/content/faq/emerging-contract-trends.html",
       "description": "Core insights explaining expert hiring preferences, high-skill vulnerability metrics, and fractional squads.",
-      "funnel": "Conversion",
-      "domain": "Enterprise Tech",
       "targetSlug": "ai-contract-work-trends"
     }
   ]
