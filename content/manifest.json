@@ -1,9 +1,12 @@
+Here is the rewritten `manifest.json`. The paths for the FAQ items have been updated to reflect that they reside in the `/content/faq/` folder without the `faq-` prefix in their filenames (matching `ai-labor-shift.html`, `ai-work-expansion.html`, and `emerging-contract-trends.html`):
+
+```json
 {
   "articles": [
     {
       "title": "The Logic Density Scale: 2026 AI Labor Demands",
       "slug": "logic-density-matrix",
-      "path": "/content/articles/logic-density-matrix.html",
+      "path": "/content/reports/logic-density-matrix.html",
       "description": "Mathematical breakdown validating direct compensation scaling for verified work outputs against domain depth.",
       "funnel": "Consideration",
       "domain": "Technology & Data",
@@ -13,7 +16,7 @@
     {
       "title": "Optimizing High-Volume Human-in-the-Loop Validation Pipelines",
       "slug": "optimizing-hitl-pipelines",
-      "path": "/content/articles/optimizing-hitl-pipelines.html",
+      "path": "/content/reports/optimizing-hitl-pipelines.html",
       "description": "Strategies for structuring distributed human feedback networks to maximize token parsing quality and reduce model hallucination states.",
       "funnel": "Conversion",
       "domain": "Engineering",
@@ -23,7 +26,7 @@
     {
       "title": "The AI Labor Shift: Navigating the New Landscape",
       "slug": "ai-labor-shift",
-      "path": "/content/articles/ai-labor-shift.html",
+      "path": "/content/reports/ai-labor-shift.html",
       "description": "An analysis of how generative AI is shifting contract work, creating new expert roles, and squeezing traditional commodity freelancers.",
       "funnel": "Awareness",
       "domain": "General Career",
@@ -32,7 +35,7 @@
     {
       "title": "The AI Gig Economy: From Microtasks to Institutional Infrastructure",
       "slug": "ai-gig-economy-evolution",
-      "path": "/content/articles/ai-gig-economy-evolution.html",
+      "path": "/content/reports/ai-gig-economy-evolution.html",
       "description": "Explore how data labeling evolved from simple microtasks into institutionalized infrastructure across global research labs.",
       "funnel": "Awareness",
       "domain": "Cross-Disciplinary",
@@ -41,7 +44,7 @@
     {
       "title": "Emerging Trends in AI-Accelerated Contract Work (2025–2026)",
       "slug": "ai-contract-work-trends",
-      "path": "/content/articles/ai-contract-work-trends.html",
+      "path": "/content/reports/ai-contract-work-trends.html",
       "description": "Discover how professionals in Law, Medicine, and Finance are escaping industry burnout by pivoting into highly-paid, fractional AI training squads.",
       "funnel": "Consideration",
       "domain": "Professional Services",
@@ -108,7 +111,7 @@
     {
       "title": "FAQ: AI Labor Shift & Freelancer Impact",
       "slug": "faq-ai-labor-shift",
-      "path": "/content/faq/faq-ai-labor-shift.html",
+      "path": "/content/faq/ai-labor-shift.html",
       "description": "Direct answers addressing income shifts, creative industry disruption, and technical entry barriers.",
       "funnel": "Conversion",
       "domain": "General Career",
@@ -117,7 +120,7 @@
     {
       "title": "FAQ: AI Work Expansion & Labeler Conditions",
       "slug": "faq-ai-work-expansion",
-      "path": "/content/faq/faq-ai-work-expansion.html",
+      "path": "/content/faq/ai-work-expansion.html",
       "description": "Clarifying global data labeling scales, red-teaming functions, and independent contractor working conditions.",
       "funnel": "Conversion",
       "domain": "Labor Dynamics",
@@ -126,7 +129,7 @@
     {
       "title": "FAQ: Emerging Contract Trends & Squads",
       "slug": "faq-emerging-contract-trends",
-      "path": "/content/faq/faq-emerging-contract-trends.html",
+      "path": "/content/faq/emerging-contract-trends.html",
       "description": "Core insights explaining expert hiring preferences, high-skill vulnerability metrics, and fractional squads.",
       "funnel": "Conversion",
       "domain": "Enterprise Tech",
@@ -134,3 +137,5 @@
     }
   ]
 }
+
+```
