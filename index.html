@@ -229,21 +229,102 @@
     </a>
   </header>
 
-  <main class="main-wrapper">
-    <div class="hero-intro">
-      <h1><b>Build</b>, build & become you.</h1>
-      <p>Try LabMatch: the fast-track diagnostic to AI gigs that fit your exact skillset.</p>
+<main class="main-wrapper" style="padding-bottom: 24px;">
+    
+    <!-- Ticker CSS Embedded for Modular Loading -->
+    <style>
+      .digital-ticker-container {
+        display: flex;
+        overflow: hidden;
+        white-space: nowrap;
+        background: #05070c;
+        border: 1px solid var(--brand-orange, #ff6a00);
+        border-radius: 6px;
+        padding: 16px 0;
+        cursor: pointer;
+        box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 15px rgba(255, 106, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      
+      .digital-ticker-container:hover {
+        border-color: #ff8a33;
+        box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 20px rgba(255, 106, 0, 0.25);
+      }
+      
+      .ticker-track {
+        display: inline-block;
+        white-space: nowrap;
+        /* Adjust the 20s duration to speed up or slow down the scroll */
+        animation: scrollTicker 20s linear infinite;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--brand-orange, #ff6a00);
+      }
+      
+      /* Pause the scroll on hover so users can easily click */
+      .digital-ticker-container:hover .ticker-track {
+        animation-play-state: paused;
+      }
+      
+      @keyframes scrollTicker {
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(-50%, 0, 0); }
+      }
+      
+      .ticker-msg {
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      
+      .ticker-sep {
+        color: var(--terminal-text-muted, #64748b);
+        margin: 0 24px;
+        font-weight: 400;
+      }
+    </style>
+
+    <!-- The Clickable Banner -->
+    <div class="digital-ticker-container" onclick="if(window.contentEngine) window.contentEngine.loadContent('/content/opportunities.html', 'dispatch-board.sys', true);" title="Access Active Opportunities">
+      <div class="ticker-track">
+        
+        <!-- SET 1 (Visible initially) -->
+        <span class="ticker-msg">BRAINTRUST RATES FROM $75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">HEALTHCARE WORKERS WANTED</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">AI LABS, HIRING FAST</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">EXPERTS START AT $50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">ALIGNERR WANTS DATA OPS NOW</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        
+        <!-- SET 2 (Exact Duplicate for seamless infinite looping) -->
+        <span class="ticker-msg">BRAINTRUST RATES FROM $75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">HEALTHCARE WORKERS WANTED</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">AI LABS, HIRING FAST</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">EXPERTS START AT $50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">ALIGNERR WANTS DATA OPS NOW</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        
+      </div>
     </div>
+    
+  </main>
 
     <div class="terminal-window">
       <aside class="terminal-sidebar">
         <div>
           <div class="tree-title">01 / Active Projects</div>
           <ul class="tree-list">
-            <li><a class="tree-link active" data-content-path="PROJECT_DECK">Workspace Deck</a></li>
-            <li><a class="tree-link app-link" data-app-src="/labmatch/" data-app-title="labmatch_v2.7.exe">LabMatch <span class="status-badge live">v2.7</span></a></li>
+            <li><a class="tree-link active" data-content-path="PROJECT_DECK">Workspace</a></li>
+            <li><a class="tree-link app-link" data-app-src="/labmatch/" data-app-title="labmatch_v2.7.exe">LabMatch App<span class="status-badge live">v2.7</span></a></li>
+            
+            <!-- OPPORTUNITIES.html LINK -->
+            <li>
+              <a class="tree-link" data-content-path="/content/opportunities.html" data-content-title="dispatch-board.sys">
+                ⚡ AI Job Board <span class="status-badge live">NEW</span>
+              </a>
+            </li>
+
             <li><a class="tree-link">Plath Matrix <span class="status-badge staged">STAGED</span></a></li>
-            <li><a class="tree-link">Go Grid Engine <span class="status-badge staged">STAGED</span></a></li>
+            <li><a class="tree-link">Godot Engine <span class="status-badge staged">STAGED</span></a></li>
           </ul>
         </div>
 				
