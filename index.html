@@ -63,10 +63,18 @@
       align-items: center;
       gap: 8px;
     }
+/* Blinking Logo Dot */
+    @keyframes slow-pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--brand-orange); }
+      50% { opacity: 0.3; box-shadow: 0 0 2px var(--brand-orange); }
+    }
+    
     .brand-logo .dot {
-      width: 10px; height: 10px; border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
       background: var(--brand-orange);
-      box-shadow: 0 0 8px var(--brand-orange);
+      animation: slow-pulse 3s infinite ease-in-out;
     }
 
     /* 95% Viewport Container Scaling */
@@ -222,86 +230,79 @@
 </head>
 <body>
 
-  <header class="top-header">
+<header class="top-header">
     <a href="/" class="brand-logo">
       <span class="dot"></span>
       SonicBloom
     </a>
   </header>
-
-<main class="main-wrapper" style="padding-bottom: 24px;">
-    
-    <!-- Ticker CSS Embedded for Modular Loading -->
+	    
     <style>
-      .digital-ticker-container {
-        display: flex;
-        overflow: hidden;
-        white-space: nowrap;
-        background: #05070c;
-        border: 1px solid var(--brand-orange, #ff6a00);
-        border-radius: 6px;
-        padding: 16px 0;
-        cursor: pointer;
-        box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 15px rgba(255, 106, 0, 0.1);
-        transition: all 0.3s ease;
-        position: relative;
-        margin-bottom: 28px; /* Added spacing between ticker and terminal */
-      }
-      
-      .digital-ticker-container:hover {
-        border-color: #ff8a33;
-        box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 20px rgba(255, 106, 0, 0.25);
-      }
-      
-      .ticker-track {
-        display: inline-block;
-        white-space: nowrap;
-        animation: scrollTicker 20s linear infinite;
-        font-family: 'Space Mono', monospace;
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: var(--brand-orange, #ff6a00);
-      }
-      
-      .digital-ticker-container:hover .ticker-track {
-        animation-play-state: paused;
-      }
-      
-      @keyframes scrollTicker {
-        0% { transform: translate3d(0, 0, 0); }
-        100% { transform: translate3d(-50%, 0, 0); }
-      }
-      
-      .ticker-msg {
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-      
-      .ticker-sep {
-        color: var(--terminal-text-muted, #64748b);
-        margin: 0 24px;
-        font-weight: 400;
-      }
+     /* CSS Flush Ticker Banner */
+    .digital-ticker-container {
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+      background: #05070c;
+      border-bottom: 1px solid var(--brand-orange, #ff6a00); /* Removed side/top borders */
+      padding: 10px 0; /* Decreased padding to 10px */
+      cursor: pointer;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 4px 15px rgba(255, 106, 0, 0.08);
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .digital-ticker-container:hover {
+      background: #080b12;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 4px 20px rgba(255, 106, 0, 0.2);
+    }
+    
+    .ticker-track {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scrollTicker 25s linear infinite;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--brand-orange, #ff6a00);
+    }
+    
+    .digital-ticker-container:hover .ticker-track {
+      animation-play-state: paused;
+    }
+    
+    @keyframes scrollTicker {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+    
+    .ticker-msg { letter-spacing: 1px; text-transform: uppercase; }
+    .ticker-sep { color: var(--terminal-text-muted, #64748b); margin: 0 24px; font-weight: 400; }
     </style>
-
-    <!-- The Clickable Banner -->
-    <div class="digital-ticker-container" onclick="if(window.contentEngine) window.contentEngine.loadContent('/content/opportunities.html', 'dispatch-board.sys', true);" title="Access Active Opportunities">
-      <div class="ticker-track">
-        <!-- SET 1 -->
-        <span class="ticker-msg">LAW: $75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">MED: $85/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">SQUADS HIRING</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">TECH: $65/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">DATA OPS HOT</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        
-        <!-- SET 2 -->
-        <span class="ticker-msg">LAW: $75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">MED: $85/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">SQUADS HIRING</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">TECH: $65/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">DATA OPS HOT</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-      </div>
+	
+  <!-- FLUSH TICKER BANNER (Moved outside of main wrapper) -->
+  <div class="digital-ticker-container" onclick="if(window.contentEngine) window.contentEngine.loadContent('/content/opportunities.html', 'dispatch-board.sys', true);" title="Access Active Opportunities">
+    <div class="ticker-track">
+      <!-- SET 1 -->
+      <span class="ticker-msg">LAW: $50-$75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">MEDICINE: $60-$85/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">BUSINESS OPS: $35-$50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">DATA: $40-$55/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">SOFTWARE: $45-$65/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">FINANCE: $45-$60/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      
+      <!-- SET 2 (Duplicate for seamless loop) -->
+      <span class="ticker-msg">LAW: $50-$75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">MEDICINE: $60-$85/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">BUSINESS OPS: $35-$50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">DATA: $40-$55/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">SOFTWARE: $45-$65/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">FINANCE: $45-$60/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
     </div>
+  </div>
+
+  <main class="main-wrapper">
+   
     
     <!-- RESTORED TERMINAL WINDOW -->
     <div class="terminal-window">
