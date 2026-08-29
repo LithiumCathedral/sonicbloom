@@ -245,6 +245,7 @@
         box-shadow: inset 0 0 12px rgba(0,0,0,0.9), 0 0 15px rgba(255, 106, 0, 0.1);
         transition: all 0.3s ease;
         position: relative;
+        margin-bottom: 28px; /* Added spacing between ticker and terminal */
       }
       
       .digital-ticker-container:hover {
@@ -255,7 +256,6 @@
       .ticker-track {
         display: inline-block;
         white-space: nowrap;
-        /* Adjust the 20s duration to speed up or slow down the scroll */
         animation: scrollTicker 20s linear infinite;
         font-family: 'Space Mono', monospace;
         font-size: 0.95rem;
@@ -263,7 +263,6 @@
         color: var(--brand-orange, #ff6a00);
       }
       
-      /* Pause the scroll on hover so users can easily click */
       .digital-ticker-container:hover .ticker-track {
         animation-play-state: paused;
       }
@@ -288,24 +287,109 @@
     <!-- The Clickable Banner -->
     <div class="digital-ticker-container" onclick="if(window.contentEngine) window.contentEngine.loadContent('/content/opportunities.html', 'dispatch-board.sys', true);" title="Access Active Opportunities">
       <div class="ticker-track">
+        <!-- SET 1 -->
+        <span class="ticker-msg">LAW: $75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">MED: $85/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">SQUADS HIRING</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">TECH: $65/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">DATA OPS HOT</span><span class="ticker-sep">&gt;&gt;&gt;</span>
         
-        <!-- SET 1 (Visible initially) -->
-        <span class="ticker-msg">BRAINTRUST RATES FROM $75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">HEALTHCARE WORKERS WANTED</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">AI LABS, HIRING FAST</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">EXPERTS START AT $50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">ALIGNERR WANTS DATA OPS NOW</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        
-        <!-- SET 2 (Exact Duplicate for seamless infinite looping) -->
-        <span class="ticker-msg">BRAINTRUST RATES FROM $75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">HEALTHCARE WORKERS WANTED</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">AI LABS, HIRING FAST</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">EXPERTS START AT $50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        <span class="ticker-msg">ALIGNERR WANTS DATA OPS NOW</span><span class="ticker-sep">&gt;&gt;&gt;</span>
-        
+        <!-- SET 2 -->
+        <span class="ticker-msg">LAW: $75/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">MED: $85/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">SQUADS HIRING</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">TECH: $65/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+        <span class="ticker-msg">DATA OPS HOT</span><span class="ticker-sep">&gt;&gt;&gt;</span>
       </div>
     </div>
     
+    <!-- RESTORED TERMINAL WINDOW -->
+    <div class="terminal-window">
+      <aside class="terminal-sidebar">
+        <div>
+          <div class="tree-title">01 / Active Projects</div>
+          <ul class="tree-list">
+            <li><a class="tree-link active" data-content-path="PROJECT_DECK">Workspace Deck</a></li>
+            <li><a class="tree-link app-link" data-app-src="/labmatch/" data-app-title="labmatch_v2.7.exe">LabMatch <span class="status-badge live">v2.7</span></a></li>
+            <li>
+              <a class="tree-link" data-content-path="/content/opportunities.html" data-content-title="dispatch-board.sys">
+                ⚡ Job Board & Perks <span class="status-badge live">NEW</span>
+              </a>
+            </li>
+            <li><a class="tree-link">Plath Matrix <span class="status-badge staged">STAGED</span></a></li>
+            <li><a class="tree-link">Go Grid Engine <span class="status-badge staged">STAGED</span></a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="tree-title">02 / Content System</div>
+          <ul class="tree-list" id="dynamic-content-list">
+            <li><span class="tree-link" style="color:var(--terminal-text-muted);">Awaiting sync...</span></li>
+          </ul>
+        </div>
+
+        <div style="margin-top: auto;">
+          <div class="tree-title">03 / Platform Ops</div>
+          <ul class="tree-list">
+            <li>
+              <a class="tree-link app-link" data-app-src="/contact.html" data-app-title="contact.sys">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="terminal-content" id="terminal-viewport">
+        <div class="terminal-topbar">
+          <div class="terminal-signals">
+            <span class="dot-signal red"></span>
+            <span class="dot-signal yellow"></span>
+            <span class="dot-signal green"></span>
+          </div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--terminal-text-muted);" id="terminal-file-title">
+            infrastructure-deck.sys
+          </div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--rate-green);" id="terminal-status-tag">
+            ONLINE
+          </div>
+        </div>
+
+        <div>
+          <h2 style="font-size: 1.3rem; margin-bottom: 6px;">Ecosystem Project Pipelines</h2>
+          <p style="color: var(--terminal-text-muted); font-size: 0.85rem;">Select an active project or click any knowledge node from the sidebar to inspect technical parameters.</p>
+        </div>
+
+        <div class="project-grid">
+          <a class="project-tile active-link app-link" data-app-src="/labmatch/" data-app-title="labmatch_v2.7.exe">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700;">LabMatch</span>
+              <span class="status-badge live">ACTIVE</span>
+            </div>
+            <p style="color: var(--terminal-text-muted); font-size: 0.85rem; line-height: 1.5;">Algorithmic intake engine mapping talent cognitive styles, logic density benchmarks, and direct referral decks across verified research labs.</p>
+            <div style="color: var(--brand-orange); font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; margin-top: auto;">Launch Diagnostic &rarr;</div>
+          </a>
+
+          <div class="project-tile disabled">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700;">Plath Matrix</span>
+              <span class="status-badge staged">STAGING</span>
+            </div>
+            <p style="color: var(--terminal-text-muted); font-size: 0.85rem; line-height: 1.5;">Deterministic framework mapping personal numerology architectures, lifecycle forecasting, and transition layers.</p>
+            <div style="color: var(--terminal-text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: auto;">Pipeline Locked</div>
+          </div>
+
+          <div class="project-tile disabled">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700;">Go Grid Engine</span>
+              <span class="status-badge staged">STAGING</span>
+            </div>
+            <p style="color: var(--terminal-text-muted); font-size: 0.85rem; line-height: 1.5;">Spatial data arrays, token routing paths, and architectural grid logic built for structured dataset ingestion.</p>
+            <div style="color: var(--terminal-text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: auto;">Pipeline Locked</div>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
     <div class="terminal-window">
