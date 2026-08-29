@@ -1,6 +1,3 @@
-Here is the rewritten `manifest.json`. The paths for the FAQ items have been updated to reflect that they reside in the `/content/faq/` folder without the `faq-` prefix in their filenames (matching `ai-labor-shift.html`, `ai-work-expansion.html`, and `emerging-contract-trends.html`):
-
-```json
 {
   "articles": [
     {
@@ -137,5 +134,3 @@ Here is the rewritten `manifest.json`. The paths for the FAQ items have been upd
     }
   ]
 }
-
-```
