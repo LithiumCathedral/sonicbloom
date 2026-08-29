@@ -103,30 +103,46 @@ class ContentEngine {
     if (!list) return;
     list.innerHTML = ''; 
 
-    const createCategoryFolder = (title, items) => {
+    // Helper to create collapsible folder accordions
+    const createCollapsibleFolder = (title, items) => {
       if (!items || items.length === 0) return;
       
-      const folderHeader = document.createElement('div');
-      folderHeader.className = 'tree-folder-title';
-      folderHeader.style.cssText = "font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--brand-orange); text-transform: uppercase; margin: 12px 0 4px 4px; letter-spacing: 0.5px;";
-      folderHeader.innerText = `// ${title}`;
-      list.appendChild(folderHeader);
+      const details = document.createElement('details');
+      details.className = 'tree-folder';
+      // Default to expanded, or remove 'open' if you prefer them collapsed initially
+      details.setAttribute('open', 'true'); 
+      details.style.cssText = "margin-bottom: 8px;";
+
+      const summary = document.createElement('summary');
+      summary.style.cssText = "font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--brand-orange, #ff6a00); text-transform: uppercase; cursor: pointer; padding: 4px 0; letter-spacing: 0.5px; user-select: none; outline: none;";
+      summary.innerText = `// ${title} (${items.length})`;
+      details.appendChild(summary);
+
+      const subList = document.createElement('ul');
+      subList.style.cssText = "list-style: none; padding-left: 12px; margin-top: 4px; display: flex; flex-direction: column; gap: 4px;";
 
       items.forEach(item => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.className = 'tree-link';
         a.innerText = item.title;
+        a.style.cssText = "font-size: 0.82rem; color: var(--terminal-text-muted, #94a3b8); text-decoration: none; display: block; padding: 2px 4px; border-radius: 4px; cursor: pointer; transition: color 0.15s;";
+        a.onmouseover = () => { a.style.color = '#f8fafc'; };
+        a.onmouseout = () => { a.style.color = 'var(--terminal-text-muted, #94a3b8)'; };
         a.onclick = () => this.loadContent(item.path, item.title, true);
+        
         li.appendChild(a);
-        list.appendChild(li);
+        subList.appendChild(li);
       });
+
+      details.appendChild(subList);
+      list.appendChild(details);
     };
 
-    // User-facing menu names mapping to backend arrays
-    createCategoryFolder("Reports", manifest.articles);
-    createCategoryFolder("Concepts", manifest.nodes);
-    createCategoryFolder("FAQs", manifest.faqs);
+    // Build the collapsible tree categories
+    createCollapsibleFolder("Reports", manifest.articles);
+    createCollapsibleFolder("Concepts", manifest.nodes);
+    createCollapsibleFolder("FAQs", manifest.faqs);
   }
 
   bindViewportInterception() {
