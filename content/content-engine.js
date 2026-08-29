@@ -71,7 +71,6 @@ class ContentEngine {
       </div>
     `;
 
-    // Render using user-facing taxonomy titles
     if (manifest.articles) {
       manifest.articles.forEach(i => this.cardGrid.innerHTML += buildGalleryCard(i, 'REPORT', 'var(--brand-accent, #ff6a00)'));
     }
@@ -103,14 +102,12 @@ class ContentEngine {
     if (!list) return;
     list.innerHTML = ''; 
 
-    // Helper to create collapsible folder accordions
     const createCollapsibleFolder = (title, items) => {
       if (!items || items.length === 0) return;
       
       const details = document.createElement('details');
       details.className = 'tree-folder';
-      // Default to expanded, or remove 'open' if you prefer them collapsed initially
-      details.setAttribute('open', 'true'); 
+      details.setAttribute('open', 'true');
       details.style.cssText = "margin-bottom: 8px;";
 
       const summary = document.createElement('summary');
@@ -139,7 +136,6 @@ class ContentEngine {
       list.appendChild(details);
     };
 
-    // Build the collapsible tree categories
     createCollapsibleFolder("Reports", manifest.articles);
     createCollapsibleFolder("Concepts", manifest.nodes);
     createCollapsibleFolder("FAQs", manifest.faqs);
@@ -234,7 +230,6 @@ class ContentEngine {
     `;
   }
 
-  // Upgraded content loader that extracts metadata and relations
   async loadContent(path, title, pushState = true) {
     this.setLoadingState();
     document.querySelectorAll('.tree-link').forEach(l => l.classList.remove('active'));
@@ -244,7 +239,7 @@ class ContentEngine {
       if (!response.ok) throw new Error("Network response was not ok");
       const htmlContent = await response.text();
 
-      // Find metadata from manifest matching this path
+      // Locate item metadata in manifest data arrays
       let currentItem = null;
       ['articles', 'nodes', 'faqs', 'reports', 'concepts'].forEach(cat => {
         if (!currentItem && this.manifestData[cat]) {
@@ -256,7 +251,7 @@ class ContentEngine {
       let relationalSuggestionsHTML = '';
 
       if (currentItem) {
-        // Build metadata pills for Funnel and Domain
+        // Dynamic Meta Badges (Funnel & Domain)
         metaBadgeHTML = `
           <div style="display: flex; gap: 8px; margin-bottom: 16px; font-family: 'Space Mono', monospace; font-size: 0.65rem;">
             <span style="background: rgba(79, 70, 229, 0.15); color: #818cf8; padding: 3px 8px; border-radius: 4px;">FUNNEL: ${currentItem.funnel || 'General'}</span>
@@ -264,7 +259,7 @@ class ContentEngine {
           </div>
         `;
 
-        // Build array-driven relationship suggestions if a 'relations' array exists
+        // Dynamic Related Content Footer Injection from manifest relations array
         if (currentItem.relations && currentItem.relations.length > 0) {
           let relatedItems = [];
           currentItem.relations.forEach(relSlug => {
@@ -278,8 +273,10 @@ class ContentEngine {
 
           if (relatedItems.length > 0) {
             relationalSuggestionsHTML = `
-              <div style="margin-top: 32px; border-top: 1px dashed var(--terminal-border); padding-top: 16px;">
-                <div style="font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--terminal-text-muted); margin-bottom: 12px;">// CONNECTED_NODES_IN_ARRAY</div>
+              <div style="margin-top: 40px; border-top: 1px dashed var(--terminal-border); padding-top: 20px;">
+                <h3 style="font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--terminal-text-muted); text-transform: uppercase; margin-bottom: 16px;">
+                  &gt; CONNECTED_NODES_IN_ARRAY
+                </h3>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
                   ${relatedItems.map(r => `
                     <a href="#" onclick="window.contentEngine.loadContent('${r.path}', '${r.title}', true); return false;" style="color: var(--brand-orange); text-decoration: none; font-size: 0.9rem; font-weight: 500;">
