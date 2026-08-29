@@ -14,7 +14,7 @@
       "publishedAt": "2026-08-26T18:12:05.211Z"
     },
     {
-      "title": "Optimizing Human-in-the-Loop Validation Pipelines",
+      "title": "Optimizing High-Volume Human-in-the-Loop Validation Pipelines",
       "slug": "optimizing-hitl-pipelines",
       "path": "/content/reports/optimizing-hitl-pipelines.html",
       "description": "Strategies for structuring distributed human feedback networks to maximize token parsing quality and reduce model hallucination states.",
@@ -30,19 +30,37 @@
       "title": "Labor Shifts: Navigating AI Work Landscapes",
       "slug": "ai-labor-shift",
       "path": "/content/reports/ai-labor-shift.html",
-      "description": "An analysis of how generative AI is shifting contract work, creating new expert roles, and squeezing traditional commodity freelancers."
+      "description": "An analysis of how generative AI is shifting contract work, creating new expert roles, and squeezing traditional commodity freelancers.",
+      "funnel": "Awareness",
+      "domain": "General Career",
+      "relations": [
+        "ai-training-pay-scale",
+        "domain-expert-pivot"
+      ]
     },
     {
       "title": "AI Gig Economy: From Microtasks to Infrastructure",
       "slug": "ai-gig-economy-evolution",
       "path": "/content/reports/ai-gig-economy-evolution.html",
-      "description": "Explore how data labeling evolved from simple microtasks into institutionalized infrastructure across global research labs."
+      "description": "Explore how data labeling evolved from simple microtasks into institutionalized infrastructure across global research labs.",
+      "funnel": "Awareness",
+      "domain": "Cross-Disciplinary",
+      "relations": [
+        "ai-labor-archetypes",
+        "sme-red-teaming-opportunities"
+      ]
     },
     {
       "title": "Emerging Trends in AI Contract Work (2025–2026)",
       "slug": "ai-contract-work-trends",
       "path": "/content/reports/ai-contract-work-trends.html",
-      "description": "Discover how professionals in Law, Medicine, and Finance are escaping industry burnout by pivoting into highly-paid, fractional AI training squads."
+      "description": "Discover how professionals in Law, Medicine, and Finance are escaping industry burnout by pivoting into highly-paid, fractional AI training squads.",
+      "funnel": "Consideration",
+      "domain": "Professional Services",
+      "relations": [
+        "domain-expert-pivot",
+        "prompt-engineering-fractional-squads"
+      ]
     }
   ],
   "nodes": [
@@ -50,37 +68,68 @@
       "title": "AI Trainer Pay Scale",
       "slug": "ai-training-pay-scale",
       "path": "/content/concepts/ai-training-pay-scale.html",
-      "description": "A structural mapping of entry barriers, platform criteria, and hourly rate indexes across global AI evaluation networks."
+      "description": "A structural mapping of entry barriers, platform criteria, and hourly rate indexes across global AI evaluation networks.",
+      "funnel": "Consideration",
+      "domain": "Market Metrics",
+      "relations": [
+        "ai-labor-shift"
+      ]
     },
     {
       "title": "Domain Expert's Pivot into AI",
       "slug": "domain-expert-pivot",
       "path": "/content/concepts/domain-expert-pivot.html",
-      "description": "How non-technical domain specialists leverage nuance, linguistic sensitivity, and ethical judgment as key AI validation assets."
+      "description": "How non-technical domain specialists leverage nuance, linguistic sensitivity, and ethical judgment as key AI validation assets.",
+      "funnel": "Consideration",
+      "domain": "Cross-Disciplinary",
+      "relations": [
+        "ai-contract-work-trends",
+        "ai-literacy-core-competency"
+      ]
     },
     {
       "title": "Core Types of AI Training Jobs",
       "slug": "ai-labor-archetypes",
       "path": "/content/concepts/ai-labor-archetypes.html",
-      "description": "An analytical comparison contrasting high-skill domain evaluators against global data moderation workflows."
+      "description": "An analytical comparison contrasting high-skill domain evaluators against global data moderation workflows.",
+      "funnel": "Awareness",
+      "domain": "Labor Dynamics",
+      "relations": [
+        "ai-gig-economy-evolution"
+      ]
     },
     {
-      "title": "High-Skill SMEs and Red-Teaming",
+      "title": "High-Skill Opportunities: SMEs and Red-Teaming",
       "slug": "sme-red-teaming-opportunities",
-      "path": "/content/concepts/sme-red-teaming-opportunities.html",
-      "description": "Unlocking adversarial testing and rubric design roles for advanced specialists in STEM, security, and regulated sectors."
+      "path": "/content/nodes/sme-red-teaming-opportunities.html",
+      "description": "Unlocking adversarial testing and rubric design roles for advanced specialists in STEM, security, and regulated sectors.",
+      "funnel": "Conversion",
+      "domain": "Security & STEM",
+      "relations": [
+        "optimizing-hitl-pipelines"
+      ]
     },
     {
       "title": "Prompt Engineering & Fractional Squads",
       "slug": "prompt-engineering-fractional-squads",
       "path": "/content/concepts/prompt-engineering-fractional-squads.html",
-      "description": "Examine how enterprises deploy multi-disciplinary contractor squads to rapidly prototype and integrate generative workflows."
+      "description": "Examine how enterprises deploy multi-disciplinary contractor squads to rapidly prototype and integrate generative workflows.",
+      "funnel": "Conversion",
+      "domain": "Enterprise Tech",
+      "relations": [
+        "ai-contract-work-trends"
+      ]
     },
     {
       "title": "AI Literacy as Professional Competency",
       "slug": "ai-literacy-core-competency",
       "path": "/content/concepts/ai-literacy-core-competency.html",
-      "description": "Why algorithmic interpretation and data stewardship are mandatory baseline requirements across legal and medical practices."
+      "description": "Why algorithmic interpretation and data stewardship are mandatory baseline requirements across legal and medical practices.",
+      "funnel": "Consideration",
+      "domain": "Law & Medicine",
+      "relations": [
+        "domain-expert-pivot"
+      ]
     }
   ],
   "faqs": [
@@ -89,6 +138,8 @@
       "slug": "ai-skill-pay-matrix",
       "path": "/content/faq/ai-skill-pay-matrix.html",
       "description": "Direct answers addressing logic density valuation, compensation scaling, and security pipeline isolation.",
+      "funnel": "Consideration",
+      "domain": "Technology & Data",
       "targetSlug": "ai-skill-pay-matrix"
     },
     {
@@ -96,6 +147,8 @@
       "slug": "faq-ai-labor-shift",
       "path": "/content/faq/ai-labor-shift.html",
       "description": "Direct answers addressing income shifts, creative industry disruption, and technical entry barriers.",
+      "funnel": "Conversion",
+      "domain": "General Career",
       "targetSlug": "ai-labor-shift"
     },
     {
@@ -103,6 +156,8 @@
       "slug": "faq-ai-work-expansion",
       "path": "/content/faq/ai-work-expansion.html",
       "description": "Clarifying global data labeling scales, red-teaming functions, and independent contractor working conditions.",
+      "funnel": "Conversion",
+      "domain": "Labor Dynamics",
       "targetSlug": "ai-gig-economy-evolution"
     },
     {
@@ -110,7 +165,18 @@
       "slug": "faq-emerging-contract-trends",
       "path": "/content/faq/emerging-contract-trends.html",
       "description": "Core insights explaining expert hiring preferences, high-skill vulnerability metrics, and fractional squads.",
+      "funnel": "Conversion",
+      "domain": "Enterprise Tech",
       "targetSlug": "ai-contract-work-trends"
+    },
+    {
+      "title": "FAQ: HITL Pipeline Optimization & Security",
+      "slug": "hitl-pipeline-optimization",
+      "path": "/content/faq/hitl-pipeline-optimization.html",
+      "description": "Direct answers covering token parsing latency reduction, database schema isolation, and automated expert routing.",
+      "funnel": "Conversion",
+      "domain": "Engineering",
+      "targetSlug": "optimizing-hitl-pipelines"
     }
   ]
 }
