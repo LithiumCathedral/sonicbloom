@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "title": "The Logic Density Scale: 2026 AI Labor Demands",
+      "slug": "logic-density-matrix",
+      "path": "/content/articles/logic-density-matrix.html",
+      "description": "Mathematical breakdown validating direct compensation scaling for verified work outputs against domain depth.",
+      "funnel": "Consideration",
+      "domain": "Technology & Data",
+      "relations": ["ai-training-pay-scale", "optimizing-hitl-pipelines"],
+      "publishedAt": "2026-08-26T18:12:05.211Z"
+    },
+    {
+      "title": "Optimizing High-Volume Human-in-the-Loop Validation Pipelines",
+      "slug": "optimizing-hitl-pipelines",
+      "path": "/content/articles/optimizing-hitl-pipelines.html",
+      "description": "Strategies for structuring distributed human feedback networks to maximize token parsing quality and reduce model hallucination states.",
+      "funnel": "Conversion",
+      "domain": "Engineering",
+      "relations": ["logic-density-matrix", "sme-red-teaming-opportunities"],
+      "publishedAt": "2026-08-26T18:12:07.806Z"
+    },
+    {
       "title": "The AI Labor Shift: Navigating the New Landscape",
       "slug": "ai-labor-shift",
       "path": "/content/articles/ai-labor-shift.html",
@@ -88,7 +108,7 @@
     {
       "title": "FAQ: AI Labor Shift & Freelancer Impact",
       "slug": "faq-ai-labor-shift",
-      "path": "/content/faq/ai-labor-shift.html",
+      "path": "/content/faq/faq-ai-labor-shift.html",
       "description": "Direct answers addressing income shifts, creative industry disruption, and technical entry barriers.",
       "funnel": "Conversion",
       "domain": "General Career",
@@ -97,7 +117,7 @@
     {
       "title": "FAQ: AI Work Expansion & Labeler Conditions",
       "slug": "faq-ai-work-expansion",
-      "path": "/content/faq/ai-work-expansion.html",
+      "path": "/content/faq/faq-ai-work-expansion.html",
       "description": "Clarifying global data labeling scales, red-teaming functions, and independent contractor working conditions.",
       "funnel": "Conversion",
       "domain": "Labor Dynamics",
@@ -106,7 +126,7 @@
     {
       "title": "FAQ: Emerging Contract Trends & Squads",
       "slug": "faq-emerging-contract-trends",
-      "path": "/content/faq/emerging-contract-trends.html",
+      "path": "/content/faq/faq-emerging-contract-trends.html",
       "description": "Core insights explaining expert hiring preferences, high-skill vulnerability metrics, and fractional squads.",
       "funnel": "Conversion",
       "domain": "Enterprise Tech",
