@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SonicBloom | AI Talent Routing & Indie Development </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>SonicBloom | Develop AI Talent </title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -186,6 +187,27 @@
         flex: 1;
       }
     }
+
+    @media (max-width: 768px) {
+  .workspace-grid {
+    grid-template-columns: 1fr; 
+    padding: 0 10px;
+    border: none;
+  }
+  .terminal-window {
+    height: auto; 
+    min-height: 85vh;
+  }
+  .content-viewport {
+    padding: 24px 16px; 
+  }
+  .hero-banner h1 {
+    font-size: 2rem; 
+  }
+  .hero-banner {
+    padding: 24px 20px;
+  }
+}
 
     .terminal-sidebar {
       background: var(--terminal-sidebar);
