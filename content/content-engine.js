@@ -102,28 +102,29 @@ class ContentEngine {
     if (!list) return;
     list.innerHTML = ''; 
 
+    // Helper to create collapsible folder accordions
     const createCollapsibleFolder = (title, items) => {
       if (!items || items.length === 0) return;
       
       const details = document.createElement('details');
       details.className = 'tree-folder';
-      details.setAttribute('open', 'true');
-      details.style.cssText = "margin-bottom: 12px;";
+      // Removed the 'open' attribute so they load collapsed by default
+      details.style.cssText = "margin-bottom: 8px;";
 
       const summary = document.createElement('summary');
-      summary.style.cssText = "font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--brand-orange, #ff6a00); text-transform: uppercase; cursor: pointer; padding: 6px 0; letter-spacing: 0.5px; user-select: none; outline: none;";
+      summary.style.cssText = "font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--brand-orange, #ff6a00); text-transform: uppercase; cursor: pointer; padding: 4px 0; letter-spacing: 0.5px; user-select: none; outline: none;";
       summary.innerText = `// ${title} (${items.length})`;
       details.appendChild(summary);
 
       const subList = document.createElement('ul');
-      subList.style.cssText = "list-style: none; padding-left: 12px; margin-top: 8px; display: flex; flex-direction: column; gap: 6px;";
+      subList.style.cssText = "list-style: none; padding-left: 12px; margin-top: 4px; display: flex; flex-direction: column; gap: 4px;";
 
       items.forEach(item => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.className = 'tree-link';
         a.innerText = item.title;
-        a.style.cssText = "font-size: 0.82rem; color: var(--terminal-text-muted, #94a3b8); text-decoration: none; display: block; padding: 4px 6px; border-radius: 4px; cursor: pointer; transition: color 0.15s;";
+        a.style.cssText = "font-size: 0.82rem; color: var(--terminal-text-muted, #94a3b8); text-decoration: none; display: block; padding: 2px 4px; border-radius: 4px; cursor: pointer; transition: color 0.15s;";
         a.onmouseover = () => { a.style.color = '#f8fafc'; };
         a.onmouseout = () => { a.style.color = 'var(--terminal-text-muted, #94a3b8)'; };
         a.onclick = () => this.loadContent(item.path, item.title, true);
@@ -136,6 +137,7 @@ class ContentEngine {
       list.appendChild(details);
     };
 
+    // Build the collapsible tree categories
     createCollapsibleFolder("Reports", manifest.articles);
     createCollapsibleFolder("Concepts", manifest.nodes);
     createCollapsibleFolder("FAQs", manifest.faqs);
