@@ -325,6 +325,24 @@
     .article-markdown-body h1 { font-family: 'Space Mono', monospace; font-size: 1.5rem; color: var(--brand-orange); margin-bottom: 12px; }
     .article-markdown-body h2 { font-size: 1.2rem; color: #ffffff; margin: 20px 0 8px 0; border-bottom: 1px solid var(--terminal-border); padding-bottom: 4px; }
     .article-markdown-body p { color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px; }
+
+    /* Job Card Global Text Color Corrections */
+.job-card {
+  background: var(--terminal-card, #111827);
+  border: 1px solid var(--terminal-border, #1e293b);
+  color: var(--terminal-text, #f8fafc); /* Forces base text to light gray/white */
+}
+
+.job-card-title {
+  color: #ffffff; /* Explicitly forces headers to pure white */
+  margin-bottom: 8px;
+}
+
+.job-card-desc {
+  color: var(--terminal-text-muted, #94a3b8); /* Softens descriptions for readability */
+  line-height: 1.5;
+}
+  
   </style>
 </head>
 <body>
