@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical AI Evaluator Directory | Verified Contracts for MDs & Specialists | SonicBloom</title>
+  <meta name="description" content="Verified remote AI evaluation and clinical annotation tracks for MDs, DOs, Residents, and Specialists. Compare high-bounty contracts across Mercor, Turing, and Braintrust ($50-$400/hr).">
+  <link rel="canonical" href="https://sonicbloom.dev/medical-ai-evaluators">
+
+  <!-- Open Graph / Meta Protocol -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sonicbloom.dev/medical-ai-evaluators">
+  <meta property="og:title" content="Medical AI Evaluator Directory | LabMatch by SonicBloom">
+  <meta property="og:description" content="Verified remote medical annotation, reasoning validation, and multimodal diagnostic evaluation tracks for healthcare professionals.">
+  <meta property="og:site_name" content="SonicBloom">
+
+  <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What specific medical AI evaluation tracks does Mercor offer for credentialed clinicians?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mercor provides high-bounty remote validation tracks including Radiologist Annotators ($200-$400/hr) for visual document understanding, Dermatologist Image Interpreters ($270/hr), and General Clinicians ($150/hr). These roles focus on evaluating foundational medical models and require active clinical credentials."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Turing structure its AI consulting roles for physicians and residents?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Turing offers contract roles spanning from $50 to $300/hr based on experience. Their primary tracks include specialized Clinical Dermatology Consultants, Resident Medical Specialists (MD), and Physician/Doctoral/PhD research roles focused on mitigating AI hallucinations and evaluating complex clinical data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What specialized opportunities are available on Braintrust for board-certified specialists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Braintrust connects specialists directly with AI engineering teams. They currently offer dedicated tracks for Cardiologists (evaluating telemetry and hemodynamic logic) and Dermatologists (reviewing lesion imagery and diagnostic schemas) at highly competitive market rates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is active clinical diagnostic experience essential for training emerging medical AI models?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "While machine learning models can parse vast amounts of medical literature, they lack real-world clinical intuition, the ability to weigh differential diagnoses, and an understanding of adversarial safety guardrails. AI engineering labs rely on human-in-the-loop validation from medical experts to prevent catastrophic diagnostic hallucinations, making credentialed clinicians one of the most critical and highly compensated assets in the AI training industry."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is it important to apply for these medical AI evaluation roles as soon as possible?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The medical AI training sector is currently in its initial frontier calibration phase. Applying now allows clinicians to secure grandfathered status, establish foundational reputations within major lab databases, and lock in premium hourly rates. As these foundation models mature and initial benchmark datasets are completed, recruitment cycles will inevitably become much more restrictive with tighter quota ceilings."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --card-bg: #14171d;
+      --border: #242933;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #ff6a00;
+      --accent-hover: #e05d00;
+      --tag-bg: #1c2128;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+    }
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .brand-mark { width: 24px; height: 24px; }
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: rgba(255, 106, 0, 0.12);
+      color: var(--accent);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    p.subtitle { color: var(--muted); font-size: 1.05rem; }
+    
+    /* Filter Bar */
+    .filter-section { margin-bottom: 2rem; }
+    .filter-label {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 0.75rem;
+    }
+    .filter-bar { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; }
+    .filter-btn {
+      background: var(--card-bg); border: 1px solid var(--border); color: var(--muted);
+      padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.875rem; cursor: pointer;
+      font-family: var(--font-mono); white-space: nowrap; transition: all 0.2s ease;
+    }
+    .filter-btn.active, .filter-btn:hover { color: #fff; border-color: var(--accent); background: var(--tag-bg); }
+
+    /* Directory Cards */
+    .job-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .job-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; transition: border-color 0.2s ease;
+    }
+    .job-card:hover { border-color: #3b4252; }
+    .job-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; }
+    .job-title { font-size: 1.25rem; font-weight: 600; color: #fff; line-height: 1.3; }
+    .job-rate { font-family: var(--font-mono); color: var(--accent); font-weight: 600; font-size: 1.1rem; }
+    .meta-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 3px; background: var(--tag-bg); color: var(--muted); border: 1px solid var(--border); }
+    .tag-lab { color: #fff; border-color: #384355; }
+    .job-desc { color: var(--muted); font-size: 0.95rem; }
+    .card-footer {
+      display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid rgba(36, 41, 51, 0.6);
+    }
+    .apply-btn {
+      background: var(--accent); color: #fff; text-decoration: none; padding: 0.6rem 1.2rem;
+      border-radius: 4px; font-size: 0.875rem; font-weight: 600; transition: background 0.2s ease;
+    }
+    .apply-btn:hover { background: var(--accent-hover); }
+
+    /* FAQ Section */
+    .faq-section { margin-top: 4rem; border-top: 1px solid var(--border); padding-top: 3rem; }
+    .faq-section h2 { font-size: 1.5rem; color: #fff; margin-bottom: 2rem; }
+    .faq-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; }
+    .faq-question { font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 0.75rem; line-height: 1.4; }
+    .faq-answer { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
+    .faq-answer a { color: var(--accent); text-decoration: underline; }
+
+    footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand-row">
+        <svg class="brand-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SonicBloom LabMatch engine glyph - technical logic matrix mark">
+          <rect width="24" height="24" rx="4" fill="#14171d"/>
+          <path d="M6 18L18 6M6 6L18 18" stroke="#ff6a00" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="badge">SonicBloom.dev & LabMatch</span>
+      </div>
+      <h1>Medical AI Evaluator Directory</h1>
+      <p class="subtitle">Direct compensation benchmarks and verified intake pipelines for licensed clinicians (MD, DO, Residents, Specialists).</p>
+    </header>
+
+    <section class="filter-section" aria-label="Discipline Filtering">
+      <span class="filter-label">Filter Verification Tracks</span>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Specialties</button>
+        <button class="filter-btn" data-filter="radiology">Radiology</button>
+        <button class="filter-btn" data-filter="dermatology">Dermatology</button>
+        <button class="filter-btn" data-filter="cardiology">Cardiology</button>
+        <button class="filter-btn" data-filter="general">General MD / DO / Resident</button>
+      </div>
+    </section>
+
+    <main class="job-list" id="directory">
+      <!-- Mercor: Radiologist Annotator -->
+      <article class="job-card" data-category="radiology">
+        <div class="job-header">
+          <h2 class="job-title">Radiologist Annotator (Visual Document Understanding)</h2>
+          <span class="job-rate">$200 – $400/hr</span>
+        </div>
+        <div class="meta-row">
+          <span class="tag tag-lab">Mercor Track</span><span class="tag">Remote</span>
+        </div>
+        <p class="job-desc">Perform granular multimodal validation across radiographic imagery, clinical documentation, and grounding masks for visual clinical LLMs.</p>
+        <div class="card-footer">
+          <span class="tag">Board-Certified MD/DO</span>
+          <a class="apply-btn outbound-track" data-lab="Mercor" href="https://t.mercor.com/893Z8" target="_blank" rel="noopener">Access Track &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Mercor: Dermatologist -->
+      <article class="job-card" data-category="dermatology">
+        <div class="job-header">
+          <h2 class="job-title">Dermatologist Image Interpreter</h2>
+          <span class="job-rate">$270/hr</span>
+        </div>
+        <div class="meta-row">
+          <span class="tag tag-lab">Mercor Track</span><span class="tag">Remote Contract</span>
+        </div>
+        <p class="job-desc">Audit classification boundaries for dermatological diagnostics, validating algorithmic certainty across varied skin phototypes and lesion imagery.</p>
+        <div class="card-footer">
+          <span class="tag">Dermatology Specialist</span>
+          <a class="apply-btn outbound-track" data-lab="Mercor" href="https://t.mercor.com/WQW1w" target="_blank" rel="noopener">Access Track &rarr;</a>
+        </div>
+      </article>
+      
+      <!-- Mercor: General Clinician -->
+      <article class="job-card" data-category="general">
+        <div class="job-header">
+          <h2 class="job-title">General Clinician AI Reviewer</h2>
+          <span class="job-rate">$150/hr</span>
+        </div>
+        <div class="meta-row">
+          <span class="tag tag-lab">Mercor Track</span><span class="tag">Remote Contract</span>
+        </div>
+        <p class="job-desc">Assess broad clinical reasoning and patient dialogue logic across multimodal foundation model evaluations.</p>
+        <div class="card-footer">
+          <span class="tag">Licensed Clinician</span>
+          <a class="apply-btn outbound-track" data-lab="Mercor" href="https://t.mercor.com/1vJlE" target="_blank" rel="noopener">Access Track &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Braintrust: Cardiologist -->
+      <article class="job-card" data-category="cardiology">
+        <div class="job-header">
+          <h2 class="job-title">AI Cardiologist Evaluator</h2>
+          <span class="job-rate">Market Rate Index</span>
+        </div>
+        <div class="meta-row">
+          <span class="tag tag-lab">BrainTrust Track</span><span class="tag">Flexible Remote</span>
+        </div>
+        <p class="job-desc">Benchmark foundation model performance on continuous telemetry signals, ECG strip interpretations, and complex hemodynamic logic prompts.</p>
+        <div class="card-footer">
+          <span class="tag">Cardiology Fellow / Attending</span>
+          <a class="apply-btn outbound-track" data-lab="BrainTrust" href="https://app.usebraintrust.com/r/devn1/?job_id=16920" target="_blank" rel="noopener">Access Track &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Braintrust: Dermatologist -->
+      <article class="job-card" data-category="dermatology">
+        <div class="job-header">
+          <h2 class="job-title">Dermatology Diagnostic Benchmark Specialist</h2>
+          <span class="job-rate">Market Rate Index</span>
+        </div>
+        <div class="meta-row">
+          <span class="tag tag-lab">BrainTrust Track</span><span class="tag">Direct Lab Placement</span>
+        </div>
+        <p class="job-desc">Serve as a domain authority evaluating generative dermatology recommendations and establishing clinical safety guardrails.</p>
+        <div class="card-footer">
+          <span class="tag">Board-Certified Specialist</span>
+          <a class="apply-btn outbound-track" data-lab="BrainTrust" href="https://app.usebraintrust.com/r/devn1/?job_id=17884" target="_blank" rel="noopener">Access Track &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Turing: Dermatology -->
+      <article class="job-card" data-category="dermatology">
+        <div class="job-header">
+          <h2 class="job-title">Clinical Dermatology Consultant</h2>
+          <span class="job-rate">$50 – $300/hr (DOE)</span>
+        </div>
+        <div class="meta-row">
+          <span class="tag tag-lab">Turing Medical</span><span class="tag">Independent Contract</span>
+        </div>
+        <p class="job-desc">Execute adversarial prompt stress-testing to surface clinical hallucinations in medical dialog models and symptom triage systems.</p>
+        <div class="card-footer">
+          <span class="tag">MD Licensure Required</span>
+          <a class="apply-btn outbound-track" data-lab="Turing" href="https://work.turing.com/r/rrJOl_uxLA" target="_blank" rel="noopener">Access Track &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Turing: Resident Medical Specialist -->
+      <article class="job-card" data-category="general">
+        <div class="job-header">
+          <h2 class="job-title">Resident Medical Specialist (MD)</h2>
+          <span class="job-rate">$50 – $300/hr (DOE)</span>
+        </div>
+        <div class="meta-row">
+          <span class="tag tag-lab">Turing Medical</span><span class="tag">Flexible Hours</span>
+        </div>
+        <p class="job-desc">Evaluate general clinical simulation dialogues and patient interaction data loops against standard hospital protocols.</p>
+        <div class="card-footer">
+          <span class="tag">Active Resident / Fellow</span>
+          <a class="apply-btn outbound-track" data-lab="Turing" href="https://work.turing.com/r/MmzBH3aZlr" target="_blank" rel="noopener">Access Track &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Turing: Physician / Doctoral / PhD -->
+      <article class="job-card" data-category="general">
+        <div class="job-header">
+          <h2 class="job-title">Physician / Doctoral Study / PhD</h2>
+          <span class="job-rate">$50 – $300/hr (DOE)</span>
+        </div>
+        <div class="meta-row">
+          <span class="tag tag-lab">Turing Medical</span><span class="tag">Research Division</span>
+        </div>
+        <p class="job-desc">Audit multi-step pharmacological logic trees, biomedical literature synthesis, and diagnostic chain-of-thought accuracy.</p>
+        <div class="card-footer">
+          <span class="tag">MD, DO, or PhD in Clinical Field</span>
+          <a class="apply-btn outbound-track" data-lab="Turing" href="https://work.turing.com/r/MmzBH3aZlr" target="_blank" rel="noopener">Access Track &rarr;</a>
+        </div>
+      </article>
+    </main>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3 class="faq-question">What specific medical AI evaluation tracks does Mercor offer for credentialed clinicians?</h3>
+          <p class="faq-answer">Mercor provides high-bounty remote validation tracks including <a href="https://t.mercor.com/893Z8" target="_blank" rel="noopener">Radiologist Annotators ($200-$400/hr)</a> for visual document understanding, <a href="https://t.mercor.com/WQW1w" target="_blank" rel="noopener">Dermatologist Image Interpreters ($270/hr)</a>, and <a href="https://t.mercor.com/1vJlE" target="_blank" rel="noopener">General Clinicians ($150/hr)</a>. These roles focus on evaluating foundational medical models and require active clinical credentials.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">How does Turing structure its AI consulting roles for physicians and residents?</h3>
+          <p class="faq-answer">Turing offers contract roles spanning from $50 to $300/hr based on experience. Their primary tracks include specialized <a href="https://work.turing.com/r/rrJOl_uxLA" target="_blank" rel="noopener">Clinical Dermatology Consultants</a>, <a href="https://work.turing.com/r/MmzBH3aZlr" target="_blank" rel="noopener">Resident Medical Specialists (MD)</a>, and <a href="https://work.turing.com/r/MmzBH3aZlr" target="_blank" rel="noopener">Physician/Doctoral/PhD research roles</a> focused on mitigating AI hallucinations and evaluating complex clinical data.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">What specialized opportunities are available on Braintrust for board-certified specialists?</h3>
+          <p class="faq-answer">Braintrust connects specialists directly with AI engineering teams. They currently offer dedicated tracks for <a href="https://app.usebraintrust.com/r/devn1/?job_id=16920" target="_blank" rel="noopener">Cardiologists</a> (evaluating telemetry and hemodynamic logic) and <a href="https://app.usebraintrust.com/r/devn1/?job_id=17884" target="_blank" rel="noopener">Dermatologists</a> (reviewing lesion imagery and diagnostic schemas) at highly competitive market rates.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">Why is active clinical diagnostic experience essential for training emerging medical AI models?</h3>
+          <p class="faq-answer">While machine learning models can parse vast amounts of medical literature, they lack real-world clinical intuition, the ability to weigh differential diagnoses, and an understanding of adversarial safety guardrails. AI engineering labs rely on human-in-the-loop validation from medical experts to prevent catastrophic diagnostic hallucinations, making credentialed clinicians one of the most critical and highly compensated assets in the AI training industry.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">Why is it important to apply for these medical AI evaluation roles as soon as possible?</h3>
+          <p class="faq-answer">The medical AI training sector is currently in its initial frontier calibration phase. Applying now allows clinicians to secure grandfathered status, establish foundational reputations within major lab databases, and lock in premium hourly rates. As these foundation models mature and initial benchmark datasets are completed, recruitment cycles will inevitably become much more restrictive with tighter quota ceilings.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>LabMatch Infrastructure &bull; SonicBloom.dev</p>
+    </footer>
+  </div>
+
+  <script>
+    // Client-side filtering logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const jobCards = document.querySelectorAll('.job-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        jobCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
