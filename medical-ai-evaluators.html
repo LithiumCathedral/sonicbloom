@@ -147,6 +147,14 @@
     }
     .apply-btn:hover { background: var(--accent-hover); }
 
+    /* FormFacade Theming Overrides */
+    #ff-compose {
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
     /* Intake Section */
     .intake-section {
       margin-top: 3rem;
@@ -158,14 +166,6 @@
     .intake-header { text-align: center; margin-bottom: 2rem; }
     .intake-header h3 { font-size: 1.25rem; color: #fff; margin-bottom: 0.5rem; }
     .intake-header p { color: var(--muted); font-size: 0.95rem; }
-
-    /* FormFacade Theming Overrides */
-    #ff-compose {
-      width: 100%;
-      background: var(--card-bg);
-      border-radius: 6px;
-      overflow: hidden;
-    }
 
     /* FAQ Section */
     .faq-section { margin-top: 4rem; border-top: 1px solid var(--border); padding-top: 3rem; }
@@ -340,8 +340,11 @@
         <h3>Unsure Which Validation Track Fits Your Profile?</h3>
         <p>Run your clinical licensure constraints through our secure intake engine below.</p>
       </div>
+      
+      <!-- FormFacade Direct Embed -->
       <div id="ff-compose"></div>
       <script async defer src="https://formfacade.com/include/118249770714079181223/form/1FAIpQLScsm-h_b3oBJOJJ7qJYC6_FaqyZn6fxuCys5iLnXXAnnaKhZg/classic.js?div=ff-compose"></script>
+      
     </section>
 
     <section class="faq-section">
