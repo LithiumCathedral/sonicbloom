@@ -177,6 +177,51 @@
     .faq-answer a { color: var(--accent); text-decoration: underline; }
 
     footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); text-align: center; }
+
+    /* Thin Banner & Glowing Accent Button */
+    .profile-banner {
+      background: rgba(255, 106, 0, 0.05);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .profile-banner-text {
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .profile-banner-text strong {
+      color: #fff;
+      font-family: var(--font-mono);
+    }
+    .btn-glow {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 12px rgba(255, 106, 0, 0.5);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-glow:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 0 20px rgba(255, 106, 0, 0.8);
+      transform: translateY(-1px);
+    }
+  
   </style>
 </head>
 <body>
@@ -193,6 +238,18 @@
       <p class="subtitle">Direct compensation benchmarks and verified intake pipelines for licensed clinicians (MD, DO, Residents, Specialists).</p>
     </header>
 
+<!-- LabMatch Profile Builder Banner -->
+    <div class="profile-banner">
+      <div class="profile-banner-text">
+        <strong>LABMATCH PROFILE BUILDER</strong><br>
+        <span style="color: var(--muted);">Build your operational baseline profile to unlock specialized, high-bounty clinical tasks.</span>
+      </div>
+      <a href="#ff-compose" class="btn-glow">Initialize Profile</a>
+    </div>
+
+    <main class="job-list" id="directory">
+      <!-- Your existing job cards go here -->
+    
     <section class="filter-section" aria-label="Discipline Filtering">
       <span class="filter-label">Filter Verification Tracks</span>
       <div class="filter-bar">
