@@ -16,6 +16,21 @@
 
   gtag('config', 'AW-10932384149');
 </script>
+<!-- Event snippet for Website traffic conversion page -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-10932384149/Wm11CMy3iZgYEJXj-9wo',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
 
   <!-- Open Graph / Meta Protocol -->
   <meta property="og:type" content="website">
