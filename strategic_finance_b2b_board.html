@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategic Finance & B2B Operations | LabMatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Core Variables */
+    :root {
+      --bg-dark: #0d0f12;
+      --bg-card: #13171e;
+      --border-dark: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --brand-orange: #ff6a00;
+      --brand-orange-glow: rgba(255, 106, 0, 0.2);
+      --brand-orange-faded: rgba(255, 106, 0, 0.05);
+      
+      --neon-green: #10b981;
+      --neon-green-glow: rgba(16, 185, 129, 0.2);
+      
+      --font-mono: 'Space Mono', monospace;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HERO & CANVAS --- */
+    .hero-section {
+      position: relative;
+      padding: 80px 20px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-bottom: 1px solid var(--border-dark);
+      overflow: hidden;
+    }
+
+    #neuralCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero-title {
+      font-family: var(--font-mono);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255, 106, 0, 0.3);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    /* --- TICKER TAPE --- */
+    .ticker-wrapper {
+      background: #080a0d;
+      border-bottom: 1px solid var(--border-dark);
+      padding: 10px 0;
+      overflow: hidden;
+      display: flex;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      animation: tickerScroll 35s linear infinite;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--brand-orange);
+    }
+
+    .ticker-wrapper:hover .ticker-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes tickerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-msg { letter-spacing: 1px; }
+    .ticker-sep { color: var(--text-muted); margin: 0 25px; font-weight: 400; }
+
+    /* --- MAIN CONTAINER --- */
+    .main-container {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    /* --- CTA BANNER --- */
+    .cta-banner {
+      background: var(--brand-orange-faded);
+      border-left: 3px solid var(--brand-orange);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 48px;
+      box-shadow: inset 0 0 20px var(--brand-orange-faded);
+    }
+
+    @media (min-width: 768px) {
+      .cta-banner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .cta-text h2 {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .cta-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 600px;
+    }
+
+    .cta-button {
+      background: transparent;
+      color: var(--brand-orange);
+      border: 1px solid var(--brand-orange);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 12px 24px;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px var(--brand-orange-glow);
+    }
+
+    .cta-button:hover {
+      background: var(--brand-orange);
+      color: #000;
+      box-shadow: 0 0 20px var(--brand-orange-glow);
+    }
+
+    /* --- JOB GRID --- */
+    .ledger-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .job-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .job-card:hover {
+      border-color: var(--brand-orange);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5), 0 0 15px var(--brand-orange-glow);
+      transform: translateY(-2px);
+    }
+
+    .job-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .job-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+    }
+
+    .job-rate-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 8px 12px;
+      border-radius: 6px;
+      align-self: flex-start;
+    }
+
+    .mini-graph {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+    }
+
+    .mini-graph span {
+      width: 4px;
+      background: var(--neon-green);
+      border-radius: 1px;
+      animation: pulseGraph 1.2s infinite alternate ease-in-out;
+      transform-origin: bottom;
+    }
+    
+    .mini-graph span:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+    .mini-graph span:nth-child(2) { height: 100%; animation-delay: 0.4s; }
+    .mini-graph span:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+    .mini-graph span:nth-child(4) { height: 80%; animation-delay: 0.5s; }
+
+    @keyframes pulseGraph {
+      0% { transform: scaleY(0.5); opacity: 0.6; }
+      100% { transform: scaleY(1.1); opacity: 1; }
+    }
+
+    .job-rate {
+      font-family: var(--font-mono);
+      color: var(--neon-green);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .job-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .job-action {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-dark);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-join {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px solid var(--border-dark);
+      padding: 8px 24px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .job-card:hover .btn-join {
+      background: var(--brand-orange);
+      color: #000;
+      border-color: var(--brand-orange);
+    }
+
+    /* --- FAQ SECTION --- */
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    .faq-title {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      text-align: center;
+    }
+
+    details {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 6px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 18px 20px;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      transition: color 0.2s;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      color: var(--brand-orange);
+    }
+
+    summary::after {
+      content: '+';
+      color: var(--brand-orange);
+      font-size: 1.2rem;
+    }
+
+    details[open] summary::after {
+      content: '-';
+    }
+
+    .faq-content {
+      padding: 0 20px 20px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .faq-content a {
+      color: var(--brand-orange);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--brand-orange);
+    }
+
+    .faq-content a:hover {
+      border-bottom-style: solid;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section with Canvas Background -->
+  <header class="hero-section">
+    <canvas id="neuralCanvas"></canvas>
+    <div class="hero-content">
+      <h1 class="hero-title">Strategic Finance & Healthcare B2B Operations</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; font-family: var(--font-mono);">Architectural Consulting & Enterprise AI Vetting</p>
+    </div>
+  </header>
+
+  <!-- Digital Ticker Tape -->
+  <div class="ticker-wrapper">
+    <div class="ticker-track">
+      <!-- Set 1 -->
+      <span class="ticker-msg">ACTIVE RATES: $93/HR - $162/HR</span><span class="ticker-sep">///</span>
+      <span class="ticker-msg">RCM EXECUTIVE (VP): $162/HR</span><span class="ticker-sep">///</span>
+      <span class="ticker-msg">MGMT CONSULTANT: $100-$150/HR</span><span class="ticker-sep">///</span>
+      <span class="ticker-msg">UM/CM LEADER: $100-$150/HR</span><span class="ticker-sep">///</span>
+      <span class="ticker-msg">ACCOUNTANTS & AUDITORS: $60-$100/HR</span><span class="ticker-sep">///</span>
+      
+      <!-- Duplicate Set for Seamless Loop -->
+      <span class="ticker-msg">ACTIVE RATES: $93/HR - $162/HR</span><span class="ticker-sep">///</span>
+      <span class="ticker-msg">RCM EXECUTIVE (VP): $162/HR</span><span class="ticker-sep">///</span>
+      <span class="ticker-msg">MGMT CONSULTANT: $100-$150/HR</span><span class="ticker-sep">///</span>
+      <span class="ticker-msg">UM/CM LEADER: $100-$150/HR</span><span class="ticker-sep">///</span>
+      <span class="ticker-msg">ACCOUNTANTS & AUDITORS: $60-$100/HR</span><span class="ticker-sep">///</span>
+    </div>
+  </div>
+
+  <main class="main-container">
+    
+    <!-- LabMatch CTA Banner -->
+    <section class="cta-banner">
+      <div class="cta-text">
+        <h2>LabMatch Diagnostic: Calibrate Your B2B Value</h2>
+        <p>Bypass traditional applications. Sync your operational credentials and logic density with unlisted enterprise bounties across the AI ecosystem.</p>
+      </div>
+      <a href="#ff-compose" class="cta-button">Initialize Profile</a>
+    </section>
+
+    <!-- The Contract Ledger -->
+    <section class="ledger-grid">
+      
+      <!-- Job 1 -->
+      <div class="job-card">
+        <div class="job-header">
+          <h3 class="job-title">Revenue-Cycle Executive (VP/Sr. Director)</h3>
+          <div class="job-rate-wrap">
+            <div class="mini-graph">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <span class="job-rate">$162/hr</span>
+          </div>
+        </div>
+        <p class="job-desc">High-level strategic oversight of RCM AI integrations. Manage enterprise-scale payer relations and contracting logic for automated systems.</p>
+        <div class="job-action">
+          <a href="#" class="btn-join">Join</a>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="job-card">
+        <div class="job-header">
+          <h3 class="job-title">Utilisation Management / Case Management Leader</h3>
+          <div class="job-rate-wrap">
+            <div class="mini-graph">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <span class="job-rate">$100-$150/hr</span>
+          </div>
+        </div>
+        <p class="job-desc">Clinical operations leadership. Require expertise in InterQual/MCG to train and validate AI-driven case management and utilization pipelines.</p>
+        <div class="job-action">
+          <a href="#" class="btn-join">Join</a>
+        </div>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="job-card">
+        <div class="job-header">
+          <h3 class="job-title">Revenue-Cycle Analytics / Decision-Support Leader</h3>
+          <div class="job-rate-wrap">
+            <div class="mini-graph">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <span class="job-rate">$100/hr</span>
+          </div>
+        </div>
+        <p class="job-desc">Architect the data layers and reporting mechanisms (Tableau, SQL) powering next-generation financial decision support and analytics models.</p>
+        <div class="job-action">
+          <a href="#" class="btn-join">Join</a>
+        </div>
+      </div>
+
+      <!-- Job 4 -->
+      <div class="job-card">
+        <div class="job-header">
+          <h3 class="job-title">Denials Management & Appeals Manager</h3>
+          <div class="job-rate-wrap">
+            <div class="mini-graph">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <span class="job-rate">$93/hr</span>
+          </div>
+        </div>
+        <p class="job-desc">Debug complex revenue bottlenecks. Validate automated denial logic frameworks utilizing deep CARC and RARC coding expertise.</p>
+        <div class="job-action">
+          <a href="#" class="btn-join">Join</a>
+        </div>
+      </div>
+
+      <!-- Job 5 -->
+      <div class="job-card">
+        <div class="job-header">
+          <h3 class="job-title">Accountants & Auditors</h3>
+          <div class="job-rate-wrap">
+            <div class="mini-graph">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <span class="job-rate">$60-$100/hr</span>
+          </div>
+        </div>
+        <p class="job-desc">Join a leading AI lab's GenAI team in the Bay Area to build benchmarks and instruction specs for frontier AI models. Active CPA/CA required.</p>
+        <div class="job-action">
+          <a href="https://t.mercor.com/DS5zd" target="_blank" class="btn-join">Join</a>
+        </div>
+      </div>
+
+      <!-- Job 6 -->
+      <div class="job-card">
+        <div class="job-header">
+          <h3 class="job-title">Management Consultant</h3>
+          <div class="job-rate-wrap">
+            <div class="mini-graph">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <span class="job-rate">$100-$150/hr</span>
+          </div>
+        </div>
+        <p class="job-desc">Drive high-level strategic optimization and AI implementation for enterprise clients. Blueprint scalable operations frameworks.</p>
+        <div class="job-action">
+          <a href="https://t.mercor.com/eqi5N" target="_blank" class="btn-join">Join</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Interactive FAQ -->
+    <section class="faq-section">
+      <h2 class="faq-title">Systems Query / FAQ</h2>
+      
+      <details>
+        <summary>What is LabMatch?</summary>
+        <div class="faq-content">
+          LabMatch is our proprietary logic and credential calibration engine. It maps your specialized human labor as queryable data nodes, ensuring you are routed to the highest-leverage AI training and evaluation tracks available. Learn more about the intake process at <a href="/labmatch">/labmatch</a>.
+        </div>
+      </details>
+
+      <details>
+        <summary>How are payouts handled?</summary>
+        <div class="faq-content">
+          Payouts are processed directly by the respective lab partners (e.g., Mercor, Turing, Braintrust) on weekly or bi-weekly cycles, strictly in USD. SonicBloom serves as the diagnostic intake and referral layer and takes zero cut of your hourly compensation.
+        </div>
+      </details>
+
+      <details>
+        <summary>Do I need to be US-based?</summary>
+        <div class="faq-content">
+          Requirements vary strictly by pipeline. While general AI training tasks often permit global remote work, high-security enterprise tiers (like GenAI Accounting teams) may mandate US residency or specific on-site hybrid attendance (e.g., Bay Area). Please review individual job specifications or reach out via <a href="/contact.html">/contact.html</a> for regional eligibility questions.
+        </div>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- Neural Network Canvas Logic -->
+  <script>
+    const canvas = document.getElementById('neuralCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    let particles = [];
+    
+    const nodeColor = 'rgba(255, 106, 0, 0.7)'; // Orange nodes
+    const lineColor = 'rgba(148, 163, 184, 0.15)'; // Slate muted lines
+    
+    function initCanvas() {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+      createParticles();
+    }
+    
+    window.addEventListener('resize', initCanvas);
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.pulse = Math.random() * Math.PI;
+      }
+      
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.pulse += 0.05;
+        
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      
+      draw() {
+        const dynamicRadius = this.radius + Math.sin(this.pulse) * 0.5;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, dynamicRadius > 0 ? dynamicRadius : 0.1, 0, Math.PI * 2);
+        ctx.fillStyle = nodeColor;
+        
+        // Glow effect
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = nodeColor;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+    
+    function createParticles() {
+      particles = [];
+      const particleCount = Math.floor((width * height) / 12000); // Responsive density
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        
+        // Draw connecting lines
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 130) {
+            ctx.beginPath();
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = 1 - distance / 130;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    
+    // Initialize
+    window.onload = function() {
+      initCanvas();
+      animate();
+    };
+  </script>
+</body>
+</html>
