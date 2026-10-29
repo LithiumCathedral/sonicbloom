@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-10932384149"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-10932384149');
-</script>
-    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10932384149"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-10932384149');
+  </script>
+  
+  <!-- Google Ads Conversion Tracking Snippet -->
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          // Opens the partner link in a new tab so the user keeps your directory open
+          window.open(url, '_blank'); 
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-10932384149/Wm11CMy3iZgYEJXj-9wo',
+          'event_callback': callback
+      });
+      // Prevents the default HTML link behavior so the tag has time to fire
+      return false;
+    }
+  </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -441,7 +458,7 @@
         </div>
         <p class="job-desc">Evaluators vet trade recommendations, investment proposals, suitability assessments, and other securities and commodities artifacts for quality and accuracy.</p>
         <div class="job-action">
-          <a href="https://t.mercor.com/XBhNP" class="btn-join">Join</a>
+          <a href="https://t.mercor.com/XBhNP" class="btn-join" onclick="return gtag_report_conversion('https://t.mercor.com/XBhNP')">Join</a>
         </div>
       </div>
 
@@ -458,7 +475,7 @@
         </div>
         <p class="job-desc">Senior sales and marketing professionals test scenarios for AI systems operating in Fortune 500 go-to-market contexts.</p>
         <div class="job-action">
-          <a href="https://t.mercor.com/FLC6y" class="btn-join">Join</a>
+          <a href="https://t.mercor.com/FLC6y" class="btn-join" onclick="return gtag_report_conversion('https://t.mercor.com/FLC6y')">Join</a>
         </div>
       </div>
 
@@ -475,7 +492,7 @@
         </div>
         <p class="job-desc">Architect the data layers and reporting mechanisms (Tableau, SQL) powering next-generation financial decision support and analytics models.</p>
         <div class="job-action">
-          <a href="https://t.mercor.com/KBpRg" class="btn-join">Join</a>
+          <a href="https://t.mercor.com/KBpRg" class="btn-join" onclick="return gtag_report_conversion('https://t.mercor.com/KBpRg')">Join</a>
         </div>
       </div>
 
@@ -492,7 +509,7 @@
         </div>
         <p class="job-desc">Debug complex revenue bottlenecks. Validate automated denial logic frameworks utilizing deep CARC and RARC coding expertise.</p>
         <div class="job-action">
-          <a href="https://t.mercor.com/KBpRg" class="btn-join">Join</a>
+          <a href="https://t.mercor.com/KBpRg" class="btn-join" onclick="return gtag_report_conversion('https://t.mercor.com/KBpRg')">Join</a>
         </div>
       </div>
 
@@ -509,7 +526,7 @@
         </div>
         <p class="job-desc">Join a leading AI lab's GenAI team in the Bay Area to build benchmarks and instruction specs for frontier AI models. Active CPA/CA required.</p>
         <div class="job-action">
-          <a href="https://t.mercor.com/DS5zd" target="_blank" class="btn-join">Join</a>
+          <a href="https://t.mercor.com/DS5zd" target="_blank" class="btn-join" onclick="return gtag_report_conversion('https://t.mercor.com/DS5zd')">Join</a>
         </div>
       </div>
 
@@ -526,7 +543,7 @@
         </div>
         <p class="job-desc">Drive high-level strategic optimization and AI implementation for enterprise clients. Blueprint scalable operations frameworks.</p>
         <div class="job-action">
-          <a href="https://t.mercor.com/eqi5N" target="_blank" class="btn-join">Join</a>
+          <a href="https://t.mercor.com/eqi5N" target="_blank" class="btn-join" onclick="return gtag_report_conversion('https://t.mercor.com/eqi5N')">Join</a>
         </div>
       </div>
 
@@ -569,88 +586,3 @@
     let particles = [];
     
     const nodeColor = 'rgba(255, 106, 0, 0.7)'; // Orange nodes
-    const lineColor = 'rgba(148, 163, 184, 0.15)'; // Slate muted lines
-    
-    function initCanvas() {
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
-      createParticles();
-    }
-    
-    window.addEventListener('resize', initCanvas);
-    
-    class Particle {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.6;
-        this.vy = (Math.random() - 0.5) * 0.6;
-        this.radius = Math.random() * 1.5 + 0.5;
-        this.pulse = Math.random() * Math.PI;
-      }
-      
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.pulse += 0.05;
-        
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-      }
-      
-      draw() {
-        const dynamicRadius = this.radius + Math.sin(this.pulse) * 0.5;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, dynamicRadius > 0 ? dynamicRadius : 0.1, 0, Math.PI * 2);
-        ctx.fillStyle = nodeColor;
-        
-        // Glow effect
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = nodeColor;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-    }
-    
-    function createParticles() {
-      particles = [];
-      const particleCount = Math.floor((width * height) / 12000); // Responsive density
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-    }
-    
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-        
-        // Draw connecting lines
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 130) {
-            ctx.beginPath();
-            ctx.strokeStyle = lineColor;
-            ctx.lineWidth = 1 - distance / 130;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(animate);
-    }
-    
-    // Initialize
-    window.onload = function() {
-      initCanvas();
-      animate();
-    };
-  </script>
-</body>
-</html>
