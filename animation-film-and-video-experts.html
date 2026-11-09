@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative & Film AI Validation Tracks | LabMatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Core Variables */
+    :root {
+      --bg-dark: #0d0f12;
+      --bg-card: #13171e;
+      --border-dark: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --brand-orange: #ff6a00;
+      --brand-orange-glow: rgba(255, 106, 0, 0.2);
+      --brand-orange-faded: rgba(255, 106, 0, 0.05);
+      
+      --font-mono: 'Space Mono', monospace;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HERO & CANVAS --- */
+    .hero-section {
+      position: relative;
+      padding: 100px 20px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-bottom: 1px solid var(--border-dark);
+      overflow: hidden;
+    }
+
+    #neuralCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero-title {
+      font-family: var(--font-mono);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      font-family: var(--font-sans);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* --- TICKER TAPE --- */
+    .ticker-wrapper {
+      background: #080a0d;
+      border-bottom: 1px solid var(--border-dark);
+      padding: 12px 0;
+      overflow: hidden;
+      display: flex;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      animation: tickerScroll 25s linear infinite;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--brand-orange);
+    }
+
+    .ticker-wrapper:hover .ticker-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes tickerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-msg { letter-spacing: 1px; }
+    .ticker-sep { color: var(--text-muted); margin: 0 25px; font-weight: 400; }
+
+    /* --- MAIN CONTAINER --- */
+    .main-container {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    /* --- LABMATCH RECRUITMENT BANNER --- */
+    .cta-banner {
+      background: var(--brand-orange-faded);
+      border-left: 3px solid var(--brand-orange);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 60px;
+      box-shadow: inset 0 0 20px var(--brand-orange-faded);
+    }
+
+    @media (min-width: 768px) {
+      .cta-banner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .cta-text h2 {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .cta-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 700px;
+    }
+
+    /* Animated Peak-Out Slider Button */
+    .btn-slider {
+      display: inline-flex;
+      align-items: center;
+      background: var(--brand-orange);
+      color: #000;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px var(--brand-orange-glow);
+      text-transform: uppercase;
+    }
+
+    .btn-slider:hover {
+      background: #fff;
+      color: #000;
+      box-shadow: 0 0 20px var(--brand-orange-glow);
+    }
+
+    .btn-slider .arrow {
+      display: inline-block;
+      margin-left: 10px;
+      font-size: 1.2rem;
+      animation: peakOut 1.5s infinite ease-in-out;
+    }
+
+    @keyframes peakOut {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(6px); }
+    }
+
+    /* --- CATEGORY HEADERS & JOB GRID --- */
+    .category-title {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .ledger-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .job-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .job-card:hover {
+      border-color: var(--brand-orange);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5), 0 0 15px var(--brand-orange-glow);
+      transform: translateY(-2px);
+    }
+
+    .job-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .job-rate-wrap {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 106, 0, 0.1);
+      border: 1px solid rgba(255, 106, 0, 0.3);
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    .job-rate {
+      font-family: var(--font-mono);
+      color: var(--brand-orange);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .job-action {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-dark);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* Bold Orange CTA Buttons */
+    .btn-join {
+      background: transparent;
+      color: var(--brand-orange);
+      border: 2px solid var(--brand-orange);
+      padding: 8px 24px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .btn-join:hover {
+      background: var(--brand-orange);
+      color: #000;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <canvas id="neuralCanvas"></canvas>
+    <div class="hero-content">
+      <h1 class="hero-title">Monetize your intuition.</h1>
+      <p class="hero-sub">It's time to get creative. Bypass the application queue and match your creative eye to vetted projects paying $60-$120/hr.</p>
+    </div>
+  </header>
+
+  <!-- Digital Ticker Tape -->
+  <div class="ticker-wrapper">
+    <div class="ticker-track">
+      <!-- Set 1 -->
+      <span class="ticker-msg">VIDEO CREATORS: $90/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">GENERATIVE DESIGN: $50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">VFX COMPOSITING: $110/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">3D ANIMATION: $120/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">AUDIO EXPERTS: $50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      
+      <!-- Duplicate Set for Seamless Loop -->
+      <span class="ticker-msg">VIDEO CREATORS: $90/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">GENERATIVE DESIGN: $50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">VFX COMPOSITING: $110/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">3D ANIMATION: $120/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+      <span class="ticker-msg">AUDIO EXPERTS: $50/HR</span><span class="ticker-sep">&gt;&gt;&gt;</span>
+    </div>
+  </div>
+
+  <main class="main-container">
+    
+    <!-- LabMatch Recruitment Banner -->
+    <section class="cta-banner">
+      <div class="cta-text">
+        <h2>LabMatch Recruitment</h2>
+        <p>Pivoting your career shouldn't be a full-time job. LabMatch cuts the friction of a professional transition down to a tenth of the national average—bypassing the traditional resume grind so you can instantly map your creative signature to active AI pipelines.</p>
+      </div>
+      <a href="https://sonicbloom.dev/labmatch" class="btn-slider">
+        Find your lab <span class="arrow">&rarr;</span>
+      </a>
+    </section>
+
+    <!-- SECTION: TECHNICAL -->
+    <h2 class="category-title">01 // Technical Tracks</h2>
+    <section class="ledger-grid">
+      <div class="job-card">
+        <h3 class="job-title">3D Art & Video Editor</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$50-$60/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoVBmLAccb_kWwapPDpVL?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoVBmLAccb_kWwapPDpVL&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <h3 class="job-title">Performance Director</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$70-$110/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoWTgOSL7w8GZCUNK9YsE?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoWTgOSL7w8GZCUNK9YsE&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <h3 class="job-title">3D Artists</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$50-$60/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoVBmLAccb_kWwapPDpVL?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoVBmLAccb_kWwapPDpVL&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CREATIVE -->
+    <h2 class="category-title">02 // Creative Tracks</h2>
+    <section class="ledger-grid">
+      <div class="job-card">
+        <h3 class="job-title">Cinematographer</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$70-$110/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoWTgIFc6PljFQHhBDpYR?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoWTgIFc6PljFQHhBDpYR&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <h3 class="job-title">Finishing Colorist</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$70-$110/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoWTgVrfzF78gL6BI_brn?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoWTgVrfzF78gL6BI_brn&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <h3 class="job-title">VFX Compositing Supervisor</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$70-$110/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoWTgSJZkV8di89dEJ5Z3?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoWTgSJZkV8di89dEJ5Z3&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <h3 class="job-title">Character Animator</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$60-$90/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoUX0FsrPqLbZr_lPg4xU?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoUX0FsrPqLbZr_lPg4xU&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PRODUCTION -->
+    <h2 class="category-title">03 // Production Tracks</h2>
+    <section class="ledger-grid">
+      <div class="job-card">
+        <h3 class="job-title">Video Craft Expert</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$70-$100/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoUYJgC6FFGQLBmRFJZvf?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoUYJgC6FFGQLBmRFJZvf&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <h3 class="job-title">3D Animators & Generalists</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$70-$120/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoa1sCbPwvr1_PhpCHLux?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoa1sCbPwvr1_PhpCHLux&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <h3 class="job-title">Commercial Post-Production Editor</h3>
+        <div class="job-rate-wrap"><span class="job-rate">$70-$120/hr</span></div>
+        <div class="job-action">
+          <a href="https://work.mercor.com/jobs/list_AAABoa1gUkpcGLZXlqdBXK5J?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoa1gUkpcGLZXlqdBXK5J&utm_medium=direct&utm_source=referral" target="_blank" rel="noopener" class="btn-join">Apply via Mercor &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Neural Network Canvas Logic -->
+  <script>
+    const canvas = document.getElementById('neuralCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    let particles = [];
+    
+    const nodeColor = 'rgba(255, 106, 0, 0.7)'; 
+    const lineColor = 'rgba(148, 163, 184, 0.15)'; 
+    
+    function initCanvas() {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+      createParticles();
+    }
+    
+    window.addEventListener('resize', initCanvas);
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.pulse = Math.random() * Math.PI;
+      }
+      
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.pulse += 0.05;
+        
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      
+      draw() {
+        const dynamicRadius = this.radius + Math.sin(this.pulse) * 0.5;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, dynamicRadius > 0 ? dynamicRadius : 0.1, 0, Math.PI * 2);
+        ctx.fillStyle = nodeColor;
+        
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = nodeColor;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+    
+    function createParticles() {
+      particles = [];
+      const particleCount = Math.floor((width * height) / 12000); 
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 130) {
+            ctx.beginPath();
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = 1 - distance / 130;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    
+    window.onload = function() {
+      initCanvas();
+      animate();
+    };
+  </script>
+</body>
+</html>
