@@ -176,4 +176,1316 @@
       font-weight: 700;
       background: var(--bg-terminal);
       color: #ffffff;
-      padding: 8px
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--bg-terminal);
+      transition: all 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--brand-orange);
+      border-color: var(--brand-orange);
+      color: #000000;
+    }
+
+    /* --- MAIN CONTAINER --- */
+    main {
+      flex: 1;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- DIRECTORY HERO --- */
+    .directory-hero {
+      padding: 52px 0 32px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--brand-orange);
+      background: var(--brand-orange-soft);
+      border: 1px solid rgba(255, 106, 0, 0.25);
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 28px;
+      align-items: end;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .directory-hero h1 {
+      font-size: clamp(2rem, 3.8vw, 2.85rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .hero-lead {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 680px;
+    }
+
+    .diagnostic-callout {
+      background: var(--bg-terminal);
+      color: var(--text-terminal);
+      border: 1px solid var(--border-terminal);
+      border-radius: 12px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .diagnostic-callout span.tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--rate-green);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .diagnostic-callout p {
+      font-size: 0.88rem;
+      color: var(--text-terminal-muted);
+    }
+
+    .diagnostic-callout a {
+      align-self: flex-start;
+      margin-top: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--brand-orange);
+      border-bottom: 1px solid rgba(255, 106, 0, 0.45);
+      padding-bottom: 2px;
+    }
+
+    .diagnostic-callout a:hover {
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    /* --- FILTER & SORT CONTROL BAR --- */
+    .controls-shell {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px -12px rgba(15, 23, 42, 0.06);
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) auto;
+      gap: 16px;
+      align-items: end;
+    }
+
+    @media (max-width: 960px) {
+      .controls-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .controls-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .control-group label {
+      font-family: var(--font-mono);
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .control-select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background-color: #f8fafc;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+
+    .control-select:focus {
+      outline: none;
+      border-color: var(--brand-orange);
+      background-color: #ffffff;
+    }
+
+    .btn-reset {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border-light);
+      background: #f1f5f9;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      height: 41px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-reset:hover {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    .controls-meta {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .results-counter {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* --- SUBSTANTIATION & DISCLOSURE BANNER --- */
+    .substantiation-note {
+      background: #f1f5f9;
+      border-left: 3px solid var(--brand-orange);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 40px;
+      font-size: 0.83rem;
+      color: var(--text-muted);
+    }
+
+    .substantiation-note strong {
+      color: var(--text-main);
+    }
+
+    .substantiation-note a {
+      color: var(--brand-orange);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    /* --- PARTNER LAB SECTIONS --- */
+    .partner-section {
+      margin-bottom: 52px;
+      scroll-margin-top: 90px;
+    }
+
+    .partner-section[hidden] {
+      display: none !important;
+    }
+
+    .partner-header {
+      background: var(--bg-terminal);
+      color: var(--text-terminal);
+      border: 1px solid var(--border-terminal);
+      border-radius: 12px;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .partner-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .partner-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .partner-header h2 {
+      font-family: var(--font-mono);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .partner-pill {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.14);
+      color: var(--rate-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-weight: 700;
+    }
+
+    .partner-header p {
+      font-size: 0.9rem;
+      color: var(--text-terminal-muted);
+      max-width: 720px;
+    }
+
+    .partner-domain-tag {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-terminal-muted);
+      background: var(--bg-terminal-card);
+      border: 1px solid var(--border-terminal);
+      padding: 8px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    /* --- ROLE CARDS GRID --- */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 820px) {
+      .roles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .role-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .role-card[hidden] {
+      display: none !important;
+    }
+
+    .role-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 12px 28px -12px rgba(15, 23, 42, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .meta-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 5px;
+      background: #f1f5f9;
+      color: var(--text-muted);
+      border: 1px solid var(--border-light);
+    }
+
+    .meta-tag.exp {
+      background: #eef2ff;
+      color: #3730a3;
+      border-color: #e0e7ff;
+    }
+
+    /* Fixed-Width Orange Rate Pill */
+    .rate-pill {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--brand-orange);
+      background: var(--brand-orange-soft);
+      border: 1px solid rgba(255, 106, 0, 0.28);
+      border-radius: 6px;
+      padding: 6px 10px;
+      min-width: 132px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .role-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
+
+    .role-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.58;
+    }
+
+    .role-reqs {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .role-reqs strong {
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .partner-dest-note {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .btn-apply {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-terminal);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--bg-terminal);
+      transition: all 0.2s ease;
+    }
+
+    .btn-apply:hover {
+      background: var(--brand-orange);
+      border-color: var(--brand-orange);
+      color: #000000;
+    }
+
+    /* Empty State */
+    .empty-state {
+      display: none;
+      background: var(--bg-surface);
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 48px 24px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    .empty-state h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+    }
+
+    /* --- GLOBAL COMPLIANCE FOOTER --- */
+    .site-footer {
+      background: var(--bg-terminal);
+      color: var(--text-terminal-muted);
+      border-top: 1px solid var(--border-terminal);
+      padding: 56px 0 40px;
+      margin-top: 24px;
+      font-size: 0.88rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border-terminal);
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+    .footer-brand {
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-disclaimer {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      max-width: 540px;
+    }
+
+    .footer-col h4 {
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--brand-orange);
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Persistent 5-Page Global Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="brand-logo">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>SonicBloom.dev</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary Navigation">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/labs.html" class="nav-link" aria-current="page">Labs</a>
+        <a href="/labmatch/" class="nav-link">LabMatch</a>
+        <a href="/updates/" class="nav-link">Updates</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/labmatch/" class="nav-cta">Run LabMatch &rarr;</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Header -->
+    <section class="directory-hero">
+      <div class="container">
+        <span class="eyebrow">Verified Partner Directory &bull; Remote 1099 / Global Contracts</span>
+        <div class="hero-grid">
+          <div>
+            <h1>AI Validation &amp; RLHF Partner Labs</h1>
+            <p class="hero-lead">
+              Compare active remote evaluation tracks across <strong>Turing</strong>, <strong>Mercor</strong>, and <strong>Micro1</strong>. Filter open pipelines by specialty domain, years of professional experience, and published hourly contractor rate bands.
+            </p>
+          </div>
+          <aside class="diagnostic-callout" aria-label="LabMatch Quick Calibration">
+            <span class="tag">⚡ Unsure where you fit?</span>
+            <p>Take our 30-second client-side LabMatch assessment to calibrate your domain background and cognitive work style before applying.</p>
+            <a href="/labmatch/">Launch LabMatch Diagnostic &rarr;</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Vanilla JS Filter & Sort Bar -->
+      <section class="controls-shell" aria-label="Filter and Sort Roles">
+        <div class="controls-grid">
+          <div class="control-group">
+            <label for="filterDomain">Area / Domain</label>
+            <select id="filterDomain" class="control-select">
+              <option value="ALL">All Domains (6)</option>
+              <option value="Software & Data">Software &amp; Data</option>
+              <option value="Medicine & Healthcare">Medicine &amp; Healthcare</option>
+              <option value="Finance & Legal">Finance &amp; Legal</option>
+              <option value="Creative, Video & Design">Creative, Video &amp; Design</option>
+              <option value="PR, Writing & Research">PR, Writing &amp; Research</option>
+              <option value="Generalist & Operations">Generalist &amp; Operations</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="filterExp">Expertise (Years)</label>
+            <select id="filterExp" class="control-select">
+              <option value="ALL">All Experience Levels</option>
+              <option value="0-1 yrs">0–1 yrs (Entry / Generalist)</option>
+              <option value="2-5 yrs">2–5 yrs (Mid-Level Practitioner)</option>
+              <option value="5+ yrs">5+ yrs (Senior / Credentialed)</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="filterPartner">Partner Lab</label>
+            <select id="filterPartner" class="control-select">
+              <option value="ALL">All Partner Labs (3)</option>
+              <option value="Turing">Turing</option>
+              <option value="Mercor">Mercor</option>
+              <option value="Micro1">Micro1</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="sortPay">Sort by Pay / Tier</label>
+            <select id="sortPay" class="control-select">
+              <option value="DEFAULT">Featured Order</option>
+              <option value="PAY_HIGH">Pay Rate: Highest Max First</option>
+              <option value="PAY_MIN_HIGH">Pay Rate: Highest Base First</option>
+              <option value="PAY_LOW">Entry Rate: Lowest to Highest</option>
+            </select>
+          </div>
+
+          <button type="button" id="resetFiltersBtn" class="btn-reset">Reset</button>
+        </div>
+
+        <div class="controls-meta">
+          <span class="results-counter" id="resultsCount" aria-live="polite">Showing 12 verified roles across 3 partner labs</span>
+          <span>Jump to: <a href="#partner-turing" style="text-decoration:underline;">Turing</a> &bull; <a href="#partner-mercor" style="text-decoration:underline;">Mercor</a> &bull; <a href="#partner-micro1" style="text-decoration:underline;">Micro1</a></span>
+        </div>
+      </section>
+
+      <!-- Visible Rate Substantiation & Partner Relationship Notice -->
+      <div class="substantiation-note" role="note">
+        <strong>Rate Substantiation &amp; Partner Disclosure:</strong> Displayed hourly bands reflect gross independent-contractor ranges published by each third-party lab as of November 2026. Final offered rates and weekly task volume vary based on technical screening scores, verified credentials, and active client project budgets. Outbound buttons (marked <code>rel="sponsored noopener"</code>) open official partner portals in a new tab and may generate a referral fee for SonicBloom at zero cost to candidates. <a href="/about.html#disclosures">Read full disclosures</a>.
+      </div>
+
+      <!-- Empty Filter State -->
+      <div class="empty-state" id="emptyState">
+        <h3>No roles match that exact filter combination</h3>
+        <p>Try broadening the Experience tier or selecting "All Domains" to compare adjacent tracks across Turing, Mercor, and Micro1.</p>
+        <button type="button" class="btn-reset" onclick="document.getElementById('resetFiltersBtn').click()">Show All 12 Roles</button>
+      </div>
+
+      <!-- =========================================================
+           SECTION 1: TURING
+      ========================================================== -->
+      <section class="partner-section" id="partner-turing" data-partner-section="Turing" aria-labelledby="heading-turing">
+        <div class="partner-header">
+          <div class="partner-title-wrap">
+            <div class="partner-badge-row">
+              <h2 id="heading-turing">01 // Turing</h2>
+              <span class="partner-pill">Verified Referral Partner</span>
+            </div>
+            <p>
+              Enterprise AI research and developer cloud specializing in LLM code evaluation, multi-hop factual verification, Python data pipelines, and multimodal video/creative critique.
+            </p>
+          </div>
+          <span class="partner-domain-tag">Portal: work.turing.com</span>
+        </div>
+
+        <div class="roles-grid">
+          <!-- Turing Role 1 -->
+          <article class="role-card"
+                   data-partner="Turing"
+                   data-domain="Software & Data"
+                   data-exp="2-5 yrs"
+                   data-pay-min="45"
+                   data-pay-max="75"
+                   data-default-order="1">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Software &amp; Data</span>
+                <span class="meta-tag exp">2–5 yrs</span>
+              </div>
+              <span class="rate-pill">$45–$75/hr*</span>
+            </div>
+            <h3>LLM Code Evaluator &amp; Python Benchmark Engineer</h3>
+            <p class="role-desc">
+              Review model-generated pull requests, write unit-tested reference solutions, and diagnose multi-file reasoning bugs across Python, TypeScript, and C++ repositories.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> 2+ years production software engineering, strong algorithmic debugging, and clear rubric documentation in English.
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://work.turing.com/r/lZvCS-A7-T"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Turing"
+                 data-role-title="LLM Code Evaluator">
+                Apply at Turing &#8599;
+              </a>
+            </div>
+          </article>
+
+          <!-- Turing Role 2 -->
+          <article class="role-card"
+                   data-partner="Turing"
+                   data-domain="Creative, Video & Design"
+                   data-exp="2-5 yrs"
+                   data-pay-min="40"
+                   data-pay-max="90"
+                   data-default-order="2">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Creative, Video &amp; Design</span>
+                <span class="meta-tag exp">2–5 yrs</span>
+              </div>
+              <span class="rate-pill">$40–$90/hr*</span>
+            </div>
+            <h3>Multimodal Video, Film &amp; Visual Arts Specialist</h3>
+            <p class="role-desc">
+              Evaluate generative video continuity, framing, lighting physics, and storyboarding prompts to help frontier multimodal models master professional visual direction.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> Portfolio in video production, animation, cinematography, or commercial visual design plus structured analytical critique skills.
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://work.turing.com/r/HioA_ZBqOt"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Turing"
+                 data-role-title="Multimodal Video Creative Specialist">
+                Apply at Turing &#8599;
+              </a>
+            </div>
+          </article>
+
+          <!-- Turing Role 3 -->
+          <article class="role-card"
+                   data-partner="Turing"
+                   data-domain="PR, Writing & Research"
+                   data-exp="0-1 yrs"
+                   data-pay-min="30"
+                   data-pay-max="50"
+                   data-default-order="3">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">PR, Writing &amp; Research</span>
+                <span class="meta-tag exp">0–1 yrs</span>
+              </div>
+              <span class="rate-pill">$30–$50/hr*</span>
+            </div>
+            <h3>Deep Web Research &amp; Fact-Verification Specialist</h3>
+            <p class="role-desc">
+              Construct natural-language research prompts with objectively verifiable answers, multi-source factual clues, and documented search validation logs for browsing agents.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> Strong investigative search habits, source citation accuracy, and clear analytical writing (academic or journalism exposure helpful).
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://work.turing.com/r/J0z2iXJEFp"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Turing"
+                 data-role-title="Web Research Specialist">
+                Apply at Turing &#8599;
+              </a>
+            </div>
+          </article>
+
+          <!-- Turing Role 4 -->
+          <article class="role-card"
+                   data-partner="Turing"
+                   data-domain="Software & Data"
+                   data-exp="5+ yrs"
+                   data-pay-min="55"
+                   data-pay-max="95"
+                   data-default-order="4">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Software &amp; Data</span>
+                <span class="meta-tag exp">5+ yrs</span>
+              </div>
+              <span class="rate-pill">$55–$95/hr*</span>
+            </div>
+            <h3>Senior Cloud Systems &amp; Agentic Data Architect</h3>
+            <p class="role-desc">
+              Design complex tool-use environments, SQL/warehouse evaluation schemas, and containerized microservice benchmarks used to stress-test autonomous coding agents.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> 5+ years full-stack, distributed systems, or data engineering experience with Docker, SQL, and cloud infrastructure.
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://work.turing.com/r/lZvCS-A7-T"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Turing"
+                 data-role-title="Senior Systems Data Architect">
+                Apply at Turing &#8599;
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SECTION 2: MERCOR
+      ========================================================== -->
+      <section class="partner-section" id="partner-mercor" data-partner-section="Mercor" aria-labelledby="heading-mercor">
+        <div class="partner-header">
+          <div class="partner-title-wrap">
+            <div class="partner-badge-row">
+              <h2 id="heading-mercor">02 // Mercor</h2>
+              <span class="partner-pill">Verified Referral Partner</span>
+            </div>
+            <p>
+              AI-vetted specialist marketplace connecting credentialed clinicians, healthcare analytics leaders, PR/communications strategists, financial/legal reviewers, and generalists with frontier labs.
+            </p>
+          </div>
+          <span class="partner-domain-tag">Portal: work.mercor.com</span>
+        </div>
+
+        <div class="roles-grid">
+          <!-- Mercor Role 1 -->
+          <article class="role-card"
+                   data-partner="Mercor"
+                   data-domain="Medicine & Healthcare"
+                   data-exp="5+ yrs"
+                   data-pay-min="80"
+                   data-pay-max="120"
+                   data-default-order="1">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Medicine &amp; Healthcare</span>
+                <span class="meta-tag exp">5+ yrs</span>
+              </div>
+              <span class="rate-pill">$80–$120/hr*</span>
+            </div>
+            <h3>Healthcare Revenue-Cycle &amp; Clinical Analytics Lead</h3>
+            <p class="role-desc">
+              Author decision-support rubrics, audit EHR/RCM reporting logic, and validate clinical operations reasoning for enterprise healthcare AI models.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> 5+ years healthcare RCM, clinical operations, or physician/RN advisory experience; SQL, Tableau, Power BI, or EHR analytics fluency.
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://work.mercor.com/jobs/list_AAABnviW9OZIlFicRPxHX428?referralCode=fd662fec-1759-40db-8a60-872e15ea555c"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Mercor"
+                 data-role-title="Healthcare RCM Clinical Analytics Lead">
+                Apply at Mercor &#8599;
+              </a>
+            </div>
+          </article>
+
+          <!-- Mercor Role 2 -->
+          <article class="role-card"
+                   data-partner="Mercor"
+                   data-domain="PR, Writing & Research"
+                   data-exp="2-5 yrs"
+                   data-pay-min="60"
+                   data-pay-max="100"
+                   data-default-order="2">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">PR, Writing &amp; Research</span>
+                <span class="meta-tag exp">2–5 yrs</span>
+              </div>
+              <span class="rate-pill">$60–$100/hr*</span>
+            </div>
+            <h3>Marketing, PR &amp; Communications Specialist (AI Environments)</h3>
+            <p class="role-desc">
+              Simulate multi-stakeholder corporate communications workflows, embargo management, media pitching, and crisis response rubrics inside AI agent training environments.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> 3+ years PR, agency communications, or editorial strategy experience with crisp persuasive writing and structured reasoning.
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoDrc0r2755XZT1FFrp5X?referralCode=fd662fec-1759-40db-8a60-872e15ea555c"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Mercor"
+                 data-role-title="Marketing PR Communications Specialist">
+                Apply at Mercor &#8599;
+              </a>
+            </div>
+          </article>
+
+          <!-- Mercor Role 3 -->
+          <article class="role-card"
+                   data-partner="Mercor"
+                   data-domain="Finance & Legal"
+                   data-exp="5+ yrs"
+                   data-pay-min="55"
+                   data-pay-max="95"
+                   data-default-order="3">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Finance &amp; Legal</span>
+                <span class="meta-tag exp">5+ yrs</span>
+              </div>
+              <span class="rate-pill">$55–$95/hr*</span>
+            </div>
+            <h3>Quantitative Finance &amp; Regulatory Compliance Reviewer</h3>
+            <p class="role-desc">
+              Stress-test financial modeling assumptions, SEC/GAAP accounting outputs, and contract compliance interpretations produced by frontier reasoning models.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> 5+ years in corporate finance, investment analysis, accounting (CPA/CFA), or legal compliance (JD/paralegal specialist).
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://work.mercor.com/jobs/list_AAABnviXT7kktkrXVkxMA5Hp?referralCode=fd662fec-1759-40db-8a60-872e15ea555c"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Mercor"
+                 data-role-title="Finance and Regulatory Reviewer">
+                Apply at Mercor &#8599;
+              </a>
+            </div>
+          </article>
+
+          <!-- Mercor Role 4 -->
+          <article class="role-card"
+                   data-partner="Mercor"
+                   data-domain="Generalist & Operations"
+                   data-exp="0-1 yrs"
+                   data-pay-min="25"
+                   data-pay-max="45"
+                   data-default-order="4">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Generalist &amp; Operations</span>
+                <span class="meta-tag exp">0–1 yrs</span>
+              </div>
+              <span class="rate-pill">$25–$45/hr*</span>
+            </div>
+            <h3>AI Reasoning &amp; Operations Generalist (US &amp; Canada)</h3>
+            <p class="role-desc">
+              Compare assistant responses side-by-side, score instruction following, flag subtle factual hallucinations, and refine everyday business workflow prompts on flexible schedules.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> Strong reading comprehension, logical attention to detail, and reliable English writing skills; ideal entry point into RLHF evaluation.
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://work.mercor.com/explore?referralCode=fd662fec-1759-40db-8a60-872e15ea555c"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Mercor"
+                 data-role-title="AI Reasoning Generalist">
+                Apply at Mercor &#8599;
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SECTION 3: MICRO1
+      ========================================================== -->
+      <section class="partner-section" id="partner-micro1" data-partner-section="Micro1" aria-labelledby="heading-micro1">
+        <div class="partner-header">
+          <div class="partner-title-wrap">
+            <div class="partner-badge-row">
+              <h2 id="heading-micro1">03 // Micro1</h2>
+              <span class="partner-pill">Verified Referral Partner</span>
+            </div>
+            <p>
+              AI human-data laboratory certifying engineers, clinical/STEM researchers, and multilingual domain specialists through automated AI technical interviews for remote lab placements.
+            </p>
+          </div>
+          <span class="partner-domain-tag">Portal: www.micro1.ai</span>
+        </div>
+
+        <div class="roles-grid">
+          <!-- Micro1 Role 1 -->
+          <article class="role-card"
+                   data-partner="Micro1"
+                   data-domain="Software & Data"
+                   data-exp="2-5 yrs"
+                   data-pay-min="45"
+                   data-pay-max="80"
+                   data-default-order="1">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Software &amp; Data</span>
+                <span class="meta-tag exp">2–5 yrs</span>
+              </div>
+              <span class="rate-pill">$45–$80/hr*</span>
+            </div>
+            <h3>Certified AI Tutor — Full-Stack &amp; Python Engineering</h3>
+            <p class="role-desc">
+              Complete Micro1's automated technical certification to join human-data engineering pods creating high-complexity coding datasets, debugging traces, and API evaluations.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> 2–5 years hands-on experience in Python, React/Node.js, or backend systems; live coding verification during onboarding.
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://www.micro1.ai/jobs"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Micro1"
+                 data-role-title="Micro1 Certified Python Engineer">
+                Apply at Micro1 &#8599;
+              </a>
+            </div>
+          </article>
+
+          <!-- Micro1 Role 2 -->
+          <article class="role-card"
+                   data-partner="Micro1"
+                   data-domain="Medicine & Healthcare"
+                   data-exp="5+ yrs"
+                   data-pay-min="65"
+                   data-pay-max="110"
+                   data-default-order="2">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Medicine &amp; Healthcare</span>
+                <span class="meta-tag exp">5+ yrs</span>
+              </div>
+              <span class="rate-pill">$65–$110/hr*</span>
+            </div>
+            <h3>Clinical &amp; Life Sciences Domain Validator (MD / PhD / PharmD)</h3>
+            <p class="role-desc">
+              Author graduate-level diagnostic vignettes, verify biomedical reasoning chains, and audit safety boundaries for clinical and life-science foundation models.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> Advanced clinical or research credential (MD, DO, PharmD, MSN, or Life Sciences PhD) with 5+ years combined clinical/research practice.
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://www.micro1.ai/jobs"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Micro1"
+                 data-role-title="Micro1 Clinical Validator">
+                Apply at Micro1 &#8599;
+              </a>
+            </div>
+          </article>
+
+          <!-- Micro1 Role 3 -->
+          <article class="role-card"
+                   data-partner="Micro1"
+                   data-domain="Finance & Legal"
+                   data-exp="2-5 yrs"
+                   data-pay-min="45"
+                   data-pay-max="75"
+                   data-default-order="3">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Finance &amp; Legal</span>
+                <span class="meta-tag exp">2–5 yrs</span>
+              </div>
+              <span class="rate-pill">$45–$75/hr*</span>
+            </div>
+            <h3>Legal &amp; Financial Reasoning Specialist</h3>
+            <p class="role-desc">
+              Draft structured case-law analyses, valuation walkthroughs, and multi-step quantitative prompts designed to benchmark domain-specific LLM accuracy.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> 2–5 years experience in legal research, commercial contracts, corporate finance, or tax/audit advisory.
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://www.micro1.ai/jobs"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Micro1"
+                 data-role-title="Micro1 Legal Financial Specialist">
+                Apply at Micro1 &#8599;
+              </a>
+            </div>
+          </article>
+
+          <!-- Micro1 Role 4 -->
+          <article class="role-card"
+                   data-partner="Micro1"
+                   data-domain="Creative, Video & Design"
+                   data-exp="0-1 yrs"
+                   data-pay-min="25"
+                   data-pay-max="45"
+                   data-default-order="4">
+            <div class="card-top">
+              <div class="card-tags">
+                <span class="meta-tag">Creative, Video &amp; Design</span>
+                <span class="meta-tag exp">0–1 yrs</span>
+              </div>
+              <span class="rate-pill">$25–$45/hr*</span>
+            </div>
+            <h3>UX/UI Design, Audio &amp; Linguistic Data Trainer</h3>
+            <p class="role-desc">
+              Critique interface layout hierarchy, voice/audio naturalness, and creative copywriting outputs across flexible asynchronous task queues.
+            </p>
+            <div class="role-reqs">
+              <strong>Criteria:</strong> Strong design eye, creative portfolio or bilingual/editorial fluency; accessible to early-career creatives (0–1+ years).
+            </div>
+            <div class="card-footer">
+              <span class="partner-dest-note">Official Portal &bull; Sponsored</span>
+              <a href="https://www.micro1.ai/jobs"
+                 target="_blank"
+                 rel="sponsored noopener"
+                 class="btn-apply"
+                 data-partner-name="Micro1"
+                 data-role-title="Micro1 Creative UX Audio Trainer">
+                Apply at Micro1 &#8599;
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Global Compliance & Identity Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <span class="brand-dot" aria-hidden="true"></span>
+            <span>SonicBloom.dev</span>
+          </div>
+          <p class="footer-disclaimer">
+            <strong>Affiliate &amp; Earnings Disclosure:</strong> SonicBloom is an independent research and career directory operated by SonicBloom Studio. We participate in referral and affiliate programs with third-party AI talent platforms (including Turing, Mercor, and Micro1) and may earn a commission when qualified candidates apply or are placed through outbound partner links. *Stated hourly rates reflect published partner ranges for independent contractors, vary by credential verification and project demand, and do not constitute a guarantee of employment or income.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/labs.html">Partner Labs Directory</a></li>
+            <li><a href="/labmatch/">LabMatch Diagnostic</a></li>
+            <li><a href="/updates/">Research &amp; Updates</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Trust &amp; Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/about.html">About SonicBloom</a></li>
+            <li><a href="/about.html#disclosures">Affiliate &amp; Rate Disclaimers</a></li>
+            <li><a href="/privacy.html">Privacy Policy &amp; Terms</a></li>
+            <li><a href="mailto:contact@sonicbloom.dev">contact@sonicbloom.dev</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 SonicBloom. All rights reserved.</span>
+        <span>Independent Research &amp; Talent Routing Directory &bull; United States</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JS Filter, Sort & Compliant Conversion Listener -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var domainSelect = document.getElementById('filterDomain');
+      var expSelect = document.getElementById('filterExp');
+      var partnerSelect = document.getElementById('filterPartner');
+      var sortSelect = document.getElementById('sortPay');
+      var resetBtn = document.getElementById('resetFiltersBtn');
+      var resultsCount = document.getElementById('resultsCount');
+      var emptyState = document.getElementById('emptyState');
+      var sections = Array.prototype.slice.call(document.querySelectorAll('.partner-section'));
+
+      // Support optional URL query pre-filtering (e.g. /labs.html?domain=Medicine)
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('partner')) {
+        partnerSelect.value = params.get('partner');
+      }
+      if (params.get('exp')) {
+        expSelect.value = params.get('exp');
+      }
+      if (params.get('domain')) {
+        var qDomain = params.get('domain').toLowerCase();
+        Array.prototype.forEach.call(domainSelect.options, function (opt) {
+          if (opt.value.toLowerCase().indexOf(qDomain) !== -1) {
+            domainSelect.value = opt.value;
+          }
+        });
+      }
+
+      function applyFiltersAndSort() {
+        var selectedDomain = domainSelect.value;
+        var selectedExp = expSelect.value;
+        var selectedPartner = partnerSelect.value;
+        var sortMode = sortSelect.value;
+
+        var totalVisibleCards = 0;
+        var visibleSections = 0;
+
+        sections.forEach(function (section) {
+          var sectionPartner = section.getAttribute('data-partner-section');
+          var grid = section.querySelector('.roles-grid');
+          var cards = Array.prototype.slice.call(grid.querySelectorAll('.role-card'));
+
+          // Sort cards inside each partner section
+          cards.sort(function (a, b) {
+            if (sortMode === 'PAY_HIGH') {
+              return Number(b.getAttribute('data-pay-max')) - Number(a.getAttribute('data-pay-max'));
+            }
+            if (sortMode === 'PAY_MIN_HIGH') {
+              return Number(b.getAttribute('data-pay-min')) - Number(a.getAttribute('data-pay-min'));
+            }
+            if (sortMode === 'PAY_LOW') {
+              return Number(a.getAttribute('data-pay-min')) - Number(b.getAttribute('data-pay-min'));
+            }
+            return Number(a.getAttribute('data-default-order')) - Number(b.getAttribute('data-default-order'));
+          });
+
+          var sectionVisibleCount = 0;
+
+          cards.forEach(function (card) {
+            grid.appendChild(card); // Apply sorted DOM order
+
+            var matchesPartner = (selectedPartner === 'ALL' || sectionPartner === selectedPartner);
+            var matchesDomain = (selectedDomain === 'ALL' || card.getAttribute('data-domain') === selectedDomain);
+            var matchesExp = (selectedExp === 'ALL' || card.getAttribute('data-exp') === selectedExp);
+
+            if (matchesPartner && matchesDomain && matchesExp) {
+              card.hidden = false;
+              sectionVisibleCount++;
+              totalVisibleCards++;
+            } else {
+              card.hidden = true;
+            }
+          });
+
+          if (sectionVisibleCount > 0) {
+            section.hidden = false;
+            visibleSections++;
+          } else {
+            section.hidden = true;
+          }
+        });
+
+        // Update accessible live counter & empty state
+        var labWord = visibleSections === 1 ? 'partner lab' : 'partner labs';
+        var roleWord = totalVisibleCards === 1 ? 'verified role' : 'verified roles';
+        resultsCount.textContent = 'Showing ' + totalVisibleCards + ' ' + roleWord + ' across ' + visibleSections + ' ' + labWord;
+
+        if (totalVisibleCards === 0) {
+          emptyState.classList.add('visible');
+        } else {
+          emptyState.classList.remove('visible');
+        }
+      }
+
+      domainSelect.addEventListener('change', applyFiltersAndSort);
+      expSelect.addEventListener('change', applyFiltersAndSort);
+      partnerSelect.addEventListener('change', applyFiltersAndSort);
+      sortSelect.addEventListener('change', applyFiltersAndSort);
+
+      resetBtn.addEventListener('click', function () {
+        domainSelect.value = 'ALL';
+        expSelect.value = 'ALL';
+        partnerSelect.value = 'ALL';
+        sortSelect.value = 'DEFAULT';
+        applyFiltersAndSort();
+      });
+
+      // Attach non-hijacking Google Ads conversion event to all partner buttons
+      var applyButtons = document.querySelectorAll('.btn-apply');
+      Array.prototype.forEach.call(applyButtons, function (btn) {
+        btn.addEventListener('click', function () {
+          gtag_report_conversion(
+            btn.getAttribute('data-partner-name'),
+            btn.getAttribute('data-role-title')
+          );
+          // Do NOT call preventDefault() or return false; browser follows canonical <a href> natively
+        });
+      });
+
+      applyFiltersAndSort();
+    });
+  </script>
+
+</body>
+</html>
