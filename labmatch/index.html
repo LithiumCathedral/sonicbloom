@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LabMatch Diagnostic | Quick AI Work Check | SonicBloom.dev</title>
-  <meta name="description" content="Take the free 30-second LabMatch quiz to match your domain skills, work style, and schedule with verified remote AI projects at Turing, Mercor, and Micro1.">
+  <title>LabMatch Diagnostic | Find Your Best AI Work Match | SonicBloom.dev</title>
+  <meta name="description" content="Take the free 30-second LabMatch diagnostic to match your field, experience, and work style to vetted remote AI training roles across Turing, Mercor, and Micro1.">
   <link rel="canonical" href="https://sonicbloom.dev/labmatch/">
 
-  <!-- Google Ads Global Site Tag & Non-Hijacking Conversion Helper -->
+  <!-- Google Ads Global Site Tag & Compliant Non-Hijacking Conversion Helper -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10932384149"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -47,18 +47,19 @@
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "Free client-side career diagnostic matching domain specialists with verified remote AI evaluation tracks across Turing, Mercor, and Micro1."
+    "description": "Free client-side career diagnostic matching domain specialists with remote AI validation and RLHF contract tracks across Turing, Mercor, and Micro1."
   }
   </script>
 
   <style>
     :root {
       --bg-canvas: #f8fafc;
-      --card-bg: #ffffff;
+      --bg-surface: #ffffff;
       --bg-terminal: #090d16;
       --bg-terminal-card: #111726;
       --text-main: #0f172a;
       --text-muted: #475569;
+      --text-terminal: #f8fafc;
       --text-terminal-muted: #94a3b8;
       --border-light: #e2e8f0;
       --border-subtle: #cbd5e1;
@@ -67,10 +68,12 @@
       --brand-orange-hover: #e65c00;
       --brand-orange-soft: rgba(255, 106, 0, 0.1);
       --rate-green: #10b981;
+      --linkedin-blue: #0a66c2;
+      --linkedin-blue-hover: #084e96;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-mono: 'Space Mono', monospace;
       --max-w: 1140px;
-      --card-shadow: 0 16px 36px -10px rgba(15, 23, 42, 0.08), 0 8px 14px -6px rgba(15, 23, 42, 0.04);
+      --card-shadow: 0 16px 36px -12px rgba(9, 13, 22, 0.1);
     }
 
     * {
@@ -95,8 +98,8 @@
       text-decoration: none;
     }
 
-    /* --- GLOBAL 5-PAGE HEADER --- */
-    .site-header {
+    /* --- PERSISTENT 5-PAGE GLOBAL HEADER --- */
+    .sb-site-header {
       position: sticky;
       top: 0;
       z-index: 100;
@@ -105,7 +108,7 @@
       border-bottom: 1px solid var(--border-light);
     }
 
-    .header-inner {
+    .sb-header-inner {
       max-width: var(--max-w);
       margin: 0 auto;
       padding: 16px 24px;
@@ -116,7 +119,7 @@
       flex-wrap: wrap;
     }
 
-    .brand-logo {
+    .sb-brand-logo {
       display: inline-flex;
       align-items: center;
       gap: 10px;
@@ -127,7 +130,7 @@
       color: var(--text-main);
     }
 
-    .brand-dot {
+    .sb-brand-dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
@@ -141,14 +144,14 @@
       50% { opacity: 0.55; transform: scale(0.88); }
     }
 
-    .site-nav {
+    .sb-site-nav {
       display: flex;
       align-items: center;
       gap: 6px;
       flex-wrap: wrap;
     }
 
-    .nav-link {
+    .sb-nav-link {
       font-family: var(--font-mono);
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -157,18 +160,18 @@
       transition: all 0.2s ease;
     }
 
-    .nav-link:hover {
+    .sb-nav-link:hover {
       color: var(--text-main);
       background: #eef2f6;
     }
 
-    .nav-link[aria-current="page"] {
+    .sb-nav-link[aria-current="page"] {
       color: var(--text-main);
       font-weight: 700;
       background: #e2e8f0;
     }
 
-    .nav-cta {
+    .sb-nav-cta {
       font-family: var(--font-mono);
       font-size: 0.82rem;
       font-weight: 700;
@@ -180,55 +183,55 @@
       transition: all 0.2s ease;
     }
 
-    .nav-cta:hover {
+    .sb-nav-cta:hover {
       background: var(--brand-orange);
       border-color: var(--brand-orange);
       color: #000000;
     }
 
-    /* --- CONTEXT STRIP --- */
-    .context-strip {
+    /* --- CONTEXT BAR --- */
+    .sb-context-strip {
       background: #f1f5f9;
       border-bottom: 1px solid var(--border-light);
       padding: 12px 24px;
     }
 
-    .context-inner {
+    .sb-context-inner {
       max-width: var(--max-w);
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
       font-size: 0.84rem;
       color: var(--text-muted);
     }
 
-    .context-inner strong {
+    .sb-context-inner strong {
       color: var(--text-main);
     }
 
-    .context-inner a {
+    .sb-context-inner a {
       color: var(--brand-orange);
       font-weight: 600;
       text-decoration: underline;
     }
 
-    /* --- MAIN QUIZ STAGE --- */
-    main.quiz-stage {
+    /* --- MAIN WORKSPACE --- */
+    main {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 44px 20px 56px;
+      padding: 40px 20px 56px;
     }
 
-    .quiz-container {
+    .quiz-shell {
       width: 100%;
-      max-width: 720px;
-      background: var(--card-bg);
+      max-width: 740px;
+      background: var(--bg-surface);
       border-radius: 16px;
       border: 1px solid var(--border-subtle);
       box-shadow: var(--card-shadow);
@@ -237,15 +240,16 @@
       flex-direction: column;
     }
 
+    /* Terminal Top Chrome */
     .terminal-topbar {
       background: var(--bg-terminal);
+      color: var(--text-terminal-muted);
       padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-family: var(--font-mono);
       font-size: 0.74rem;
-      color: var(--text-terminal-muted);
     }
 
     .terminal-dots {
@@ -262,10 +266,15 @@
     .t-dot.y { background: #f59e0b; }
     .t-dot.g { background: #10b981; }
 
+    .step-indicator {
+      color: var(--rate-green);
+      font-weight: 700;
+    }
+
     .progress-bar-container {
       width: 100%;
       height: 6px;
-      background: #1e293b;
+      background: #e2e8f0;
     }
 
     .progress-bar {
@@ -275,9 +284,10 @@
       transition: width 0.3s ease;
     }
 
+    /* --- SLIDES --- */
     .slide {
       display: none;
-      padding: 38px 34px;
+      padding: 40px 36px;
     }
 
     .slide.active {
@@ -288,16 +298,17 @@
 
     @media (max-width: 600px) {
       .slide {
-        padding: 26px 20px;
+        padding: 28px 20px;
       }
     }
 
-    .step-badge {
+    .slide-badge {
       align-self: flex-start;
       font-family: var(--font-mono);
       font-size: 0.74rem;
       font-weight: 700;
       text-transform: uppercase;
+      letter-spacing: 0.05em;
       color: var(--brand-orange);
       background: var(--brand-orange-soft);
       border: 1px solid rgba(255, 106, 0, 0.25);
@@ -305,19 +316,20 @@
       border-radius: 999px;
     }
 
-    .slide h1, .slide h2, .slide h3 {
+    .slide h1 {
+      font-size: clamp(1.85rem, 3.6vw, 2.35rem);
       font-weight: 800;
       color: var(--text-main);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-    }
-
-    .slide h1 {
-      font-size: clamp(1.85rem, 3.5vw, 2.25rem);
+      letter-spacing: -0.03em;
+      line-height: 1.18;
     }
 
     .slide h2 {
-      font-size: 1.5rem;
+      font-size: clamp(1.35rem, 2.8vw, 1.65rem);
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
     }
 
     .slide p {
@@ -337,7 +349,7 @@
       grid-template-columns: 1fr 1fr;
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 640px) {
       .option-grid.two-col {
         grid-template-columns: 1fr;
       }
@@ -347,22 +359,37 @@
       background: #f8fafc;
       border: 2px solid var(--border-light);
       color: var(--text-main);
-      padding: 14px 18px;
+      padding: 14px 16px;
       border-radius: 10px;
       font-family: var(--font-sans);
       font-size: 0.96rem;
       font-weight: 600;
       cursor: pointer;
       text-align: left;
-      transition: all 0.18s ease;
+      transition: all 0.16s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
     }
 
-    .btn-option:hover {
+    .btn-option:hover,
+    .btn-option:focus-visible {
       border-color: var(--brand-orange);
-      background: var(--brand-orange-soft);
+      background: #fff7ed;
       color: var(--text-main);
+      outline: none;
     }
 
+    .opt-rate {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--brand-orange);
+      white-space: nowrap;
+    }
+
+    /* Action Bar & Buttons */
     .action-bar {
       display: flex;
       justify-content: space-between;
@@ -382,13 +409,16 @@
       font-size: 0.85rem;
       cursor: pointer;
       border: none;
-      transition: all 0.2s ease;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .btn-back {
       background: #f1f5f9;
       color: var(--text-muted);
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border-light);
     }
 
     .btn-back:hover {
@@ -397,40 +427,46 @@
     }
 
     .btn-next {
-      background: var(--bg-terminal);
-      color: #ffffff;
-    }
-
-    .btn-next:hover {
       background: var(--brand-orange);
       color: #000000;
     }
 
+    .btn-next:hover {
+      background: var(--brand-orange-hover);
+      color: #ffffff;
+    }
+
     .btn-fastpass {
-      background: transparent;
-      color: var(--brand-orange);
-      border: 1px dashed var(--brand-orange);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-transform: uppercase;
+      background: var(--bg-terminal);
+      color: #ffffff;
+      border: 1px solid var(--bg-terminal);
+      letter-spacing: 0.03em;
     }
 
     .btn-fastpass:hover {
-      background: var(--brand-orange-soft);
+      background: var(--brand-orange);
+      border-color: var(--brand-orange);
+      color: #000000;
     }
 
     .btn-linkedin {
-      background: #0a66c2;
+      background: var(--linkedin-blue);
       color: #ffffff;
-      font-family: var(--font-sans);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .btn-linkedin:hover {
-      background: #084e96;
+      background: var(--linkedin-blue-hover);
+    }
+
+    /* Email Input Slide */
+    .input-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
 
     .input-field {
@@ -442,17 +478,28 @@
       font-size: 1rem;
       color: var(--text-main);
       outline: none;
-      margin-top: 8px;
+      transition: border-color 0.2s ease;
     }
 
     .input-field:focus {
       border-color: var(--brand-orange);
     }
 
-    .privacy-microcopy {
-      font-size: 0.8rem !important;
-      color: var(--text-muted);
+    .field-error {
+      display: none;
       margin-top: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #dc2626;
+    }
+
+    .privacy-microcopy {
+      font-size: 0.82rem !important;
+      color: var(--text-muted);
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 10px 14px;
     }
 
     .privacy-microcopy a {
@@ -460,39 +507,57 @@
       text-decoration: underline;
     }
 
-    /* Results Slide */
+    .skip-email-btn {
+      background: transparent;
+      border: none;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+
+    .skip-email-btn:hover {
+      color: var(--brand-orange);
+    }
+
+    /* Results Card (Slide 8) */
     .workprint-box {
       background: var(--bg-terminal);
-      color: #ffffff;
+      color: var(--text-terminal);
       border: 1px solid var(--border-terminal);
       border-radius: 12px;
-      padding: 26px 22px;
+      padding: 26px 24px;
       text-align: center;
     }
 
     .workprint-emojis {
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       letter-spacing: 8px;
       margin-bottom: 10px;
     }
 
     .workprint-box h3 {
-      color: #ffffff;
       font-size: 1.35rem;
-      margin-bottom: 6px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
     }
 
     .workprint-rate {
       font-family: var(--font-mono);
-      font-size: 0.9rem !important;
-      color: var(--brand-orange) !important;
+      font-size: 0.92rem !important;
       font-weight: 700;
+      color: var(--brand-orange) !important;
+      margin-bottom: 8px;
     }
 
     .workprint-desc {
       font-size: 0.9rem !important;
       color: var(--text-terminal-muted) !important;
-      margin-top: 8px;
+      max-width: 480px;
+      margin: 0 auto;
     }
 
     .referral-card {
@@ -502,6 +567,14 @@
       padding: 22px;
       display: flex;
       flex-direction: column;
+      gap: 10px;
+    }
+
+    .referral-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
     }
 
@@ -509,57 +582,57 @@
       font-family: var(--font-mono);
       font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
       color: var(--text-muted);
     }
 
     .partner-name {
-      font-size: 1.2rem !important;
+      font-size: 1.15rem !important;
       font-weight: 800;
       color: var(--text-main) !important;
     }
 
-    .referral-actions {
+    .invite-cta-row {
       display: flex;
       align-items: center;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 8px;
+      margin-top: 4px;
     }
 
-    .btn-partner-apply {
+    .btn-open-invite {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--brand-orange);
-      color: #000000;
+      background: var(--bg-terminal);
+      color: #ffffff;
       font-family: var(--font-mono);
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       font-weight: 700;
       padding: 12px 20px;
       border-radius: 8px;
-      transition: background 0.2s ease;
+      transition: all 0.2s ease;
     }
 
-    .btn-partner-apply:hover {
-      background: var(--brand-orange-hover);
+    .btn-open-invite:hover {
+      background: var(--brand-orange);
+      color: #000000;
     }
 
-    .btn-directory-secondary {
+    .btn-compare-all {
       font-family: var(--font-mono);
       font-size: 0.8rem;
       font-weight: 700;
-      color: var(--text-muted);
+      color: var(--brand-orange);
       text-decoration: underline;
     }
 
-    .rate-footnote {
+    .rate-disclaimer-inline {
       font-size: 0.78rem !important;
-      color: var(--text-muted);
+      color: var(--text-muted) !important;
     }
 
     /* --- GLOBAL COMPLIANCE FOOTER --- */
-    .site-footer {
+    .sb-site-footer {
       background: var(--bg-terminal);
       color: var(--text-terminal-muted);
       border-top: 1px solid var(--border-terminal);
@@ -568,12 +641,12 @@
       line-height: 1.6;
     }
 
-    .footer-inner {
+    .sb-footer-inner {
       max-width: var(--max-w);
       margin: 0 auto;
     }
 
-    .footer-grid {
+    .sb-footer-grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
       gap: 40px;
@@ -582,13 +655,13 @@
     }
 
     @media (max-width: 768px) {
-      .footer-grid {
+      .sb-footer-grid {
         grid-template-columns: 1fr;
         gap: 28px;
       }
     }
 
-    .footer-brand {
+    .sb-footer-brand {
       color: #ffffff;
       font-family: var(--font-mono);
       font-weight: 700;
@@ -599,13 +672,13 @@
       gap: 8px;
     }
 
-    .footer-disclaimer {
+    .sb-footer-disclaimer {
       font-size: 0.82rem;
       color: #94a3b8;
       max-width: 540px;
     }
 
-    .footer-col h4 {
+    .sb-footer-col h4 {
       color: #ffffff;
       font-family: var(--font-mono);
       font-size: 0.82rem;
@@ -614,18 +687,18 @@
       margin-bottom: 14px;
     }
 
-    .footer-links {
+    .sb-footer-links {
       list-style: none;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .footer-links a:hover {
+    .sb-footer-links a:hover {
       color: var(--brand-orange);
     }
 
-    .footer-bottom {
+    .sb-footer-bottom {
       padding-top: 24px;
       display: flex;
       justify-content: space-between;
@@ -639,34 +712,34 @@
 <body>
 
   <!-- Persistent 5-Page Global Header -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="/" class="brand-logo">
-        <span class="brand-dot" aria-hidden="true"></span>
+  <header class="sb-site-header">
+    <div class="sb-header-inner">
+      <a href="/" class="sb-brand-logo">
+        <span class="sb-brand-dot" aria-hidden="true"></span>
         <span>SonicBloom.dev</span>
       </a>
-      <nav class="site-nav" aria-label="Primary Navigation">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/labs.html" class="nav-link">Labs</a>
-        <a href="/labmatch/" class="nav-link" aria-current="page">LabMatch</a>
-        <a href="/updates/" class="nav-link">Updates</a>
-        <a href="/about.html" class="nav-link">About</a>
-        <a href="/labs.html" class="nav-cta">Browse All Roles &rarr;</a>
+      <nav class="sb-site-nav" aria-label="Primary Navigation">
+        <a href="/" class="sb-nav-link">Home</a>
+        <a href="/labs.html" class="sb-nav-link">Labs</a>
+        <a href="/labmatch/" class="sb-nav-link" aria-current="page">LabMatch</a>
+        <a href="/updates/" class="sb-nav-link">Updates</a>
+        <a href="/about.html" class="sb-nav-link">About</a>
+        <a href="/labs.html" class="sb-nav-cta">Browse All Roles &rarr;</a>
       </nav>
     </div>
   </header>
 
-  <!-- Context Bar for Direct Navigation & Disclosures -->
-  <div class="context-strip">
-    <div class="context-inner">
-      <span><strong>LabMatch Quick Check (100% Free):</strong> Answer 5 quick questions to match an AI lab track, or <a href="/labs.html">browse all Turing, Mercor &amp; Micro1 roles directly</a>.</span>
-      <span><a href="/about.html#disclosures">Affiliate &amp; Rate Disclosures</a></span>
+  <!-- Context Strip -->
+  <div class="sb-context-strip">
+    <div class="sb-context-inner">
+      <span><strong>LabMatch Diagnostic (100% Free):</strong> Answer 5 quick questions to find your best AI lab fit, or <a href="/labs.html">browse all 12 roles directly in the Labs Directory</a>.</span>
+      <span><a href="/about.html#disclosures">Rate &amp; Referral Disclosures</a></span>
     </div>
   </div>
 
-  <!-- Centered Quiz Workspace -->
-  <main class="quiz-stage">
-    <div class="quiz-container">
+  <!-- Main LabMatch Diagnostic Container -->
+  <main>
+    <div class="quiz-shell">
       <div class="terminal-topbar">
         <div class="terminal-dots" aria-hidden="true">
           <span class="t-dot r"></span>
@@ -674,16 +747,16 @@
           <span class="t-dot g"></span>
         </div>
         <span>labmatch-engine // v3.0</span>
-        <span style="color: var(--rate-green); font-weight: 700;">READY</span>
+        <span class="step-indicator" id="stepCounter">READY</span>
       </div>
 
-      <div class="progress-bar-container" role="progressbar" aria-label="Quiz Progress">
+      <div class="progress-bar-container" aria-hidden="true">
         <div class="progress-bar" id="progressBar"></div>
       </div>
 
-      <!-- Slide 1: Updated Launch Intro -->
-      <div class="slide active" id="slide-1">
-        <span class="step-badge">30-Second Diagnostic</span>
+      <!-- Slide 1: Welcome / Launch -->
+      <section class="slide active" id="slide-1" aria-label="Welcome">
+        <span class="slide-badge">30-Second Work Check</span>
         <h1>Find out, break in, &amp; become you.</h1>
         <p>
           Focus your growth, clear work blockades, and get invited to leading AI labs. LabMatch is a custom diagnostic designed to fast-track your path to well-paid AI consulting.
@@ -691,34 +764,64 @@
         <div class="action-bar" style="justify-content: flex-start;">
           <button type="button" class="btn btn-next" style="padding: 14px 32px; font-size: 0.95rem;" onclick="nextSlide(2)">LAUNCH &rarr;</button>
         </div>
-      </div>
+      </section>
 
-      <!-- Slide 2: Q1 - Segment / Field (All 10 Matrix Tracks) -->
-      <div class="slide" id="slide-2">
-        <span class="step-badge">Step 1 of 5 // Topic</span>
+      <!-- Slide 2: Q1 - Segment / Field (All 10 quiz.json Tracks) -->
+      <section class="slide" id="slide-2" aria-label="Question 1: Topic">
+        <span class="slide-badge">Question 1 of 5</span>
         <h2>1. What is your favorite topic to work on?</h2>
         <p>Pick the field you know best:</p>
         <div class="option-grid two-col">
-          <button type="button" class="btn-option" onclick="selectDomain('Software Engineering')">💻 Coding &amp; Tech</button>
-          <button type="button" class="btn-option" onclick="selectDomain('Medicine')">🩺 Healthcare &amp; Medicine</button>
-          <button type="button" class="btn-option" onclick="selectDomain('Data Analysis')">📊 Data &amp; Numbers</button>
-          <button type="button" class="btn-option" onclick="selectDomain('Finance')">📈 Finance &amp; Accounting</button>
-          <button type="button" class="btn-option" onclick="selectDomain('Law')">⚖️ Law &amp; Rules</button>
-          <button type="button" class="btn-option" onclick="selectDomain('Arts')">🎨 Art, Video &amp; Design</button>
-          <button type="button" class="btn-option" onclick="selectDomain('Language/Audio')">🎙️ Languages, PR &amp; Audio</button>
-          <button type="button" class="btn-option" onclick="selectDomain('Humanities')">📚 Writing &amp; Research</button>
-          <button type="button" class="btn-option" onclick="selectDomain('Life Sciences')">🧬 Science &amp; Biology</button>
-          <button type="button" class="btn-option" onclick="selectDomain('Business Operations')">🏢 Everyday Business Ops</button>
+          <button type="button" class="btn-option" onclick="selectDomain('Software Engineering')">
+            <span>💻 Coding &amp; Tech</span>
+            <span class="opt-rate">$45–$75/hr*</span>
+          </button>
+          <button type="button" class="btn-option" onclick="selectDomain('Medicine')">
+            <span>🩺 Healthcare &amp; Medicine</span>
+            <span class="opt-rate">$80–$120/hr*</span>
+          </button>
+          <button type="button" class="btn-option" onclick="selectDomain('Arts')">
+            <span>🎬 Art, Video &amp; Design</span>
+            <span class="opt-rate">$40–$90/hr*</span>
+          </button>
+          <button type="button" class="btn-option" onclick="selectDomain('Data Analysis')">
+            <span>📊 Data &amp; Numbers</span>
+            <span class="opt-rate">$45–$80/hr*</span>
+          </button>
+          <button type="button" class="btn-option" onclick="selectDomain('Finance')">
+            <span>📈 Finance &amp; Accounting</span>
+            <span class="opt-rate">$55–$95/hr*</span>
+          </button>
+          <button type="button" class="btn-option" onclick="selectDomain('Law')">
+            <span>⚖️ Law &amp; Rules</span>
+            <span class="opt-rate">$45–$75/hr*</span>
+          </button>
+          <button type="button" class="btn-option" onclick="selectDomain('Language/Audio')">
+            <span>📣 PR, Comms &amp; Audio</span>
+            <span class="opt-rate">$60–$100/hr*</span>
+          </button>
+          <button type="button" class="btn-option" onclick="selectDomain('Life Sciences')">
+            <span>🧬 Science &amp; Biology</span>
+            <span class="opt-rate">$65–$110/hr*</span>
+          </button>
+          <button type="button" class="btn-option" onclick="selectDomain('Humanities')">
+            <span>📚 Writing &amp; Research</span>
+            <span class="opt-rate">$30–$50/hr*</span>
+          </button>
+          <button type="button" class="btn-option" onclick="selectDomain('Business Operations')">
+            <span>🗂️ Everyday Business Ops</span>
+            <span class="opt-rate">$25–$45/hr*</span>
+          </button>
         </div>
         <div class="action-bar">
           <button type="button" class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
           <button type="button" class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
         </div>
-      </div>
+      </section>
 
       <!-- Slide 3: Q2 - Experience in Years -->
-      <div class="slide" id="slide-3">
-        <span class="step-badge">Step 2 of 5 // Experience</span>
+      <section class="slide" id="slide-3" aria-label="Question 2: Experience">
+        <span class="slide-badge">Question 2 of 5</span>
         <h2>2. How many years of experience do you have?</h2>
         <p>Choose the option that fits you best:</p>
         <div class="option-grid">
@@ -731,11 +834,11 @@
           <button type="button" class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
           <button type="button" class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
         </div>
-      </div>
+      </section>
 
       <!-- Slide 4: Q3 - Work Style -->
-      <div class="slide" id="slide-4">
-        <span class="step-badge">Step 3 of 5 // Work Style</span>
+      <section class="slide" id="slide-4" aria-label="Question 3: Work Style">
+        <span class="slide-badge">Question 3 of 5</span>
         <h2>3. How do you like to solve problems?</h2>
         <p>Pick your favorite way to work:</p>
         <div class="option-grid">
@@ -747,11 +850,11 @@
           <button type="button" class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
           <button type="button" class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
         </div>
-      </div>
+      </section>
 
       <!-- Slide 5: Q4 - Learning Style -->
-      <div class="slide" id="slide-5">
-        <span class="step-badge">Step 4 of 5 // Learning Style</span>
+      <section class="slide" id="slide-5" aria-label="Question 4: Learning Style">
+        <span class="slide-badge">Question 4 of 5</span>
         <h2>4. How do you learn best?</h2>
         <p>Choose what works best when learning new things:</p>
         <div class="option-grid">
@@ -763,11 +866,11 @@
           <button type="button" class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
           <button type="button" class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
         </div>
-      </div>
+      </section>
 
       <!-- Slide 6: Q5 - Commitment Level -->
-      <div class="slide" id="slide-6">
-        <span class="step-badge">Step 5 of 5 // Schedule</span>
+      <section class="slide" id="slide-6" aria-label="Question 5: Schedule">
+        <span class="slide-badge">Question 5 of 5</span>
         <h2>5. How much time do you want to spend?</h2>
         <p>Pick your preferred work schedule:</p>
         <div class="option-grid">
@@ -779,87 +882,91 @@
           <button type="button" class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
           <button type="button" class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
         </div>
-      </div>
+      </section>
 
-      <!-- Slide 7: Penultimate Slide - Email Capture (With Optional Fast Pass Bypass) -->
-      <div class="slide" id="slide-7">
-        <span class="step-badge">Save Your Workprint</span>
-        <h2>Where should we save your match?</h2>
-        <p>Enter your email below to unlock your custom AI Workprint and partner lab invite, or use Fast Pass to view immediately.</p>
+      <!-- Slide 7: Penultimate Slide - Email Save & Unlock -->
+      <section class="slide" id="slide-7" aria-label="Save Your Match">
+        <span class="slide-badge">Almost Done</span>
+        <h2>Save your AI Workprint &amp; see your match</h2>
+        <p>Enter your email below to save your custom match in your browser, or skip straight to your lab invite.</p>
         <div>
-          <label for="userEmailInput" style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">YOUR EMAIL ADDRESS</label>
-          <input type="email" id="userEmailInput" class="input-field" placeholder="name@example.com">
-          <p class="privacy-microcopy">
-            Zero-resale guarantee: stored locally in your browser per our <a href="/privacy.html">Privacy Policy</a>.
-          </p>
+          <label for="userEmailInput" class="input-label">Your Email Address</label>
+          <input type="email" id="userEmailInput" class="input-field" placeholder="name@example.com" autocomplete="email">
+          <div id="emailErrorMsg" class="field-error">Please enter a valid email address (with @), or click "Skip &amp; See Match" below.</div>
         </div>
+        <p class="privacy-microcopy">
+          <strong>Zero-Resale Privacy Promise:</strong> Your choices stay stored locally on your device—SonicBloom never sells your email to data brokers. See our <a href="/privacy.html">Privacy Policy</a>.
+        </p>
         <div class="action-bar">
           <button type="button" class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button type="button" class="btn btn-fastpass" onclick="triggerFastPass()">Skip Email</button>
+          <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <button type="button" class="skip-email-btn" onclick="triggerFastPass()">Skip &amp; See Match</button>
             <button type="button" class="btn btn-next" onclick="submitEmailAndFinish()">See My Match &rarr;</button>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- Slide 8: Custom Results & LinkedIn Share -->
-      <div class="slide" id="slide-8">
-        <span class="step-badge">Calibration Complete</span>
+      <section class="slide" id="slide-8" aria-label="Your AI Workprint Results">
+        <span class="slide-badge">Match Ready</span>
         <h2>Your AI Workprint is Ready!</h2>
 
         <div class="workprint-box">
           <div class="workprint-emojis" id="workprintEmojiDisplay">⚡ 🔍 🛠️ 🛡️</div>
           <h3 id="workprintRoleDisplay">LLM Code Evaluator</h3>
-          <p class="workprint-rate" id="workprintRateDisplay">Published Band: $45 - $75/hr*</p>
+          <p class="workprint-rate" id="workprintRateDisplay">Published Pay Band: $45 - $75/hr*</p>
           <p class="workprint-desc" id="workprintStyleDesc">You spot mistakes and test things to make them work better.</p>
         </div>
 
         <div class="referral-card" id="standardReferralCard">
-          <h4>Matched Partner Lab (Sponsored Referral)</h4>
+          <div class="referral-card-top">
+            <h4>Your Matched Partner AI Lab</h4>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">Official Portal &bull; Sponsored</span>
+          </div>
           <p class="partner-name" id="labPartnerName">Turing</p>
-          <div class="referral-actions">
+          <div class="invite-cta-row">
             <a href="https://work.turing.com/r/lZvCS-A7-T"
                id="directLabUrl"
-               class="btn-partner-apply"
+               class="btn-open-invite"
                target="_blank"
                rel="sponsored noopener">
               Apply at Turing &#8599;
             </a>
-            <a href="/labs.html" class="btn-directory-secondary">Compare all 12 roles in Labs Directory &rarr;</a>
+            <a href="/labs.html" id="compareDomainLink" class="btn-compare-all">Compare all 12 roles &rarr;</a>
           </div>
-          <p class="rate-footnote">
-            *Published independent-contractor range. Final pay and hours depend on partner lab screening and active project demand.
+          <p class="rate-disclaimer-inline">
+            *Published independent-contractor pay ranges depend on passing the partner lab's screening check and open project demand. SonicBloom may earn a referral fee at zero cost to you.
           </p>
         </div>
 
         <div class="action-bar">
-          <button type="button" class="btn btn-back" onclick="nextSlide(2)">&larr; Retake Quiz</button>
+          <button type="button" class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
           <button type="button" class="btn btn-linkedin" onclick="shareToLinkedIn()">
             <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
             Share on LinkedIn
           </button>
         </div>
-      </div>
+      </section>
     </div>
   </main>
 
   <!-- Global Compliance & Identity Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-grid">
+  <footer class="sb-site-footer">
+    <div class="sb-footer-inner">
+      <div class="sb-footer-grid">
         <div>
-          <div class="footer-brand">
-            <span class="brand-dot" aria-hidden="true"></span>
+          <div class="sb-footer-brand">
+            <span class="sb-brand-dot" aria-hidden="true"></span>
             <span>SonicBloom.dev</span>
           </div>
-          <p class="footer-disclaimer">
+          <p class="sb-footer-disclaimer">
             <strong>Affiliate &amp; Earnings Disclosure:</strong> SonicBloom is an independent research and career directory operated by SonicBloom Studio. We participate in referral and affiliate programs with third-party AI talent platforms (including Turing, Mercor, and Micro1) and may earn a commission when qualified candidates apply or are placed through outbound partner links. Stated hourly rates reflect published partner ranges for independent contractors, vary by credential verification and project demand, and do not constitute a guarantee of employment or income.
           </p>
         </div>
 
-        <div class="footer-col">
+        <div class="sb-footer-col">
           <h4>Platform</h4>
-          <ul class="footer-links">
+          <ul class="sb-footer-links">
             <li><a href="/">Home</a></li>
             <li><a href="/labs.html">Partner Labs Directory</a></li>
             <li><a href="/labmatch/">LabMatch Diagnostic</a></li>
@@ -867,9 +974,9 @@
           </ul>
         </div>
 
-        <div class="footer-col">
+        <div class="sb-footer-col">
           <h4>Trust &amp; Legal</h4>
-          <ul class="footer-links">
+          <ul class="sb-footer-links">
             <li><a href="/about.html">About SonicBloom</a></li>
             <li><a href="/about.html#disclosures">Affiliate &amp; Rate Disclaimers</a></li>
             <li><a href="/privacy.html">Privacy Policy &amp; Terms</a></li>
@@ -878,7 +985,7 @@
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="sb-footer-bottom">
         <span>&copy; 2026 SonicBloom. All rights reserved.</span>
         <span>Independent Research &amp; Talent Routing Directory &bull; United States</span>
       </div>
