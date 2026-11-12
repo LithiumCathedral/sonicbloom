@@ -1,336 +1,165 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SonicBloom LabMatch | Quick Work Check</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://sonicbloom.dev/labmatch/">
+
+  <!-- Google Ads Global Site Tag & Non-Hijacking Conversion Helper -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10932384149"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-10932384149');
+
+    function gtag_report_conversion(partnerName) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-10932384149/Wm11CMy3iZgYEJXj-9wo',
+          'transport_type': 'beacon',
+          'event_category': partnerName || 'LabMatch_Diagnostic',
+          'event_label': 'LabMatch_Outbound_Route'
+        });
+      }
+      return true;
+    }
+  </script>
+
   <style>
-    :root {
-      /* Dark Terminal Theme Variables */
-      --bg-canvas: transparent; /* Allows iframe integration to blend with parent */
-      --card-bg: #090d16;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --border-subtle: #1e293b;
-      --border-focus: #334155;
-      
-      --brand-primary: #ff6a00;
-      --brand-primary-hover: #e05d00;
-      --brand-primary-dim: rgba(255, 106, 0, 0.12);
-      
-      --accent-fastpass: transparent;
-      --accent-fastpass-hover: rgba(255, 106, 0, 0.1);
-      
-      --rate-green: #34d399;
-      --card-shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
+    /* Namespaced Global Header & Footer Wrapper (Zero Collision with LabMatch UI) */
+    .sb-site-header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(248, 250, 252, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e2e8f0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: var(--bg-canvas);
-      color: var(--text-main);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
+    .sb-header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 16px 24px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 680px;
-      background: var(--card-bg);
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--card-shadow);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .progress-bar-container { width: 100%; height: 6px; background: #05070c; }
-    .progress-bar { width: 14%; height: 100%; background: var(--brand-primary); transition: width 0.3s ease; }
-
-    .slide { display: none; padding: 40px 32px; }
-    .slide.active { display: flex; flex-direction: column; gap: 20px; animation: fadeIn 0.3s ease; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    h1, h2, h3 { 
-      font-family: 'Space Mono', monospace; 
-      font-weight: 700; 
-      color: var(--brand-primary); 
-      line-height: 1.3; 
-    }
-    
-    p { 
-      color: var(--text-muted); 
-      font-size: 0.95rem; 
-      line-height: 1.6; 
-    }
-
-    .option-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px; }
-
-    .btn-option {
-      background: #0d121f;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      padding: 16px 20px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      font-family: 'Inter', sans-serif;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.2s ease;
-    }
-    .btn-option:hover {
-      border-color: var(--brand-primary);
-      background: var(--brand-primary-dim);
-      color: var(--brand-primary);
-    }
-
-    .action-bar {
-      display: flex;
       justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .sb-brand-logo {
+      display: inline-flex;
       align-items: center;
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px dashed var(--border-subtle);
-    }
-
-    .btn {
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: 700;
+      gap: 10px;
       font-family: 'Space Mono', monospace;
-      font-size: 0.85rem;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s ease;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.5px;
+      color: #0f172a;
+      text-decoration: none;
     }
-    
-    .btn-back { background: transparent; color: var(--text-muted); border: 1px solid var(--border-subtle); }
-    .btn-back:hover { color: var(--text-main); border-color: var(--border-focus); }
-    
-    .btn-next { background: var(--brand-primary); color: #fff; margin-left: auto; }
-    .btn-next:hover { background: var(--brand-primary-hover); }
-
-    .btn-fastpass {
-      background: var(--accent-fastpass);
-      border: 1px dashed var(--brand-primary);
-      color: var(--brand-primary);
+    .sb-brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ff6a00;
+      box-shadow: 0 0 8px rgba(255, 106, 0, 0.6);
+    }
+    .sb-site-nav {
       display: flex;
       align-items: center;
       gap: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      flex-wrap: wrap;
     }
-    .btn-fastpass:hover { background: var(--accent-fastpass-hover); }
-
-    .btn-linkedin {
-      background: #0a66c2;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Inter', sans-serif;
-    }
-    .btn-linkedin:hover { background: #084e96; }
-
-    .input-field {
-      width: 100%;
-      padding: 14px 18px;
-      background: #05070c;
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-family: 'Inter', sans-serif;
-      color: var(--text-main);
-      outline: none;
-      margin-top: 8px;
-      transition: border-color 0.2s;
-    }
-    .input-field:focus { border-color: var(--brand-primary); }
-
-    .workprint-box {
-      background: #05070c;
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 28px;
-      text-align: center;
-    }
-    .workprint-emojis { font-size: 2.2rem; letter-spacing: 8px; margin: 12px 0; }
-
-    .referral-card {
-      background: #0d121f;
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 24px;
-      margin-top: 16px;
-    }
-    
-    .referral-card a {
-      display: inline-block;
-      margin-top: 16px;
-      background: var(--brand-primary);
-      color: #fff;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: 700;
+    .sb-nav-link {
       font-family: 'Space Mono', monospace;
       font-size: 0.85rem;
-      transition: background 0.2s;
+      color: #475569;
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
-    .referral-card a:hover { background: var(--brand-primary-hover); }
+    .sb-nav-link:hover { color: #0f172a; background: #eef2f6; }
+    .sb-nav-link[aria-current="page"] { color: #0f172a; font-weight: 700; background: #e2e8f0; }
+    .sb-nav-cta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: #090d16;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .sb-nav-cta:hover { background: #ff6a00; color: #000000; }
+
+    .sb-context-strip {
+      background: #f8fafc;
+      color: #334155;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 18px 24px;
+      font-family: 'Inter', sans-serif;
+    }
+    .sb-context-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+    .sb-context-inner strong { color: #0f172a; }
+    .sb-context-inner a { color: #ff6a00; font-weight: 600; text-decoration: underline; }
+
+    .sb-site-footer {
+      background: #090d16;
+      color: #94a3b8;
+      border-top: 1px solid #1e293b;
+      padding: 56px 24px 40px;
+      margin-top: auto;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+    .sb-footer-inner { max-width: 1140px; margin: 0 auto; }
+    .sb-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid #1e293b;
+    }
+    @media (max-width: 768px) {
+      .sb-footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+    .sb-footer-brand {
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sb-footer-disclaimer { font-size: 0.82rem; color: #94a3b8; max-width: 540px; }
+    .sb-footer-col h4 {
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+    .sb-footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .sb-footer-links a { color: #94a3b8; text-decoration: none; }
+    .sb-footer-links a:hover { color: #ff6a00; }
+    .sb-footer-bottom {
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+    }
   </style>
-</head>
-<body>
-
-<div class="container">
-  <div class="progress-bar-container">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
-
-  <!-- Slide 1: Welcome -->
-  <div class="slide active" id="slide-1">
-    <h1 style="font-size: 2.2rem; margin-bottom: 8px; letter-spacing: -0.5px;">Find out, break in, & become you.</h1>
-    <p style="margin-bottom: 24px;">
-      Focus your growth, clear work blockades, and get invited to leading AI labs. Labmatch is a custom diagnostic designed to fast-track your path to well-paid AI consulting.
-    </p>
-    
-    <div style="display: flex; justify-content: flex-start;">
-      <button class="btn btn-next" style="padding: 14px 32px; font-size: 1.1rem;" onclick="nextSlide(2)">LAUNCH &rarr;</button>
-    </div>
-  </div>
-
-  <!-- Slide 2: Q1 - Segment / Field -->
-  <div class="slide" id="slide-2">
-    <h2>1. What is your favorite topic to work on?</h2>
-    <p>Pick the field you know best:</p>
-    <div class="option-grid">
-      <!-- Strings map precisely to the quiz.json file -->
-      <button class="btn-option" onclick="selectDomain('Software Engineering')">💻 Coding & Tech</button>
-      <button class="btn-option" onclick="selectDomain('Medicine')">🩺 Healthcare & Medicine</button>
-      <button class="btn-option" onclick="selectDomain('Humanities')">📚 Writing & Reading</button>
-      <button class="btn-option" onclick="selectDomain('Data Analysis')">📊 Data & Numbers</button>
-      <button class="btn-option" onclick="selectDomain('Law')">⚖️ Law & Rules</button>
-      <button class="btn-option" onclick="selectDomain('Business Operations')">📈 Money & Business</button>
-    </div>
-    <div class="action-bar">
-      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
-    </div>
-  </div>
-
-  <!-- Slide 3: Q2 - Experience in Years -->
-  <div class="slide" id="slide-3">
-    <h2>2. How many years of experience do you have?</h2>
-    <p>Choose the option that fits you best:</p>
-    <div class="option-grid">
-      <button class="btn-option" onclick="selectYears('Under 1 year')">🌱 Under 1 year (Just starting out)</button>
-      <button class="btn-option" onclick="selectYears('1 to 3 years')">🚀 1 to 3 years (Some good practice)</button>
-      <button class="btn-option" onclick="selectYears('3 to 5 years')">⭐ 3 to 5 years (Solid background)</button>
-      <button class="btn-option" onclick="selectYears('5+ years')">🏆 5+ years (Expert level)</button>
-    </div>
-    <div class="action-bar">
-      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
-    </div>
-  </div>
-
-  <!-- Slide 4: Q3 - Work Style -->
-  <div class="slide" id="slide-4">
-    <h2>3. How do you like to solve problems?</h2>
-    <p>Pick your favorite way to work:</p>
-    <div class="option-grid">
-      <button class="btn-option" onclick="selectWorkStyle('Bug Finder')">🔍 Bug Finder: I like finding mistakes and fixing them.</button>
-      <button class="btn-option" onclick="selectWorkStyle('System Builder')">📐 System Builder: I like neat steps and clear organization.</button>
-      <button class="btn-option" onclick="selectWorkStyle('Creative Thinker')">💡 Creative Thinker: I like trying new ideas and brainstorming.</button>
-    </div>
-    <div class="action-bar">
-      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
-    </div>
-  </div>
-
-  <!-- Slide 5: Q4 - Learning Style -->
-  <div class="slide" id="slide-5">
-    <h2>4. How do you learn best?</h2>
-    <p>Choose what works best when learning new things:</p>
-    <div class="option-grid">
-      <button class="btn-option" onclick="selectLearningStyle('Visual')">👁️ Visual: Watching videos and seeing pictures.</button>
-      <button class="btn-option" onclick="selectLearningStyle('Audio')">🎧 Audio: Listening to guides and spoken words.</button>
-      <button class="btn-option" onclick="selectLearningStyle('Hands-On')">✍️ Hands-On: Reading instructions and doing it myself.</button>
-    </div>
-    <div class="action-bar">
-      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
-    </div>
-  </div>
-
-  <!-- Slide 6: Q5 - Commitment Level -->
-  <div class="slide" id="slide-6">
-    <h2>5. How much time do you want to spend?</h2>
-    <p>Pick your preferred work schedule:</p>
-    <div class="option-grid">
-      <button class="btn-option" onclick="selectCommitment('Full-Time')">🏢 Full-Time (30+ hours a week)</button>
-      <button class="btn-option" onclick="selectCommitment('Part-Time')">⏱️ Part-Time (10 to 20 hours a week)</button>
-      <button class="btn-option" onclick="selectCommitment('Flexible')">🎯 Flexible (Pick my own hours whenever I want)</button>
-    </div>
-    <div class="action-bar">
-      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-      <button class="btn btn-fastpass" onclick="triggerFastPass()">⚡ FAST PASS</button>
-    </div>
-  </div>
-
-  <!-- Slide 7: Penultimate Slide - Email Capture -->
-  <div class="slide" id="slide-7">
-    <h2>Where should we send your results?</h2>
-    <p>Type your email address below to unlock your custom AI Work match and pay rate.</p>
-    <div style="margin-top: 12px;">
-      <label for="userEmailInput" style="font-size: 0.75rem; font-family: 'Space Mono', monospace; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.5px;">YOUR EMAIL ADDRESS</label>
-      <input type="email" id="userEmailInput" class="input-field" placeholder="operator@domain.com" required />
-    </div>
-    <div class="action-bar">
-      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-      <button class="btn btn-next" onclick="submitEmailAndFinish()">See My Match &rarr;</button>
-    </div>
-  </div>
-
-  <!-- Slide 8: Custom Results & LinkedIn Share -->
-  <div class="slide" id="slide-8">
-    <h2>Your AI Workprint is Ready!</h2>
-    <div class="workprint-box">
-      <div class="workprint-emojis" id="workprintEmojiDisplay">⚡️ 🔍 🛠️ 🛡️</div>
-      <h3 id="workprintRoleDisplay" style="font-size: 1.3rem; margin-bottom: 6px;">Code Helper</h3>
-      <p id="workprintRateDisplay" style="font-family: 'Space Mono', monospace; color: var(--rate-green); font-size: 0.85rem;">Estimated Pay: $45 - $65 per hour</p>
-    </div>
-    <div class="referral-card" id="standardReferralCard">
-      <h4 style="font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--text-main); margin-bottom: 4px;">Your Matched AI Lab</h4>
-      <p id="labPartnerName">Mercor Code Lab</p>
-      <a href="https://t.mercor.com/rrVyb" id="directLabUrl" target="_blank" rel="noopener">Open Lab Invite &rarr;</a>
-    </div>
-    <div class="action-bar">
-      <button class="btn btn-back" onclick="prevSlide()">&larr; Back</button>
-      <button class="btn btn-linkedin" onclick="shareToLinkedIn()">
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-        Share on LinkedIn
-      </button>
-    </div>
-  </div>
-</div>
-
-<script src="labmatch-router.js"></script>
-</body>
-</html>
