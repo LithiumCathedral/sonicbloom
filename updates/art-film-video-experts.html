@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art, Film, Video &amp; 3D AI Evaluators Guide &amp; Roles | SonicBloom</title>
+  <meta name="description" content="Educational field guide for Film Editors, Cinematographers, 3D Artists, VFX Supervisors, and Art Directors entering Multimodal AI RLHF ($50–$120/hr). Includes downloadable 8-slide briefing deck.">
+  <link rel="canonical" href="https://sonicbloom.dev/updates/art-film-video-experts.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sonicbloom.dev/updates/art-film-video-experts.html">
+  <meta property="og:title" content="Art, Film, Video &amp; 3D AI Evaluators Guide &amp; Roles | SonicBloom">
+  <meta property="og:description" content="How directors, editors, DPs, and 3D generalists evaluate video physics, lighting continuity, and mesh topology for frontier AI labs ($50–$120/hr).">
+  <meta property="og:site_name" content="SonicBloom">
+
+  <!-- Google Tag (AW-10932384149) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10932384149"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-10932384149');
+    function trackPartnerClick(partnerName) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-10932384149/Wm11CMy3iZgYEJXj-9wo',
+          'event_label': partnerName
+        });
+      }
+    }
+  </script>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Article & FAQPage JSON-LD Schema -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Multimodal AI Evaluation: How Film, Video & 3D Specialists Train Generative Media Models",
+      "description": "An operational guide explaining how editors, cinematographers, VFX artists, and 3D generalists audit temporal continuity, lighting physics, and mesh topology in multimodal RLHF.",
+      "datePublished": "2026-11-16",
+      "dateModified": "2026-11-16",
+      "author": {
+        "@type": "Organization",
+        "name": "SonicBloom Studio",
+        "url": "https://sonicbloom.dev/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SonicBloom",
+        "url": "https://sonicbloom.dev/"
+      },
+      "mainEntityOfPage": "https://sonicbloom.dev/updates/art-film-video-experts.html"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What do Art, Film, and Video AI Evaluators actually do day-to-day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Creative and Multimodal AI Evaluators perform asynchronous human-in-the-loop (HITL) audits on video, image, audio, and 3D generation models. Daily tasks include side-by-side clip ranking for temporal consistency and camera physics, writing dense frame-accurate shot captions using real cinematography and lighting terminology, and scoring 3D meshes or compositing outputs against multi-constraint prompts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my personal portfolio artwork or unreleased studio footage used to train AI models?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Your portfolio reel is reviewed solely during onboarding to verify production caliber. Once contracted, you evaluate synthetic prompts and lab-supplied benchmark outputs—never uploading unreleased client dailies, studio rigs, or copyrighted personal artwork into training queues."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What tools and background help creative professionals qualify for higher hourly tiers ($70–$120/hr)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "While 3D art and video editing baseline queues start around $50–$60/hr, senior editors, cinematographers, colorists, performance directors, and VFX compositing supervisors with verifiable credits in DaVinci Resolve, Avid, Nuke, Blender, Maya, or Unreal Engine 5 routinely qualify for $70–$120/hr specialty cohorts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do partner labs structure creative and multimedia evaluation contracts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Partner networks such as Mercor, Turing, and Micro1 structure creative evaluations as flexible 1099 independent contractor sprints. Candidates complete a structured portfolio and visual critique assessment once to unlock asynchronous evaluation queues paid weekly or biweekly in USD."
+          }
+        }
+      ]
+    }
+  ]
+  </script>
+
+  <style>
+    :root {
+      --bg-canvas: #f8fafc;
+      --surface-white: #ffffff;
+      --terminal-bg: #090d16;
+      --terminal-card: #111827;
+      --terminal-border: #1e293b;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --term-text: #f8fafc;
+      --term-muted: #94a3b8;
+      --border-light: #e2e8f0;
+      --orange: #ff6a00;
+      --orange-hover: #e05d00;
+      --orange-tint: rgba(255, 106, 0, 0.1);
+      --green: #10b981;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg-canvas); color: var(--text-main); font-family: var(--font-sans); line-height: 1.65; }
+
+    /* Persistent 5-Item Global Header */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 1rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .brand-logo {
+      font-family: var(--font-mono); font-weight: 700; font-size: 1.05rem;
+      color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .brand-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--orange);
+      box-shadow: 0 0 8px var(--orange); animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .global-nav { display: flex; gap: 1.5rem; list-style: none; font-family: var(--font-mono); font-size: 0.85rem; }
+    .global-nav a { color: var(--text-muted); text-decoration: none; transition: color 0.15s ease; }
+    .global-nav a:hover, .global-nav a.active { color: var(--orange); font-weight: 700; }
+
+    .page-wrap { max-width: 1040px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+    .breadcrumb { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .breadcrumb a { color: var(--orange); text-decoration: none; }
+
+    .hero-block {
+      background: var(--surface-white); border: 1px solid var(--border-light);
+      border-radius: 12px; padding: 2.5rem; margin-bottom: 2.5rem;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    }
+    .kicker {
+      display: inline-block; font-family: var(--font-mono); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.06em; background: var(--orange-tint);
+      color: var(--orange); padding: 0.25rem 0.65rem; border-radius: 4px; font-weight: 700; margin-bottom: 1rem;
+    }
+    h1 { font-size: 2.2rem; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .lead { font-size: 1.08rem; color: var(--text-muted); max-width: 820px; }
+
+    .edu-section { margin-bottom: 3rem; }
+    .section-heading { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .section-sub { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+    .pillar-card {
+      background: var(--surface-white); border: 1px solid var(--border-light);
+      border-top: 3px solid var(--orange); border-radius: 8px; padding: 1.5rem;
+    }
+    .pillar-num { font-family: var(--font-mono); font-size: 0.75rem; color: var(--orange); font-weight: 700; margin-bottom: 0.5rem; }
+    .pillar-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .pillar-card p { font-size: 0.92rem; color: var(--text-muted); }
+
+    .table-wrap { overflow-x: auto; background: var(--surface-white); border: 1px solid var(--border-light); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--border-light); }
+    th { background: #f1f5f9; font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; color: var(--text-main); }
+
+    /* Interactive Slidedeck + Content Offer */
+    .deck-offer-shell {
+      background: var(--terminal-bg); color: var(--term-text); border: 1px solid var(--terminal-border);
+      border-radius: 12px; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 16px 36px rgba(9, 13, 22, 0.16);
+    }
+    .deck-topbar {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 1rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--terminal-border); margin-bottom: 1.5rem;
+    }
+    .deck-badge { font-family: var(--font-mono); font-size: 0.75rem; color: var(--green); }
+    .deck-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 1.75rem; align-items: stretch; }
+    @media (max-width: 820px) { .deck-grid { grid-template-columns: 1fr; } }
+    .slide-viewport {
+      background: var(--terminal-card); border: 1px solid var(--terminal-border); border-radius: 8px;
+      padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 270px;
+    }
+    .slide-frame { display: none; }
+    .slide-frame.active { display: block; }
+    .slide-index { font-family: var(--font-mono); font-size: 0.72rem; color: var(--orange); margin-bottom: 0.6rem; }
+    .slide-frame h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: #ffffff; }
+    .slide-frame p, .slide-frame li { font-size: 0.92rem; color: var(--term-muted); }
+    .slide-frame ul { padding-left: 1.2rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .slide-controls {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed var(--terminal-border);
+    }
+    .slide-btn {
+      background: transparent; border: 1px solid var(--terminal-border); color: var(--term-text);
+      font-family: var(--font-mono); font-size: 0.78rem; padding: 0.45rem 0.9rem; border-radius: 4px; cursor: pointer;
+    }
+    .slide-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+    .offer-cta-box {
+      background: rgba(255, 106, 0, 0.06); border: 1px dashed var(--orange); border-radius: 8px;
+      padding: 1.6rem; display: flex; flex-direction: column; justify-content: center; gap: 1rem;
+    }
+    .offer-cta-box h3 { font-size: 1.15rem; color: #ffffff; }
+    .offer-cta-box p { font-size: 0.88rem; color: var(--term-muted); }
+    .btn-download {
+      display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem;
+      background: var(--orange); color: #000000; font-family: var(--font-mono); font-weight: 700;
+      font-size: 0.85rem; text-decoration: none; padding: 0.85rem 1.2rem; border-radius: 6px;
+    }
+    .btn-download:hover { background: var(--orange-hover); }
+    .offer-meta { font-family: var(--font-mono); font-size: 0.72rem; color: var(--term-muted); }
+
+    /* LabMatch Banner */
+    .labmatch-banner {
+      background: var(--surface-white); border: 1px solid var(--border-light); border-left: 4px solid var(--orange);
+      border-radius: 8px; padding: 1.4rem 1.75rem; margin-bottom: 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .btn-outline {
+      font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; color: var(--orange);
+      border: 1px solid var(--orange); padding: 0.65rem 1.1rem; border-radius: 6px; text-decoration: none;
+    }
+    .btn-outline:hover { background: var(--orange); color: #000000; }
+
+    /* Role Directory */
+    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .filter-btn {
+      background: var(--surface-white); border: 1px solid var(--border-light); color: var(--text-muted);
+      font-family: var(--font-mono); font-size: 0.78rem; padding: 0.5rem 0.9rem; border-radius: 4px; cursor: pointer;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--terminal-bg); color: #ffffff; border-color: var(--terminal-bg); }
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.25rem; margin-bottom: 3rem; }
+    .role-card {
+      background: var(--terminal-bg); color: var(--term-text); border: 1px solid var(--terminal-border);
+      border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.95rem;
+    }
+    .role-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; }
+    .role-title { font-size: 1.12rem; font-weight: 700; color: #ffffff; }
+    .role-rate { font-family: var(--font-mono); font-size: 0.92rem; color: var(--green); font-weight: 700; }
+    .role-tags { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+    .tag {
+      font-family: var(--font-mono); font-size: 0.7rem; padding: 0.18rem 0.5rem; border-radius: 4px;
+      background: var(--terminal-card); border: 1px solid var(--terminal-border); color: var(--term-muted);
+    }
+
+    /* Two-Fragment Job Description Bullets */
+    .job-desc {
+      color: var(--term-muted); font-size: 0.88rem; line-height: 1.5;
+      flex-grow: 1; display: flex; flex-direction: column; gap: 0.55rem;
+    }
+    .job-desc p { margin: 0; padding-left: 0.9rem; position: relative; }
+    .job-desc p::before {
+      content: '>'; position: absolute; left: 0; color: var(--orange);
+      font-family: var(--font-mono); font-weight: 700;
+    }
+    .job-desc strong { color: #e2e8f0; font-weight: 600; }
+
+    .role-footer {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 0.75rem; padding-top: 0.85rem; border-top: 1px dashed var(--terminal-border); margin-top: auto;
+    }
+    .btn-partner {
+      background: var(--orange); color: #000000; font-family: var(--font-mono); font-size: 0.8rem;
+      font-weight: 700; text-decoration: none; padding: 0.55rem 1.05rem; border-radius: 4px; text-transform: uppercase;
+    }
+    .btn-partner:hover { background: var(--orange-hover); }
+
+    /* FAQ */
+    .faq-section { margin-bottom: 2rem; }
+    details.faq-item {
+      background: var(--surface-white); border: 1px solid var(--border-light); border-radius: 8px;
+      padding: 1.1rem 1.35rem; margin-bottom: 0.85rem;
+    }
+    details.faq-item summary {
+      font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
+    }
+    details.faq-item p { margin-top: 0.85rem; font-size: 0.94rem; color: var(--text-muted); }
+
+    /* Footer */
+    .site-footer {
+      background: var(--terminal-bg); color: var(--term-muted); border-top: 1px solid var(--terminal-border);
+      padding: 2.5rem 1.5rem; font-size: 0.85rem;
+    }
+    .footer-inner { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.78rem; }
+    .footer-links a { color: var(--term-text); text-decoration: none; }
+    .footer-links a:hover { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- Persistent 5-Page Global Header -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">
+        <span class="brand-dot"></span>
+        SonicBloom
+      </a>
+      <nav aria-label="Primary Navigation">
+        <ul class="global-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/labs.html">Labs</a></li>
+          <li><a href="/labmatch/">LabMatch</a></li>
+          <li><a href="/updates/" class="active">Updates</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="breadcrumb">
+      <a href="/updates/">&larr; Back to Updates</a> / Sector Briefing: Art, Film, Video &amp; 3D RLHF
+    </div>
+
+    <article>
+      <header class="hero-block">
+        <span class="kicker">Multimodal Creative AI Briefing &bull; Updated Nov 2026</span>
+        <h1>Multimodal AI Evaluation: How Film, Video &amp; 3D Specialists Train Generative Media Models</h1>
+        <p class="lead">
+          Video diffusion and text-to-3D foundation models can render photorealistic frames in seconds, yet routinely violate camera axis rules, morph prop geometry, and break lighting continuity. Learn how Film Editors, Cinematographers, 3D Generalists, and VFX Supervisors monetize production craft in asynchronous RLHF queues ($50–$120/hr)—and download our 8-slide Multimodal Creative Briefing below.
+        </p>
+      </header>
+
+      <!-- Educational Section: 3 Operational Layers -->
+      <section class="edu-section" aria-labelledby="creative-layers-heading">
+        <h2 class="section-heading" id="creative-layers-heading">Why Multimodal Labs Rely on Production Craft</h2>
+        <p class="section-sub">
+          Unlike generic image tagging, frontier video and 3D training pipelines require seasoned visual storytellers and technical artists to enforce real-world physical and editorial grammar across three operational layers:
+        </p>
+
+        <div class="pillar-grid">
+          <div class="pillar-card">
+            <div class="pillar-num">01 / TEMPORAL &amp; EDITORIAL CONTINUITY</div>
+            <h3>Camera, Axis &amp; Pacing Grammar</h3>
+            <p>Editors and cinematographers flag 180-degree eyeline flips, unnatural focal-length warping, and broken object permanence across multi-shot video sequences.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">02 / SPATIAL &amp; SHADER TOPOLOGY</div>
+            <h3>3D Mesh, Rigging &amp; PBR Audits</h3>
+            <p>3D generalists and VFX technical artists inspect generated assets for non-manifold geometry, UV seams, rigging deformation defects, and baked vs. physically based lighting.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">03 / DENSE PRODUCTION CAPTIONING</div>
+            <h3>Deterministic Shot Breakdowns</h3>
+            <p>Visual directors translate abstract clips into frame-accurate technical metadata—specifying lens focal length, key-to-fill ratios, color palettes, and foley sync cues.</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Production Dimension</th>
+                <th>Traditional Commercial / Agency Freelance</th>
+                <th>Multimodal AI Evaluation (Video, 3D &amp; Art)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Primary Deliverable</strong></td>
+                <td>Client revisions, render deadlines &amp; asset delivery</td>
+                <td>Pairwise clip ranking, rubric scoring &amp; dense shot captions</td>
+              </tr>
+              <tr>
+                <td><strong>Client Revision Loops</strong></td>
+                <td>Multi-round subjective stakeholder notes</td>
+                <td>Deterministic criterion-referenced project rubrics</td>
+              </tr>
+              <tr>
+                <td><strong>Scheduling Structure</strong></td>
+                <td>Crunch windows &amp; live set/post-house hours</td>
+                <td>100% asynchronous remote queues between productions</td>
+              </tr>
+              <tr>
+                <td><strong>Observed Partner Rate Bands</strong></td>
+                <td>Project day-rates subject to scope creep</td>
+                <td>$50–$60/hr (3D/Video Editing) up to $70–$120/hr (DP, VFX &amp; Post-Production)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Downloadable Slidedeck Content Offer + Interactive Preview -->
+      <section class="deck-offer-shell" aria-labelledby="creative-deck-title">
+        <div class="deck-topbar">
+          <div>
+            <span class="deck-badge">[ FREE CONTENT OFFER // v2026.11 SLIDEDECK ]</span>
+            <h2 id="creative-deck-title" style="font-size: 1.35rem; color: #fff; margin-top: 0.25rem;">
+              Multimodal AI Evaluation: Art, Film, Video &amp; 3D Production Briefing
+            </h2>
+          </div>
+          <span class="offer-meta">8 SLIDES &bull; PPTX DECK &bull; ZERO EMAIL GATE</span>
+        </div>
+
+        <div class="deck-grid">
+          <div class="slide-viewport">
+            <div class="slide-frame active" data-art-slide="0">
+              <div class="slide-index">SLIDE PREVIEW 01 / 05 &mdash; THE MULTIMODAL ALIGNMENT GAP</div>
+              <h3>Why Video &amp; 3D Foundation Models Need Production Craft</h3>
+              <p>Diffusion and video-transformer models render glossy pixels yet violate the 180-degree axis rule, morph prop geometry mid-shot, and generate non-manifold 3D meshes without seasoned human critique.</p>
+            </div>
+            <div class="slide-frame" data-art-slide="1">
+              <div class="slide-index">SLIDE PREVIEW 02 / 05 &mdash; WORKFLOW ANATOMY</div>
+              <h3>Anatomy of a High-Scoring Video &amp; Film Rubric</h3>
+              <ul>
+                <li><strong>Shot Brief:</strong> 35mm anamorphic dolly-in on a watchmaker's workbench; warm tungsten key vs. cool twilight rim.</li>
+                <li><strong>Technical Audit:</strong> Verify rigid brass gear geometry across 120 frames and penalize hand/tweezer occlusion errors.</li>
+                <li><strong>Dense Rewrite:</strong> Cite exact timestamps where specular reflection breaks physical continuity.</li>
+              </ul>
+            </div>
+            <div class="slide-frame" data-art-slide="2">
+              <div class="slide-index">SLIDE PREVIEW 03 / 05 &mdash; RATE ARCHITECTURE</div>
+              <h3>Creative &amp; Multimodal Rate Architecture</h3>
+              <p>Technical tracks (3D Art &amp; Video Editing) establish $50–$60/hr baseline queues, Character Animation scales to $60–$90/hr, and Cinematography, Finishing Color, VFX Compositing, and 3D Animation reach $70–$120/hr.</p>
+            </div>
+            <div class="slide-frame" data-art-slide="3">
+              <div class="slide-index">SLIDE PREVIEW 04 / 05 &mdash; PORTFOLIO CALIBRATION</div>
+              <h3>4-Step Creative Evaluator Onboarding Checklist</h3>
+              <p>Tokenize exact DCC tools (DaVinci Resolve, Avid, Nuke, Blender, Maya, Unreal Engine 5, ACES) in plain text, use concrete diagnostic mechanics instead of subjective adjectives, and never upload NDA studio footage.</p>
+            </div>
+            <div class="slide-frame" data-art-slide="4">
+              <div class="slide-index">SLIDE PREVIEW 05 / 05 &mdash; FULL DECK DOWNLOAD</div>
+              <h3>Included in the 8-Slide PowerPoint Deck</h3>
+              <p>Download the complete widescreen briefing covering all 4 creative workstreams (Film/Video, 3D/VFX, Art Direction, Audio/Foley), rubric scoring walkthroughs, and partner lab comparison.</p>
+            </div>
+
+            <div class="slide-controls">
+              <button type="button" class="slide-btn" id="prevArtSlide">&larr; Prev Slide</button>
+              <span class="offer-meta" id="artSlideCounter">1 / 5 Preview</span>
+              <button type="button" class="slide-btn" id="nextArtSlide">Next Slide &rarr;</button>
+            </div>
+          </div>
+
+          <div class="offer-cta-box">
+            <h3>Download the Full 8-Slide Deck</h3>
+            <p>
+              Keep the complete video &amp; 3D evaluation rubric examples, rate tier matrix, and portfolio checklist offline—no form gate required.
+            </p>
+            <a href="/assets/decks/art-film-video-ai-briefing.pptx" download class="btn-download">
+              &darr; Download Slidedeck (.PPTX)
+            </a>
+            <span class="offer-meta">
+              Want automated track matching after reading? Run the 2-minute <a href="/labmatch/" style="color: var(--orange);">LabMatch Diagnostic &rarr;</a>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- LabMatch Routing Callout -->
+      <aside class="labmatch-banner" aria-label="LabMatch Creative Calibration">
+        <div>
+          <strong style="font-size: 1.05rem;">Calibrate Your Film, 3D, or Visual Design Workprint</strong>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Map your production specialization and critique style directly to active multimodal lab tracks.</p>
+        </div>
+        <a href="/labmatch/" class="btn-outline">Launch LabMatch &rarr;</a>
+      </aside>
+
+  <!-- Verified Partner Role Directory (10 Verified Tracks with Bolded Two-Fragment Descriptions) -->
+      <section aria-labelledby="creative-roles-heading">
+        <h2 class="section-heading" id="creative-roles-heading">Active Art, Film, Video &amp; 3D Validation Tracks</h2>
+        <p class="section-sub">Filter active multimodal roles across Technical, Creative, and Production tracks. All contracts operate remotely on flexible independent 1099 terms.</p>
+
+        <div class="filter-bar" role="group" aria-label="Filter creative disciplines">
+          <button type="button" class="filter-btn active" data-filter="all">All Tracks (10)</button>
+          <button type="button" class="filter-btn" data-filter="technical">01 // Technical</button>
+          <button type="button" class="filter-btn" data-filter="creative">02 // Creative</button>
+          <button type="button" class="filter-btn" data-filter="production">03 // Production</button>
+        </div>
+
+        <div class="role-grid" id="artRoleGrid">
+          <!-- 01 // TECHNICAL TRACKS -->
+          <div class="role-card" data-category="technical">
+            <div class="role-top">
+              <h3 class="role-title">3D Art &amp; Video Editor</h3>
+              <span class="role-rate">$50–$60/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">01 // Technical</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Evaluate <strong>3D spatial rendering</strong> models and <strong>video compositing</strong> outputs for precision.</p>
+              <p>Validate <strong>generative video</strong> transitions and <strong>post-production</strong> logic.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoVBmLAccb_kWwapPDpVL?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoVBmLAccb_kWwapPDpVL&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_3D_Art_Video_Editor')">See More &rarr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="technical">
+            <div class="role-top">
+              <h3 class="role-title">Performance Director</h3>
+              <span class="role-rate">$70–$110/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">01 // Technical</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Critique <strong>motion capture</strong> fidelity and <strong>facial rigging</strong> dynamics in AI avatars.</p>
+              <p>Guide <strong>virtual camera</strong> behavior and <strong>scene blocking</strong> for cinematic models.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoWTgOSL7w8GZCUNK9YsE?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoWTgOSL7w8GZCUNK9YsE&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_Performance_Director')">See More &rarr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="technical">
+            <div class="role-top">
+              <h3 class="role-title">3D Artists</h3>
+              <span class="role-rate">$50–$60/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">01 // Technical</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Audit <strong>mesh topologies</strong>, <strong>texture mapping</strong>, and <strong>lighting physics</strong> in generated assets.</p>
+              <p>Refine <strong>volumetric data</strong> and <strong>spatial reasoning</strong> for frontier 3D engines.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoVBmLAccb_kWwapPDpVL?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoVBmLAccb_kWwapPDpVL&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_3D_Artists')">See More &rarr;</a>
+            </div>
+          </div>
+
+          <!-- 02 // CREATIVE TRACKS -->
+          <div class="role-card" data-category="creative">
+            <div class="role-top">
+              <h3 class="role-title">Cinematographer</h3>
+              <span class="role-rate">$70–$110/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">02 // Creative</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Assess <strong>focal length</strong> simulations, <strong>depth of field</strong>, and <strong>dynamic range</strong>.</p>
+              <p>Map <strong>cinematic lighting</strong> structures and <strong>color science</strong> for multimodal vision systems.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoWTgIFc6PljFQHhBDpYR?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoWTgIFc6PljFQHhBDpYR&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_Cinematographer')">See More &rarr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="creative">
+            <div class="role-top">
+              <h3 class="role-title">Finishing Colorist</h3>
+              <span class="role-rate">$70–$110/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">02 // Creative</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Benchmark <strong>color grading</strong> palettes, <strong>LUT integrations</strong>, and <strong>HDR</strong> compliance.</p>
+              <p>Validate <strong>color space</strong> transformations and <strong>contrast ratios</strong> in AI video outputs.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoWTgVrfzF78gL6BI_brn?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoWTgVrfzF78gL6BI_brn&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_Finishing_Colorist')">See More &rarr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="creative">
+            <div class="role-top">
+              <h3 class="role-title">VFX Compositing Supervisor</h3>
+              <span class="role-rate">$70–$110/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">02 // Creative</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Evaluate <strong>chroma keying</strong>, <strong>rotoscoping</strong>, and <strong>multi-pass compositing</strong> accuracy.</p>
+              <p>Debug <strong>visual artifacting</strong> and <strong>edge blending</strong> in generative VFX pipelines.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoWTgSJZkV8di89dEJ5Z3?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoWTgSJZkV8di89dEJ5Z3&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_VFX_Compositing_Supervisor')">See More &rarr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="creative">
+            <div class="role-top">
+              <h3 class="role-title">Character Animator</h3>
+              <span class="role-rate">$60–$90/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">02 // Creative</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Audit <strong>kinematic movement</strong>, <strong>weight distribution</strong>, and <strong>keyframe</strong> transitions.</p>
+              <p>Train models on <strong>bipedal locomotion</strong> and nuanced <strong>expressive acting</strong> mechanics.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoUX0FsrPqLbZr_lPg4xU?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoUX0FsrPqLbZr_lPg4xU&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_Character_Animator')">See More &rarr;</a>
+            </div>
+          </div>
+
+          <!-- 03 // PRODUCTION TRACKS -->
+          <div class="role-card" data-category="production">
+            <div class="role-top">
+              <h3 class="role-title">Video Craft Expert</h3>
+              <span class="role-rate">$70–$100/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">03 // Production</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Validate <strong>non-linear editing</strong> logic, <strong>pacing</strong>, and <strong>narrative sequencing</strong>.</p>
+              <p>Optimize <strong>timeline assembly</strong> and <strong>audio-visual sync</strong> for automated editors.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoUYJgC6FFGQLBmRFJZvf?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoUYJgC6FFGQLBmRFJZvf&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_Video_Craft_Expert')">See More &rarr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="production">
+            <div class="role-top">
+              <h3 class="role-title">3D Animators &amp; Generalists</h3>
+              <span class="role-rate">$70–$120/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">03 // Production</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Evaluate end-to-end <strong>CGI pipelines</strong>, from <strong>modeling</strong> to <strong>final render</strong>.</p>
+              <p>Benchmark <strong>physics simulations</strong>, <strong>particle systems</strong>, and <strong>procedural generation</strong> logic.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoa1sCbPwvr1_PhpCHLux?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoa1sCbPwvr1_PhpCHLux&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_3D_Animators_Generalists')">See More &rarr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="production">
+            <div class="role-top">
+              <h3 class="role-title">Commercial Post-Production Editor</h3>
+              <span class="role-rate">$70–$120/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">03 // Production</span>
+              <span class="tag">Remote 1099</span>
+            </div>
+            <div class="job-desc">
+              <p>Verify <strong>commercial timing</strong>, <strong>graphic overlays</strong>, and <strong>brand compliance</strong> constraints.</p>
+              <p>Audit <strong>versioning</strong> capabilities and <strong>render compression</strong> algorithms for broadcast.</p>
+            </div>
+            <div class="role-footer">
+              <span class="offer-meta">Verified Multimodal Track</span>
+              <a href="https://work.mercor.com/jobs/list_AAABoa1gUkpcGLZXlqdBXK5J?referralCode=fd662fec-1759-40db-8a60-872e15ea555c&utm_campaign=job&utm_content=list_AAABoa1gUkpcGLZXlqdBXK5J&utm_medium=direct&utm_source=referral"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Creative_Commercial_Post_Editor')">See More &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section (Exact 1:1 Parity with JSON-LD) -->
+      <section class="faq-section" aria-labelledby="art-faq-heading">
+        <h2 class="section-heading" id="art-faq-heading">Art, Film &amp; Video AI Evaluation FAQs</h2>
+
+        <details class="faq-item">
+          <summary>What do Art, Film, and Video AI Evaluators actually do day-to-day? <span>+</span></summary>
+          <p>Creative and Multimodal AI Evaluators perform asynchronous human-in-the-loop (HITL) audits on video, image, audio, and 3D generation models. Daily tasks include side-by-side clip ranking for temporal consistency and camera physics, writing dense frame-accurate shot captions using real cinematography and lighting terminology, and scoring 3D meshes or compositing outputs against multi-constraint prompts.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is my personal portfolio artwork or unreleased studio footage used to train AI models? <span>+</span></summary>
+          <p>No. Your portfolio reel is reviewed solely during onboarding to verify production caliber. Once contracted, you evaluate synthetic prompts and lab-supplied benchmark outputs—never uploading unreleased client dailies, studio rigs, or copyrighted personal artwork into training queues.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What tools and background help creative professionals qualify for higher hourly tiers ($70–$120/hr)? <span>+</span></summary>
+          <p>While 3D art and video editing baseline queues start around $50–$60/hr, senior editors, cinematographers, colorists, performance directors, and VFX compositing supervisors with verifiable credits in DaVinci Resolve, Avid, Nuke, Blender, Maya, or Unreal Engine 5 routinely qualify for $70–$120/hr specialty cohorts.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do partner labs structure creative and multimedia evaluation contracts? <span>+</span></summary>
+          <p>Partner networks such as Mercor, Turing, and Micro1 structure creative evaluations as flexible 1099 independent contractor sprints. Candidates complete a structured portfolio and visual critique assessment once to unlock asynchronous evaluation queues paid weekly or biweekly in USD.</p>
+        </details>
+      </section>
+    </article>
+  </main>
+
+  <!-- Global Compliance Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>
+        <strong>Disclosure &amp; Rate Notice:</strong> SonicBloom.dev is an independent AI labor research publication and talent routing directory—not an employer or staffing agency. Some outbound partner links (Turing, Mercor, Micro1) carry referral attribution at zero cost to candidates. Published hourly rates reflect partner lab benchmarks and vary by verified portfolio experience, assessment scores, and active sprint demand.
+      </p>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/labs.html">Partner Labs</a>
+        <a href="/labmatch/">LabMatch Diagnostic</a>
+        <a href="/about.html#disclosures">Affiliate &amp; Rate Disclosures</a>
+        <a href="/privacy.html">Privacy Policy &amp; Terms</a>
+        <a href="mailto:contact@sonicbloom.dev">contact@sonicbloom.dev</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Interactive Slidedeck Preview Controls
+    (function() {
+      const frames = document.querySelectorAll('[data-art-slide]');
+      const counter = document.getElementById('artSlideCounter');
+      let idx = 0;
+      function renderSlide(n) {
+        frames.forEach((f, i) => f.classList.toggle('active', i === n));
+        counter.textContent = (n + 1) + ' / ' + frames.length + ' Preview';
+      }
+      document.getElementById('prevArtSlide').addEventListener('click', () => {
+        idx = (idx - 1 + frames.length) % frames.length;
+        renderSlide(idx);
+      });
+      document.getElementById('nextArtSlide').addEventListener('click', () => {
+        idx = (idx + 1) % frames.length;
+        renderSlide(idx);
+      });
+
+      // Track Category Filter Controls
+      const btns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('#artRoleGrid .role-card');
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const cat = btn.getAttribute('data-filter');
+          cards.forEach(c => {
+            c.style.display = (cat === 'all' || c.getAttribute('data-category') === cat) ? 'flex' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
