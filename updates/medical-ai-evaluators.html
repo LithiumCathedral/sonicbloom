@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical AI Validation Guide & Verified MD/DO Roles | SonicBloom</title>
+  <meta name="description" content="Educational field guide for MDs, DOs, Residents, and Specialists entering Clinical RLHF and multimodal diagnostic evaluation, with a downloadable 8-slide briefing deck and verified lab tracks.">
+  <link rel="canonical" href="https://sonicbloom.dev/updates/medical-ai-evaluators.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sonicbloom.dev/updates/medical-ai-evaluators.html">
+  <meta property="og:title" content="Clinical AI Validation Guide & Verified MD/DO Roles | SonicBloom">
+  <meta property="og:description" content="How licensed clinicians translate diagnostic judgment into high-yield AI training pipelines ($60–$350+/hr). Includes downloadable 8-slide Clinical RLHF Slidedeck.">
+  <meta property="og:site_name" content="SonicBloom">
+
+  <!-- Google Tag (AW-10932384149) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10932384149"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-10932384149');
+    function trackPartnerClick(partnerName) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-10932384149/Wm11CMy3iZgYEJXj-9wo',
+          'event_label': partnerName
+        });
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Article & FAQPage JSON-LD Schema -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Clinical AI Validation: How Physicians & Specialists Audit Multimodal Medical Models",
+      "description": "An operational guide explaining how MDs, DOs, Residents, and Specialists prevent diagnostic hallucinations in foundation models through Clinical RLHF and visual grounding.",
+      "datePublished": "2026-11-16",
+      "dateModified": "2026-11-16",
+      "author": {
+        "@type": "Organization",
+        "name": "SonicBloom Studio",
+        "url": "https://sonicbloom.dev/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SonicBloom",
+        "url": "https://sonicbloom.dev/"
+      },
+      "mainEntityOfPage": "https://sonicbloom.dev/updates/medical-ai-evaluators.html"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does a Clinical AI Validator actually do day-to-day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clinical AI Validators perform asynchronous human-in-the-loop (HITL) audits on medical foundation models. Depending on specialty, daily tasks include bounding-box or mask verification on radiographic and dermatological imagery, grading multi-step differential diagnosis reasoning chains, and writing adversarial patient prompts to expose unsafe triage hallucinations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do Clinical AI evaluation contracts involve treating patients or malpractice exposure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. AI model evaluation is strictly non-clinical R&D consulting performed on de-identified benchmark datasets or synthetic clinical vignettes. You are auditing algorithmic logic and training weights rather than establishing a physician-patient relationship or issuing live clinical orders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do Mercor, Turing, and Micro1 differ for credentialed clinicians?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mercor specializes in high-bounty specialty sprints such as Radiology visual document understanding and Dermatology image interpretation ($60 to $350+/hr depending on subspecialty cohort). Turing recruits Resident Medical Specialists, Dermatologists, and MD/PhD researchers for longitudinal reasoning and safety mitigation ($50 to $300/hr DOE). Micro1 vets domain physicians for direct embedded placements with frontier AI engineering teams."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do traditional academic CVs get filtered out by AI lab intake systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI research labs use programmatic ingestion parsers that look for explicit structured competencies—such as clinical protocol frameworks, modality fluency, and error-taxonomy critique—rather than multi-page publication lists. Structuring your clinical experience around diagnostic logic density dramatically improves intake routing speed."
+          }
+        }
+      ]
+    }
+  ]
+  </script>
+
+  <style>
+    :root {
+      --bg-canvas: #f8fafc;
+      --surface-white: #ffffff;
+      --terminal-bg: #090d16;
+      --terminal-card: #111827;
+      --terminal-border: #1e293b;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --term-text: #f8fafc;
+      --term-muted: #94a3b8;
+      --border-light: #e2e8f0;
+      --orange: #ff6a00;
+      --orange-hover: #e05d00;
+      --orange-tint: rgba(255, 106, 0, 0.1);
+      --green: #10b981;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg-canvas); color: var(--text-main); font-family: var(--font-sans); line-height: 1.65; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 1rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .brand-logo {
+      font-family: var(--font-mono); font-weight: 700; font-size: 1.05rem;
+      color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .brand-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--orange);
+      box-shadow: 0 0 8px var(--orange); animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .global-nav { display: flex; gap: 1.5rem; list-style: none; font-family: var(--font-mono); font-size: 0.85rem; }
+    .global-nav a { color: var(--text-muted); text-decoration: none; transition: color 0.15s ease; }
+    .global-nav a:hover, .global-nav a.active { color: var(--orange); font-weight: 700; }
+
+    .page-wrap { max-width: 1040px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+    .breadcrumb { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .breadcrumb a { color: var(--orange); text-decoration: none; }
+
+    .hero-block {
+      background: var(--surface-white); border: 1px solid var(--border-light);
+      border-radius: 12px; padding: 2.5rem; margin-bottom: 2.5rem;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    }
+    .kicker {
+      display: inline-block; font-family: var(--font-mono); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.06em; background: var(--orange-tint);
+      color: var(--orange); padding: 0.25rem 0.65rem; border-radius: 4px; font-weight: 700; margin-bottom: 1rem;
+    }
+    h1 { font-size: 2.2rem; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .lead { font-size: 1.08rem; color: var(--text-muted); max-width: 820px; }
+
+    .edu-section { margin-bottom: 3rem; }
+    .section-heading { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .section-sub { color: var(--text-muted); margin-bottom: 1.5rem; }
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+    .pillar-card {
+      background: var(--surface-white); border: 1px solid var(--border-light);
+      border-top: 3px solid var(--orange); border-radius: 8px; padding: 1.5rem;
+    }
+    .pillar-num { font-family: var(--font-mono); font-size: 0.75rem; color: var(--orange); font-weight: 700; margin-bottom: 0.5rem; }
+    .pillar-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .pillar-card p { font-size: 0.92rem; color: var(--text-muted); }
+
+    .table-wrap { overflow-x: auto; background: var(--surface-white); border: 1px solid var(--border-light); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--border-light); }
+    th { background: #f1f5f9; font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; color: var(--text-main); }
+
+    .deck-offer-shell {
+      background: var(--terminal-bg); color: var(--term-text); border: 1px solid var(--terminal-border);
+      border-radius: 12px; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 16px 36px rgba(9, 13, 22, 0.16);
+    }
+    .deck-topbar {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 1rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--terminal-border); margin-bottom: 1.5rem;
+    }
+    .deck-badge { font-family: var(--font-mono); font-size: 0.75rem; color: var(--green); }
+    .deck-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 1.75rem; align-items: stretch; }
+    @media (max-width: 820px) { .deck-grid { grid-template-columns: 1fr; } }
+    .slide-viewport {
+      background: var(--terminal-card); border: 1px solid var(--terminal-border); border-radius: 8px;
+      padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 270px;
+    }
+    .slide-frame { display: none; }
+    .slide-frame.active { display: block; }
+    .slide-index { font-family: var(--font-mono); font-size: 0.72rem; color: var(--orange); margin-bottom: 0.6rem; }
+    .slide-frame h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: #ffffff; }
+    .slide-frame p, .slide-frame li { font-size: 0.92rem; color: var(--term-muted); }
+    .slide-frame ul { padding-left: 1.2rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .slide-controls {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed var(--terminal-border);
+    }
+    .slide-btn {
+      background: transparent; border: 1px solid var(--terminal-border); color: var(--term-text);
+      font-family: var(--font-mono); font-size: 0.78rem; padding: 0.45rem 0.9rem; border-radius: 4px; cursor: pointer;
+    }
+    .slide-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+    .offer-cta-box {
+      background: rgba(255, 106, 0, 0.06); border: 1px dashed var(--orange); border-radius: 8px;
+      padding: 1.6rem; display: flex; flex-direction: column; justify-content: center; gap: 1rem;
+    }
+    .offer-cta-box h3 { font-size: 1.15rem; color: #ffffff; }
+    .offer-cta-box p { font-size: 0.88rem; color: var(--term-muted); }
+    .btn-download {
+      display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem;
+      background: var(--orange); color: #000000; font-family: var(--font-mono); font-weight: 700;
+      font-size: 0.85rem; text-decoration: none; padding: 0.85rem 1.2rem; border-radius: 6px;
+    }
+    .btn-download:hover { background: var(--orange-hover); }
+    .offer-meta { font-family: var(--font-mono); font-size: 0.72rem; color: var(--term-muted); }
+
+    .labmatch-banner {
+      background: var(--surface-white); border: 1px solid var(--border-light); border-left: 4px solid var(--orange);
+      border-radius: 8px; padding: 1.4rem 1.75rem; margin-bottom: 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .btn-outline {
+      font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; color: var(--orange);
+      border: 1px solid var(--orange); padding: 0.65rem 1.1rem; border-radius: 6px; text-decoration: none;
+    }
+    .btn-outline:hover { background: var(--orange); color: #000000; }
+
+    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .filter-btn {
+      background: var(--surface-white); border: 1px solid var(--border-light); color: var(--text-muted);
+      font-family: var(--font-mono); font-size: 0.78rem; padding: 0.5rem 0.9rem; border-radius: 4px; cursor: pointer;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--terminal-bg); color: #ffffff; border-color: var(--terminal-bg); }
+    .role-grid { display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 3rem; }
+    .role-card {
+      background: var(--terminal-bg); color: var(--term-text); border: 1px solid var(--terminal-border);
+      border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem;
+    }
+    .role-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; }
+    .role-title { font-size: 1.15rem; font-weight: 700; color: #ffffff; }
+    .role-rate { font-family: var(--font-mono); font-size: 0.95rem; color: var(--green); font-weight: 700; }
+    .role-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag {
+      font-family: var(--font-mono); font-size: 0.72rem; padding: 0.2rem 0.55rem; border-radius: 4px;
+      background: var(--terminal-card); border: 1px solid var(--terminal-border); color: var(--term-muted);
+    }
+    .role-desc { font-size: 0.92rem; color: var(--term-muted); }
+    .role-footer {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 0.75rem; padding-top: 0.85rem; border-top: 1px solid var(--terminal-border);
+    }
+    .btn-partner {
+      background: var(--orange); color: #000000; font-family: var(--font-mono); font-size: 0.8rem;
+      font-weight: 700; text-decoration: none; padding: 0.6rem 1.1rem; border-radius: 4px;
+    }
+    .btn-partner:hover { background: var(--orange-hover); }
+
+    .faq-section { margin-bottom: 2rem; }
+    details.faq-item {
+      background: var(--surface-white); border: 1px solid var(--border-light); border-radius: 8px;
+      padding: 1.1rem 1.35rem; margin-bottom: 0.85rem;
+    }
+    details.faq-item summary {
+      font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
+    }
+    details.faq-item p { margin-top: 0.85rem; font-size: 0.94rem; color: var(--text-muted); }
+
+    .site-footer {
+      background: var(--terminal-bg); color: var(--term-muted); border-top: 1px solid var(--terminal-border);
+      padding: 2.5rem 1.5rem; font-size: 0.85rem;
+    }
+    .footer-inner { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.78rem; }
+    .footer-links a { color: var(--term-text); text-decoration: none; }
+    .footer-links a:hover { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="/" class="brand-logo">
+        <span class="brand-dot"></span>
+        SonicBloom
+      </a>
+      <nav aria-label="Primary Navigation">
+        <ul class="global-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/labs.html">Labs</a></li>
+          <li><a href="/labmatch/">LabMatch</a></li>
+          <li><a href="/updates/" class="active">Updates</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="breadcrumb">
+      <a href="/updates/">&larr; Back to Updates</a> / Sector Briefing: Clinical RLHF
+    </div>
+
+    <article>
+      <header class="hero-block">
+        <span class="kicker">Clinical AI Field Briefing &bull; Updated Nov 2026</span>
+        <h1>Clinical AI Validation: How Physicians &amp; Specialists Audit Multimodal Models</h1>
+        <p class="lead">
+          Foundation models can ingest millions of PubMed abstracts in seconds, yet still hallucinate contraindicated dosages or misread subtle radiographic margins. Learn how MDs, DOs, Residents, and Specialists convert diagnostic judgment into asynchronous AI training contracts—and download our 8-slide Clinical RLHF Intake Briefing below.
+        </p>
+      </header>
+
+      <section class="edu-section" aria-labelledby="clinical-layers-heading">
+        <h2 class="section-heading" id="clinical-layers-heading">Why Frontier AI Labs Pay Clinical Bounties</h2>
+        <p class="section-sub">
+          Unlike traditional telemedicine or chart review, Clinical Reinforcement Learning from Human Feedback (RLHF) treats the AI model's reasoning chain as the patient under examination. Credentialed clinicians operate across three technical layers:
+        </p>
+
+        <div class="pillar-grid">
+          <div class="pillar-card">
+            <div class="pillar-num">01 / MULTIMODAL GROUNDING</div>
+            <h3>Visual &amp; Signal Annotation</h3>
+            <p>Radiologists, dermatologists, and cardiologists validate pixel-level grounding masks on DICOM slices, skin lesion phototypes, and continuous ECG telemetry strips so vision-language models stop confusing artifacts with pathology.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">02 / CHAIN-OF-THOUGHT AUDITING</div>
+            <h3>Differential Logic Scoring</h3>
+            <p>Physicians inspect step-by-step intermediate reasoning tokens, penalizing models when they arrive at a plausible diagnosis via flawed pathophysiology or omitted red-flag history questions.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">03 / ADVERSARIAL RED-TEAMING</div>
+            <h3>Clinical Safety Guardrails</h3>
+            <p>Clinicians craft ambiguous, multi-morbid patient dialogues designed to force model failure—establishing strict escalation boundaries before health-tech tools reach clinical deployment.</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Operational Dimension</th>
+                <th>Traditional Locums / Telehealth</th>
+                <th>Clinical AI Model Validation (RLHF)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Primary Output</strong></td>
+                <td>Direct patient care, charting &amp; prescribing</td>
+                <td>Rubric grading, bounding masks &amp; reasoning rewrites</td>
+              </tr>
+              <tr>
+                <td><strong>Malpractice / Patient Risk</strong></td>
+                <td>Active clinical liability &amp; state licensure constraints</td>
+                <td>Zero patient contact; non-clinical R&amp;D on de-identified data</td>
+              </tr>
+              <tr>
+                <td><strong>Scheduling Structure</strong></td>
+                <td>Fixed shift blocks &amp; on-call windows</td>
+                <td>100% asynchronous remote queues (5–25+ hrs/week)</td>
+              </tr>
+              <tr>
+                <td><strong>Observed Partner Rate Bands</strong></td>
+                <td>Fixed clinical RVU or hourly shift rate</td>
+                <td>$60–$350+/hr depending on subspecialty &amp; sprint urgency</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Downloadable Slidedeck Content Offer + Interactive Preview -->
+      <section class="deck-offer-shell" aria-labelledby="deck-offer-title">
+        <div class="deck-topbar">
+          <div>
+            <span class="deck-badge">[ FREE CONTENT OFFER // v2026.11 SLIDEDECK ]</span>
+            <h2 id="deck-offer-title" style="font-size: 1.35rem; color: #fff; margin-top: 0.25rem;">
+              Clinical AI Validation &amp; Diagnostic RLHF Briefing
+            </h2>
+          </div>
+          <span class="offer-meta">8 SLIDES &bull; PPTX DECK &bull; ZERO EMAIL GATE</span>
+        </div>
+
+        <div class="deck-grid">
+          <div class="slide-viewport">
+            <div class="slide-frame active" data-slide="0">
+              <div class="slide-index">SLIDE PREVIEW 01 / 05 &mdash; THE CLINICAL ALIGNMENT GAP</div>
+              <h3>Why Medical LLMs Require Active Bedside Intuition</h3>
+              <p>Pre-trained models optimize for plausible token completion rather than ruling out high-mortality differentials—often omitting critical red-flag history questions or mislocalizing subtle radiographic opacities.</p>
+            </div>
+            <div class="slide-frame" data-slide="1">
+              <div class="slide-index">SLIDE PREVIEW 02 / 05 &mdash; WORKFLOW ANATOMY</div>
+              <h3>Anatomy of a High-Scoring Clinical Rubric</h3>
+              <ul>
+                <li><strong>Input:</strong> 62yo patient with atypical epigastric discomfort, diaphoresis &amp; normal 1-hr troponin.</li>
+                <li><strong>Audit Step:</strong> Penalize empirical PPI trial; reward immediate serial 12-lead ECG + repeat troponin.</li>
+                <li><strong>Gold Rationale:</strong> Rewrite defective reasoning trace citing ACC/AHA chest pain guidelines.</li>
+              </ul>
+            </div>
+            <div class="slide-frame" data-slide="2">
+              <div class="slide-index">SLIDE PREVIEW 03 / 05 &mdash; RATE ARCHITECTURE</div>
+              <h3>How Specialty Scarcity Drives Hourly Bounties</h3>
+              <p>RN &amp; Utilization Management leaders anchor Tier 1 ($60–$150/hr), General MDs/DOs, Residents, and PharmDs scale Tier 2 ($120–$220/hr), and Board-Certified Radiologists &amp; Dermatologists reach Tier 3 ($200–$350+/hr).</p>
+            </div>
+            <div class="slide-frame" data-slide="3">
+              <div class="slide-index">SLIDE PREVIEW 04 / 05 &mdash; CANDIDATE PROTOCOL</div>
+              <h3>4-Step Clinical Evaluator Onboarding Checklist</h3>
+              <p>Tokenize explicit licensure &amp; guidelines (NPI, PGY, InterQual, MCG, CT/MRI) in plain text, verbalize rule-out logic during the 20-minute AI interview, and maintain strict zero-PHI hygiene.</p>
+            </div>
+            <div class="slide-frame" data-slide="4">
+              <div class="slide-index">SLIDE PREVIEW 05 / 05 &mdash; FULL DECK DOWNLOAD</div>
+              <h3>Included in the 8-Slide PowerPoint Deck</h3>
+              <p>Download the complete widescreen presentation with the 4-track taxonomy, atomic rubric scoring breakdown, Mercor/Turing/Micro1 comparison matrix, and onboarding checklist.</p>
+            </div>
+
+            <div class="slide-controls">
+              <button type="button" class="slide-btn" id="prevMedSlide">&larr; Prev Slide</button>
+              <span class="offer-meta" id="medSlideCounter">1 / 5 Preview</span>
+              <button type="button" class="slide-btn" id="nextMedSlide">Next Slide &rarr;</button>
+            </div>
+          </div>
+
+          <div class="offer-cta-box">
+            <h3>Download the Full 8-Slide Deck</h3>
+            <p>
+              Keep the complete clinical rubric examples, rate tier breakdown, and lab comparison matrix offline—no form gate required.
+            </p>
+            <a href="/assets/decks/clinical-ai-validation-briefing.pptx" download class="btn-download">
+              &darr; Download Slidedeck (.PPTX)
+            </a>
+            <span class="offer-meta">
+              Want automated track matching after reading? Run the 2-minute <a href="/labmatch/" style="color: var(--orange);">LabMatch Diagnostic &rarr;</a>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="labmatch-banner" aria-label="LabMatch Diagnostic Routing">
+        <div>
+          <strong style="font-size: 1.05rem;">Unsure which lab matches your clinical licensure tier?</strong>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Calibrate your specialty, residency/attending status, and evaluation style in our interactive router.</p>
+        </div>
+        <a href="/labmatch/" class="btn-outline">Launch LabMatch &rarr;</a>
+      </aside>
+
+      <section aria-labelledby="clinical-roles-heading">
+        <h2 class="section-heading" id="clinical-roles-heading">Active Clinical Validation Tracks</h2>
+        <p class="section-sub">Direct canonical partner applications across Mercor, Turing, and Micro1. Compensation bands are set directly by hiring labs based on credential verification and assessment scores.</p>
+
+        <div class="filter-bar" role="group" aria-label="Filter medical specialties">
+          <button type="button" class="filter-btn active" data-filter="all">All Clinical Tracks</button>
+          <button type="button" class="filter-btn" data-filter="radiology">Radiology</button>
+          <button type="button" class="filter-btn" data-filter="dermatology">Dermatology</button>
+          <button type="button" class="filter-btn" data-filter="general">General MD / DO / Resident</button>
+        </div>
+
+        <div class="role-grid" id="medRoleGrid">
+          <div class="role-card" data-category="radiology">
+            <div class="role-top">
+              <h3 class="role-title">Radiology — Visual Document &amp; Image Understanding</h3>
+              <span class="role-rate">$200 – $350+/hr (Cohort Tiered)</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">Partner: Mercor</span>
+              <span class="tag">Board-Certified MD/DO (US/CA)</span>
+              <span class="tag">Asynchronous Remote</span>
+            </div>
+            <p class="role-desc">Validate multimodal radiographic interpretation, clinical documentation alignment, and visual grounding masks for diagnostic foundation models.</p>
+            <div class="role-footer">
+              <span class="offer-meta">Requires active or board-certified radiology credentials</span>
+              <a href="https://work.mercor.com/jobs/list_AAABnvt6_s3CKAAxCYIHyYnj?referralCode=fd662fec-1759-40db-8a60-872e15ea555c"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Mercor_Radiology')">Apply at Mercor &nearr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="dermatology">
+            <div class="role-top">
+              <h3 class="role-title">Dermatology &amp; Subspecialty Clinical Evaluator</h3>
+              <span class="role-rate">$150 – $270/hr</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">Partner: Mercor</span>
+              <span class="tag">MD / DO Specialist</span>
+              <span class="tag">Remote Contract</span>
+            </div>
+            <p class="role-desc">Audit diagnostic classification boundaries across diverse skin phototypes, lesion imagery, and differential dermatology rubrics.</p>
+            <div class="role-footer">
+              <span class="offer-meta">Direct Mercor Medical Marketplace</span>
+              <a href="https://work.mercor.com/jobs"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Mercor_Medical_Portal')">Apply at Mercor &nearr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="dermatology">
+            <div class="role-top">
+              <h3 class="role-title">Clinical Dermatology AI Consultant</h3>
+              <span class="role-rate">$50 – $300/hr (DOE)</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">Partner: Turing</span>
+              <span class="tag">Licensed MD / DO</span>
+              <span class="tag">Flexible Queue</span>
+            </div>
+            <p class="role-desc">Execute adversarial prompt stress-testing to surface clinical hallucinations in medical dialogue models and dermatological triage workflows.</p>
+            <div class="role-footer">
+              <span class="offer-meta">Independent 1099 Contract</span>
+              <a href="https://work.turing.com/r/rrJOl_uxLA"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Turing_Dermatology')">Apply at Turing &nearr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="general">
+            <div class="role-top">
+              <h3 class="role-title">Physician / Resident Medical Specialist / Clinical PhD</h3>
+              <span class="role-rate">$50 – $300/hr (DOE)</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">Partner: Turing</span>
+              <span class="tag">MD, DO, Resident, or Biomedical PhD</span>
+              <span class="tag">Remote Research</span>
+            </div>
+            <p class="role-desc">Audit multi-step pharmacological logic trees, hospital triage protocols, and biomedical literature synthesis across frontier LLM benchmarks.</p>
+            <div class="role-footer">
+              <span class="offer-meta">Open to active Residents, Fellows &amp; Attendings</span>
+              <a href="https://work.turing.com/r/MmzBH3aZlr"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Turing_Physician_Resident')">Apply at Turing &nearr;</a>
+            </div>
+          </div>
+
+          <div class="role-card" data-category="general">
+            <div class="role-top">
+              <h3 class="role-title">AI Medical Trainer &amp; Clinical Reasoning Expert</h3>
+              <span class="role-rate">Verified Lab Benchmark</span>
+            </div>
+            <div class="role-tags">
+              <span class="tag">Partner: Micro1</span>
+              <span class="tag">MD / DO / Clinical Specialist</span>
+              <span class="tag">Embedded Sprints</span>
+            </div>
+            <p class="role-desc">Complete AI-assisted technical credentialing once to match into recurring clinical dataset curation and reasoning validation squads.</p>
+            <div class="role-footer">
+              <span class="offer-meta">Direct AI Lab Placement</span>
+              <a href="https://www.micro1.ai/jobs"
+                 target="_blank" rel="sponsored noopener" class="btn-partner"
+                 onclick="trackPartnerClick('Micro1_Medical')">Apply at Micro1 &nearr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq-section" aria-labelledby="faq-heading">
+        <h2 class="section-heading" id="faq-heading">Clinical AI Evaluation FAQs</h2>
+
+        <details class="faq-item">
+          <summary>What does a Clinical AI Validator actually do day-to-day? <span>+</span></summary>
+          <p>Clinical AI Validators perform asynchronous human-in-the-loop (HITL) audits on medical foundation models. Depending on specialty, daily tasks include bounding-box or mask verification on radiographic and dermatological imagery, grading multi-step differential diagnosis reasoning chains, and writing adversarial patient prompts to expose unsafe triage hallucinations.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do Clinical AI evaluation contracts involve treating patients or malpractice exposure? <span>+</span></summary>
+          <p>No. AI model evaluation is strictly non-clinical R&amp;D consulting performed on de-identified benchmark datasets or synthetic clinical vignettes. You are auditing algorithmic logic and training weights rather than establishing a physician-patient relationship or issuing live clinical orders.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do Mercor, Turing, and Micro1 differ for credentialed clinicians? <span>+</span></summary>
+          <p>Mercor specializes in high-bounty specialty sprints such as Radiology visual document understanding and Dermatology image interpretation ($60 to $350+/hr depending on subspecialty cohort). Turing recruits Resident Medical Specialists, Dermatologists, and MD/PhD researchers for longitudinal reasoning and safety mitigation ($50 to $300/hr DOE). Micro1 vets domain physicians for direct embedded placements with frontier AI engineering teams.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Why do traditional academic CVs get filtered out by AI lab intake systems? <span>+</span></summary>
+          <p>AI research labs use programmatic ingestion parsers that look for explicit structured competencies—such as clinical protocol frameworks, modality fluency, and error-taxonomy critique—rather than multi-page publication lists. Structuring your clinical experience around diagnostic logic density dramatically improves intake routing speed.</p>
+        </details>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>
+        <strong>Disclosure &amp; Rate Notice:</strong> SonicBloom.dev is an independent AI labor research publication and talent routing directory—not an employer or staffing agency. Some outbound partner links (Turing, Mercor, Micro1) carry referral attribution at zero cost to candidates. Published hourly rates reflect partner lab benchmarks and vary by verified licensure, assessment performance, and cohort availability.
+      </p>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/labs.html">Partner Labs</a>
+        <a href="/labmatch/">LabMatch Diagnostic</a>
+        <a href="/about.html#disclosures">Affiliate &amp; Rate Disclosures</a>
+        <a href="/privacy.html">Privacy Policy &amp; Terms</a>
+        <a href="mailto:contact@sonicbloom.dev">contact@sonicbloom.dev</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const frames = document.querySelectorAll('.slide-frame');
+      const counter = document.getElementById('medSlideCounter');
+      let idx = 0;
+      function renderSlide(n) {
+        frames.forEach((f, i) => f.classList.toggle('active', i === n));
+        counter.textContent = (n + 1) + ' / ' + frames.length + ' Preview';
+      }
+      document.getElementById('prevMedSlide').addEventListener('click', () => {
+        idx = (idx - 1 + frames.length) % frames.length;
+        renderSlide(idx);
+      });
+      document.getElementById('nextMedSlide').addEventListener('click', () => {
+        idx = (idx + 1) % frames.length;
+        renderSlide(idx);
+      });
+
+      const btns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('#medRoleGrid .role-card');
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const cat = btn.getAttribute('data-filter');
+          cards.forEach(c => {
+            c.style.display = (cat === 'all' || c.getAttribute('data-category') === cat) ? 'flex' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
